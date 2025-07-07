@@ -2,55 +2,6 @@ name: Container Security Scan
 
 on:
   workflow_dispatch:
-    inputs:
-      run_test_report:
-        description: 'Run test report with sample data'
-        required: false
-        default: 'false'
-        type: boolean
-      test_report_only:
-        description: 'Skip real scans and only run test report'
-        required: false
-        default: 'false'
-        type: boolean
-      dashboard_test_mode:
-        description: 'Update dashboard with existing data (no scan)'
-        required: false
-        default: 'false'
-        type: boolean
-      debug_mode:
-        description: 'Enable debug mode for detailed troubleshooting'
-        required: false
-        default: 'false'
-        type: boolean
-      performance_mode:
-        description: 'Performance optimization level'
-        required: false
-        default: 'max'
-        type: choice
-        options:
-          - 'normal'
-          - 'high'
-          - 'max'
-      scan_mode:
-        description: 'Scan execution mode'
-        required: false
-        default: 'full'
-        type: choice
-        options:
-          - 'full'
-          - 'testmode'
-          - 'quickmode'
-      strict_mode:
-        description: 'Enable strict mode (fail fast on errors)'
-        required: false
-        default: 'false'
-        type: boolean
-      clean_cache:
-        description: 'Clean vulnerability database cache before scan'
-        required: false
-        default: 'false'
-        type: boolean
   # schedule:
   #   - cron: '0 3 * * 1-5'  # Daily Monday-Friday at 3:00 AM UTC
 
@@ -63,7 +14,7 @@ jobs:
   test-report:
     name: 🧪 Generate Test Report with Sample Data
     runs-on: self-hosted
-    if: github.event_name == 'workflow_dispatch' && (github.event.inputs.run_test_report == 'true' || github.event.inputs.test_report_only == 'true')
+    if: github.event_name == 'workflow_dispatch'
     permissions:
       contents: read
     outputs:
@@ -291,7 +242,7 @@ jobs:
 
   scan:
     runs-on: self-hosted
-    if: always() && (github.event_name != 'workflow_dispatch' || (github.event.inputs.test_report_only != 'true' && github.event.inputs.dashboard_test_mode != 'true'))
+    if: always()
     needs: [test-report]
     permissions:
       contents: read
@@ -1233,7 +1184,7 @@ jobs:
   dashboard-test:
     name: 📊 Dashboard Test Mode - Update with Existing Data
     runs-on: self-hosted
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.dashboard_test_mode == 'true'
+    if: github.event_name == 'workflow_dispatch'
     permissions:
       contents: write
     steps:
