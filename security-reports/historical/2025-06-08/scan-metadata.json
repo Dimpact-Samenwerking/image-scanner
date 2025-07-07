@@ -1,0 +1,15 @@
+{
+  "scan_date": "2025-06-08",
+  "scan_timestamp": "20250608_230555",
+  "workflow_run_id": "15523235720",
+  "workflow_run_number": "54",
+  "commit_sha": "f88fa127cb006ef540df82d815cdba10b80e05b3",
+  "ref": "refs/heads/main",
+  "actor": "jimleitch01",
+  "event_name": "workflow_dispatch",
+  "raw_data_archive": "scan-data-20250608_230555.tar.gz",
+  "archive_retention": "6 months as GitHub Actions artifact",
+  "storage_strategy": "space_efficient",
+  "notes": "Raw scan data stored as compressed artifact to save git space",
+  "report_status": "generated"
+}

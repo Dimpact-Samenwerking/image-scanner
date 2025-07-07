@@ -1,0 +1,63 @@
+{
+  "SchemaVersion": 2,
+  "ArtifactName": "nginx:1.21",
+  "ArtifactType": "container_image",
+  "Results": [
+    {
+      "Target": "nginx:1.21 (debian 11.5)",
+      "Class": "os-pkgs",
+      "Type": "debian",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2023-7890",
+          "PkgName": "nginx",
+          "PkgVersion": "1.21.6-1~bullseye",
+          "FixedVersion": "1.21.6-2~bullseye",
+          "Severity": "HIGH",
+          "Title": "Nginx HTTP Request Smuggling",
+          "Description": "HTTP request smuggling vulnerability in nginx that allows attackers to bypass security controls and access restricted resources.",
+          "References": [
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-7890",
+            "https://nginx.org/en/security_advisories.html"
+          ]
+        },
+        {
+          "VulnerabilityID": "CVE-2023-6789",
+          "PkgName": "libpcre3",
+          "PkgVersion": "2:8.39-13ubuntu0.22.04.1",
+          "FixedVersion": "2:8.39-13ubuntu0.22.04.2",
+          "Severity": "HIGH",
+          "Title": "PCRE Regular Expression DoS",
+          "Description": "Denial of service vulnerability in PCRE library through specially crafted regular expressions that can cause excessive CPU consumption.",
+          "References": [
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-6789"
+          ]
+        },
+        {
+          "VulnerabilityID": "CVE-2023-5432",
+          "PkgName": "zlib1g",
+          "PkgVersion": "1:1.2.11.dfsg-2ubuntu9.2",
+          "FixedVersion": "1:1.2.11.dfsg-2ubuntu9.3",
+          "Severity": "MEDIUM",
+          "Title": "Zlib Compression Vulnerability",
+          "Description": "Vulnerability in zlib compression library that may lead to information disclosure through decompression attacks.",
+          "References": [
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-5432"
+          ]
+        },
+        {
+          "VulnerabilityID": "CVE-2023-4321",
+          "PkgName": "bash",
+          "PkgVersion": "5.1-6ubuntu1",
+          "FixedVersion": "5.1-6ubuntu2",
+          "Severity": "LOW",
+          "Title": "Bash Command Injection",
+          "Description": "Minor command injection vulnerability in bash that requires local access and specific conditions to exploit.",
+          "References": [
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-4321"
+          ]
+        }
+      ]
+    }
+  ]
+} 

@@ -1,0 +1,63 @@
+{
+  "SchemaVersion": 2,
+  "ArtifactName": "redis:7.0-alpine",
+  "ArtifactType": "container_image",
+  "Results": [
+    {
+      "Target": "redis:7.0-alpine (alpine 3.16.3)",
+      "Class": "os-pkgs",
+      "Type": "alpine",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2023-9012",
+          "PkgName": "busybox",
+          "PkgVersion": "1.35.0-r17",
+          "FixedVersion": "1.35.0-r18",
+          "Severity": "LOW",
+          "Title": "BusyBox Minor Information Disclosure",
+          "Description": "Minor information disclosure vulnerability in BusyBox that may leak limited system information through error messages.",
+          "References": [
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-9012"
+          ]
+        },
+        {
+          "VulnerabilityID": "CVE-2023-8123",
+          "PkgName": "musl",
+          "PkgVersion": "1.2.3-r1",
+          "FixedVersion": "1.2.3-r2",
+          "Severity": "LOW",
+          "Title": "Musl C Library Edge Case",
+          "Description": "Edge case vulnerability in musl C library that may cause minor issues in very specific usage scenarios.",
+          "References": [
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-8123"
+          ]
+        },
+        {
+          "VulnerabilityID": "CVE-2023-7234",
+          "PkgName": "redis",
+          "PkgVersion": "7.0.5-r0",
+          "FixedVersion": "7.0.8-r0",
+          "Severity": "LOW",
+          "Title": "Redis Configuration Exposure",
+          "Description": "Low severity vulnerability in Redis that may expose configuration details through debug commands when debug mode is enabled.",
+          "References": [
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-7234",
+            "https://redis.io/docs/manual/security/"
+          ]
+        },
+        {
+          "VulnerabilityID": "CVE-2023-6345",
+          "PkgName": "alpine-baselayout",
+          "PkgVersion": "3.2.0-r23",
+          "FixedVersion": "",
+          "Severity": "LOW",
+          "Title": "Alpine Base Layout Minor Issue",
+          "Description": "Minor issue in Alpine base layout that has minimal security impact and requires local access to exploit.",
+          "References": [
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-6345"
+          ]
+        }
+      ]
+    }
+  ]
+} 

@@ -1,0 +1,45 @@
+# Trivy configuration file
+# This file allows you to customize Trivy's behavior
+
+# Database settings
+db:
+  # Skip database update (useful for CI/CD to speed up scans)
+  skip-update: false
+  # Cache directory for vulnerability database
+  cache-dir: /tmp/trivy-cache
+
+# Vulnerability settings
+vulnerability:
+  # Vulnerability types to scan for
+  type:
+    - os
+    - library
+  
+  # Severities to include in the scan
+  severity:
+    - UNKNOWN
+    - LOW
+    - MEDIUM
+    - HIGH
+    - CRITICAL
+
+# Output settings
+format: json
+output: /tmp/trivy-results.json
+
+# Ignore unfixed vulnerabilities (optional)
+ignore-unfixed: false
+
+# Exit code settings
+exit-code: 0  # Don't fail on vulnerabilities (handled by workflow)
+
+# Timeout settings
+timeout: 5m
+
+# Skip files/directories (if needed)
+skip-files:
+  - "**/*.md"
+  - "**/README*"
+
+# Custom ignore rules (uncomment and modify as needed)
+# ignorefile: .trivyignore 

@@ -1,0 +1,194 @@
+{
+  "SchemaVersion": 2,
+  "CreatedAt": "2025-06-07T13:20:48.531927546Z",
+  "ArtifactName": "docker.elastic.co/eck/eck-operator:latest",
+  "ArtifactType": "container_image",
+  "Metadata": {
+    "Size": 102138880,
+    "OS": {
+      "Family": "wolfi",
+      "Name": "20230201"
+    },
+    "ImageID": "sha256:1b6e1e5fc7324738a9cac22ab3d46a89acb1e86869d2d49ea68267e1bb7d562a",
+    "DiffIDs": [
+      "sha256:e64109102188e0c7362ef4e9cdabc379a55758a9901331e1b13521c112c2da24",
+      "sha256:3d4de96382b88693c9e5eed8d3ed908b8ff4ff3e82617dfa2148cc3524f1b20a"
+    ],
+    "RepoTags": [
+      "docker.elastic.co/eck/eck-operator:latest"
+    ],
+    "RepoDigests": [
+      "docker.elastic.co/eck/eck-operator@sha256:4ff194d43ecc087d65e3bebb61bebd67eb8499beae7991fd11ee7acea481c283"
+    ],
+    "ImageConfig": {
+      "architecture": "amd64",
+      "author": "github.com/chainguard-dev/apko",
+      "created": "2025-04-15T12:54:36.277992311Z",
+      "history": [
+        {
+          "author": "apko",
+          "created": "2025-03-05T01:39:44Z",
+          "created_by": "apko",
+          "comment": "This is an apko single-layer image"
+        },
+        {
+          "created": "2025-04-15T12:54:35.495539134Z",
+          "created_by": "/bin/sh -c #(nop) ARG VERSION",
+          "comment": "FROM docker.elastic.co/wolfi/static@sha256:7a6456cc96ecde793b7c8ad9a3ccd5d610d6168a6f64d693ecc2e84f8276c6c6",
+          "empty_layer": true
+        },
+        {
+          "created": "2025-04-15T12:54:35.495684568Z",
+          "created_by": "/bin/sh -c #(nop) LABEL io.k8s.description=\"Elastic Cloud on Kubernetes automates the deployment, provisioning, management, and orchestration of Elasticsearch, Kibana, APM Server, Beats, and Enterprise Search on Kubernetes\"       io.k8s.display-name=\"Elastic Cloud on Kubernetes\"       org.opencontainers.image.authors=\"eck@elastic.co\"       org.opencontainers.image.base.name=\"gcr.io/distroless/static:nonroot\"       org.opencontainers.image.description=\"Elastic Cloud on Kubernetes automates the deployment, provisioning, management, and orchestration of Elasticsearch, Kibana, APM Server, Beats, and Enterprise Search on Kubernetes\"       org.opencontainers.image.documentation=\"https://www.elastic.co/guide/en/cloud-on-k8s/\"       org.opencontainers.image.licenses=\"Elastic-License-2.0\"       org.opencontainers.image.source=\"https://github.com/elastic/cloud-on-k8s/\"       org.opencontainers.image.title=\"Elastic Cloud on Kubernetes\"       org.opencontainers.image.vendor=\"Elastic\"       org.opencontainers.image.version=\"$VERSION\"       org.opencontainers.image.url=\"https://github.com/elastic/cloud-on-k8s/\"",
+          "empty_layer": true
+        },
+        {
+          "created": "2025-04-15T12:54:36.058616504Z",
+          "created_by": "/bin/sh -c #(nop) COPY file:a4a34c884db136c4cce41f0554492c9191860b2f3c5eb22f9aeccb0fbbdb4506 in /elastic-operator ",
+          "empty_layer": true
+        },
+        {
+          "created": "2025-04-15T12:54:36.146765215Z",
+          "created_by": "/bin/sh -c #(nop) COPY file:000bcc8b27939e7fa8d593033ce25aae153cca3e9cab1d6591516897d1385599 in /conf/eck.yaml ",
+          "empty_layer": true
+        },
+        {
+          "created": "2025-04-15T12:54:36.277564542Z",
+          "created_by": "/bin/sh -c #(nop) COPY multi:dd1c14aa39173acc7846f399fc7cfa1e0ed5eb6dcee0dc524a7411c1c8119d97 in /licenses/ ",
+          "empty_layer": true
+        },
+        {
+          "created": "2025-04-15T12:54:36.277587849Z",
+          "created_by": "/bin/sh -c #(nop) ENTRYPOINT [\"/elastic-operator\"]",
+          "empty_layer": true
+        },
+        {
+          "author": "github.com/chainguard-dev/apko",
+          "created": "2025-04-15T12:54:37.000197504Z",
+          "created_by": "/bin/sh -c #(nop) CMD [\"manager\"]"
+        }
+      ],
+      "os": "linux",
+      "rootfs": {
+        "type": "layers",
+        "diff_ids": [
+          "sha256:e64109102188e0c7362ef4e9cdabc379a55758a9901331e1b13521c112c2da24",
+          "sha256:3d4de96382b88693c9e5eed8d3ed908b8ff4ff3e82617dfa2148cc3524f1b20a"
+        ]
+      },
+      "config": {
+        "Cmd": [
+          "manager"
+        ],
+        "Entrypoint": [
+          "/elastic-operator"
+        ],
+        "Env": [
+          "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+          "SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt"
+        ],
+        "Labels": {
+          "dev.chainguard.package.main": "",
+          "io.buildah.version": "1.37.5",
+          "io.k8s.description": "Elastic Cloud on Kubernetes automates the deployment, provisioning, management, and orchestration of Elasticsearch, Kibana, APM Server, Beats, and Enterprise Search on Kubernetes",
+          "io.k8s.display-name": "Elastic Cloud on Kubernetes",
+          "org.opencontainers.image.authors": "eck@elastic.co",
+          "org.opencontainers.image.base.name": "gcr.io/distroless/static:nonroot",
+          "org.opencontainers.image.created": "2025-03-05T01:39:44Z",
+          "org.opencontainers.image.description": "Elastic Cloud on Kubernetes automates the deployment, provisioning, management, and orchestration of Elasticsearch, Kibana, APM Server, Beats, and Enterprise Search on Kubernetes",
+          "org.opencontainers.image.documentation": "https://www.elastic.co/guide/en/cloud-on-k8s/",
+          "org.opencontainers.image.licenses": "Elastic-License-2.0",
+          "org.opencontainers.image.source": "https://github.com/elastic/cloud-on-k8s/",
+          "org.opencontainers.image.title": "Elastic Cloud on Kubernetes",
+          "org.opencontainers.image.url": "https://github.com/elastic/cloud-on-k8s/",
+          "org.opencontainers.image.vendor": "Elastic",
+          "org.opencontainers.image.version": "3.0.0"
+        },
+        "User": "65532"
+      }
+    },
+    "Layers": [
+      {
+        "Size": 2212352,
+        "DiffID": "sha256:e64109102188e0c7362ef4e9cdabc379a55758a9901331e1b13521c112c2da24"
+      },
+      {
+        "Size": 99926528,
+        "DiffID": "sha256:3d4de96382b88693c9e5eed8d3ed908b8ff4ff3e82617dfa2148cc3524f1b20a"
+      }
+    ]
+  },
+  "Results": [
+    {
+      "Target": "docker.elastic.co/eck/eck-operator:latest (wolfi 20230201)",
+      "Class": "os-pkgs",
+      "Type": "wolfi"
+    },
+    {
+      "Target": "elastic-operator",
+      "Class": "lang-pkgs",
+      "Type": "gobinary",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2025-22871",
+          "PkgID": "stdlib@v1.24.1",
+          "PkgName": "stdlib",
+          "PkgIdentifier": {
+            "PURL": "pkg:golang/stdlib@v1.24.1",
+            "UID": "f6f3ee978020cd37"
+          },
+          "InstalledVersion": "v1.24.1",
+          "FixedVersion": "1.23.8, 1.24.2",
+          "Status": "fixed",
+          "Layer": {
+            "DiffID": "sha256:3d4de96382b88693c9e5eed8d3ed908b8ff4ff3e82617dfa2148cc3524f1b20a"
+          },
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-22871",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "Title": "net/http: Request smuggling due to acceptance of invalid chunked data in net/http",
+          "Description": "The net/http package improperly accepts a bare LF as a line terminator in chunked data chunk-size lines. This can permit request smuggling if a net/http server is used in conjunction with a server that incorrectly accepts a bare LF as part of a chunk-ext.",
+          "Severity": "MEDIUM",
+          "VendorSeverity": {
+            "alma": 2,
+            "amazon": 3,
+            "bitnami": 4,
+            "cbl-mariner": 3,
+            "oracle-oval": 2,
+            "redhat": 2
+          },
+          "CVSS": {
+            "bitnami": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
+              "V3Score": 9.1
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:L/A:N",
+              "V3Score": 5.4
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2025/04/04/4",
+            "https://access.redhat.com/errata/RHSA-2025:8476",
+            "https://access.redhat.com/security/cve/CVE-2025-22871",
+            "https://bugzilla.redhat.com/2358493",
+            "https://errata.almalinux.org/9/ALSA-2025-8476.html",
+            "https://go.dev/cl/652998",
+            "https://go.dev/issue/71988",
+            "https://groups.google.com/g/golang-announce/c/Y2uBTVKjBQk",
+            "https://linux.oracle.com/cve/CVE-2025-22871.html",
+            "https://linux.oracle.com/errata/ELSA-2025-8478.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2025-22871",
+            "https://pkg.go.dev/vuln/GO-2025-3563",
+            "https://www.cve.org/CVERecord?id=CVE-2025-22871"
+          ],
+          "PublishedDate": "2025-04-08T20:15:20.183Z",
+          "LastModifiedDate": "2025-04-18T15:15:57.923Z"
+        }
+      ]
+    }
+  ]
+}

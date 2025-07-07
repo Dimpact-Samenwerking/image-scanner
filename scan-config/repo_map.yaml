@@ -1,0 +1,13 @@
+# Repository alias to full URI mapping for Helm charts
+# Use this file to replace the case statement in map_repo_url
+
+bitnami: https://charts.bitnami.com/bitnami
+wiremind: https://wiremind.github.io/wiremind-helm-charts
+maykinmedia: https://maykinmedia.github.io/charts
+kiss-elastic: https://raw.githubusercontent.com/Klantinteractie-Servicesysteem/.github/main/docs/scripts/elastic
+openshift: https://charts.openshift.io
+zac: https://infonl.github.io/dimpact-zaakafhandelcomponent
+dimpact: https://Dimpact-Samenwerking.github.io/helm-charts
+elastic: https://helm.elastic.co
+opentelemetry: https://open-telemetry.github.io/opentelemetry-helm-charts
+solr: https://solr.apache.org/charts 

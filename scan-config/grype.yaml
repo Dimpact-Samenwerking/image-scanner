@@ -1,0 +1,51 @@
+# Grype configuration file
+# Customize Grype's vulnerability scanning behavior
+
+# Database settings
+db:
+  # Automatically update the vulnerability database
+  auto-update: true
+  # Cache directory for vulnerability database
+  cache-dir: /tmp/grype-cache
+  # Update timeout
+  update-timeout: 120s
+
+# Scanning configuration
+scan:
+  # Scope of the scan
+  scope: "all-layers"  # Options: all-layers, squashed
+
+# Output configuration
+output:
+  # Default output format (can be overridden by CLI)
+  format: "json"
+  # Show suppressed vulnerabilities
+  show-suppressed: false
+
+# Failure configuration
+fail-on-severity: "critical"  # Options: negligible, low, medium, high, critical
+
+# Ignore configuration
+ignore:
+  # Rules for ignoring vulnerabilities
+  rules:
+    # Example: Ignore vulnerabilities in specific packages
+    # - vulnerability: "CVE-2021-44228"
+    #   package:
+    #     name: "log4j-core"
+    #     version: "2.14.1"
+    #   reason: "Fixed in our deployment"
+
+# Registry configuration (if needed for private registries)
+registry:
+  # Insecure registries (use with caution)
+  insecure-skip-tls-verify: false
+  # Use only HTTPS
+  insecure-use-http: false
+
+# Logging configuration
+log:
+  # Log level: trace, debug, info, warn, error, fatal, panic
+  level: "info"
+  # Structured logging
+  structured: false 

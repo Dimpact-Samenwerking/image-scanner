@@ -1,0 +1,2 @@
+# This directory represents a failed scan scenario
+# No trivy-results.json file exists here to simulate scan failure 

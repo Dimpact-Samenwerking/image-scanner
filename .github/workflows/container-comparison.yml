@@ -1,0 +1,493 @@
+name: Container Version Comparison
+
+on:
+  workflow_dispatch:
+    inputs:
+      container_image:
+        description: 'Container image URI (e.g., nginx:1.20, mysql:8.0.32)'
+        required: true
+        type: string
+      include_details:
+        description: 'Include detailed vulnerability breakdown'
+        required: false
+        default: true
+        type: boolean
+
+env:
+  REGISTRY: docker.io
+
+jobs:
+  compare-versions:
+    name: 🔍 Compare Container Versions
+    runs-on: self-hosted
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Install dependencies
+        run: |
+          echo "🔧 Installing dependencies for container comparison..."
+          
+          # Install jq for JSON processing
+          if command -v jq >/dev/null 2>&1; then
+            echo "✅ jq already installed"
+          else
+            if [[ "$OSTYPE" == "darwin"* ]]; then
+              brew install jq
+            elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+              if command -v apt-get >/dev/null 2>&1; then
+                sudo apt-get update && sudo apt-get install -y jq
+              elif command -v yum >/dev/null 2>&1; then
+                sudo yum install -y jq
+              fi
+            fi
+          fi
+          
+          # Install skopeo for registry queries
+          if command -v skopeo >/dev/null 2>&1; then
+            echo "✅ skopeo already installed"
+          else
+            echo "📦 Installing skopeo for registry queries..."
+            if [[ "$OSTYPE" == "darwin"* ]]; then
+              brew install skopeo
+            elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+              if command -v apt-get >/dev/null 2>&1; then
+                sudo apt-get install -y skopeo
+              elif command -v yum >/dev/null 2>&1; then
+                sudo yum install -y skopeo
+              fi
+            fi
+          fi
+          
+          # Install trivy if not present
+          if command -v trivy >/dev/null 2>&1; then
+            echo "✅ trivy already installed"
+          else
+            echo "🔒 Installing Trivy scanner..."
+            if [[ "$OSTYPE" == "darwin"* ]]; then
+              brew install trivy
+            elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+              curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
+            fi
+          fi
+
+      - name: Parse container image and find latest version
+        id: image-analysis
+        run: |
+          INPUT_IMAGE="${{ github.event.inputs.container_image }}"
+          echo "🔍 Analyzing input image: $INPUT_IMAGE"
+          
+          # Parse the image name and tag
+          if [[ "$INPUT_IMAGE" =~ ^([^/]+/)?([^:]+):(.+)$ ]]; then
+            REGISTRY_PREFIX="${BASH_REMATCH[1]}"
+            IMAGE_NAME="${BASH_REMATCH[2]}"
+            CURRENT_TAG="${BASH_REMATCH[3]}"
+          elif [[ "$INPUT_IMAGE" =~ ^([^/]+/)?([^:]+)$ ]]; then
+            REGISTRY_PREFIX="${BASH_REMATCH[1]}"
+            IMAGE_NAME="${BASH_REMATCH[2]}"
+            CURRENT_TAG="latest"
+          else
+            echo "❌ Invalid image format: $INPUT_IMAGE"
+            exit 1
+          fi
+          
+          # Handle official Docker Hub images (no prefix)
+          if [[ -z "$REGISTRY_PREFIX" ]]; then
+            if [[ "$IMAGE_NAME" =~ ^[a-z0-9]+([._-][a-z0-9]+)*$ ]]; then
+              # Official image like "nginx", "mysql"
+              FULL_IMAGE_NAME="library/$IMAGE_NAME"
+            else
+              FULL_IMAGE_NAME="$IMAGE_NAME"
+            fi
+          else
+            FULL_IMAGE_NAME="${REGISTRY_PREFIX}${IMAGE_NAME}"
+          fi
+          
+          echo "📋 Parsed image details:"
+          echo "  Registry prefix: ${REGISTRY_PREFIX:-docker.io/}"
+          echo "  Image name: $IMAGE_NAME"
+          echo "  Current tag: $CURRENT_TAG"
+          echo "  Full name: $FULL_IMAGE_NAME"
+          
+          # Construct full image URIs
+          CURRENT_IMAGE="${REGISTRY_PREFIX:-}${IMAGE_NAME}:${CURRENT_TAG}"
+          
+                    # Check if 'latest' tag exists for comparison
+          echo "🔍 Checking if 'latest' tag exists for comparison..."
+          
+          # Try to get tags list to verify 'latest' exists
+          set +e
+          if [[ -z "$REGISTRY_PREFIX" ]]; then
+            # Docker Hub official image
+            TAGS_JSON=$(skopeo list-tags docker://docker.io/$FULL_IMAGE_NAME 2>/dev/null)
+          else
+            # Other registries or user images
+            TAGS_JSON=$(skopeo list-tags docker://$FULL_IMAGE_NAME 2>/dev/null)
+          fi
+          set -e
+          
+          if [[ -n "$TAGS_JSON" ]]; then
+            # Check if 'latest' tag exists
+            HAS_LATEST=$(echo "$TAGS_JSON" | jq -r '.Tags[]' | grep -x "latest" | head -1)
+            
+            if [[ -n "$HAS_LATEST" ]]; then
+              echo "✅ Found 'latest' tag, proceeding with comparison"
+              LATEST_TAG="latest"
+            else
+              echo "❌ ERROR: No 'latest' tag found for this image!"
+              echo ""
+              echo "📋 Available tags (first 20):"
+              echo "$TAGS_JSON" | jq -r '.Tags[]' | head -20 | sed 's/^/  - /'
+              echo ""
+              echo "🚨 This image does not provide a 'latest' tag for comparison."
+              echo "   Please choose a different image that has a 'latest' tag available."
+              exit 1
+            fi
+          else
+            echo "❌ ERROR: Could not fetch tags from registry!"
+            echo "🚨 Unable to verify if 'latest' tag exists."
+            echo "   Please check the image name and registry accessibility."
+            exit 1
+          fi
+          
+          LATEST_IMAGE="${REGISTRY_PREFIX:-}${IMAGE_NAME}:${LATEST_TAG}"
+          
+          echo "✅ Version comparison setup:"
+          echo "  User's version: $CURRENT_IMAGE"
+          echo "  Latest version: $LATEST_IMAGE"
+          
+          # Output for next steps
+          echo "current_image=$CURRENT_IMAGE" >> $GITHUB_OUTPUT
+          echo "latest_image=$LATEST_IMAGE" >> $GITHUB_OUTPUT
+          echo "current_tag=$CURRENT_TAG" >> $GITHUB_OUTPUT
+          echo "latest_tag=$LATEST_TAG" >> $GITHUB_OUTPUT
+          echo "image_name=$IMAGE_NAME" >> $GITHUB_OUTPUT
+          
+          # Check if they're the same (user specified 'latest' or same as latest)
+          if [[ "$CURRENT_TAG" == "latest" ]]; then
+            echo "same_version=true" >> $GITHUB_OUTPUT
+            echo "ℹ️ User specified the 'latest' tag - no comparison needed!"
+          elif [[ "$CURRENT_IMAGE" == "$LATEST_IMAGE" ]]; then
+            echo "same_version=true" >> $GITHUB_OUTPUT
+            echo "ℹ️ User's version is the same as 'latest'!"
+          else
+            echo "same_version=false" >> $GITHUB_OUTPUT
+            echo "🔍 Will compare user's tag ($CURRENT_TAG) with 'latest' tag"
+          fi
+
+      - name: Pull container images
+        run: |
+          echo "📥 Pulling container images for scanning..."
+          
+          echo "🔄 Pulling current version: ${{ steps.image-analysis.outputs.current_image }}"
+          docker pull "${{ steps.image-analysis.outputs.current_image }}"
+          
+          if [[ "${{ steps.image-analysis.outputs.same_version }}" != "true" ]]; then
+            echo "🔄 Pulling latest version: ${{ steps.image-analysis.outputs.latest_image }}"
+            docker pull "${{ steps.image-analysis.outputs.latest_image }}"
+          else
+            echo "ℹ️ Skipping latest pull - same as current version"
+          fi
+
+      - name: Scan current version
+        id: scan-current
+        continue-on-error: true
+        run: |
+          echo "🔒 Scanning current version: ${{ steps.image-analysis.outputs.current_image }}"
+          
+          # Create output directory
+          mkdir -p "./comparison-results/current"
+          
+          # Scan with Trivy
+          echo "🛡️ Running Trivy scan on current version..."
+          trivy image \
+            --format json \
+            --output "./comparison-results/current/trivy-results.json" \
+            "${{ steps.image-analysis.outputs.current_image }}" || true
+          
+          # Extract vulnerability counts
+          if [[ -f "./comparison-results/current/trivy-results.json" ]]; then
+            CRITICAL=$(jq '[.Results[]?.Vulnerabilities[]? | select(.Severity=="CRITICAL")] | length' "./comparison-results/current/trivy-results.json" 2>/dev/null || echo "0")
+            HIGH=$(jq '[.Results[]?.Vulnerabilities[]? | select(.Severity=="HIGH")] | length' "./comparison-results/current/trivy-results.json" 2>/dev/null || echo "0")
+            MEDIUM=$(jq '[.Results[]?.Vulnerabilities[]? | select(.Severity=="MEDIUM")] | length' "./comparison-results/current/trivy-results.json" 2>/dev/null || echo "0")
+            LOW=$(jq '[.Results[]?.Vulnerabilities[]? | select(.Severity=="LOW")] | length' "./comparison-results/current/trivy-results.json" 2>/dev/null || echo "0")
+            TOTAL=$((CRITICAL + HIGH + MEDIUM + LOW))
+            
+            echo "📊 Current version vulnerabilities:"
+            echo "  Critical: $CRITICAL"
+            echo "  High: $HIGH"
+            echo "  Medium: $MEDIUM"
+            echo "  Low: $LOW"
+            echo "  Total: $TOTAL"
+            
+            echo "current_critical=$CRITICAL" >> $GITHUB_OUTPUT
+            echo "current_high=$HIGH" >> $GITHUB_OUTPUT
+            echo "current_medium=$MEDIUM" >> $GITHUB_OUTPUT
+            echo "current_low=$LOW" >> $GITHUB_OUTPUT
+            echo "current_total=$TOTAL" >> $GITHUB_OUTPUT
+          else
+            echo "❌ Failed to scan current version"
+            echo "current_critical=0" >> $GITHUB_OUTPUT
+            echo "current_high=0" >> $GITHUB_OUTPUT
+            echo "current_medium=0" >> $GITHUB_OUTPUT
+            echo "current_low=0" >> $GITHUB_OUTPUT
+            echo "current_total=0" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Scan latest version
+        id: scan-latest
+        continue-on-error: true
+        if: steps.image-analysis.outputs.same_version != 'true'
+        run: |
+          echo "🔒 Scanning latest version: ${{ steps.image-analysis.outputs.latest_image }}"
+          
+          # Create output directory
+          mkdir -p "./comparison-results/latest"
+          
+          # Scan with Trivy
+          echo "🛡️ Running Trivy scan on latest version..."
+          trivy image \
+            --format json \
+            --output "./comparison-results/latest/trivy-results.json" \
+            "${{ steps.image-analysis.outputs.latest_image }}" || true
+          
+          # Extract vulnerability counts
+          if [[ -f "./comparison-results/latest/trivy-results.json" ]]; then
+            CRITICAL=$(jq '[.Results[]?.Vulnerabilities[]? | select(.Severity=="CRITICAL")] | length' "./comparison-results/latest/trivy-results.json" 2>/dev/null || echo "0")
+            HIGH=$(jq '[.Results[]?.Vulnerabilities[]? | select(.Severity=="HIGH")] | length' "./comparison-results/latest/trivy-results.json" 2>/dev/null || echo "0")
+            MEDIUM=$(jq '[.Results[]?.Vulnerabilities[]? | select(.Severity=="MEDIUM")] | length' "./comparison-results/latest/trivy-results.json" 2>/dev/null || echo "0")
+            LOW=$(jq '[.Results[]?.Vulnerabilities[]? | select(.Severity=="LOW")] | length' "./comparison-results/latest/trivy-results.json" 2>/dev/null || echo "0")
+            TOTAL=$((CRITICAL + HIGH + MEDIUM + LOW))
+            
+            echo "📊 Latest version vulnerabilities:"
+            echo "  Critical: $CRITICAL"
+            echo "  High: $HIGH"
+            echo "  Medium: $MEDIUM"
+            echo "  Low: $LOW"
+            echo "  Total: $TOTAL"
+            
+            echo "latest_critical=$CRITICAL" >> $GITHUB_OUTPUT
+            echo "latest_high=$HIGH" >> $GITHUB_OUTPUT
+            echo "latest_medium=$MEDIUM" >> $GITHUB_OUTPUT
+            echo "latest_low=$LOW" >> $GITHUB_OUTPUT
+            echo "latest_total=$TOTAL" >> $GITHUB_OUTPUT
+          else
+            echo "❌ Failed to scan latest version"
+            echo "latest_critical=0" >> $GITHUB_OUTPUT
+            echo "latest_high=0" >> $GITHUB_OUTPUT
+            echo "latest_medium=0" >> $GITHUB_OUTPUT
+            echo "latest_low=0" >> $GITHUB_OUTPUT
+            echo "latest_total=0" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Generate comparison report
+        run: |
+          echo "📋 Generating vulnerability comparison report..."
+          
+          # Create comparison results directory
+          mkdir -p "./comparison-results"
+          
+          # Get values from previous steps
+          CURRENT_CRITICAL="${{ steps.scan-current.outputs.current_critical }}"
+          CURRENT_HIGH="${{ steps.scan-current.outputs.current_high }}"
+          CURRENT_MEDIUM="${{ steps.scan-current.outputs.current_medium }}"
+          CURRENT_LOW="${{ steps.scan-current.outputs.current_low }}"
+          CURRENT_TOTAL="${{ steps.scan-current.outputs.current_total }}"
+          
+          if [[ "${{ steps.image-analysis.outputs.same_version }}" == "true" ]]; then
+            # Same version case
+            cat > "./comparison-results/comparison-report.md" << EOF
+          # Container Version Comparison Report
+          
+          ## 📋 Scan Summary
+          
+          **Image**: ${{ steps.image-analysis.outputs.image_name }}
+          **Current Version**: ${{ steps.image-analysis.outputs.current_tag }}
+          **Latest Version**: ${{ steps.image-analysis.outputs.latest_tag }}
+          **Scan Date**: $(date -u +"%Y-%m-%d %H:%M:%S UTC")
+          
+          ## 🎯 Result
+          
+          ✅ **You are already using the latest version!**
+          
+          The specified version (${{ steps.image-analysis.outputs.current_tag }}) is the same as the latest available version.
+          
+          ## 📊 Vulnerability Summary
+          
+          | Severity | Count |
+          |----------|-------|
+          | Critical | $CURRENT_CRITICAL |
+          | High     | $CURRENT_HIGH |
+          | Medium   | $CURRENT_MEDIUM |
+          | Low      | $CURRENT_LOW |
+          | **Total** | **$CURRENT_TOTAL** |
+          
+          ## 💡 Recommendations
+          
+          - ✅ Your container version is up to date
+          - 🔍 Monitor for new releases regularly
+          - 🔒 Address any existing vulnerabilities through security patches
+          EOF
+          
+          echo "✅ Report generated for same version scenario"
+          
+          else
+            # Different versions case
+            LATEST_CRITICAL="${{ steps.scan-latest.outputs.latest_critical }}"
+            LATEST_HIGH="${{ steps.scan-latest.outputs.latest_high }}"
+            LATEST_MEDIUM="${{ steps.scan-latest.outputs.latest_medium }}"
+            LATEST_LOW="${{ steps.scan-latest.outputs.latest_low }}"
+            LATEST_TOTAL="${{ steps.scan-latest.outputs.latest_total }}"
+            
+            # Calculate differences
+            CRITICAL_DIFF=$((CURRENT_CRITICAL - LATEST_CRITICAL))
+            HIGH_DIFF=$((CURRENT_HIGH - LATEST_HIGH))
+            MEDIUM_DIFF=$((CURRENT_MEDIUM - LATEST_MEDIUM))
+            LOW_DIFF=$((CURRENT_LOW - LATEST_LOW))
+            TOTAL_DIFF=$((CURRENT_TOTAL - LATEST_TOTAL))
+            
+            cat > "./comparison-results/comparison-report.md" << EOF
+          # Container Version Comparison Report
+          
+          ## 📋 Scan Summary
+          
+          **Image**: ${{ steps.image-analysis.outputs.image_name }}
+          **Current Version**: ${{ steps.image-analysis.outputs.current_tag }}
+          **Latest Version**: ${{ steps.image-analysis.outputs.latest_tag }}
+          **Scan Date**: $(date -u +"%Y-%m-%d %H:%M:%S UTC")
+          
+          ## 📊 Vulnerability Comparison
+          
+          | Severity | Current (${{ steps.image-analysis.outputs.current_tag }}) | Latest (${{ steps.image-analysis.outputs.latest_tag }}) | Difference |
+          |----------|-------------|-----------|------------|
+          | Critical | $CURRENT_CRITICAL | $LATEST_CRITICAL | $(printf "%+d" $CRITICAL_DIFF) |
+          | High     | $CURRENT_HIGH | $LATEST_HIGH | $(printf "%+d" $HIGH_DIFF) |
+          | Medium   | $CURRENT_MEDIUM | $LATEST_MEDIUM | $(printf "%+d" $MEDIUM_DIFF) |
+          | Low      | $CURRENT_LOW | $LATEST_LOW | $(printf "%+d" $LOW_DIFF) |
+          | **Total** | **$CURRENT_TOTAL** | **$LATEST_TOTAL** | **$(printf "%+d" $TOTAL_DIFF)** |
+          
+          ## 🎯 Impact Analysis
+          
+          EOF
+          
+          if [[ $TOTAL_DIFF -gt 0 ]]; then
+            echo "✅ **Upgrading to the latest version would reduce vulnerabilities by $TOTAL_DIFF**" >> "./comparison-results/comparison-report.md"
+            echo "" >> "./comparison-results/comparison-report.md"
+            echo "### Improvements by upgrading:" >> "./comparison-results/comparison-report.md"
+            [[ $CRITICAL_DIFF -gt 0 ]] && echo "- 🔴 **Critical**: $CRITICAL_DIFF fewer vulnerabilities" >> "./comparison-results/comparison-report.md"
+            [[ $HIGH_DIFF -gt 0 ]] && echo "- 🟠 **High**: $HIGH_DIFF fewer vulnerabilities" >> "./comparison-results/comparison-report.md"
+            [[ $MEDIUM_DIFF -gt 0 ]] && echo "- 🟡 **Medium**: $MEDIUM_DIFF fewer vulnerabilities" >> "./comparison-results/comparison-report.md"
+            [[ $LOW_DIFF -gt 0 ]] && echo "- 🔵 **Low**: $LOW_DIFF fewer vulnerabilities" >> "./comparison-results/comparison-report.md"
+          elif [[ $TOTAL_DIFF -lt 0 ]]; then
+            TOTAL_INCREASE=$((-TOTAL_DIFF))
+            echo "⚠️ **The latest version has $TOTAL_INCREASE more vulnerabilities than your current version**" >> "./comparison-results/comparison-report.md"
+            echo "" >> "./comparison-results/comparison-report.md"
+            echo "### Additional vulnerabilities in latest:" >> "./comparison-results/comparison-report.md"
+            [[ $CRITICAL_DIFF -lt 0 ]] && echo "- 🔴 **Critical**: $((-CRITICAL_DIFF)) more vulnerabilities" >> "./comparison-results/comparison-report.md"
+            [[ $HIGH_DIFF -lt 0 ]] && echo "- 🟠 **High**: $((-HIGH_DIFF)) more vulnerabilities" >> "./comparison-results/comparison-report.md"
+            [[ $MEDIUM_DIFF -lt 0 ]] && echo "- 🟡 **Medium**: $((-MEDIUM_DIFF)) more vulnerabilities" >> "./comparison-results/comparison-report.md"
+            [[ $LOW_DIFF -lt 0 ]] && echo "- 🔵 **Low**: $((-LOW_DIFF)) more vulnerabilities" >> "./comparison-results/comparison-report.md"
+          else
+            echo "➡️ **Both versions have the same number of vulnerabilities**" >> "./comparison-results/comparison-report.md"
+          fi
+          
+          cat >> "./comparison-results/comparison-report.md" << EOF
+          
+          ## 💡 Recommendations
+          
+          EOF
+          
+          if [[ $TOTAL_DIFF -gt 0 ]]; then
+            echo "- ✅ **Recommended**: Upgrade to ${{ steps.image-analysis.outputs.latest_tag }} for improved security" >> "./comparison-results/comparison-report.md"
+            echo "- 🚀 **Priority**: $(if [[ $CRITICAL_DIFF -gt 0 || $HIGH_DIFF -gt 0 ]]; then echo "High (reduces critical/high vulnerabilities)"; else echo "Medium (reduces overall vulnerabilities)"; fi)" >> "./comparison-results/comparison-report.md"
+          elif [[ $TOTAL_DIFF -lt 0 ]]; then
+            echo "- ⚠️ **Consider**: Staying with current version ${{ steps.image-analysis.outputs.current_tag }}" >> "./comparison-results/comparison-report.md"
+            echo "- 🔍 **Action**: Review if latest version vulnerabilities are acceptable" >> "./comparison-results/comparison-report.md"
+          else
+            echo "- ➡️ **Neutral**: No security difference between versions" >> "./comparison-results/comparison-report.md"
+            echo "- 📅 **Consider**: Upgrade for latest features and non-security fixes" >> "./comparison-results/comparison-report.md"
+          fi
+          
+          cat >> "./comparison-results/comparison-report.md" << EOF
+          - 🔒 Address existing vulnerabilities through security patches
+          - 📊 Set up regular vulnerability monitoring
+          - 🔄 Automate container updates where appropriate
+          
+          ---
+          *Generated by Customer Container Security Scanner*
+          EOF
+          
+          fi
+          
+          echo "✅ Comparison report generated successfully"
+
+      - name: Display comparison results
+        run: |
+          echo "🎯 CONTAINER VERSION COMPARISON RESULTS"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo ""
+          
+          if [[ "${{ steps.image-analysis.outputs.same_version }}" == "true" ]]; then
+            echo "📋 Image: ${{ steps.image-analysis.outputs.image_name }}"
+            echo "🏷️ Version: ${{ steps.image-analysis.outputs.current_tag }} (latest)"
+            echo ""
+            echo "✅ You are already using the latest version!"
+            echo ""
+            echo "📊 Current vulnerabilities:"
+            echo "   🔴 Critical: ${{ steps.scan-current.outputs.current_critical }}"
+            echo "   🟠 High:     ${{ steps.scan-current.outputs.current_high }}"
+            echo "   🟡 Medium:   ${{ steps.scan-current.outputs.current_medium }}"
+            echo "   🔵 Low:      ${{ steps.scan-current.outputs.current_low }}"
+            echo "   📊 Total:    ${{ steps.scan-current.outputs.current_total }}"
+          else
+            echo "📋 Image: ${{ steps.image-analysis.outputs.image_name }}"
+            echo "🏷️ Current: ${{ steps.image-analysis.outputs.current_tag }}"
+            echo "🏷️ Latest:  ${{ steps.image-analysis.outputs.latest_tag }}"
+            echo ""
+            
+            # Calculate differences
+            CRITICAL_DIFF=$((${{ steps.scan-current.outputs.current_critical }} - ${{ steps.scan-latest.outputs.latest_critical }}))
+            HIGH_DIFF=$((${{ steps.scan-current.outputs.current_high }} - ${{ steps.scan-latest.outputs.latest_high }}))
+            MEDIUM_DIFF=$((${{ steps.scan-current.outputs.current_medium }} - ${{ steps.scan-latest.outputs.latest_medium }}))
+            LOW_DIFF=$((${{ steps.scan-current.outputs.current_low }} - ${{ steps.scan-latest.outputs.latest_low }}))
+            TOTAL_DIFF=$((${{ steps.scan-current.outputs.current_total }} - ${{ steps.scan-latest.outputs.latest_total }}))
+            
+            echo "📊 Vulnerability comparison:"
+            echo "                    Current    Latest     Difference"
+            echo "   🔴 Critical:     $(printf "%7d" ${{ steps.scan-current.outputs.current_critical }})    $(printf "%7d" ${{ steps.scan-latest.outputs.latest_critical }})     $(printf "%+d" $CRITICAL_DIFF)"
+            echo "   🟠 High:         $(printf "%7d" ${{ steps.scan-current.outputs.current_high }})    $(printf "%7d" ${{ steps.scan-latest.outputs.latest_high }})     $(printf "%+d" $HIGH_DIFF)"
+            echo "   🟡 Medium:       $(printf "%7d" ${{ steps.scan-current.outputs.current_medium }})    $(printf "%7d" ${{ steps.scan-latest.outputs.latest_medium }})     $(printf "%+d" $MEDIUM_DIFF)"
+            echo "   🔵 Low:          $(printf "%7d" ${{ steps.scan-current.outputs.current_low }})    $(printf "%7d" ${{ steps.scan-latest.outputs.latest_low }})     $(printf "%+d" $LOW_DIFF)"
+            echo "   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            echo "   📊 Total:        $(printf "%7d" ${{ steps.scan-current.outputs.current_total }})    $(printf "%7d" ${{ steps.scan-latest.outputs.latest_total }})     $(printf "%+d" $TOTAL_DIFF)"
+            echo ""
+            
+            if [[ $TOTAL_DIFF -gt 0 ]]; then
+              echo "🎉 UPGRADE RECOMMENDED!"
+              echo "   Upgrading to the latest version would reduce vulnerabilities by $TOTAL_DIFF"
+              if [[ $CRITICAL_DIFF -gt 0 ]]; then
+                echo "   🚨 This includes $CRITICAL_DIFF fewer CRITICAL vulnerabilities!"
+              fi
+              if [[ $HIGH_DIFF -gt 0 ]]; then
+                echo "   ⚠️ This includes $HIGH_DIFF fewer HIGH severity vulnerabilities!"
+              fi
+            elif [[ $TOTAL_DIFF -lt 0 ]]; then
+              TOTAL_INCREASE=$((-TOTAL_DIFF))
+              echo "⚠️ CAUTION: Latest version has $TOTAL_INCREASE MORE vulnerabilities"
+              echo "   Consider staying with your current version or investigating further"
+            else
+              echo "➡️ Both versions have the same vulnerability count"
+              echo "   Consider upgrading for latest features and bug fixes"
+            fi
+          fi
+          
+          echo ""
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+ 

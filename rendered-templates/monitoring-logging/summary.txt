@@ -1,0 +1,4 @@
+Chart: monitoring-logging
+Status: FAILED
+Failed at: Wed Jun  4 15:11:08 CEST 2025
+Error log: error.log

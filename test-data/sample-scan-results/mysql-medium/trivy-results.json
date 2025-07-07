@@ -1,0 +1,63 @@
+{
+  "SchemaVersion": 2,
+  "ArtifactName": "mysql:8.0",
+  "ArtifactType": "container_image",
+  "Results": [
+    {
+      "Target": "mysql:8.0 (ubuntu 20.04)",
+      "Class": "os-pkgs",
+      "Type": "ubuntu",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2023-8901",
+          "PkgName": "mysql-server",
+          "PkgVersion": "8.0.32-0ubuntu0.20.04.2",
+          "FixedVersion": "8.0.33-0ubuntu0.20.04.1",
+          "Severity": "MEDIUM",
+          "Title": "MySQL Privilege Escalation",
+          "Description": "Privilege escalation vulnerability in MySQL server that allows authenticated users to gain elevated privileges under specific conditions.",
+          "References": [
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-8901",
+            "https://dev.mysql.com/doc/relnotes/mysql/8.0/en/"
+          ]
+        },
+        {
+          "VulnerabilityID": "CVE-2023-7812",
+          "PkgName": "libmysqlclient21",
+          "PkgVersion": "8.0.32-0ubuntu0.20.04.2",
+          "FixedVersion": "8.0.33-0ubuntu0.20.04.1",
+          "Severity": "MEDIUM",
+          "Title": "MySQL Client Library Buffer Overflow",
+          "Description": "Buffer overflow vulnerability in MySQL client library that can be exploited through malformed server responses.",
+          "References": [
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-7812"
+          ]
+        },
+        {
+          "VulnerabilityID": "CVE-2023-6723",
+          "PkgName": "openssl",
+          "PkgVersion": "1.1.1f-1ubuntu2.17",
+          "FixedVersion": "1.1.1f-1ubuntu2.19",
+          "Severity": "MEDIUM",
+          "Title": "OpenSSL Certificate Validation",
+          "Description": "Certificate validation vulnerability in OpenSSL that may allow man-in-the-middle attacks under specific configurations.",
+          "References": [
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-6723"
+          ]
+        },
+        {
+          "VulnerabilityID": "CVE-2023-5634",
+          "PkgName": "systemd",
+          "PkgVersion": "245.4-4ubuntu3.20",
+          "FixedVersion": "245.4-4ubuntu3.21",
+          "Severity": "LOW",
+          "Title": "Systemd Service Manipulation",
+          "Description": "Low impact vulnerability in systemd that allows local users to manipulate service states under certain conditions.",
+          "References": [
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-5634"
+          ]
+        }
+      ]
+    }
+  ]
+} 
