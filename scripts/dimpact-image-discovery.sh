@@ -21,10 +21,6 @@ fi
 # Default values
 OUTPUT_FILE=""
 CHECK_IMAGE_AVAILABILITY=false
-FORCED_TRANSLATIONS_FILE="forced_translations.yaml"
-
-# Global variables for translations (using temp files for bash 3.x compatibility)
-TRANSLATIONS_DIR="${TMPDIR:-${TMP:-/tmp}}/dimpact_translations_$$"
 
 # Function to handle CTRL-C gracefully
 cleanup() {
@@ -33,7 +29,6 @@ cleanup() {
     echo "🛑 Operation interrupted by user. Cleaning up..." >&2
     # Clean up temporary files
     rm -rf tmp >/dev/null 2>&1
-    rm -rf "$TRANSLATIONS_DIR" >/dev/null 2>&1
     exit 130
 }
 
@@ -51,17 +46,12 @@ while [[ $# -gt 0 ]]; do
             CHECK_IMAGE_AVAILABILITY=true
             shift
             ;;
-        --translations-file)
-            FORCED_TRANSLATIONS_FILE="$2"
-            shift 2
-            ;;
         -h|--help)
-            echo "Usage: $0 [--output-file] [--check-image-availability] [--translations-file FILE] [--help]"
+            echo "Usage: $0 [--output-file] [--check-image-availability] [--help]"
             echo ""
             echo "Options:"
             echo "  --output-file               Save YAML output to discovered.yaml file"
             echo "  --check-image-availability  Check availability of all discovered container images"
-            echo "  --translations-file         Specify custom forced translations file (default: forced_translations.yaml)"
             echo "  --help                      Show this help message"
             echo ""
             echo "Examples:"
@@ -69,7 +59,6 @@ while [[ $# -gt 0 ]]; do
             echo "  $0 --output-file                              # Save discovery to discovered.yaml"
             echo "  $0 --check-image-availability                 # Discover and check image availability"
             echo "  $0 --output-file --check-image-availability   # Save discovery and check image availability"
-            echo "  $0 --translations-file translations.yaml      # Use custom translations file"
             exit 0
             ;;
         *)
@@ -100,146 +89,6 @@ unzip -q "$TMP_ZIP" "helm-charts-main/charts/*" -d "$TMP_UNZIP_DIR"
 cp -r "$TMP_UNZIP_DIR/helm-charts-main/charts/"* dimpact-charts/
 rm -rf "$TMP_ZIP" "$TMP_UNZIP_DIR"
 echo "✅ Charts downloaded to dimpact-charts/ 🎉"
-
-# Function to load forced translations from YAML file
-load_forced_translations() {
-    echo "🔹 Running: load_forced_translations"
-    # Check if yq is available
-    if ! command -v yq >/dev/null 2>&1; then
-        return 0
-    fi
-    
-    # Check if forced translations file exists
-    if [ ! -f "$FORCED_TRANSLATIONS_FILE" ]; then
-        return 0
-    fi
-    
-    # Create translations directory
-    mkdir -p "$TRANSLATIONS_DIR"
-    
-    # Load direct image translations
-    if yq e '.translations' "$FORCED_TRANSLATIONS_FILE" >/dev/null 2>&1; then
-        yq e '.translations | to_entries | .[] | .key + ": " + .value' "$FORCED_TRANSLATIONS_FILE" 2>/dev/null > "$TRANSLATIONS_DIR/translations.txt"
-    fi
-    
-    # Load default versions
-    if yq e '.default_versions' "$FORCED_TRANSLATIONS_FILE" >/dev/null 2>&1; then
-        yq e '.default_versions | to_entries | .[] | .key + ": " + .value' "$FORCED_TRANSLATIONS_FILE" 2>/dev/null > "$TRANSLATIONS_DIR/default_versions.txt"
-    fi
-    
-    # Load registry redirects
-    if yq e '.registry_redirects' "$FORCED_TRANSLATIONS_FILE" >/dev/null 2>&1; then
-        yq e '.registry_redirects | to_entries | .[] | .key + ": " + .value' "$FORCED_TRANSLATIONS_FILE" 2>/dev/null > "$TRANSLATIONS_DIR/registry_redirects.txt"
-    fi
-    
-    # Load pattern translations
-    if yq e '.pattern_translations' "$FORCED_TRANSLATIONS_FILE" >/dev/null 2>&1; then
-        yq e '.pattern_translations | to_entries | .[] | .key + ": " + .value' "$FORCED_TRANSLATIONS_FILE" 2>/dev/null > "$TRANSLATIONS_DIR/pattern_translations.txt"
-    fi
-}
-
-# Function to apply forced translations to an image URI
-apply_forced_translations() {
-    echo "🔹 Running: apply_forced_translations"
-    local original_image="$1"
-    local image="$original_image"
-    
-    # Step 1: Check for direct translation
-    if [ -f "$TRANSLATIONS_DIR/translations.txt" ]; then
-        # Use simple string matching instead of regex to avoid escaping issues
-        local translated=""
-        while IFS= read -r line; do
-            # Skip empty lines
-            if [ -z "$line" ]; then
-                continue
-            fi
-            # Split on first ': ' using parameter expansion
-            local key="${line%%: *}"
-            local value="${line#*: }"
-            if [ "$key" = "$image" ]; then
-                translated="$value"
-                break
-            fi
-        done < "$TRANSLATIONS_DIR/translations.txt"
-        
-        if [ -n "$translated" ]; then
-            echo "$translated"
-            return
-        fi
-    fi
-    
-    # Step 2: Check for pattern translations
-    if [ -f "$TRANSLATIONS_DIR/pattern_translations.txt" ]; then
-        while IFS= read -r line; do
-            if [ -z "$line" ]; then
-                continue
-            fi
-            local pattern_key="${line%%: *}"
-            local pattern_value="${line#*: }"
-            
-            # Convert pattern to match (replace * with anything)
-            local pattern_regex="${pattern_key//\*/.*}"
-            
-            if [[ "$image" =~ ^${pattern_regex}$ ]]; then
-                # Extract the tag from the original image
-                local tag=""
-                if [[ "$image" =~ :([^:]+)$ ]]; then
-                    tag="${BASH_REMATCH[1]}"
-                fi
-                
-                # Replace {tag} placeholder in the pattern value
-                local translated_pattern="${pattern_value//\{tag\}/$tag}"
-                echo "$translated_pattern"
-                return
-            fi
-        done < "$TRANSLATIONS_DIR/pattern_translations.txt"
-    fi
-    
-    # Step 3: Check for registry redirects
-    if [[ "$image" =~ ^([^/]+)/(.+)$ ]] && [ -f "$TRANSLATIONS_DIR/registry_redirects.txt" ]; then
-        local registry="${BASH_REMATCH[1]}"
-        local rest="${BASH_REMATCH[2]}"
-        local new_registry=""
-        while IFS= read -r line; do
-            if [ -z "$line" ]; then
-                continue
-            fi
-            local key="${line%%: *}"
-            local value="${line#*: }"
-            if [ "$key" = "$registry" ]; then
-                new_registry="$value"
-                break
-            fi
-        done < "$TRANSLATIONS_DIR/registry_redirects.txt"
-        
-        if [ -n "$new_registry" ]; then
-            image="$new_registry/$rest"
-        fi
-    fi
-    
-    # Step 4: Check for default version mappings
-    if [[ "$image" =~ ^(.+):latest$ ]] && [ -f "$TRANSLATIONS_DIR/default_versions.txt" ]; then
-        local image_base="${BASH_REMATCH[1]}"
-        local default_tag=""
-        while IFS= read -r line; do
-            if [ -z "$line" ]; then
-                continue
-            fi
-            local key="${line%%: *}"
-            local value="${line#*: }"
-            if [ "$key" = "$image_base" ]; then
-                default_tag="$value"
-                break
-            fi
-        done < "$TRANSLATIONS_DIR/default_versions.txt"
-        
-        if [ -n "$default_tag" ]; then
-            image="$image_base:$default_tag"
-        fi
-    fi
-    
-    echo "$image"
-}
 
 # Function to map repository aliases to their actual URLs
 map_repo_url() {
@@ -659,7 +508,7 @@ check_discovered_images() {
     done
     echo "" >&2
     
-    # Check each image (apply forced translations before checking)
+    # Check each image
     for image in "${unique_images[@]}"; do
         if check_image "$image"; then
             echo "✅ Found: $image"
@@ -717,7 +566,7 @@ build_image_uri() {
         tag="latest"
     fi
     
-    echo "${image_uri}:${tag}"
+    echo "${image_uri}:$tag"
 }
 
 # Function to extract images from a values file
@@ -867,14 +716,13 @@ check_and_download_dependencies() {
 }
 
 # Function to generate YAML output
-# Now also outputs a mapping of original:translated images to $TMP_DIR/translated_map.txt
 generate_yaml_output() {
     echo "🔹 Running: generate_yaml_output"
     local images_file="$1"
-    local suppress_file_output="${2:-false}"  # Optional parameter to suppress file output
+    local suppress_file_output="${2:-false}"
     local yaml_output=""
     local translated_map_file="${TMP_DIR:-/tmp}/translated_map.txt"
-    : > "$translated_map_file"  # Truncate file
+    : > "$translated_map_file"
     
     # Use associative arrays to group images by url:version and collect charts
     # Check if we have bash 4+ for associative arrays
@@ -888,16 +736,6 @@ generate_yaml_output() {
             if [[ $line =~ ^([^:]+):[[:space:]]*(.+)$ ]]; then
                 local chart_name="${BASH_REMATCH[1]}"
                 local image="${BASH_REMATCH[2]}"
-                local original_image="$image"
-                
-                # Apply forced translations if any
-                local translated_image=$(apply_forced_translations "$image")
-                if [[ "$translated_image" != "$image" ]]; then
-                    image="$translated_image"
-                fi
-                
-                # Write mapping: translated_image:original_image
-                echo "$image:$original_image" >> "$translated_map_file"
                 
                 # Parse image components
                 IFS=':' read -r registry repository tag <<< "$(parse_image_components "$image")"
@@ -969,14 +807,6 @@ generate_yaml_output() {
             if [[ $line =~ ^([^:]+):[[:space:]]*(.+)$ ]]; then
                 local chart_name="${BASH_REMATCH[1]}"
                 local image="${BASH_REMATCH[2]}"
-                local original_image="$image"
-                # Apply forced translations if any
-                local translated_image=$(apply_forced_translations "$image")
-                if [[ "$translated_image" != "$image" ]]; then
-                    image="$translated_image"
-                fi
-                # Write mapping: translated_image:original_image
-                echo "$image:$original_image" >> "$translated_map_file"
                 # Parse image components
                 IFS=':' read -r registry repository tag <<< "$(parse_image_components "$image")"
                 # Validate the tag before including in output
@@ -1017,10 +847,7 @@ main() {
     echo "🔹 Running: main"
     # Check dependencies first
     check_dependencies
-    
-    # Load forced translations
-    load_forced_translations
-    
+
     # Initialize helm repositories from repo_map.yaml
     if command -v yq >/dev/null 2>&1 && [ -f "scan-config/repo_map.yaml" ]; then
         for alias in $(yq e 'keys | .[]' scan-config/repo_map.yaml); do
@@ -1110,7 +937,6 @@ main() {
 
     # Clean up silently
     rm -rf tmp >/dev/null 2>&1
-    rm -rf "$TRANSLATIONS_DIR" >/dev/null 2>&1
 }
 
 # Run main function
