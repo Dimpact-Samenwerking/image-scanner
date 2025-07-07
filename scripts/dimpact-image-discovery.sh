@@ -1022,7 +1022,8 @@ fetch_latest_dimpact_charts() {
     if [[ -d "$charts_src" ]]; then
         mkdir -p "dimpact-charts"
         rm -rf "$charts_dest"
-        mv "$charts_src" "$charts_dest"
+        cp -r "$charts_src" "$charts_dest"
+        rm -rf "$charts_src"
         echo "✅ Charts updated in $charts_dest! 🚀"
     else
         echo "❌ Could not find charts/ in the extracted zip!" >&2
