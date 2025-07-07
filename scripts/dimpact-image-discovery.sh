@@ -1044,39 +1044,33 @@ main() {
     PULLED_CHARTS_DIR="$TMP_DIR/pulled_charts"
     mkdir -p "$PULLED_CHARTS_DIR"
 
-         # Check if the podiumd chart exists
-     if [ ! -d "dimpact-charts/charts/podiumd" ]; then
-         echo "ERROR: podiumd chart not found in the repository" >&2
-         echo "Current working directory: $(pwd)" >&2
-         echo "Looking for: dimpact-charts/charts/podiumd" >&2
-         if [ -d "dimpact-charts" ]; then
-             echo "dimpact-charts directory exists" >&2
-             if [ -d "dimpact-charts/charts" ]; then
-                 echo "dimpact-charts/charts directory exists" >&2
-                 echo "Available charts:" >&2
-                 ls -1 dimpact-charts/charts/ 2>/dev/null || echo "No charts found" >&2
-             else
-                 echo "dimpact-charts/charts directory does not exist" >&2
-             fi
-         else
-             echo "dimpact-charts directory does not exist" >&2
-         fi
-         exit 1
-     fi
-     
-     # Check for dependencies in the podiumd chart silently
-     check_and_download_dependencies "dimpact-charts/charts/podiumd/Chart.yaml" "$PULLED_CHARTS_DIR" >/dev/null 2>&1
+    # Check if the podiumd chart exists
+    if [ ! -d "dimpact-charts/podiumd" ]; then
+        echo "ERROR: podiumd chart not found in the repository" >&2
+        echo "Current working directory: $(pwd)" >&2
+        echo "Looking for: dimpact-charts/podiumd" >&2
+        if [ -d "dimpact-charts" ]; then
+            echo "dimpact-charts directory exists" >&2
+            echo "Available charts:" >&2
+            ls -1 dimpact-charts/ 2>/dev/null || echo "No charts found" >&2
+        else
+            echo "dimpact-charts directory does not exist" >&2
+        fi
+        exit 1
+    fi
+    
+    # Check for dependencies in the podiumd chart silently
+    check_and_download_dependencies "dimpact-charts/podiumd/Chart.yaml" "$PULLED_CHARTS_DIR" >/dev/null 2>&1
 
     # Create a temporary file for storing images
     IMAGES_FILE="$TMP_DIR/images.txt"
     touch "$IMAGES_FILE"
 
-         # Process all charts and extract images
-     if ! process_chart "dimpact-charts/charts/podiumd" "podiumd" "$IMAGES_FILE"; then
-         echo "ERROR: Failed to process main podiumd chart" >&2
-         exit 1
-     fi
-# exit JIM
+    # Process all charts and extract images
+    if ! process_chart "dimpact-charts/podiumd" "podiumd" "$IMAGES_FILE"; then
+        echo "ERROR: Failed to process main podiumd chart" >&2
+        exit 1
+    fi
 
     # Process all downloaded dependencies
     for chart_dir in "$PULLED_CHARTS_DIR"/*; do
