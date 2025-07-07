@@ -82,6 +82,23 @@ done
 # Exit on any error
 set -e
 
+# Ensure dimpact-charts directory exists and is populated
+if [ ! -d "dimpact-charts" ] || [ -z "$(ls -A dimpact-charts 2>/dev/null)" ]; then
+    echo "📦 Downloading latest charts from Dimpact-Samenwerking/helm-charts..."
+    mkdir -p dimpact-charts
+    TMP_ZIP="dimpact-helm-charts.zip"
+    TMP_UNZIP_DIR="tmp-helm-charts-unzip-$$"
+    curl -L -o "$TMP_ZIP" \
+      https://github.com/Dimpact-Samenwerking/helm-charts/archive/refs/heads/main.zip
+    mkdir -p "$TMP_UNZIP_DIR"
+    unzip -q "$TMP_ZIP" "helm-charts-main/charts/*" -d "$TMP_UNZIP_DIR"
+    cp -r "$TMP_UNZIP_DIR/helm-charts-main/charts/"* dimpact-charts/
+    rm -rf "$TMP_ZIP" "$TMP_UNZIP_DIR"
+    echo "✅ Charts downloaded to dimpact-charts/ 🎉"
+else
+    echo "📁 dimpact-charts already exists and is not empty. Skipping download."
+fi
+
 # Function to load forced translations from YAML file
 load_forced_translations() {
     # Check if yq is available
