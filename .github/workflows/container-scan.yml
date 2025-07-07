@@ -1,3 +1,7 @@
+---
+
+# This GitHub Actionsworkflow is used to scan the container image and generate a report.
+
 name: Container Security Scan
 
 on:
@@ -13,7 +17,7 @@ jobs:
   # Test report job with sample data (only when explicitly requested)
   test-report:
     name: 🧪 Generate Test Report with Sample Data
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     if: github.event_name == 'workflow_dispatch'
     permissions:
       contents: read
@@ -26,7 +30,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          echo "🔧 Installing dependencies for self-hosted runner..."
+          echo "🔧 Installing dependencies for ubuntu-latest runner..."
           
           # Make diagnostic script executable and run dependency check
           chmod +x scripts/diagnose-environment.sh
@@ -241,7 +245,7 @@ jobs:
           retention-days: 30
 
   scan:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     if: always()
     needs: [test-report]
     permissions:
@@ -1183,7 +1187,7 @@ jobs:
   # Dashboard test mode - update dashboard with existing data without scanning
   dashboard-test:
     name: 📊 Dashboard Test Mode - Update with Existing Data
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     if: github.event_name == 'workflow_dispatch'
     permissions:
       contents: write
@@ -1500,7 +1504,7 @@ jobs:
 
   commit-reports:
     needs: [scan]
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     if: always()  # Run even if scan job fails
     permissions:
       contents: write
