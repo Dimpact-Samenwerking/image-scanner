@@ -28,6 +28,7 @@ TRANSLATIONS_DIR="${TMPDIR:-${TMP:-/tmp}}/dimpact_translations_$$"
 
 # Function to handle CTRL-C gracefully
 cleanup() {
+    echo "🔹 Running: cleanup"
     echo "" >&2
     echo "🛑 Operation interrupted by user. Cleaning up..." >&2
     # Clean up temporary files
@@ -82,25 +83,27 @@ done
 # Exit on any error
 set -e
 
-# Ensure dimpact-charts directory exists and is populated
-if [ ! -d "dimpact-charts" ] || [ -z "$(ls -A dimpact-charts 2>/dev/null)" ]; then
-    echo "📦 Downloading latest charts from Dimpact-Samenwerking/helm-charts..."
-    mkdir -p dimpact-charts
-    TMP_ZIP="dimpact-helm-charts.zip"
-    TMP_UNZIP_DIR="tmp-helm-charts-unzip-$$"
-    curl -L -o "$TMP_ZIP" \
-      https://github.com/Dimpact-Samenwerking/helm-charts/archive/refs/heads/main.zip
-    mkdir -p "$TMP_UNZIP_DIR"
-    unzip -q "$TMP_ZIP" "helm-charts-main/charts/*" -d "$TMP_UNZIP_DIR"
-    cp -r "$TMP_UNZIP_DIR/helm-charts-main/charts/"* dimpact-charts/
-    rm -rf "$TMP_ZIP" "$TMP_UNZIP_DIR"
-    echo "✅ Charts downloaded to dimpact-charts/ 🎉"
-else
-    echo "📁 dimpact-charts already exists and is not empty. Skipping download."
+# Always refresh dimpact-charts directory
+if [ -d "dimpact-charts" ]; then
+    echo "🧹 Removing old dimpact-charts directory..."
+    rm -rf dimpact-charts
 fi
+
+echo "📦 Downloading latest charts from Dimpact-Samenwerking/helm-charts..."
+mkdir -p dimpact-charts
+TMP_ZIP="dimpact-helm-charts.zip"
+TMP_UNZIP_DIR="tmp-helm-charts-unzip-$$"
+curl -L -o "$TMP_ZIP" \
+  https://github.com/Dimpact-Samenwerking/helm-charts/archive/refs/heads/main.zip
+mkdir -p "$TMP_UNZIP_DIR"
+unzip -q "$TMP_ZIP" "helm-charts-main/charts/*" -d "$TMP_UNZIP_DIR"
+cp -r "$TMP_UNZIP_DIR/helm-charts-main/charts/"* dimpact-charts/
+rm -rf "$TMP_ZIP" "$TMP_UNZIP_DIR"
+echo "✅ Charts downloaded to dimpact-charts/ 🎉"
 
 # Function to load forced translations from YAML file
 load_forced_translations() {
+    echo "🔹 Running: load_forced_translations"
     # Check if yq is available
     if ! command -v yq >/dev/null 2>&1; then
         return 0
@@ -137,6 +140,7 @@ load_forced_translations() {
 
 # Function to apply forced translations to an image URI
 apply_forced_translations() {
+    echo "🔹 Running: apply_forced_translations"
     local original_image="$1"
     local image="$original_image"
     
@@ -239,6 +243,7 @@ apply_forced_translations() {
 
 # Function to map repository aliases to their actual URLs
 map_repo_url() {
+    echo "🔹 Running: map_repo_url"
     local repo=$1
     # Remove leading @ if present
     local alias=${repo#@}
@@ -257,6 +262,7 @@ map_repo_url() {
 
 # Function to map chart versions to their available versions
 map_chart_version() {
+    echo "🔹 Running: map_chart_version"
     local chart=$1
     local version=$2
     local repo=$3
@@ -271,6 +277,7 @@ map_chart_version() {
 
 # Function to clean image string
 clean_image_string() {
+    echo "🔹 Running: clean_image_string"
     local image="$1"
     # Remove comments
     image=$(echo "$image" | sed 's/#.*$//')
@@ -297,6 +304,7 @@ clean_image_string() {
 
 # Function to parse image components
 parse_image_components() {
+    echo "🔹 Running: parse_image_components"
     local image="$1"
     local registry=""
     local repository=""
@@ -344,6 +352,7 @@ parse_image_components() {
 
 # Function to validate if a string is a valid Docker tag
 is_valid_docker_tag() {
+    echo "🔹 Running: is_valid_docker_tag"
     local tag="$1"
     
     # Check if tag is empty or null
@@ -378,6 +387,7 @@ is_valid_docker_tag() {
 
 # Function to check if Docker is available and running
 check_docker() {
+    echo "🔹 Running: check_docker"
     echo "🔧 Checking Docker availability..." >&2
     
     # Ensure Docker CLI hints are disabled
@@ -442,6 +452,7 @@ check_docker() {
 
 # Function to check dependencies
 check_dependencies() {
+    echo "🔹 Running: check_dependencies"
     local missing_deps=()
     local optional_deps=()
     
@@ -476,6 +487,7 @@ check_dependencies() {
 
 # Function to check if a container image exists and is accessible
 check_image() {
+    echo "🔹 Running: check_image"
     local image="$1"
     local image_name="${image%:*}"
     local tag="${image##*:}"
@@ -533,6 +545,7 @@ check_image() {
 
 # Function to check all discovered images
 check_discovered_images() {
+    echo "🔹 Running: check_discovered_images"
     local yaml_content="$1"
     local translated_map_file="${TMP_DIR:-/tmp}/translated_map.txt"
     
@@ -682,6 +695,7 @@ check_discovered_images() {
 
 # Function to build image URI (from extract_helm_images.sh)
 build_image_uri() {
+    echo "🔹 Running: build_image_uri"
     local registry="$1"
     local repository="$2"
     local tag="$3"
@@ -708,6 +722,7 @@ build_image_uri() {
 
 # Function to extract images from a values file
 extract_images_from_values() {
+    echo "🔹 Running: extract_images_from_values"
     local values_file="$1"
     local chart_name="$2"
     local output_file="$3"
@@ -779,6 +794,7 @@ extract_images_from_values() {
 
 # Function to process a chart and its dependencies
 process_chart() {
+    echo "🔹 Running: process_chart"
     local chart_dir="$1"
     local chart_name="$2"
     local output_file="$3"
@@ -816,6 +832,7 @@ process_chart() {
 
 # Function to check and download dependencies
 check_and_download_dependencies() {
+    echo "🔹 Running: check_and_download_dependencies"
     local chart_yaml="$1"
     local dependencies_dir="$2"
     
@@ -852,6 +869,7 @@ check_and_download_dependencies() {
 # Function to generate YAML output
 # Now also outputs a mapping of original:translated images to $TMP_DIR/translated_map.txt
 generate_yaml_output() {
+    echo "🔹 Running: generate_yaml_output"
     local images_file="$1"
     local suppress_file_output="${2:-false}"  # Optional parameter to suppress file output
     local yaml_output=""
@@ -996,6 +1014,7 @@ generate_yaml_output() {
 
 # Main execution block
 main() {
+    echo "🔹 Running: main"
     # Check dependencies first
     check_dependencies
     
