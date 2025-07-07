@@ -82,7 +82,7 @@ echo "📦 Downloading latest charts from Dimpact-Samenwerking/helm-charts..."
 mkdir -p dimpact-charts
 TMP_ZIP="dimpact-helm-charts.zip"
 TMP_UNZIP_DIR="tmp-helm-charts-unzip-$$"
-curl -L -o "$TMP_ZIP" \
+curl -s -L -o "$TMP_ZIP" \
   https://github.com/Dimpact-Samenwerking/helm-charts/archive/refs/heads/main.zip
 mkdir -p "$TMP_UNZIP_DIR"
 unzip -q "$TMP_ZIP" "helm-charts-main/charts/*" -d "$TMP_UNZIP_DIR"
