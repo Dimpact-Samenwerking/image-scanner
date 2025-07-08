@@ -118,7 +118,7 @@
               }
             }
           ],
-          "version": "0.64.0"
+          "version": "0.64.1"
         }
       },
       "results": [
@@ -247,48 +247,27 @@
           "docker.elastic.co/eck/eck-operator:latest"
         ],
         "imageCreatedDate": "2025-04-15T12:54:36.277992311Z",
-        "imageAgeDays": 79,
-        "imageAgeSeconds": 6828695,
-        "imageAgeText": "79 days",
+        "imageAgeDays": 84,
+        "imageAgeSeconds": 7258956,
+        "imageAgeText": "84 days",
         "imageAgeStatus": "recent",
-        "scanTimestamp": "2025-07-03T11:46:13Z",
+        "scanTimestamp": "2025-07-08T13:17:14Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "eck-operator"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-03T11:46:14Z",
+        "helmChartsEnhancementDate": "2025-07-08T13:17:14Z",
         "chartsMetadataVersion": "1.0",
-        "epss": {
-          "high_risk_count": 3,
-          "very_high_risk_count": 0,
-          "total_cves": 4,
-          "threshold": "5%",
-          "analysis_date": "2025-07-03 11:46:14 UTC",
-          "scores": [
-            {
-              "cve": "CVE-2025-22874",
-              "epss": "0.1260",
-              "percentile": "27.9"
-            },
-            {
-              "cve": "CVE-2025-0913",
-              "epss": "0.0979",
-              "percentile": "92.0"
-            },
-            {
-              "cve": "CVE-2025-22871",
-              "epss": "0.0986",
-              "percentile": "9.4"
-            },
-            {
-              "cve": "CVE-2025-4673",
-              "epss": "0.0135",
-              "percentile": "2.7"
-            }
-          ]
-        }
+        "epssScores": [],
+        "epssHighRiskCount": 0,
+        "epssMediumRiskCount": 0,
+        "epssLowRiskCount": 0,
+        "epssVeryHighRiskCount": 0,
+        "epssEnhanced": true,
+        "epssEnhancementDate": "2025-07-08T13:17:14Z",
+        "epssMetadataVersion": "1.0"
       }
     }
   ]

@@ -165,12 +165,6 @@ enhance_sarif_with_epss() {
         if jq empty "$temp_sarif" 2>/dev/null; then
             mv "$temp_sarif" "$sarif_file"
             print_status "✅ Enhanced SARIF with EPSS exploitability scores"
-            if [ "$DEBUG_MODE" = true ]; then
-                print_status "🐛 Debug: Added EPSS metadata to SARIF:"
-                print_status "  • High Risk CVEs (>5%): $high_epss_count"
-                print_status "  • Very High Risk CVEs (>50%): $very_high_epss_count"
-                print_status "  • Enhancement Timestamp: $enhancement_timestamp"
-            fi
         else
             print_warning "Enhanced SARIF file is invalid JSON - reverting to original"
             rm -f "$temp_sarif"

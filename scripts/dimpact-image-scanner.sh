@@ -72,7 +72,6 @@ QUICKMODE=false
 STRICT_MODE=false
 UPDATE_DATABASES=false
 CLEAN_CACHE=false
-DEBUG_MODE=false
 
 # Parse command line arguments
 while [[ $# -gt 0 ]]; do
@@ -140,7 +139,6 @@ while [[ $# -gt 0 ]]; do
             echo "  --strict                 Enable strict mode (fail fast on any error)"
             echo "  --update-db              Force update vulnerability databases"
             echo "  --clean-cache            Clean up all scanner caches and temporary files"
-            echo "  --debug                  Enable debug mode (verbose output and error details)"
             echo "  --help                   Show this help message"
             echo ""
             echo "Required input: discovered.yaml must be present in the working directory."
@@ -646,14 +644,22 @@ scan_image() {
         print_status "📄 SARIF output: $image_dir/trivy-results.sarif"
         
         # Enhance SARIF file with image age metadata
-        enhance_sarif_with_age "$image_dir/trivy-results.sarif" "$image"
+        if ! enhance_sarif_with_age "$image_dir/trivy-results.sarif" "$image"; then
+            print_error "[ACTION REQUIRED] Failed to enhance SARIF with age metadata for $image_dir/trivy-results.sarif.\n  - Check that jq is installed and the SARIF file is valid JSON.\n  - Try: sudo apt install jq\n  - If the SARIF file is missing or empty, check the scan output."
+        fi
         
         # Enhance SARIF file with Helm charts metadata
-        enhance_sarif_with_charts "$image_dir/trivy-results.sarif" "$image"
+        if ! enhance_sarif_with_charts "$image_dir/trivy-results.sarif" "$image"; then
+            print_error "[ACTION REQUIRED] Failed to enhance SARIF with Helm charts metadata for $image_dir/trivy-results.sarif.\n  - Check that jq is installed and the SARIF file is valid JSON.\n  - If the SARIF file is missing or empty, check the scan output.\n  - If using bash < 4, charts enhancement is skipped."
+        fi
         
         # Fetch and enhance SARIF with EPSS exploitability scores
-        fetch_epss_scores "$image_dir/trivy-results.sarif"
-        enhance_sarif_with_epss "$image_dir/trivy-results.sarif"
+        if ! fetch_epss_scores "$image_dir/trivy-results.sarif"; then
+            print_error "[ACTION REQUIRED] Failed to fetch EPSS scores for $image_dir/trivy-results.sarif.\n  - Check network connectivity for EPSS data download.\n  - If jq is missing, install it: sudo apt install jq\n  - If no CVEs found, this may not be an error."
+        fi
+        if ! enhance_sarif_with_epss "$image_dir/trivy-results.sarif"; then
+            print_error "[ACTION REQUIRED] Failed to enhance SARIF with EPSS data for $image_dir/trivy-results.sarif.\n  - Check that jq is installed and the SARIF and EPSS files are valid JSON.\n  - If the SARIF or EPSS file is missing or empty, check the scan and EPSS output."
+        fi
         
         # Show vulnerability summary from SARIF using actual CVE severity levels
         if command_exists jq; then
@@ -1143,63 +1149,40 @@ main() {
         exit 0
     fi
     
-    # Regular scan mode - initialize everything
-    load_cve_suppressions
-    
-    # If user specified an image, scan only that image
-    if [[ -n "$USER_IMAGE" ]]; then
-        print_status "User specified image: $USER_IMAGE"
-        mkdir -p "$OUTPUT_DIR"
-        if [ "$QUICKMODE" = true ] && has_existing_data "$USER_IMAGE"; then
-            print_status "⚡ Quickmode: Found existing data for $USER_IMAGE"
-            if copy_existing_data "$USER_IMAGE"; then
-                print_success "✅ Reused existing scan data for $USER_IMAGE"
-            else
-                print_warning "⚠️ Failed to copy existing data for $USER_IMAGE, performing fresh scan"
-                scan_image "$USER_IMAGE"
-            fi
-        else
-            if [ "$QUICKMODE" = true ]; then
-                print_status "⚡ Quickmode: No existing data found for $USER_IMAGE, performing fresh scan"
-            fi
-            scan_image "$USER_IMAGE"
-        fi
-    else
-        # Only support loading images from discovered.yaml
-        if [ ! -f "discovered.yaml" ]; then
-            print_error "discovered.yaml not found. Please generate it externally."
-            print_status "Run the image discovery script before using this script."
-            exit 1
-        fi
-        load_images_from_file
-        # Apply test mode limitation if enabled
-        if [ "$TESTMODE" = true ]; then
-            local original_count=${#discovered_images[@]}
-            print_status "🧪 Test mode enabled - limiting scan to first 3 images"
-            if [ $original_count -gt 3 ]; then
-                if (( BASH_VERSINFO[0] >= 4 )); then
-                    discovered_images=("${discovered_images[@]:0:3}")
-                else
-                    local temp_array=()
-                    local count=0
-                    for img in "${discovered_images[@]}"; do
-                        if [ $count -lt 3 ]; then
-                            temp_array+=("$img")
-                            ((count++))
-                        else
-                            break
-                        fi
-                    done
-                    discovered_images=("${temp_array[@]}")
-                fi
-                print_status "Scanning ${#discovered_images[@]} out of $original_count total images"
-            else
-                print_status "Scanning all ${#discovered_images[@]} images (less than 3 found)"
-            fi
-        fi
-        mkdir -p "$OUTPUT_DIR"
-        run_sequential_scans "${discovered_images[@]}"
+    # Always load and scan discovered images
+    if [ ! -f "discovered.yaml" ]; then
+        print_error "discovered.yaml not found. Please generate it externally."
+        print_status "Run the image discovery script before using this script."
+        exit 1
     fi
+    load_images_from_file
+    # Apply test mode limitation if enabled
+    if [ "$TESTMODE" = true ]; then
+        local original_count=${#discovered_images[@]}
+        print_status "🧪 Test mode enabled - limiting scan to first 3 images"
+        if [ $original_count -gt 3 ]; then
+            if (( BASH_VERSINFO[0] >= 4 )); then
+                discovered_images=("${discovered_images[@]:0:3}")
+            else
+                local temp_array=()
+                local count=0
+                for img in "${discovered_images[@]}"; do
+                    if [ $count -lt 3 ]; then
+                        temp_array+=("$img")
+                        ((count++))
+                    else
+                        break
+                    fi
+                done
+                discovered_images=("${temp_array[@]}")
+            fi
+            print_status "Scanning ${#discovered_images[@]} out of $original_count total images"
+        else
+            print_status "Scanning all ${#discovered_images[@]} images (less than 3 found)"
+        fi
+    fi
+    mkdir -p "$OUTPUT_DIR"
+    run_sequential_scans "${discovered_images[@]}"
     
     # Generate consolidated report
     generate_consolidated_report

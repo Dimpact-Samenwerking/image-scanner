@@ -45,9 +45,6 @@ ensure_docker_env() {
         print_warning "DOCKER_CLI_HINTS is set to '$DOCKER_CLI_HINTS' - setting to 'false' to suppress hints"
         export DOCKER_CLI_HINTS=false
     fi
-    if [ "$DEBUG_MODE" = true ]; then
-        print_status "🐛 Debug: Docker environment - DOCKER_CLI_HINTS=$DOCKER_CLI_HINTS"
-    fi
 }
 
 get_absolute_path() {
