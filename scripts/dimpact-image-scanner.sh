@@ -13,8 +13,6 @@ source "$(dirname "$0")/dimpact-scanner-epss.sh"
 # Source image discovery and YAML parsing functions
 source "$(dirname "$0")/dimpact-scanner-discovery.sh"
 
-#set -x  # Enable debug mode for verbose output
-
 # Ensure we're using bash
 if [ -z "${BASH_VERSION:-}" ]; then
     echo "Error: This script requires bash" >&2
@@ -120,11 +118,7 @@ while [[ $# -gt 0 ]]; do
             CLEAN_CACHE=true
             shift
             ;;
-        --debug)
-            DEBUG_MODE=true
-            shift
-            ;;
-        -h|--help)
+        --help)
             echo "Usage: $0 [OPTIONS]"
             echo ""
             echo "Options:"
@@ -1107,7 +1101,6 @@ main() {
         print_status "    - HELM_CHARTS_DIR: $HELM_CHARTS_DIR"
         print_status "    - TESTMODE: $TESTMODE"
         print_status "    - STRICT_MODE: $STRICT_MODE"
-        print_status "    - DEBUG_MODE: $DEBUG_MODE"
         print_status "    - UPDATE_DATABASES: $UPDATE_DATABASES"
         print_status "    - CLEAN_CACHE: $CLEAN_CACHE"
         print_status "    - LIST_IMAGES_ONLY: $LIST_IMAGES_ONLY"
