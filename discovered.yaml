@@ -1,0 +1,117 @@
+- url: docker.io/bats/bats
+  version: v1.4.1
+  charts:
+    - grafana
+- url: docker.io/grafana/agent-operator
+  version: v0.44.2
+  charts:
+    - grafana-agent-operator
+- url: docker.io/grafana/enterprise-logs-provisioner
+  version: latest
+  charts:
+    - loki
+- url: docker.io/grafana/enterprise-logs
+  version: 3.5.1
+  charts:
+    - loki
+- url: docker.io/grafana/grafana-image-renderer
+  version: latest
+  charts:
+    - grafana
+- url: docker.io/grafana/grafana
+  version: latest
+  charts:
+    - monitoring-logging
+    - grafana
+- url: docker.io/grafana/loki-canary
+  version: latest
+  charts:
+    - loki
+- url: docker.io/grafana/loki-helm-test
+  version: ewelch-distributed-helm-chart-17db5ee
+  charts:
+    - loki
+- url: docker.io/grafana/loki
+  version: 3.5.0
+  charts:
+    - loki
+- url: docker.io/grafana/promtail
+  version: latest
+  charts:
+    - monitoring-logging
+    - promtail
+- url: docker.io/grafana/rollout-operator
+  version: latest
+  charts:
+    - rollout-operator
+- url: docker.io/kiwigrid/k8s-sidecar
+  version: 1.30.3
+  charts:
+    - loki
+- url: docker.io/library/busybox
+  version: 1.31.1
+  charts:
+    - grafana
+- url: docker.io/library/busybox
+  version: latest
+  charts:
+    - grafana-agent-operator
+- url: docker.io/memcached
+  version: 1.6.38-alpine
+  charts:
+    - loki
+- url: docker.io/nginxinc/nginx-unprivileged
+  version: 1.28-alpine
+  charts:
+    - loki
+- url: docker.io/null
+  version: latest
+  charts:
+    - loki
+- url: docker.io/prom/memcached-exporter
+  version: v0.15.2
+  charts:
+    - loki
+- url: ghcr.io/jimmidyson/configmap-reload
+  version: v0.12.0
+  charts:
+    - promtail
+- url: quay.io/brancz/kube-rbac-proxy
+  version: v0.19.1
+  charts:
+    - kube-state-metrics
+    - prometheus-node-exporter
+- url: quay.io/kiwigrid/k8s-sidecar
+  version: 1.30.0
+  charts:
+    - grafana
+- url: quay.io/minio/minio
+  version: RELEASE.2024-12-18T13-15-44Z
+  charts:
+    - minio
+- url: quay.io/prometheus-operator/prometheus-config-reloader
+  version: v0.83.0
+  charts:
+    - prometheus
+    - alertmanager
+- url: quay.io/prometheus/alertmanager
+  version: latest
+  charts:
+    - alertmanager
+- url: quay.io/prometheus/node-exporter
+  version: latest
+  charts:
+    - prometheus-node-exporter
+- url: quay.io/prometheus/prometheus
+  version: latest
+  charts:
+    - monitoring-logging
+    - prometheus
+- url: quay.io/prometheus/pushgateway
+  version: latest
+  charts:
+    - prometheus-pushgateway
+- url: registry.k8s.io/kube-state-metrics/kube-state-metrics
+  version: latest
+  charts:
+    - kube-state-metrics

@@ -24,7 +24,7 @@ CHECK_IMAGE_AVAILABILITY=false
 
 # Function to handle CTRL-C gracefully
 cleanup() {
-    echo "🔹 Running: cleanup"
+    echo "🔹 Running: cleanup" >&2
     echo "" >&2
     echo "🛑 Operation interrupted by user. Cleaning up..." >&2
     # Clean up temporary files
@@ -92,7 +92,7 @@ echo "✅ Charts downloaded to dimpact-charts/ 🎉"
 
 # Function to map repository aliases to their actual URLs
 map_repo_url() {
-    echo "🔹 Running: map_repo_url"
+    echo "🔹 Running: map_repo_url" >&2
     local repo=$1
     # Remove leading @ if present
     local alias=${repo#@}
@@ -111,7 +111,7 @@ map_repo_url() {
 
 # Function to map chart versions to their available versions
 map_chart_version() {
-    echo "🔹 Running: map_chart_version"
+    echo "🔹 Running: map_chart_version" >&2
     local chart=$1
     local version=$2
     local repo=$3
@@ -126,7 +126,7 @@ map_chart_version() {
 
 # Function to clean image string
 clean_image_string() {
-    echo "🔹 Running: clean_image_string"
+    echo "🔹 Running: clean_image_string" >&2
     local image="$1"
     # Remove comments
     image=$(echo "$image" | sed 's/#.*$//')
@@ -153,7 +153,7 @@ clean_image_string() {
 
 # Function to parse image components
 parse_image_components() {
-    echo "🔹 Running: parse_image_components"
+    echo "🔹 Running: parse_image_components" >&2
     local image="$1"
     local registry=""
     local repository=""
@@ -201,7 +201,7 @@ parse_image_components() {
 
 # Function to validate if a string is a valid Docker tag
 is_valid_docker_tag() {
-    echo "🔹 Running: is_valid_docker_tag"
+    echo "🔹 Running: is_valid_docker_tag" >&2
     local tag="$1"
     
     # Check if tag is empty or null
@@ -236,7 +236,7 @@ is_valid_docker_tag() {
 
 # Function to check if Docker is available and running
 check_docker() {
-    echo "🔹 Running: check_docker"
+    echo "🔹 Running: check_docker" >&2
     echo "🔧 Checking Docker availability..." >&2
     
     # Ensure Docker CLI hints are disabled
@@ -301,7 +301,7 @@ check_docker() {
 
 # Function to check dependencies
 check_dependencies() {
-    echo "🔹 Running: check_dependencies"
+    echo "🔹 Running: check_dependencies" >&2
     local missing_deps=()
     local optional_deps=()
     
@@ -336,7 +336,7 @@ check_dependencies() {
 
 # Function to check if a container image exists and is accessible
 check_image() {
-    echo "🔹 Running: check_image"
+    echo "🔹 Running: check_image" >&2
     local image="$1"
     local image_name="${image%:*}"
     local tag="${image##*:}"
@@ -394,7 +394,7 @@ check_image() {
 
 # Function to check all discovered images
 check_discovered_images() {
-    echo "🔹 Running: check_discovered_images"
+    echo "🔹 Running: check_discovered_images" >&2
     local yaml_content="$1"
     local translated_map_file="${TMP_DIR:-/tmp}/translated_map.txt"
     
@@ -544,7 +544,7 @@ check_discovered_images() {
 
 # Function to build image URI (from extract_helm_images.sh)
 build_image_uri() {
-    echo "🔹 Running: build_image_uri"
+    echo "🔹 Running: build_image_uri" >&2
     local registry="$1"
     local repository="$2"
     local tag="$3"
@@ -571,7 +571,7 @@ build_image_uri() {
 
 # Function to extract images from a values file
 extract_images_from_values() {
-    echo "🔹 Running: extract_images_from_values"
+    echo "🔹 Running: extract_images_from_values" >&2
     local values_file="$1"
     local chart_name="$2"
     local output_file="$3"
@@ -643,45 +643,68 @@ extract_images_from_values() {
 
 # Function to process a chart and its dependencies
 process_chart() {
-    echo "🔹 Running: process_chart"
+    echo "🔹 Running: process_chart" >&2
     local chart_dir="$1"
     local chart_name="$2"
     local output_file="$3"
     
+    echo "🗂️  Processing chart directory: $chart_dir" >&2
+    echo "🏷️  Chart name: $chart_name" >&2
+    echo "📄 Output file: $output_file" >&2
+
     # Check if chart directory exists
     if [ ! -d "$chart_dir" ]; then
+        echo "❌ Chart directory not found: $chart_dir" >&2
         return 1
     fi
     
     # Process the main chart's values
     if [ -f "$chart_dir/values.yaml" ]; then
+        echo "🔍 Found values.yaml in $chart_dir, extracting images..." >&2
         extract_images_from_values "$chart_dir/values.yaml" "$chart_name" "$output_file"
+    else
+        echo "⚠️  No values.yaml found in $chart_dir" >&2
     fi
     
     # Process any additional values files
+    local found_additional=false
     for values_file in "$chart_dir"/values-*.yaml; do
         if [ -f "$values_file" ]; then
+            found_additional=true
+            echo "🔍 Found additional values file: $values_file, extracting images..." >&2
             extract_images_from_values "$values_file" "$chart_name" "$output_file"
         fi
     done
+    if [ "$found_additional" = false ]; then
+        echo "ℹ️  No additional values-*.yaml files found in $chart_dir" >&2
+    fi
     
     # Process dependencies if they exist
     if [ -f "$chart_dir/Chart.yaml" ]; then
         local deps_dir="$chart_dir/charts"
         if [ -d "$deps_dir" ]; then
+            echo "🔗 Checking dependencies in $deps_dir..." >&2
             for dep_dir in "$deps_dir"/*; do
                 if [ -d "$dep_dir" ]; then
                     local dep_name=$(basename "$dep_dir")
+                    echo "➡️  Processing dependency chart: $dep_name in $dep_dir" >&2
                     process_chart "$dep_dir" "$dep_name" "$output_file"
+                else
+                    echo "⚠️  Expected directory but found something else: $dep_dir" >&2
                 fi
             done
+        else
+            echo "ℹ️  No dependencies directory found in $chart_dir" >&2
         fi
+    else
+        echo "⚠️  No Chart.yaml found in $chart_dir, skipping dependencies." >&2
     fi
+    echo "✅ Finished processing chart: $chart_name ($chart_dir)" >&2
 }
 
 # Function to check and download dependencies
 check_and_download_dependencies() {
-    echo "🔹 Running: check_and_download_dependencies"
+    echo "🔹 Running: check_and_download_dependencies" >&2
     local chart_yaml="$1"
     local dependencies_dir="$2"
     
@@ -717,7 +740,7 @@ check_and_download_dependencies() {
 
 # Function to generate YAML output
 generate_yaml_output() {
-    echo "🔹 Running: generate_yaml_output"
+    echo "🔹 Running: generate_yaml_output" >&2
     local images_file="$1"
     local suppress_file_output="${2:-false}"
     local yaml_output=""
@@ -844,7 +867,7 @@ generate_yaml_output() {
 
 # Main execution block
 main() {
-    echo "🔹 Running: main"
+    echo "🔹 Running: main" >&2
     # Check dependencies first
     check_dependencies
 
@@ -871,11 +894,11 @@ main() {
     PULLED_CHARTS_DIR="$TMP_DIR/pulled_charts"
     mkdir -p "$PULLED_CHARTS_DIR"
 
-    # Check if the podiumd chart exists
-    if [ ! -d "dimpact-charts/podiumd" ]; then
-        echo "ERROR: podiumd chart not found in the repository" >&2
+    # Check if the monitoring-logging chart exists
+    if [ ! -d "dimpact-charts/monitoring-logging" ]; then
+        echo "ERROR: monitoring-logging chart not found in the repository" >&2
         echo "Current working directory: $(pwd)" >&2
-        echo "Looking for: dimpact-charts/podiumd" >&2
+        echo "Looking for: dimpact-charts/monitoring-logging" >&2
         if [ -d "dimpact-charts" ]; then
             echo "dimpact-charts directory exists" >&2
             echo "Available charts:" >&2
@@ -886,16 +909,16 @@ main() {
         exit 1
     fi
     
-    # Check for dependencies in the podiumd chart silently
-    check_and_download_dependencies "dimpact-charts/podiumd/Chart.yaml" "$PULLED_CHARTS_DIR" >/dev/null 2>&1
+    # Check for dependencies in the monitoring-logging chart silently
+    check_and_download_dependencies "dimpact-charts/monitoring-logging/Chart.yaml" "$PULLED_CHARTS_DIR" >/dev/null 2>&1
 
     # Create a temporary file for storing images
     IMAGES_FILE="$TMP_DIR/images.txt"
     touch "$IMAGES_FILE"
 
     # Process all charts and extract images
-    if ! process_chart "dimpact-charts/podiumd" "podiumd" "$IMAGES_FILE"; then
-        echo "ERROR: Failed to process main podiumd chart" >&2
+    if ! process_chart "dimpact-charts/monitoring-logging" "monitoring-logging" "$IMAGES_FILE"; then
+        echo "ERROR: Failed to process main monitoring-logging chart" >&2
         exit 1
     fi
 
