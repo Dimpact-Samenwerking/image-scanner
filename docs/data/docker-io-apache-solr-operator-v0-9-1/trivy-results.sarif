@@ -301,25 +301,25 @@
           "apache/solr-operator:v0.9.1"
         ],
         "imageCreatedDate": "2025-03-25T15:19:40.064209724Z",
-        "imageAgeDays": 97,
-        "imageAgeSeconds": 8457856,
-        "imageAgeText": "97 days",
+        "imageAgeDays": 99,
+        "imageAgeSeconds": 8630797,
+        "imageAgeText": "99 days",
         "imageAgeStatus": "moderate",
-        "scanTimestamp": "2025-07-01T11:43:57Z",
+        "scanTimestamp": "2025-07-03T11:46:18Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "solr-operator"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-01T11:43:57Z",
+        "helmChartsEnhancementDate": "2025-07-03T11:46:18Z",
         "chartsMetadataVersion": "1.0",
         "epss": {
           "high_risk_count": 3,
           "very_high_risk_count": 0,
           "total_cves": 5,
           "threshold": "5%",
-          "analysis_date": "2025-07-01 11:43:57 UTC",
+          "analysis_date": "2025-07-03 11:46:18 UTC",
           "scores": [
             {
               "cve": "CVE-2025-22870",

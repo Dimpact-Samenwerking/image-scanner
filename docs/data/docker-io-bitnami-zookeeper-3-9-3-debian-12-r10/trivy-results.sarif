@@ -7294,25 +7294,25 @@
           "bitnami/zookeeper:3.9.3-debian-12-r10"
         ],
         "imageCreatedDate": "2025-03-24T00:29:58.221350654Z",
-        "imageAgeDays": 99,
-        "imageAgeSeconds": 8597764,
-        "imageAgeText": "99 days",
+        "imageAgeDays": 101,
+        "imageAgeSeconds": 8770703,
+        "imageAgeText": "101 days",
         "imageAgeStatus": "moderate",
-        "scanTimestamp": "2025-07-01T11:46:03Z",
+        "scanTimestamp": "2025-07-03T11:48:22Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "zookeeper"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-01T11:46:03Z",
+        "helmChartsEnhancementDate": "2025-07-03T11:48:22Z",
         "chartsMetadataVersion": "1.0",
         "epss": {
           "high_risk_count": 54,
           "very_high_risk_count": 11,
           "total_cves": 88,
           "threshold": "5%",
-          "analysis_date": "2025-07-01 11:46:04 UTC",
+          "analysis_date": "2025-07-03 11:48:23 UTC",
           "scores": [
             {
               "cve": "CVE-2011-3374",

@@ -16447,25 +16447,25 @@
           "bitnami/rabbitmq:3.11.8-debian-11-r0"
         ],
         "imageCreatedDate": "2023-01-31T02:01:23.479270935Z",
-        "imageAgeDays": 882,
-        "imageAgeSeconds": 76243451,
-        "imageAgeText": "882 days",
+        "imageAgeDays": 884,
+        "imageAgeSeconds": 76416388,
+        "imageAgeText": "884 days",
         "imageAgeStatus": "very_old",
-        "scanTimestamp": "2025-07-01T11:45:35Z",
+        "scanTimestamp": "2025-07-03T11:47:52Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "rabbitmq"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-01T11:45:35Z",
+        "helmChartsEnhancementDate": "2025-07-03T11:47:52Z",
         "chartsMetadataVersion": "1.0",
         "epss": {
           "high_risk_count": 126,
           "very_high_risk_count": 21,
           "total_cves": 213,
           "threshold": "5%",
-          "analysis_date": "2025-07-01 11:45:37 UTC",
+          "analysis_date": "2025-07-03 11:47:55 UTC",
           "scores": [
             {
               "cve": "CVE-2011-3374",

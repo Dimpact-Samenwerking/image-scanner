@@ -6457,25 +6457,25 @@
           "bitnami/os-shell:12-debian-12-r42"
         ],
         "imageCreatedDate": "2025-04-07T14:27:52.747909215Z",
-        "imageAgeDays": 84,
-        "imageAgeSeconds": 7341451,
-        "imageAgeText": "84 days",
+        "imageAgeDays": 86,
+        "imageAgeSeconds": 7514389,
+        "imageAgeText": "86 days",
         "imageAgeStatus": "recent",
-        "scanTimestamp": "2025-07-01T11:45:24Z",
+        "scanTimestamp": "2025-07-03T11:47:42Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "solr"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-01T11:45:24Z",
+        "helmChartsEnhancementDate": "2025-07-03T11:47:42Z",
         "chartsMetadataVersion": "1.0",
         "epss": {
           "high_risk_count": 37,
           "very_high_risk_count": 8,
           "total_cves": 65,
           "threshold": "5%",
-          "analysis_date": "2025-07-01 11:45:25 UTC",
+          "analysis_date": "2025-07-03 11:47:43 UTC",
           "scores": [
             {
               "cve": "CVE-2011-3374",

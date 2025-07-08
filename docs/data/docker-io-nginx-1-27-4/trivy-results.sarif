@@ -7780,25 +7780,25 @@
           "nginx:1.27.4"
         ],
         "imageCreatedDate": "2025-02-05T21:27:16Z",
-        "imageAgeDays": 145,
-        "imageAgeSeconds": 12583303,
-        "imageAgeText": "145 days",
+        "imageAgeDays": 147,
+        "imageAgeSeconds": 12756183,
+        "imageAgeText": "147 days",
         "imageAgeStatus": "moderate",
-        "scanTimestamp": "2025-07-01T11:49:00Z",
+        "scanTimestamp": "2025-07-03T11:50:20Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "podiumd"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-01T11:49:00Z",
+        "helmChartsEnhancementDate": "2025-07-03T11:50:20Z",
         "chartsMetadataVersion": "1.0",
         "epss": {
           "high_risk_count": 66,
           "very_high_risk_count": 11,
           "total_cves": 107,
           "threshold": "5%",
-          "analysis_date": "2025-07-01 11:49:02 UTC",
+          "analysis_date": "2025-07-03 11:50:21 UTC",
           "scores": [
             {
               "cve": "CVE-2011-3374",

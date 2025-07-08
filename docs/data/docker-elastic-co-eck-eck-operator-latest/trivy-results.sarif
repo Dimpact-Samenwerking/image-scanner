@@ -247,25 +247,25 @@
           "docker.elastic.co/eck/eck-operator:latest"
         ],
         "imageCreatedDate": "2025-04-15T12:54:36.277992311Z",
-        "imageAgeDays": 77,
-        "imageAgeSeconds": 6655752,
-        "imageAgeText": "77 days",
+        "imageAgeDays": 79,
+        "imageAgeSeconds": 6828695,
+        "imageAgeText": "79 days",
         "imageAgeStatus": "recent",
-        "scanTimestamp": "2025-07-01T11:43:52Z",
+        "scanTimestamp": "2025-07-03T11:46:13Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "eck-operator"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-01T11:43:52Z",
+        "helmChartsEnhancementDate": "2025-07-03T11:46:14Z",
         "chartsMetadataVersion": "1.0",
         "epss": {
           "high_risk_count": 3,
           "very_high_risk_count": 0,
           "total_cves": 4,
           "threshold": "5%",
-          "analysis_date": "2025-07-01 11:43:52 UTC",
+          "analysis_date": "2025-07-03 11:46:14 UTC",
           "scores": [
             {
               "cve": "CVE-2025-22874",

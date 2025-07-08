@@ -5458,25 +5458,25 @@
           "bitnami/postgres-exporter:0.16.0-debian-12-r1"
         ],
         "imageCreatedDate": "2024-11-11T11:21:39.678475767Z",
-        "imageAgeDays": 232,
-        "imageAgeSeconds": 20049828,
-        "imageAgeText": "232 days",
+        "imageAgeDays": 234,
+        "imageAgeSeconds": 20222765,
+        "imageAgeText": "234 days",
         "imageAgeStatus": "old",
-        "scanTimestamp": "2025-07-01T11:45:28Z",
+        "scanTimestamp": "2025-07-03T11:47:45Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "postgresql"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-01T11:45:28Z",
+        "helmChartsEnhancementDate": "2025-07-03T11:47:45Z",
         "chartsMetadataVersion": "1.0",
         "epss": {
           "high_risk_count": 33,
           "very_high_risk_count": 7,
           "total_cves": 60,
           "threshold": "5%",
-          "analysis_date": "2025-07-01 11:45:29 UTC",
+          "analysis_date": "2025-07-03 11:47:46 UTC",
           "scores": [
             {
               "cve": "CVE-2011-3374",

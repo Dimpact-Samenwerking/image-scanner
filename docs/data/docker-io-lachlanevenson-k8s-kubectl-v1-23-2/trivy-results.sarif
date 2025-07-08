@@ -7780,25 +7780,25 @@
           "lachlanevenson/k8s-kubectl:v1.23.2"
         ],
         "imageCreatedDate": "2022-01-22T17:08:15.163688384Z",
-        "imageAgeDays": 1255,
-        "imageAgeSeconds": 108502680,
-        "imageAgeText": "1255 days",
+        "imageAgeDays": 1257,
+        "imageAgeSeconds": 108675619,
+        "imageAgeText": "1257 days",
         "imageAgeStatus": "very_old",
-        "scanTimestamp": "2025-07-01T11:46:17Z",
+        "scanTimestamp": "2025-07-03T11:48:36Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "zookeeper-operator"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-01T11:46:17Z",
+        "helmChartsEnhancementDate": "2025-07-03T11:48:36Z",
         "chartsMetadataVersion": "1.0",
         "epss": {
           "high_risk_count": 71,
           "very_high_risk_count": 9,
           "total_cves": 119,
           "threshold": "5%",
-          "analysis_date": "2025-07-01 11:46:18 UTC",
+          "analysis_date": "2025-07-03 11:48:38 UTC",
           "scores": [
             {
               "cve": "CVE-2022-28391",

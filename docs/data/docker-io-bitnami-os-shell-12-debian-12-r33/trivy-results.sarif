@@ -7915,25 +7915,25 @@
           "bitnami/os-shell:12-debian-12-r33"
         ],
         "imageCreatedDate": "2024-11-09T22:52:05.549354545Z",
-        "imageAgeDays": 233,
-        "imageAgeSeconds": 20181191,
-        "imageAgeText": "233 days",
+        "imageAgeDays": 235,
+        "imageAgeSeconds": 20354129,
+        "imageAgeText": "235 days",
         "imageAgeStatus": "old",
-        "scanTimestamp": "2025-07-01T11:45:17Z",
+        "scanTimestamp": "2025-07-03T11:47:35Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "postgresql"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-01T11:45:17Z",
+        "helmChartsEnhancementDate": "2025-07-03T11:47:35Z",
         "chartsMetadataVersion": "1.0",
         "epss": {
           "high_risk_count": 43,
           "very_high_risk_count": 9,
           "total_cves": 76,
           "threshold": "5%",
-          "analysis_date": "2025-07-01 11:45:18 UTC",
+          "analysis_date": "2025-07-03 11:47:36 UTC",
           "scores": [
             {
               "cve": "CVE-2011-3374",

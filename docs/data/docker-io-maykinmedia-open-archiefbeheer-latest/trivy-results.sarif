@@ -39775,25 +39775,25 @@
           "maykinmedia/open-archiefbeheer:latest"
         ],
         "imageCreatedDate": "2025-06-04T09:50:56.049110347Z",
-        "imageAgeDays": 27,
-        "imageAgeSeconds": 2346979,
-        "imageAgeText": "27 days",
+        "imageAgeDays": 29,
+        "imageAgeSeconds": 2519940,
+        "imageAgeText": "29 days",
         "imageAgeStatus": "very_recent",
-        "scanTimestamp": "2025-07-01T11:47:16Z",
+        "scanTimestamp": "2025-07-03T11:49:57Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "openarchiefbeheer"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-01T11:47:16Z",
+        "helmChartsEnhancementDate": "2025-07-03T11:49:57Z",
         "chartsMetadataVersion": "1.0",
         "epss": {
           "high_risk_count": 263,
           "very_high_risk_count": 53,
           "total_cves": 427,
           "threshold": "5%",
-          "analysis_date": "2025-07-01 11:47:21 UTC",
+          "analysis_date": "2025-07-03 11:50:02 UTC",
           "scores": [
             {
               "cve": "CVE-2011-3374",

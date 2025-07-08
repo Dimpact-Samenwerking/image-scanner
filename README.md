@@ -1,3 +1,7 @@
+# All dependencies for scripts are managed in .github/workflows/install-dependencies.yml.
+# Scripts assume all dependencies are present and do not check or install them.
+# If you add a new dependency to any script, add it to the workflow.
+
 # 🔒 Container Image Security Scanner
 
 [![Security Scan](https://github.com/your-org/image-scanner/actions/workflows/container-scan.yml/badge.svg)](https://github.com/your-org/image-scanner/actions/workflows/container-scan.yml)
@@ -383,3 +387,45 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 **🔒 Secure your containers. 📊 Track your progress. 🚀 Scale with confidence.**
+
+# Running Scripts in a Consistent Ubuntu Environment (with Docker)
+
+This project provides a `Dockerfile` to ensure all scripts run in a consistent Ubuntu 22.04 environment with all dependencies pre-installed. This is the recommended way to run scripts, regardless of your host OS.
+
+## Quick Start
+
+1. **Build the Docker image:**
+
+   ```bash
+   docker build -t image-scanner-ubuntu .
+   ```
+
+2. **Start a container with your project mounted:**
+
+   ```bash
+   docker run --rm -it \
+     -v /var/run/docker.sock:/var/run/docker.sock \
+     -v $(pwd):/workspace \
+     -w /workspace \
+     image-scanner-ubuntu \
+     bash
+   ```
+
+   > This gives you a bash shell inside the container, with your project at `/workspace`.
+
+3. **Run any script as you would on Ubuntu:**
+
+   ```bash
+   chmod +x scripts/dimpact-image-discovery.sh
+   ./scripts/dimpact-image-discovery.sh --output-file
+   
+   chmod +x scripts/dimpact-image-scanner.sh
+   ./scripts/dimpact-image-scanner.sh --use-discovered
+   
+   chmod +x scripts/dimpact-scan-postprocess.sh
+   ./scripts/dimpact-scan-postprocess.sh <SCAN_DATE> <SCAN_TIMESTAMP> <GITHUB_RUN_ID> <GITHUB_RUN_NUMBER> <GITHUB_SHA> <GITHUB_REF> <GITHUB_ACTOR> <GITHUB_EVENT_NAME>
+   ```
+
+- All scripts assume a Linux/Ubuntu environment.
+- Docker must be available inside the container (the `-v /var/run/docker.sock:/var/run/docker.sock` flag is required).
+- You can add more dependencies to the `Dockerfile` as needed.

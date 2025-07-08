@@ -17869,34 +17869,34 @@
         }
       },
       "properties": {
-        "imageID": "sha256:5efb704ccb2712d1e3095e0da395d48def36aa9efa46cdac36b641c4669733c6",
+        "imageID": "sha256:8c1bcd224a9dcb9d0f8d4a77884aff5bb587a428323ecf7bea49e7ad94ab0613",
         "imageName": "docker.io/openformulieren/open-forms:latest",
         "repoDigests": [
-          "openformulieren/open-forms@sha256:1c80b074bf1bd14a7c60d4091a6b5f1d1859bf4d1191b8c78e0ed5437d6df060"
+          "openformulieren/open-forms@sha256:59327d66dc0e241c50dd7f2b7cc60c8f3bb67cad2e9800fb981ba2514f6506bb"
         ],
         "repoTags": [
           "openformulieren/open-forms:latest"
         ],
-        "imageCreatedDate": "2025-06-30T15:20:06.030741451Z",
+        "imageCreatedDate": "2025-07-02T15:10:17.978395219Z",
         "imageAgeDays": 0,
-        "imageAgeSeconds": 80948,
-        "imageAgeText": "22 hour(s), 29 minute(s)",
+        "imageAgeSeconds": 81619,
+        "imageAgeText": "22 hour(s), 40 minute(s)",
         "imageAgeStatus": "very_recent",
-        "scanTimestamp": "2025-07-01T11:49:15Z",
+        "scanTimestamp": "2025-07-03T11:50:37Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "openforms"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-01T11:49:15Z",
+        "helmChartsEnhancementDate": "2025-07-03T11:50:37Z",
         "chartsMetadataVersion": "1.0",
         "epss": {
           "high_risk_count": 143,
           "very_high_risk_count": 25,
           "total_cves": 238,
           "threshold": "5%",
-          "analysis_date": "2025-07-01 11:49:18 UTC",
+          "analysis_date": "2025-07-03 11:50:40 UTC",
           "scores": [
             {
               "cve": "CVE-2011-3374",

@@ -8129,25 +8129,25 @@
         ],
         "repoTags": [],
         "imageCreatedDate": "2022-11-25T02:43:34.82336729Z",
-        "imageAgeDays": 949,
-        "imageAgeSeconds": 82029767,
-        "imageAgeText": "949 days",
+        "imageAgeDays": 951,
+        "imageAgeSeconds": 82202708,
+        "imageAgeText": "951 days",
         "imageAgeStatus": "very_old",
-        "scanTimestamp": "2025-07-01T11:46:22Z",
+        "scanTimestamp": "2025-07-03T11:48:43Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "zaakafhandelcomponent"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-01T11:46:22Z",
+        "helmChartsEnhancementDate": "2025-07-03T11:48:43Z",
         "chartsMetadataVersion": "1.0",
         "epss": {
           "high_risk_count": 64,
           "very_high_risk_count": 9,
           "total_cves": 116,
           "threshold": "5%",
-          "analysis_date": "2025-07-01 11:46:24 UTC",
+          "analysis_date": "2025-07-03 11:48:45 UTC",
           "scores": [
             {
               "cve": "CVE-2023-42363",

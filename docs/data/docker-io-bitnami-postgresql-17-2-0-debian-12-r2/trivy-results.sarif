@@ -6970,25 +6970,25 @@
           "bitnami/postgresql:17.2.0-debian-12-r2"
         ],
         "imageCreatedDate": "2024-12-03T14:24:05.15302837Z",
-        "imageAgeDays": 209,
-        "imageAgeSeconds": 18138085,
-        "imageAgeText": "209 days",
+        "imageAgeDays": 211,
+        "imageAgeSeconds": 18311022,
+        "imageAgeText": "211 days",
         "imageAgeStatus": "old",
-        "scanTimestamp": "2025-07-01T11:45:31Z",
+        "scanTimestamp": "2025-07-03T11:47:48Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "postgresql"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-01T11:45:31Z",
+        "helmChartsEnhancementDate": "2025-07-03T11:47:48Z",
         "chartsMetadataVersion": "1.0",
         "epss": {
           "high_risk_count": 52,
           "very_high_risk_count": 9,
           "total_cves": 84,
           "threshold": "5%",
-          "analysis_date": "2025-07-01 11:45:32 UTC",
+          "analysis_date": "2025-07-03 11:47:50 UTC",
           "scores": [
             {
               "cve": "CVE-2011-3374",

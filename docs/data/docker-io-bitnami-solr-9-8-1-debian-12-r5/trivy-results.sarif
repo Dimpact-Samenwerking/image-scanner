@@ -6511,25 +6511,25 @@
           "bitnami/solr:9.8.1-debian-12-r5"
         ],
         "imageCreatedDate": "2025-04-07T15:13:50.552804971Z",
-        "imageAgeDays": 84,
-        "imageAgeSeconds": 7338728,
-        "imageAgeText": "84 days",
+        "imageAgeDays": 86,
+        "imageAgeSeconds": 7511667,
+        "imageAgeText": "86 days",
         "imageAgeStatus": "recent",
-        "scanTimestamp": "2025-07-01T11:45:59Z",
+        "scanTimestamp": "2025-07-03T11:48:18Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "solr"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-01T11:45:59Z",
+        "helmChartsEnhancementDate": "2025-07-03T11:48:18Z",
         "chartsMetadataVersion": "1.0",
         "epss": {
           "high_risk_count": 42,
           "very_high_risk_count": 10,
           "total_cves": 73,
           "threshold": "5%",
-          "analysis_date": "2025-07-01 11:46:00 UTC",
+          "analysis_date": "2025-07-03 11:48:19 UTC",
           "scores": [
             {
               "cve": "CVE-2011-3374",

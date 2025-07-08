@@ -1,0 +1,220 @@
+- url: docker.elastic.co/eck/eck-operator
+  version: latest
+  charts:
+    - eck-operator
+- url: docker.io/alpine
+  version: 3.20
+  charts:
+    - podiumd
+- url: docker.io/apache/solr-operator
+  version: v0.9.1
+  charts:
+    - solr-operator
+- url: docker.io/apache/solr-operator
+  version: v0.9.1@sha256:4db34508137f185d3cad03c7cf7c2b5d6533fb590822effcde9125cff5a90aa2
+  charts:
+    - zaakafhandelcomponent
+- url: docker.io/bitnami/bitnami-shell
+  version: 11-debian-11-r58
+  charts:
+    - redis
+- url: docker.io/bitnami/bitnami-shell
+  version: 11-debian-11-r76
+  charts:
+    - kibana
+- url: docker.io/bitnami/bitnami-shell
+  version: 11-debian-11-r78
+  charts:
+    - rabbitmq
+- url: docker.io/bitnami/bitnami-shell
+  version: 11-debian-11-r86
+  charts:
+    - elasticsearch
+- url: docker.io/bitnami/elasticsearch-exporter
+  version: 1.5.0-debian-11-r70
+  charts:
+    - elasticsearch
+- url: docker.io/bitnami/elasticsearch
+  version: 8.6.2-debian-11-r0
+  charts:
+    - elasticsearch
+- url: docker.io/bitnami/keycloak-config-cli
+  version: 6.1.6-debian-12-r6
+  charts:
+    - keycloak
+- url: docker.io/bitnami/keycloak
+  version: 26.0.7-debian-12-r0
+  charts:
+    - keycloak
+- url: docker.io/bitnami/kibana
+  version: 8.6.1-debian-11-r0
+  charts:
+    - kibana
+- url: docker.io/bitnami/os-shell
+  version: 12-debian-12-r33
+  charts:
+    - postgresql
+- url: docker.io/bitnami/os-shell
+  version: 12-debian-12-r40
+  charts:
+    - zookeeper
+- url: docker.io/bitnami/os-shell
+  version: 12-debian-12-r42
+  charts:
+    - solr
+- url: docker.io/bitnami/postgres-exporter
+  version: 0.16.0-debian-12-r1
+  charts:
+    - postgresql
+- url: docker.io/bitnami/postgresql
+  version: 17.2.0-debian-12-r2
+  charts:
+    - postgresql
+- url: docker.io/bitnami/rabbitmq
+  version: 3.11.8-debian-11-r0
+  charts:
+    - rabbitmq
+- url: docker.io/bitnami/redis-exporter
+  version: 1.45.0-debian-11-r11
+  charts:
+    - redis
+- url: docker.io/bitnami/redis-sentinel
+  version: 7.0.5-debian-11-r24
+  charts:
+    - redis
+- url: docker.io/bitnami/redis
+  version: 7.0.5-debian-11-r25
+  charts:
+    - redis
+- url: docker.io/bitnami/solr
+  version: 9.8.1-debian-12-r5
+  charts:
+    - solr
+- url: docker.io/bitnami/zookeeper
+  version: 3.9.3-debian-12-r10
+  charts:
+    - zookeeper
+- url: docker.io/clamav/clamav
+  version: latest
+  charts:
+    - clamav
+- url: docker.io/curlimages/curl
+  version: 8.13.0@sha256:d43bdb28bae0be0998f3be83199bfb2b81e0a30b034b6d7586ce7e05de34c3fd
+  charts:
+    - zaakafhandelcomponent
+- url: docker.io/keycloak-config-cli
+  version: latest
+  charts:
+    - podiumd
+- url: docker.io/keycloak
+  version: 25.0.6
+  charts:
+    - podiumd
+- url: docker.io/lachlanevenson/k8s-kubectl
+  version: v1.23.2
+  charts:
+    - zookeeper-operator
+- url: docker.io/lachlanevenson/k8s-kubectl
+  version: v1.25.4@sha256:af5cea3f2e40138df90660c0c073d8b1506fb76c8602a9f48aceb5f4fb052ddc
+  charts:
+    - zaakafhandelcomponent
+- url: docker.io/library/solr
+  version: 9.8.1@sha256:16983468366aaf62417bb6a2a4b703b486b199b8461192df131455071c263916
+  charts:
+    - zaakafhandelcomponent
+- url: docker.io/maykinmedia/objects-api
+  version: latest
+  charts:
+    - objecten
+- url: docker.io/maykinmedia/objecttypes-api
+  version: latest
+  charts:
+    - objecttypen
+- url: docker.io/maykinmedia/open-archiefbeheer
+  version: latest
+  charts:
+    - openarchiefbeheer
+- url: docker.io/maykinmedia/open-inwoner
+  version: latest
+  charts:
+    - openinwoner
+- url: docker.io/maykinmedia/open-klant
+  version: latest
+  charts:
+    - openklant
+- url: docker.io/nginx
+  version: 1.27.4
+  charts:
+    - podiumd
+- url: docker.io/nginxinc/nginx-unprivileged
+  version: 1.28.0@sha256:3e5f030818c3782a35b6f621458a21f3e526a35267b2b4505d225684d5eac7c4
+  charts:
+    - zaakafhandelcomponent
+- url: docker.io/nginxinc/nginx-unprivileged
+  version: stable
+  charts:
+    - openarchiefbeheer
+    - openforms
+    - openinwoner
+    - openklant
+    - openzaak
+- url: docker.io/openformulieren/open-forms
+  version: latest
+  charts:
+    - openforms
+- url: docker.io/openpolicyagent/opa
+  version: 1.3.0-static@sha256:44f0f4b1c09260eaf5e24fc3931fe10f80cffd13054ef3ef62cef775d5cbd272
+  charts:
+    - zaakafhandelcomponent
+- url: docker.io/openzaak/open-notificaties
+  version: latest
+  charts:
+    - opennotificaties
+- url: docker.io/openzaak/open-zaak
+  version: latest
+  charts:
+    - openzaak
+- url: docker.io/otel/opentelemetry-collector-contrib
+  version: 0.123.0@sha256:e39311df1f3d941923c00da79ac7ba6269124a870ee87e3c3ad24d60f8aee4d2
+  charts:
+    - zaakafhandelcomponent
+- url: docker.io/pravega/zookeeper-operator
+  version: 0.2.15
+  charts:
+    - zookeeper-operator
+- url: docker.io/pravega/zookeeper-operator
+  version: 0.2.15@sha256:b2bc4042fdd8fea6613b04f2f602ba4aff1201e79ba35cd0e2df9f3327111b0e
+  charts:
+    - zaakafhandelcomponent
+- url: docker.io/pravega/zookeeper
+  version: 0.2.15@sha256:c498ebfb76a66f038075e2fa6148528d74d31ca1664f3257fdf82ee779eec9c8
+  charts:
+    - zaakafhandelcomponent
+- url: ghcr.io/brp-api/personen-mock
+  version: 2.6.0-202502261446
+  charts:
+    - brp-personen-mock
+- url: ghcr.io/eugenmayer/kontextwork-converter
+  version: 1.8.0@sha256:48da70902307f27ad92a27ddf5875310464fd4d4a2f53ce53e1a6f9b3b4c3355
+  charts:
+    - zaakafhandelcomponent
+- url: ghcr.io/icatt-menselijk-digitaal/podiumd-adapter
+  version: v0.6.x-20250225135230-fc9468b
+  charts:
+    - podiumd
+- url: ghcr.io/infonl/zaakafhandelcomponent
+  version: 3.5.0
+  charts:
+    - podiumd
+- url: ghcr.io/infonl/zaakafhandelcomponent
+  version: latest
+  charts:
+    - zaakafhandelcomponent
+- url: ghcr.io/klantinteractie-servicesysteem/kiss-elastic-sync
+  version: latest
+  charts:
+    - podiumd
+- url: ghcr.io/klantinteractie-servicesysteem/kiss-frontend
+  version: release-1.0.x-20250418091744-8936963
+  charts:
+    - podiumd

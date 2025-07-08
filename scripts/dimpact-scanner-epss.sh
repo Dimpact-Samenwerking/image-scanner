@@ -160,7 +160,7 @@ enhance_sarif_with_epss() {
          "epssEnhanced": true,
          "epssEnhancementDate": $enhancement_timestamp,
          "epssMetadataVersion": "1.0"
-       }' "$sarif_file" > "$temp_sarif" 2>/dev/null
+       }' "$sarif_file" > "$temp_sarif" 2>"${sarif_file}.jq_error.log"
     if [ $? -eq 0 ] && [ -s "$temp_sarif" ]; then
         if jq empty "$temp_sarif" 2>/dev/null; then
             mv "$temp_sarif" "$sarif_file"
@@ -178,8 +178,11 @@ enhance_sarif_with_epss() {
         fi
     else
         print_warning "Failed to enhance SARIF with EPSS data"
+        if [ -f "${sarif_file}.jq_error.log" ]; then
+            print_warning "jq error output:\n$(cat "${sarif_file}.jq_error.log")"
+        fi
         rm -f "$temp_sarif"
         return 1
     fi
-    rm -f "${sarif_file}.backup"
+    rm -f "${sarif_file}.backup" "${sarif_file}.jq_error.log"
 } 

@@ -18041,25 +18041,25 @@
           "pravega/zookeeper:latest"
         ],
         "imageCreatedDate": "2023-04-04T05:21:13.108649441-07:00",
-        "imageAgeDays": 819,
-        "imageAgeSeconds": 70792148,
-        "imageAgeText": "819 days",
+        "imageAgeDays": 821,
+        "imageAgeSeconds": 70965008,
+        "imageAgeText": "821 days",
         "imageAgeStatus": "very_old",
-        "scanTimestamp": "2025-07-01T11:50:22Z",
+        "scanTimestamp": "2025-07-03T11:51:22Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "zaakafhandelcomponent"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-01T11:50:22Z",
+        "helmChartsEnhancementDate": "2025-07-03T11:51:23Z",
         "chartsMetadataVersion": "1.0",
         "epss": {
           "high_risk_count": 133,
           "very_high_risk_count": 24,
           "total_cves": 219,
           "threshold": "5%",
-          "analysis_date": "2025-07-01 11:50:25 UTC",
+          "analysis_date": "2025-07-03 11:51:25 UTC",
           "scores": [
             {
               "cve": "CVE-2011-3374",

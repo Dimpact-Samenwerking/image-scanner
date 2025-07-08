@@ -61,12 +61,6 @@ test_buildx() {
     time_command "docker buildx imagetools inspect" "$image"
 }
 
-# Check if buildx is available
-if ! docker buildx version >/dev/null 2>&1; then
-    echo "❌ Docker buildx not available"
-    exit 1
-fi
-
 echo "🔍 Testing with ${#TEST_IMAGES[@]} images..."
 echo ""
 

@@ -11884,25 +11884,25 @@
           "bitnami/redis-exporter:1.45.0-debian-11-r11"
         ],
         "imageCreatedDate": "2022-11-30T09:35:22.686489331Z",
-        "imageAgeDays": 944,
-        "imageAgeSeconds": 81573017,
-        "imageAgeText": "944 days",
+        "imageAgeDays": 946,
+        "imageAgeSeconds": 81745954,
+        "imageAgeText": "946 days",
         "imageAgeStatus": "very_old",
-        "scanTimestamp": "2025-07-01T11:45:42Z",
+        "scanTimestamp": "2025-07-03T11:48:00Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "redis"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-01T11:45:42Z",
+        "helmChartsEnhancementDate": "2025-07-03T11:48:00Z",
         "chartsMetadataVersion": "1.0",
         "epss": {
           "high_risk_count": 93,
           "very_high_risk_count": 16,
           "total_cves": 158,
           "threshold": "5%",
-          "analysis_date": "2025-07-01 11:45:44 UTC",
+          "analysis_date": "2025-07-03 11:48:02 UTC",
           "scores": [
             {
               "cve": "CVE-2011-3374",

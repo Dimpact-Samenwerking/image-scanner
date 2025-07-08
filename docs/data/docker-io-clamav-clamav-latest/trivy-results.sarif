@@ -29,18 +29,18 @@
           "clamav/clamav:latest"
         ],
         "imageCreatedDate": "2025-06-30T01:24:49.176162079Z",
-        "imageAgeDays": 1,
-        "imageAgeSeconds": 130876,
-        "imageAgeText": "1 days",
+        "imageAgeDays": 3,
+        "imageAgeSeconds": 303815,
+        "imageAgeText": "3 days",
         "imageAgeStatus": "very_recent",
-        "scanTimestamp": "2025-07-01T11:46:06Z",
+        "scanTimestamp": "2025-07-03T11:48:25Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "clamav"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-01T11:46:06Z",
+        "helmChartsEnhancementDate": "2025-07-03T11:48:25Z",
         "chartsMetadataVersion": "1.0"
       }
     }

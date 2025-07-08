@@ -21,7 +21,7 @@ if (( BASH_VERSINFO[0] < 4 )); then
 fi
 
 # Colors for output (only use colors if not in CI environment)
-if [ -z "$CI" ]; then
+if [ -z "${CI:-}" ]; then
     RED='\033[0;31m'
     GREEN='\033[0;32m'
     YELLOW='\033[1;33m'
@@ -97,6 +97,9 @@ while [[ $# -gt 0 ]]; do
             ;;
     esac
 done
+
+# Source utility functions
+source "$(dirname "$0")/dimpact-scanner-utils.sh"
 
 # Function to print colored output
 print_status() {
@@ -238,17 +241,6 @@ update_dashboard_data() {
     echo "  cd docs && python3 -m http.server 8080"
     
     return 0
-}
-
-# Function to check dependencies
-check_dependencies() {
-    if ! command_exists jq; then
-        print_error "jq is required to process SARIF files. Please install jq first."
-        print_status "  On macOS: brew install jq"
-        print_status "  On Ubuntu/Debian: sudo apt-get install jq"
-        print_status "  On CentOS/RHEL: sudo yum install jq"
-        exit 1
-    fi
 }
 
 # Function to extract helm chart name from image name
@@ -556,28 +548,6 @@ generate_detailed_cve_report() {
         done <<< "$suppressed_data"
         
         echo "" >> "$report_file"
-    fi
-}
-
-# Function to load CVE suppressions
-load_cve_suppressions() {
-    suppressed_cves=()
-    if [ -f "$CVE_SUPPRESSIONS_FILE" ]; then
-        print_status "Loading CVE suppressions from $CVE_SUPPRESSIONS_FILE..."
-        
-        # Extract CVE IDs from the markdown table (skip header rows)
-        while IFS='|' read -r _ cve_id _; do
-            # Trim whitespace and check if it's a valid CVE ID
-            cve_id=$(echo "$cve_id" | xargs)
-            if [[ "$cve_id" =~ ^CVE-[0-9]{4}-[0-9]+$ ]]; then
-                suppressed_cves+=("$cve_id")
-                print_status "  ✓ Suppressing CVE: $cve_id"
-            fi
-        done < <(grep -E '^\|[[:space:]]*CVE-' "$CVE_SUPPRESSIONS_FILE" 2>/dev/null || true)
-        
-        print_status "  📊 Total suppressed CVEs: ${#suppressed_cves[@]}"
-    else
-        print_status "No $CVE_SUPPRESSIONS_FILE file found, no CVEs will be suppressed"
     fi
 }
 
@@ -890,21 +860,6 @@ main() {
         print_status "🧪 Test mode enabled - using sample data"
     fi
     print_status "🚀 Starting SARIF-based report generation..."
-    
-    # Check dependencies
-    print_status "🔧 Step 1/5: Checking dependencies..."
-    check_dependencies
-    print_status "  ✅ Dependencies verified"
-    
-    # Validate input directory
-    print_status "📂 Step 2/5: Validating input directory..."
-    validate_input_dir
-    print_status "  ✅ Input directory validated"
-    
-    # Load CVE suppressions
-    print_status "🛡️ Step 3/5: Loading CVE suppressions..."
-    load_cve_suppressions
-    print_status "  ✅ CVE suppressions loaded"
     
     # Generate consolidated report
     print_status "📊 Step 4/5: Generating consolidated report..."

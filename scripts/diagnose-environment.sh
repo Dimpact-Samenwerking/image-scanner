@@ -29,19 +29,6 @@ echo "  • GITHUB_ACTIONS: ${GITHUB_ACTIONS:-'not set'}"
 echo "  • RUNNER_OS: ${RUNNER_OS:-'not set'}"
 echo
 
-# Check dependencies
-echo "🔧 Dependency Check:"
-dependencies=("docker" "jq" "helm" "yq" "figlet" "bash")
-for dep in "${dependencies[@]}"; do
-    if command -v "$dep" >/dev/null 2>&1; then
-        version=$(${dep} --version 2>/dev/null | head -1 || echo "unknown")
-        echo "  ✅ $dep: $(which $dep) ($version)"
-    else
-        echo "  ❌ $dep: not found"
-    fi
-done
-echo
-
 # Check Docker specifically
 echo "🐳 Docker Status:"
 

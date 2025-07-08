@@ -10912,25 +10912,25 @@
           "maykinmedia/open-klant:latest"
         ],
         "imageCreatedDate": "2025-06-30T09:05:33.428611746Z",
-        "imageAgeDays": 1,
-        "imageAgeSeconds": 103402,
-        "imageAgeText": "1 days",
+        "imageAgeDays": 3,
+        "imageAgeSeconds": 276283,
+        "imageAgeText": "3 days",
         "imageAgeStatus": "very_recent",
-        "scanTimestamp": "2025-07-01T11:48:56Z",
+        "scanTimestamp": "2025-07-03T11:50:17Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "openklant"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-01T11:48:56Z",
+        "helmChartsEnhancementDate": "2025-07-03T11:50:17Z",
         "chartsMetadataVersion": "1.0",
         "epss": {
           "high_risk_count": 57,
           "very_high_risk_count": 9,
           "total_cves": 89,
           "threshold": "5%",
-          "analysis_date": "2025-07-01 11:48:58 UTC",
+          "analysis_date": "2025-07-03 11:50:18 UTC",
           "scores": [
             {
               "cve": "CVE-2011-3374",

@@ -29,11 +29,11 @@
           "alpine:3.20"
         ],
         "imageCreatedDate": "2025-02-14T03:00:07Z",
-        "imageAgeDays": 137,
-        "imageAgeSeconds": 11871827,
-        "imageAgeText": "137 days",
+        "imageAgeDays": 139,
+        "imageAgeSeconds": 12044768,
+        "imageAgeText": "139 days",
         "imageAgeStatus": "moderate",
-        "scanTimestamp": "2025-07-01T11:43:55Z",
+        "scanTimestamp": "2025-07-03T11:46:16Z",
         "ageMetadataVersion": "1.0"
       }
     }

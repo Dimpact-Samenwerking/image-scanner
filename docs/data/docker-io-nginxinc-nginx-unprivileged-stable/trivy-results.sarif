@@ -6205,20 +6205,20 @@
         }
       },
       "properties": {
-        "imageID": "sha256:34262e93d952f2783190fce8d443d0d2608d6da5a9c0af200dab7b024457bed3",
+        "imageID": "sha256:e31b484ecccd2c07ff9a428c93c100e08f3a8169dead3baf8f67cee84e118c81",
         "imageName": "docker.io/nginxinc/nginx-unprivileged:stable",
         "repoDigests": [
-          "nginxinc/nginx-unprivileged@sha256:ef5a63bb2892b0ed2bcd13bc35d1cc1202472828e03eb8cfe13312c3f7db3868"
+          "nginxinc/nginx-unprivileged@sha256:0bc3a04325a4e2737a7ae78749af987df8c7a9004c4fff63cfa915bd46b1ffee"
         ],
         "repoTags": [
           "nginxinc/nginx-unprivileged:stable"
         ],
-        "imageCreatedDate": "2025-06-30T00:05:10.509058461Z",
-        "imageAgeDays": 1,
-        "imageAgeSeconds": 135840,
-        "imageAgeText": "1 days",
+        "imageCreatedDate": "2025-07-01T10:06:44.896223477Z",
+        "imageAgeDays": 2,
+        "imageAgeSeconds": 186229,
+        "imageAgeText": "2 days",
         "imageAgeStatus": "very_recent",
-        "scanTimestamp": "2025-07-01T11:49:11Z",
+        "scanTimestamp": "2025-07-03T11:50:34Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "openarchiefbeheer",
@@ -6229,14 +6229,14 @@
         ],
         "helmChartsCount": 5,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-01T11:49:11Z",
+        "helmChartsEnhancementDate": "2025-07-03T11:50:34Z",
         "chartsMetadataVersion": "1.0",
         "epss": {
           "high_risk_count": 51,
           "very_high_risk_count": 9,
           "total_cves": 84,
           "threshold": "5%",
-          "analysis_date": "2025-07-01 11:49:13 UTC",
+          "analysis_date": "2025-07-03 11:50:35 UTC",
           "scores": [
             {
               "cve": "CVE-2011-3374",

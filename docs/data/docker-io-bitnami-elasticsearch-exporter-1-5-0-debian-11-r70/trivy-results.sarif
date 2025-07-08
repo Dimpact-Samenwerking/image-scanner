@@ -11695,25 +11695,25 @@
           "bitnami/elasticsearch-exporter:1.5.0-debian-11-r70"
         ],
         "imageCreatedDate": "2023-02-14T21:04:21.856989907Z",
-        "imageAgeDays": 867,
-        "imageAgeSeconds": 74965185,
-        "imageAgeText": "867 days",
+        "imageAgeDays": 869,
+        "imageAgeSeconds": 75138126,
+        "imageAgeText": "869 days",
         "imageAgeStatus": "very_old",
-        "scanTimestamp": "2025-07-01T11:44:08Z",
+        "scanTimestamp": "2025-07-03T11:46:28Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "elasticsearch"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-01T11:44:08Z",
+        "helmChartsEnhancementDate": "2025-07-03T11:46:28Z",
         "chartsMetadataVersion": "1.0",
         "epss": {
           "high_risk_count": 93,
           "very_high_risk_count": 17,
           "total_cves": 157,
           "threshold": "5%",
-          "analysis_date": "2025-07-01 11:44:10 UTC",
+          "analysis_date": "2025-07-03 11:46:30 UTC",
           "scores": [
             {
               "cve": "CVE-2011-3374",

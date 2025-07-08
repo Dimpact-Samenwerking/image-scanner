@@ -2245,25 +2245,25 @@
           "pravega/zookeeper-operator:0.2.15"
         ],
         "imageCreatedDate": "2023-04-04T04:59:42.869624136-07:00",
-        "imageAgeDays": 819,
-        "imageAgeSeconds": 70793437,
-        "imageAgeText": "819 days",
+        "imageAgeDays": 821,
+        "imageAgeSeconds": 70966297,
+        "imageAgeText": "821 days",
         "imageAgeStatus": "very_old",
-        "scanTimestamp": "2025-07-01T11:50:20Z",
+        "scanTimestamp": "2025-07-03T11:51:20Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "zaakafhandelcomponent"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-01T11:50:20Z",
+        "helmChartsEnhancementDate": "2025-07-03T11:51:20Z",
         "chartsMetadataVersion": "1.0",
         "epss": {
           "high_risk_count": 25,
           "very_high_risk_count": 4,
           "total_cves": 40,
           "threshold": "5%",
-          "analysis_date": "2025-07-01 11:50:20 UTC",
+          "analysis_date": "2025-07-03 11:51:21 UTC",
           "scores": [
             {
               "cve": "CVE-2023-39325",

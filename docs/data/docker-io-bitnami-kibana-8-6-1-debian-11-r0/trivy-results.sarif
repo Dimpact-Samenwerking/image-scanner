@@ -20929,25 +20929,25 @@
           "bitnami/kibana:8.6.1-debian-11-r0"
         ],
         "imageCreatedDate": "2023-01-26T22:12:22.794599304Z",
-        "imageAgeDays": 886,
-        "imageAgeSeconds": 76602768,
-        "imageAgeText": "886 days",
+        "imageAgeDays": 888,
+        "imageAgeSeconds": 76775702,
+        "imageAgeText": "888 days",
         "imageAgeStatus": "very_old",
-        "scanTimestamp": "2025-07-01T11:45:11Z",
+        "scanTimestamp": "2025-07-03T11:47:25Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "kibana"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-01T11:45:11Z",
+        "helmChartsEnhancementDate": "2025-07-03T11:47:25Z",
         "chartsMetadataVersion": "1.0",
         "epss": {
           "high_risk_count": 161,
           "very_high_risk_count": 28,
           "total_cves": 283,
           "threshold": "5%",
-          "analysis_date": "2025-07-01 11:45:15 UTC",
+          "analysis_date": "2025-07-03 11:47:32 UTC",
           "scores": [
             {
               "cve": "CVE-2011-3374",

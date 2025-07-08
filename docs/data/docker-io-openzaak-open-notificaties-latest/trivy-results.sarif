@@ -5620,25 +5620,25 @@
           "openzaak/open-notificaties:latest"
         ],
         "imageCreatedDate": "2025-06-30T09:32:10.175400156Z",
-        "imageAgeDays": 1,
-        "imageAgeSeconds": 101834,
-        "imageAgeText": "1 days",
+        "imageAgeDays": 3,
+        "imageAgeSeconds": 274716,
+        "imageAgeText": "3 days",
         "imageAgeStatus": "very_recent",
-        "scanTimestamp": "2025-07-01T11:49:25Z",
+        "scanTimestamp": "2025-07-03T11:50:47Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "opennotificaties"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-01T11:49:25Z",
+        "helmChartsEnhancementDate": "2025-07-03T11:50:47Z",
         "chartsMetadataVersion": "1.0",
         "epss": {
           "high_risk_count": 41,
           "very_high_risk_count": 9,
           "total_cves": 65,
           "threshold": "5%",
-          "analysis_date": "2025-07-01 11:49:26 UTC",
+          "analysis_date": "2025-07-03 11:50:48 UTC",
           "scores": [
             {
               "cve": "CVE-2011-3374",

@@ -14935,25 +14935,25 @@
           "bitnami/redis:7.0.5-debian-11-r25"
         ],
         "imageCreatedDate": "2022-12-03T09:53:27.015140866Z",
-        "imageAgeDays": 941,
-        "imageAgeSeconds": 81312745,
-        "imageAgeText": "941 days",
+        "imageAgeDays": 943,
+        "imageAgeSeconds": 81485683,
+        "imageAgeText": "943 days",
         "imageAgeStatus": "very_old",
-        "scanTimestamp": "2025-07-01T11:45:54Z",
+        "scanTimestamp": "2025-07-03T11:48:13Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "redis"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-01T11:45:54Z",
+        "helmChartsEnhancementDate": "2025-07-03T11:48:13Z",
         "chartsMetadataVersion": "1.0",
         "epss": {
           "high_risk_count": 114,
           "very_high_risk_count": 19,
           "total_cves": 193,
           "threshold": "5%",
-          "analysis_date": "2025-07-01 11:45:57 UTC",
+          "analysis_date": "2025-07-03 11:48:16 UTC",
           "scores": [
             {
               "cve": "CVE-2011-3374",

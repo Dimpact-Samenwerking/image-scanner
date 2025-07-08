@@ -42,18 +42,6 @@ print_info() {
     echo -e "${YELLOW}ℹ️  $1${NC}"
 }
 
-# Function to check if jq is installed
-check_dependencies() {
-    if ! command -v jq >/dev/null 2>&1; then
-        echo -e "${RED}❌ Error: jq is required but not installed${NC}"
-        echo -e "${YELLOW}Please install jq:${NC}"
-        echo "  - macOS: brew install jq"
-        echo "  - Ubuntu/Debian: sudo apt-get install jq"
-        echo "  - CentOS/RHEL: sudo yum install jq"
-        exit 1
-    fi
-}
-
 # Function to display test data overview
 show_test_data_overview() {
     print_step "📊 Test Data Overview"
@@ -202,12 +190,6 @@ show_expected_results() {
 # Main execution
 main() {
     print_header
-    
-    # Check dependencies
-    print_step "🔧 Checking Dependencies"
-    check_dependencies
-    print_success "All dependencies available"
-    echo ""
     
     # Validate test data
     validate_test_data
