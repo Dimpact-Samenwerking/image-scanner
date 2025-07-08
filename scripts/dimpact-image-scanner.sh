@@ -743,6 +743,59 @@ display_progress_banner() {
     echo
 }
 
+# Function to check if existing scan data is available for an image
+has_existing_data() {
+    print_status "🔧 Function: has_existing_data"
+    local image="$1"
+    local safe_name=$(echo "$image" | sed 's/[^a-zA-Z0-9]/-/g')
+    
+    # Check if data exists in docs/data/ directory
+    local existing_data_dir="docs/data/$safe_name"
+    
+    if [ -d "$existing_data_dir" ] && [ -f "$existing_data_dir/trivy-results.sarif" ]; then
+        print_status "✅ Found existing data for $image in $existing_data_dir"
+        return 0
+    else
+        print_status "❌ No existing data found for $image"
+        return 1
+    fi
+}
+
+# Function to copy existing scan data to output directory
+copy_existing_data() {
+    print_status "🔧 Function: copy_existing_data"
+    local image="$1"
+    local safe_name=$(echo "$image" | sed 's/[^a-zA-Z0-9]/-/g')
+    
+    local existing_data_dir="docs/data/$safe_name"
+    local target_dir="$OUTPUT_DIR/$safe_name"
+    
+    # Create target directory
+    mkdir -p "$target_dir"
+    
+    # Copy SARIF file if it exists
+    if [ -f "$existing_data_dir/trivy-results.sarif" ]; then
+        if cp "$existing_data_dir/trivy-results.sarif" "$target_dir/"; then
+            print_status "📋 Copied SARIF data: $existing_data_dir/trivy-results.sarif → $target_dir/"
+            
+            # Copy any additional files that might exist
+            if [ -f "$existing_data_dir/epss-scores.json" ]; then
+                cp "$existing_data_dir/epss-scores.json" "$target_dir/" 2>/dev/null || true
+                print_status "📋 Copied EPSS data: $existing_data_dir/epss-scores.json → $target_dir/"
+            fi
+            
+            print_success "✅ Successfully copied existing scan data for $image"
+            return 0
+        else
+            print_error "❌ Failed to copy SARIF file for $image"
+            return 1
+        fi
+    else
+        print_error "❌ SARIF file not found in existing data for $image"
+        return 1
+    fi
+}
+
 # Function to run sequential scans
 run_sequential_scans() {
     local images=("$@")
