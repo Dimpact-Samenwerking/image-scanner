@@ -18039,17 +18039,17 @@
         "repoTags": [],
         "imageCreatedDate": "2023-04-04T05:21:13.108649441-07:00",
         "imageAgeDays": 826,
-        "imageAgeSeconds": 71378483,
+        "imageAgeSeconds": 71381555,
         "imageAgeText": "826 days",
         "imageAgeStatus": "very_old",
-        "scanTimestamp": "2025-07-08T15:42:47Z",
+        "scanTimestamp": "2025-07-08T16:33:49Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "zaakafhandelcomponent"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-08T15:42:47Z",
+        "helmChartsEnhancementDate": "2025-07-08T16:33:49Z",
         "chartsMetadataVersion": "1.0",
         "epssScores": [
           {
@@ -19153,7 +19153,7 @@
         "epssLowRiskCount": 181,
         "epssVeryHighRiskCount": 7,
         "epssEnhanced": true,
-        "epssEnhancementDate": "2025-07-08T15:42:50Z",
+        "epssEnhancementDate": "2025-07-08T16:33:52Z",
         "epssMetadataVersion": "1.0"
       }
     }

@@ -5,11 +5,11 @@
 ### 1. Update Dashboard Data
 From the **project root directory**:
 ```bash
-# Update dashboard data from latest scan results
-./scripts/update-dashboard-data.sh
+# Generate report and update dashboard data from latest scan results
+./scripts/dimpact-image-report.sh --input-dir dimpact-scan-results/250627
 
-# Or specify a specific scan results directory
-./scripts/update-dashboard-data.sh 250627-dimpact-scan-results
+# Or use environment variable
+INPUT_DIR="dimpact-scan-results/250627" ./scripts/dimpact-image-report.sh
 ```
 
 ### 2. Commit and Push
@@ -61,7 +61,7 @@ cd docs && python3 -m http.server 8081
 ```
 project-root/
 ├── scripts/
-│   └── update-dashboard-data.sh    # Helper script
+│   └── dimpact-image-report.sh     # Report generation and dashboard update script
 ├── docs/
 │   ├── index.html                  # Dashboard
 │   ├── data/                       # SARIF data files
@@ -70,9 +70,10 @@ project-root/
 │   │   └── container-2/
 │   │       └── trivy-results.sarif
 │   └── DEPLOY.md                   # This file
-└── 250627-dimpact-scan-results/    # Source scan results
-    ├── container-1/
-    └── container-2/
+└── dimpact-scan-results/           # Source scan results
+    └── 250627/                     # Date-specific results
+        ├── container-1/
+        └── container-2/
 ```
 
 ## Troubleshooting

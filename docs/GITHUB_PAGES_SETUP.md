@@ -19,14 +19,14 @@ This security dashboard is designed to work with GitHub Pages to provide a web-b
 ### 2. Copy Scan Results to docs/data
 To make SARIF files available to GitHub Pages, copy your scan results.
 
-#### Using Helper Script (Recommended)
+#### Using Report Script (Recommended)
 From the **project root directory**:
 ```bash
-# Auto-detect and copy latest scan results
-./scripts/update-dashboard-data.sh
+# Generate report and update dashboard data from latest scan results
+./scripts/dimpact-image-report.sh --input-dir dimpact-scan-results/250627
 
-# Or specify a specific scan results directory
-./scripts/update-dashboard-data.sh 250627-dimpact-scan-results
+# Or use environment variable
+INPUT_DIR="dimpact-scan-results/250627" ./scripts/dimpact-image-report.sh
 ```
 
 #### Manual Copy (Alternative)
@@ -36,7 +36,7 @@ mkdir -p docs/data
 cp -r your-scan-results-directory/* docs/data/
 
 # For example, if using the default naming:
-cp -r 250627-dimpact-scan-results/* docs/data/
+cp -r dimpact-scan-results/250627/* docs/data/
 ```
 
 ### 3. Commit and Push
@@ -52,11 +52,11 @@ Your dashboard will be available at:
 
 ## 🔄 Updating Scan Results
 
-### Using Helper Script (Recommended)
+### Using Report Script (Recommended)
 From the **project root directory**:
 ```bash
-# Update scan results with helper script
-./scripts/update-dashboard-data.sh
+# Generate report and update dashboard data
+./scripts/dimpact-image-report.sh --input-dir dimpact-scan-results/250627
 
 # Commit and push
 git add docs/data/

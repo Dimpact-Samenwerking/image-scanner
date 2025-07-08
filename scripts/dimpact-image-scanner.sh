@@ -44,7 +44,7 @@ fi
 SEVERITY_THRESHOLD="${SEVERITY_THRESHOLD:-MEDIUM}"
 # Create date-prefixed output directory (YYMMDD format)
 DEFAULT_DATE_PREFIX=$(date +%y%m%d)
-OUTPUT_DIR="${OUTPUT_DIR:-./${DEFAULT_DATE_PREFIX}-dimpact-scan-results}"
+OUTPUT_DIR="${OUTPUT_DIR:-./dimpact-scan-results/${DEFAULT_DATE_PREFIX}}"
 HELM_CHARTS_DIR="${HELM_CHARTS_DIR:-./helm-charts}"
 LIST_IMAGES_ONLY=false
 PERFORMANCE_MODE="${PERFORMANCE_MODE:-normal}"  # normal, high, max
@@ -124,7 +124,7 @@ while [[ $# -gt 0 ]]; do
             echo "Options:"
             echo "  --image IMAGE            Scan a specific container image"
             echo "  --severity LEVEL         Set severity threshold (default: MEDIUM)"
-            echo "  --output-dir DIR         Set output directory (default: ./YYMMDD-dimpact-scan-results)"
+            echo "  --output-dir DIR         Set output directory (default: ./dimpact-scan-results/YYMMDD)"
             echo "  --list-images            Only list images from discovered.yaml (no scan)"
             echo "  --performance MODE       Set performance mode: normal, high, max (default: normal)"
             echo "  --testmode               Run in test mode (scan only first 3 images)"
@@ -1258,6 +1258,8 @@ main() {
         fi
     done
 
+    # Ensure parent directory exists for the new structure
+    mkdir -p "$(dirname "$OUTPUT_DIR")"
     mkdir -p "$OUTPUT_DIR"
     print_status "About to call run_sequential_scans with ${#discovered_images[@]} images"
     run_sequential_scans "${discovered_images[@]}"

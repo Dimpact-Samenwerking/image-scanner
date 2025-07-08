@@ -302,17 +302,17 @@
         ],
         "imageCreatedDate": "2025-03-25T15:19:40.064209724Z",
         "imageAgeDays": 105,
-        "imageAgeSeconds": 9072730,
+        "imageAgeSeconds": 9076054,
         "imageAgeText": "105 days",
         "imageAgeStatus": "moderate",
-        "scanTimestamp": "2025-07-08T15:31:51Z",
+        "scanTimestamp": "2025-07-08T16:27:16Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "solr-operator"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-08T15:31:51Z",
+        "helmChartsEnhancementDate": "2025-07-08T16:27:16Z",
         "chartsMetadataVersion": "1.0",
         "epssScores": [
           {
@@ -346,7 +346,7 @@
         "epssLowRiskCount": 5,
         "epssVeryHighRiskCount": 0,
         "epssEnhanced": true,
-        "epssEnhancementDate": "2025-07-08T15:31:51Z",
+        "epssEnhancementDate": "2025-07-08T16:27:16Z",
         "epssMetadataVersion": "1.0"
       }
     }

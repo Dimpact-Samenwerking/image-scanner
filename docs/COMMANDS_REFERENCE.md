@@ -3,18 +3,18 @@
 ## 🏠 Working Directory
 All commands assume you're in the **project root directory**: `/Users/jim/src/image-scanner`
 
-## 🔧 Helper Script Location
-The update script is located at: `./scripts/update-dashboard-data.sh`
+## 🔧 Report Script Location
+The report generation script that also updates dashboard data is located at: `./scripts/dimpact-image-report.sh`
 
 ## 📊 Dashboard Commands
 
 ### 1. Update Dashboard Data
 ```bash
-# Auto-detect latest scan results and copy to docs/data/
-./scripts/update-dashboard-data.sh
+# Generate report and auto-update dashboard data from latest scan results
+./scripts/dimpact-image-report.sh --input-dir dimpact-scan-results/250627
 
-# Or specify a specific scan results directory
-./scripts/update-dashboard-data.sh 250627-dimpact-scan-results
+# Or use environment variable
+INPUT_DIR="dimpact-scan-results/250627" ./scripts/dimpact-image-report.sh
 ```
 
 ### 2. Test Dashboard Locally
@@ -40,7 +40,7 @@ git push origin main
 ```
 project-root/                              ← YOU ARE HERE
 ├── scripts/
-│   └── update-dashboard-data.sh           ← Helper script
+│   └── dimpact-image-report.sh            ← Report script (also updates dashboard)
 ├── docs/
 │   ├── index.html                         ← Dashboard
 │   ├── data/                              ← SARIF data (generated)
@@ -49,11 +49,12 @@ project-root/                              ← YOU ARE HERE
 │   │   └── container-2/
 │   │       └── trivy-results.sarif
 │   └── *.md                               ← Documentation
-└── 250627-dimpact-scan-results/           ← Source scan results
-    ├── container-1/
-    │   └── trivy-results.sarif
-    └── container-2/
-        └── trivy-results.sarif
+└── dimpact-scan-results/                  ← Source scan results
+    └── 250627/                            ← Date-specific results
+        ├── container-1/
+        │   └── trivy-results.sarif
+        └── container-2/
+            └── trivy-results.sarif
 ```
 
 ## ⚠️ Common Mistakes
@@ -84,7 +85,7 @@ cd docs && python3 -m http.server 8080  # This works!
 
 1. **Update data** (from project root):
    ```bash
-   ./scripts/update-dashboard-data.sh
+   ./scripts/dimpact-image-report.sh --input-dir dimpact-scan-results/250627
    ```
 
 2. **Test locally** (from project root):
@@ -113,7 +114,7 @@ cd docs && python3 -m http.server 8081
 ### Script Permission Denied
 ```bash
 # Make script executable
-chmod +x scripts/update-dashboard-data.sh
+chmod +x scripts/dimpact-image-report.sh
 ```
 
 ### No Data Showing in Dashboard

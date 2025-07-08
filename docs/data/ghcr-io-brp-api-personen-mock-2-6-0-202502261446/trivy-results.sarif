@@ -5405,17 +5405,17 @@
         ],
         "imageCreatedDate": "2025-02-26T13:56:50.63243481Z",
         "imageAgeDays": 132,
-        "imageAgeSeconds": 11411181,
+        "imageAgeSeconds": 11414223,
         "imageAgeText": "132 days",
         "imageAgeStatus": "moderate",
-        "scanTimestamp": "2025-07-08T15:43:17Z",
+        "scanTimestamp": "2025-07-08T16:33:54Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "brp-personen-mock"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-08T15:43:17Z",
+        "helmChartsEnhancementDate": "2025-07-08T16:33:54Z",
         "chartsMetadataVersion": "1.0",
         "epssScores": [
           {
@@ -5744,7 +5744,7 @@
         "epssLowRiskCount": 56,
         "epssVeryHighRiskCount": 0,
         "epssEnhanced": true,
-        "epssEnhancementDate": "2025-07-08T15:43:18Z",
+        "epssEnhancementDate": "2025-07-08T16:33:55Z",
         "epssMetadataVersion": "1.0"
       }
     }

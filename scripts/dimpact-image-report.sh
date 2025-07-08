@@ -38,7 +38,7 @@ fi
 # Default configuration
 # Create date-prefixed input directory (YYMMDD format)
 DEFAULT_DATE_PREFIX=$(date +%y%m%d)
-INPUT_DIR="${INPUT_DIR:-./${DEFAULT_DATE_PREFIX}-dimpact-scan-results}"
+INPUT_DIR="${INPUT_DIR:-./dimpact-scan-results/${DEFAULT_DATE_PREFIX}}"
 CVE_SUPPRESSIONS_FILE="${CVE_SUPPRESSIONS_FILE:-cve-suppressions.md}"
 
 # Declare array for suppressed CVEs
@@ -67,7 +67,7 @@ while [[ $# -gt 0 ]]; do
             echo ""
             echo "Options:"
             echo "  --input-dir DIR          Directory containing scan results"
-            echo "                           (default: ./YYMMDD-dimpact-scan-results)"
+            echo "                           (default: ./dimpact-scan-results/YYMMDD)"
             echo "  --cve-suppressions FILE  CVE suppressions file"
             echo "                           (default: cve-suppressions.md)"
             echo "  --test                   Use built-in test data for prototyping"
