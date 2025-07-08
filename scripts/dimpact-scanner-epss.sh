@@ -104,7 +104,8 @@ fetch_epss_scores() {
             else
                 epss_data="$epss_data,"
             fi
-            epss_data="$epss_data{"cve":"$cve_id","epss":$epss_score,"percentile":$epss_percentile}"
+            # Properly quote keys and string values for valid JSON
+            epss_data="$epss_data$(printf '{\"cve\":\"%s\",\"epss\":%s,\"percentile\":%s}' "$cve_id" "$epss_score" "$epss_percentile")"
         fi
     done <<< "$cve_list"
     epss_data="$epss_data]"

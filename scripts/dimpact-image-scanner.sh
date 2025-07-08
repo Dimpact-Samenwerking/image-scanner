@@ -180,9 +180,6 @@ configure_performance() {
     local total_mem_gb="${resources[1]}"
     
     # Debug output for resource detection
-    if [ "$DEBUG_MODE" = true ]; then
-        print_status "🐛 Debug: Detected resources - CPU: '$cpu_cores', Memory: '${total_mem_gb}GB'"
-    fi
     
     case "$mode" in
         "max")
@@ -232,7 +229,17 @@ get_image_age() {
     local current_epoch=$(date +%s)
     # Remove nanoseconds and Z for GNU date compatibility
     local created_date_short=$(echo "$created_date" | sed -E 's/\.[0-9]+Z$//')
-    local image_epoch=$(date -d "$created_date_short" +%s 2>/dev/null)
+    
+    # Handle both GNU date (Linux) and BSD date (macOS)
+    local image_epoch
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        # macOS uses BSD date - different syntax
+        image_epoch=$(date -j -f "%Y-%m-%dT%H:%M:%S" "$created_date_short" "+%s" 2>/dev/null)
+    else
+        # Linux uses GNU date
+        image_epoch=$(date -d "$created_date_short" +%s 2>/dev/null)
+    fi
+    
     if [ -z "$image_epoch" ]; then
         print_status "📅 Image age: Unable to parse creation date"
         return 1
@@ -359,14 +366,7 @@ enhance_sarif_with_age() {
             cp -a "$temp_sarif" "$sarif_file"
             print_status "✅ Enhanced SARIF with image age metadata"
             
-            if [ "$DEBUG_MODE" = true ]; then
-                print_status "🐛 Debug: Added age metadata to SARIF:"
-                print_status "  • Created Date: ${IMAGE_CREATED_DATE:-unknown}"
-                print_status "  • Age (days): ${IMAGE_AGE_DAYS:-0}"
-                print_status "  • Age Text: ${IMAGE_AGE_TEXT:-unknown}"
-                print_status "  • Age Status: $age_status"
-                print_status "  • Scan Timestamp: $scan_timestamp"
-            fi
+
         else
             print_warning "Enhanced SARIF file is invalid JSON - reverting to original"
             rm -f "$temp_sarif"
@@ -462,12 +462,7 @@ enhance_sarif_with_charts() {
             cp -a "$temp_sarif" "$sarif_file"
             print_status "✅ Enhanced SARIF with Helm charts metadata"
             
-            if [ "$DEBUG_MODE" = true ]; then
-                print_status "🐛 Debug: Added charts metadata to SARIF:"
-                print_status "  • Charts: $(echo "$charts_list" | tr ',' ', ')"
-                print_status "  • Charts Count: ${#chart_names[@]}"
-                print_status "  • Enhancement Timestamp: $enhancement_timestamp"
-            fi
+
         else
             print_warning "Enhanced SARIF file is invalid JSON - reverting to original"
             rm -f "$temp_sarif"
@@ -638,22 +633,22 @@ scan_image() {
         print_status "📄 SARIF output: $image_dir/trivy-results.sarif"
         
         # Enhance SARIF file with image age metadata
-        if ! enhance_sarif_with_age "$image_dir/trivy-results.sarif" "$image"; then
+        enhance_sarif_with_age "$image_dir/trivy-results.sarif" "$image" || {
             print_error "[ACTION REQUIRED] Failed to enhance SARIF with age metadata for $image_dir/trivy-results.sarif.\n  - Check that jq is installed and the SARIF file is valid JSON.\n  - Try: sudo apt install jq\n  - If the SARIF file is missing or empty, check the scan output."
-        fi
+        }
         
         # Enhance SARIF file with Helm charts metadata
-        if ! enhance_sarif_with_charts "$image_dir/trivy-results.sarif" "$image"; then
+        enhance_sarif_with_charts "$image_dir/trivy-results.sarif" "$image" || {
             print_error "[ACTION REQUIRED] Failed to enhance SARIF with Helm charts metadata for $image_dir/trivy-results.sarif.\n  - Check that jq is installed and the SARIF file is valid JSON.\n  - If the SARIF file is missing or empty, check the scan output.\n  - If using bash < 4, charts enhancement is skipped."
-        fi
+        }
         
         # Fetch and enhance SARIF with EPSS exploitability scores
-        if ! fetch_epss_scores "$image_dir/trivy-results.sarif"; then
+        fetch_epss_scores "$image_dir/trivy-results.sarif" || {
             print_error "[ACTION REQUIRED] Failed to fetch EPSS scores for $image_dir/trivy-results.sarif.\n  - Check network connectivity for EPSS data download.\n  - If jq is missing, install it: sudo apt install jq\n  - If no CVEs found, this may not be an error."
-        fi
-        if ! enhance_sarif_with_epss "$image_dir/trivy-results.sarif"; then
+        }
+        enhance_sarif_with_epss "$image_dir/trivy-results.sarif" || {
             print_error "[ACTION REQUIRED] Failed to enhance SARIF with EPSS data for $image_dir/trivy-results.sarif.\n  - Check that jq is installed and the SARIF and EPSS files are valid JSON.\n  - If the SARIF or EPSS file is missing or empty, check the scan and EPSS output."
-        fi
+        }
         
         # Show vulnerability summary from SARIF using actual CVE severity levels
         if command_exists jq; then
@@ -709,6 +704,8 @@ scan_image() {
         echo "SCAN_FAILED: $image - No SARIF output generated" >> "$OUTPUT_DIR/failed_scans.log"
         return 1
     fi
+    
+    print_status "🔄 scan_image function completed for $image, returning to loop"
 }
 
 # Function to display progress banner with figlet
@@ -716,11 +713,6 @@ display_progress_banner() {
     local current="$1"
     local total="$2"
     local image="$3"
-    
-    # Clear screen for better visual impact
-    if [ -z "${CI:-}" ]; then
-        clear
-    fi
     
     echo
     echo "═══════════════════════════════════════════════════════════════════════════════"
@@ -761,6 +753,8 @@ run_sequential_scans() {
     local reused_count=0
     local scanned_count=0
 
+    print_status "🔄 run_sequential_scans started with $total images"
+    
     if [ "$QUICKMODE" = true ]; then
         print_status "🚀 Starting quickmode processing (${total} images)"
         print_status "Will reuse existing data from docs/data/ when available"
@@ -770,6 +764,8 @@ run_sequential_scans() {
 
     # Run scans sequentially (or copy existing data in quickmode)
     for image in "${images[@]}"; do
+        print_status "🔄 Processing image $current of $total: $image"
+        
         # Display progress banner with figlet
         display_progress_banner "$current" "$total" "$image"
         
@@ -781,8 +777,8 @@ run_sequential_scans() {
             
             if copy_existing_data "$image"; then
                 print_success "✅ Reused existing scan data for $image ($current of $total)"
-                ((reused_count++))
-                ((success_count++))
+                reused_count=$((reused_count + 1))
+                success_count=$((success_count + 1))
                 image_processed=true
             else
                 print_warning "⚠️ Failed to copy existing data for $image, will scan fresh"
@@ -796,17 +792,20 @@ run_sequential_scans() {
             # Run scan_image and capture its exit code
             if scan_image "$image"; then
                 print_status "✅ Completed scan $current of $total: $image"
-                ((scanned_count++))
-                ((success_count++))
+                scanned_count=$((scanned_count + 1))
+                success_count=$((success_count + 1))
             else
                 print_warning "❌ Failed to scan image $current of $total: $image"
                 echo "SCAN_FAILED: $image - Scan function returned error" >> "$OUTPUT_DIR/failed_scans.log"
-                ((failed_count++))
+                failed_count=$((failed_count + 1))
             fi
         fi
         
-        ((current++))
+        print_status "🔄 Finished processing image $current of $total, moving to next..."
+        current=$((current + 1))
     done
+    
+    print_status "🔄 Loop completed, generating summary..."
     
     if [ "$QUICKMODE" = true ]; then
         print_status "🎉 Quickmode processing completed!"
@@ -829,6 +828,8 @@ run_sequential_scans() {
     if [ $failed_count -gt 0 ]; then
         print_status "  • See failed_scans.log for details on failed operations"
     fi
+    
+    print_status "🔄 run_sequential_scans function completed normally"
 }
 
 # Function to display discovered images
@@ -1077,7 +1078,7 @@ cleanup_temp_dirs() {
 }
 
 # Set up cleanup trap
-trap cleanup_on_exit EXIT
+# trap cleanup_on_exit EXIT   # REMOVED - causing premature cleanup
 
 # Main execution block
 main() {
@@ -1088,45 +1089,24 @@ main() {
         print_status "⚡ Quickmode enabled - will reuse existing scan data from docs/data/ when available"
     fi
     
-    if [ "$DEBUG_MODE" = true ]; then
-        print_status "🐛 Debug: Main execution flow starting..."
-        print_status "  • Script arguments: $*"
-        print_status "  • Working directory: $(pwd)"
-        print_status "  • User: $(whoami)"
-        print_status "  • Shell: $SHELL"
-        print_status "  • Bash version: $BASH_VERSION"
-        print_status "  • Configuration:"
-        print_status "    - PERFORMANCE_MODE: $PERFORMANCE_MODE"
-        print_status "    - OUTPUT_DIR: $OUTPUT_DIR"
-        print_status "    - HELM_CHARTS_DIR: $HELM_CHARTS_DIR"
-        print_status "    - TESTMODE: $TESTMODE"
-        print_status "    - STRICT_MODE: $STRICT_MODE"
-        print_status "    - UPDATE_DATABASES: $UPDATE_DATABASES"
-        print_status "    - CLEAN_CACHE: $CLEAN_CACHE"
-        print_status "    - LIST_IMAGES_ONLY: $LIST_IMAGES_ONLY"
-        print_status "    - USE_DISCOVERED: $USE_DISCOVERED"
-        print_status "    - QUICKMODE: $QUICKMODE"
-        print_status "    - USER_IMAGE: ${USER_IMAGE:-'(not set)'}"
-    fi
+
     
     # Configure performance settings
     configure_performance "$PERFORMANCE_MODE"
     
     # Handle database update request
     if [ "$UPDATE_DATABASES" = true ]; then
-        if [ "$DEBUG_MODE" = true ]; then
-            print_status "🐛 Debug: Handling database update request..."
-        fi
+
         update_vulnerability_databases
+        cleanup_on_exit
         exit 0
     fi
     
     # Handle cache cleanup request
     if [ "$CLEAN_CACHE" = true ]; then
-        if [ "$DEBUG_MODE" = true ]; then
-            print_status "🐛 Debug: Handling cache cleanup request..."
-        fi
+
         clean_all_caches
+        cleanup_on_exit
         exit 0
     fi
     
@@ -1135,10 +1115,12 @@ main() {
         if [ ! -f "discovered.yaml" ]; then
             print_error "discovered.yaml not found. Please generate it externally."
             print_status "Run the image discovery script before using this script."
+            cleanup_on_exit
             exit 1
         fi
         load_images_from_file
         display_discovered_images
+        cleanup_on_exit
         exit 0
     fi
     
@@ -1146,6 +1128,7 @@ main() {
     if [ ! -f "discovered.yaml" ]; then
         print_error "discovered.yaml not found. Please generate it externally."
         print_status "Run the image discovery script before using this script."
+        cleanup_on_exit
         exit 1
     fi
     load_images_from_file
@@ -1153,32 +1136,68 @@ main() {
     if [ "$TESTMODE" = true ]; then
         local original_count=${#discovered_images[@]}
         print_status "🧪 Test mode enabled - limiting scan to first 3 images"
+        print_status "Original array has $original_count images"
+        
         if [ $original_count -gt 3 ]; then
-            if (( BASH_VERSINFO[0] >= 4 )); then
-                discovered_images=("${discovered_images[@]:0:3}")
-            else
-                local temp_array=()
-                local count=0
-                for img in "${discovered_images[@]}"; do
-                    if [ $count -lt 3 ]; then
-                        temp_array+=("$img")
-                        ((count++))
-                    else
-                        break
-                    fi
-                done
-                discovered_images=("${temp_array[@]}")
-            fi
+            # More robust array slicing that works in all bash versions
+            local temp_array=()
+            local count=0
+            print_status "Creating limited array with first 3 images..."
+            
+            for img in "${discovered_images[@]}"; do
+                if [ $count -lt 3 ]; then
+                    temp_array[count]="$img"
+                    print_status "  Added image $((count + 1)): $img"
+                    count=$((count + 1))
+                else
+                    break
+                fi
+            done
+            
+            print_status "Built temp array with ${#temp_array[@]} images"
+            
+            # Clear and rebuild the discovered_images array
+            discovered_images=()
+            for i in "${!temp_array[@]}"; do
+                discovered_images[i]="${temp_array[i]}"
+            done
+            
             print_status "Scanning ${#discovered_images[@]} out of $original_count total images"
         else
             print_status "Scanning all ${#discovered_images[@]} images (less than 3 found)"
         fi
+        
+        print_status "Final array size: ${#discovered_images[@]}"
     fi
+
+    # Debug: Show the first few images to be scanned
+    print_status "📋 Images to scan:"
+    if [ ${#discovered_images[@]} -eq 0 ]; then
+        print_error "No images to scan! Array is empty."
+        cleanup_on_exit
+        exit 1
+    fi
+
+    local debug_count=0
+    for img in "${discovered_images[@]}"; do
+        if [ $debug_count -lt 5 ]; then
+            print_status "  $((debug_count + 1)). $img"
+            debug_count=$((debug_count + 1))
+        else
+            print_status "  ... and $((${#discovered_images[@]} - 5)) more"
+            break
+        fi
+    done
+
     mkdir -p "$OUTPUT_DIR"
+    print_status "About to call run_sequential_scans with ${#discovered_images[@]} images"
     run_sequential_scans "${discovered_images[@]}"
     
     # Generate consolidated report
     generate_consolidated_report
+    
+    # Explicit cleanup at the end
+    cleanup_on_exit
     
     print_success "Scan completed successfully! Results are available in $OUTPUT_DIR"
     echo "[COMPLETED]"
