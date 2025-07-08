@@ -864,28 +864,44 @@ display_discovered_images() {
     done
 }
 
-# Function to generate consolidated report (calls external report script)
-generate_consolidated_report() {
-    print_status "📊 Initiating consolidated report generation..."
-    print_status "This process will analyze all SARIF files and create comprehensive reports"
+# Function to show instructions for running the report generation script
+show_report_instructions() {
+    print_status "🔧 Function: show_report_instructions"
     
-    # Call the standalone report generation script (dashboard update is automatic)
+    echo ""
+    echo "═══════════════════════════════════════════════════════════════════════════════"
+    echo "📊 NEXT STEP: Generate Consolidated Reports"
+    echo "═══════════════════════════════════════════════════════════════════════════════"
+    echo ""
+    print_status "🎯 Scanning completed! Now generate comprehensive reports from the SARIF data:"
+    echo ""
+    
+    # Check if report script exists and show appropriate instructions
     if [ -f "./scripts/dimpact-image-report.sh" ]; then
-        print_status "🚀 Launching report generation script..."
+        print_success "✅ Report generation script found: ./scripts/dimpact-image-report.sh"
         echo ""
-        INPUT_DIR="$OUTPUT_DIR" CVE_SUPPRESSIONS_FILE="cve-suppressions.md" ./scripts/dimpact-image-report.sh --input-dir "$OUTPUT_DIR"
-        local exit_code=$?
+        print_status "🚀 Run the following command to generate reports:"
         echo ""
-        if [ $exit_code -eq 0 ]; then
-            print_success "✅ Report generation completed successfully!"
-        else
-            print_error "❌ Report generation failed with exit code: $exit_code"
-            return $exit_code
-        fi
+        echo "    INPUT_DIR=\"${OUTPUT_DIR}\" CVE_SUPPRESSIONS_FILE=\"cve-suppressions.md\" \\"
+        echo "    ./scripts/dimpact-image-report.sh --input-dir \"${OUTPUT_DIR}\""
+        echo ""
+        print_status "📋 This will create:"
+        print_status "  • 📄 Consolidated SARIF file with all vulnerabilities"
+        print_status "  • 📊 Markdown summary report with statistics"
+        print_status "  • 🌐 HTML dashboard with interactive charts"
+        print_status "  • 📈 Charts and visualizations in docs/data/"
+        echo ""
+        print_status "💡 The report script will automatically update the documentation dashboard"
     else
-        print_error "Report generation script not found: ./scripts/dimpact-image-report.sh"
-        return 1
+        print_error "❌ Report generation script not found: ./scripts/dimpact-image-report.sh"
+        print_status "📥 Please ensure the report script is available before generating reports"
     fi
+    
+    echo ""
+    print_status "📁 Scan results location: ${OUTPUT_DIR}"
+    print_status "🔍 Individual SARIF files are available in subdirectories"
+    echo ""
+    echo "═══════════════════════════════════════════════════════════════════════════════"
 }
 
 # Function to load images from discovered.yaml file
@@ -1193,8 +1209,8 @@ main() {
     print_status "About to call run_sequential_scans with ${#discovered_images[@]} images"
     run_sequential_scans "${discovered_images[@]}"
     
-    # Generate consolidated report
-    generate_consolidated_report
+    # Show instructions for running the report generation script
+    show_report_instructions
     
     # Explicit cleanup at the end
     cleanup_on_exit
