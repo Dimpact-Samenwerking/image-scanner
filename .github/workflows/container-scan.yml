@@ -8,8 +8,8 @@ env:
   REGISTRY: ghcr.io
 
 jobs:
-  install-dependencies:
-    uses: ./.github/workflows/install-dependencies.yml
+  # install-dependencies:
+  #   uses: ./.github/workflows/install-dependencies.yml
 
   scan:
     needs: [install-dependencies]
