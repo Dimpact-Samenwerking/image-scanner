@@ -227,26 +227,53 @@ class SecurityDashboard {
         // Process SARIF results - iterate through all runs and their results
         if (sarifData.runs && Array.isArray(sarifData.runs)) {
             sarifData.runs.forEach(run => {
+                // Create a lookup map for rules to get severity information
+                const ruleMap = new Map();
+                if (run.tool?.driver?.rules && Array.isArray(run.tool.driver.rules)) {
+                    run.tool.driver.rules.forEach(rule => {
+                        ruleMap.set(rule.id, rule);
+                    });
+                }
+
                 if (run.results && Array.isArray(run.results)) {
                     run.results.forEach(result => {
-                        // Map SARIF levels to our severity system
-                        let severity = 'low';
-                        switch (result.level) {
-                            case 'error':
-                                severity = 'critical';
+                        // Get the rule for this result to extract severity
+                        const rule = ruleMap.get(result.ruleId);
+                        let severity = 'low'; // default
+                        
+                        if (rule) {
+                            // Method 1: Check properties.tags for severity
+                            if (rule.properties?.tags && Array.isArray(rule.properties.tags)) {
+                                const severityTag = rule.properties.tags.find(tag => 
+                                    ['CRITICAL', 'HIGH', 'MEDIUM', 'LOW'].includes(tag.toUpperCase())
+                                );
+                                if (severityTag) {
+                                    severity = severityTag.toLowerCase();
+                                }
+                            }
+                            
+                            // Method 2: Fallback to help text parsing if no severity tag found
+                            if (severity === 'low' && rule.help?.text) {
+                                const severityMatch = rule.help.text.match(/Severity:\s*(CRITICAL|HIGH|MEDIUM|LOW)/i);
+                                if (severityMatch) {
+                                    severity = severityMatch[1].toLowerCase();
+                                }
+                            }
+                        }
+
+                        // Count vulnerabilities by actual CVE severity
+                        switch (severity.toLowerCase()) {
+                            case 'critical':
                                 vulnerabilities.critical++;
                                 break;
-                            case 'warning':
-                                severity = 'high';
+                            case 'high':
                                 vulnerabilities.high++;
                                 break;
-                            case 'note':
-                                severity = 'medium';
+                            case 'medium':
                                 vulnerabilities.medium++;
                                 break;
-                            case 'info':
+                            case 'low':
                             default:
-                                severity = 'low';
                                 vulnerabilities.low++;
                                 break;
                         }
