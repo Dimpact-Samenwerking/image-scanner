@@ -1,154 +1,124 @@
-# 🛡️ Container Security Dashboard
+# 🛡️ Dimpact Container Security Scanner & Dashboard
 
-A modern, colorful, and interactive web dashboard for visualizing container vulnerability scan results from SARIF (Static Analysis Results Interchange Format) data.
+A comprehensive, modern, and interactive solution for scanning container images in Dimpact Helm charts. Automatically discovers, scans, and generates detailed security reports with a beautiful dashboard.
 
-## ✨ Features
+## 🚀 Quick Start
 
-- **Modern Design**: Clean, colorful interface with gradient backgrounds and glass-morphism effects
-- **Real-time Data**: Automatically loads and displays vulnerability data from SARIF scan results
-- **Interactive Drill-down**: Click on any container image to see detailed vulnerability information
-- **Search Functionality**: Quickly find specific container images using the search box
-- **Responsive Design**: Works perfectly on desktop, tablet, and mobile devices
-- **Self-contained**: Single HTML file with embedded CSS/JavaScript, no build process required
+### Prerequisites
+- Docker installed and running
+- Internet connection for downloading images
+- Bash shell (Linux/macOS) or WSL (Windows)
 
-## 🎯 Dashboard Sections
+### Basic Usage
 
-### 1. Summary Cards
-- **Critical**: 🔥 Immediate action required
-- **High**: ⚠️ High priority patching needed
-- **Medium**: 🔶 Schedule maintenance
-- **Low**: 🔵 Monitor and review
-- **Suppressed**: 🛡️ Known issues that are suppressed
-- **Failed Scans**: ❌ Images that couldn't be scanned
+1. **Discover and scan all container images**:
+   ```bash
+   ./scripts/dimpact-image-scanner.sh --use-discovered
+   ```
 
-### 2. Container Images List
-- Sortable list of all scanned container images
-- Color-coded vulnerability badges for quick assessment
-- Status indicators (✅ Scanned / ❌ Failed)
-- Click to drill down into detailed vulnerability information
+2. **Generate enhanced report and update dashboard data**:
+   ```bash
+   ./scripts/dimpact-image-report.sh
+   ```
 
-### 3. Detailed Vulnerability Modal
-- Comprehensive vulnerability details for each image
-- CVE IDs with direct links to security advisories
-- Vulnerability descriptions and locations
-- Organized by severity level
+3. **View dashboard**: Open the dashboard locally or via GitHub Pages (see below).
 
-## 🚀 Usage
+## 📁 Output Structure
+
+```
+docs/
+├── index.html          # Main dashboard (HTML, CSS, JavaScript)
+├── data/               # Dashboard data (SARIF files)
+│   ├── image-name-1/
+│   │   └── trivy-results.sarif
+│   └── ...
+├── README.md           # This file
+└── ...
+```
+
+Scan results are stored in `dimpact-scan-results/YYMMDD/` and copied to `docs/data/` for dashboard display.
+
+## 📊 Dashboard Features
+
+- **Modern Design**: Clean, colorful, responsive UI
+- **Real-time Data**: Loads vulnerability data from SARIF scan results
+- **Interactive Drill-down**: Click any image for detailed vulnerability info
+- **Search & Filter**: Quickly find and filter images by severity
+- **EPSS Integration**: Exploit Prediction Scoring System support
+- **No Build Required**: Self-contained, works on any web server
 
 ### Local Development
 1. Run your SARIF vulnerability scans
-2. Copy scan results: `./scripts/update-dashboard-data.sh` (from project root)
-3. Start a local HTTP server: `cd docs && python3 -m http.server 8080`
+2. Copy scan results: `./scripts/dimpact-image-report.sh`
+3. Start a local HTTP server:
+   ```bash
+   cd docs && python3 -m http.server 8080
+   ```
 4. Open your browser to `http://localhost:8080`
 
-### GitHub Pages Deployment  
-1. Copy scan results to `docs/data/`: `./scripts/update-dashboard-data.sh` (from project root)
+### GitHub Pages Deployment
+1. Copy scan results to `docs/data/`: `./scripts/dimpact-image-report.sh`
 2. Commit and push: `git add docs/data/ && git commit -m "📊 Add scan results" && git push`
 3. Enable GitHub Pages in repository Settings → Pages → docs folder
 4. Access your dashboard at: `https://yourusername.github.io/yourrepository/`
 
-📖 **Detailed GitHub Pages setup**: See [GitHub Pages Setup Guide](GITHUB_PAGES_SETUP.md)
+## 🔧 Advanced Features
 
-### Expected Directory Structure
-```
-docs/data/  (for GitHub Pages)
-├── image-name-1/
-│   └── trivy-results.sarif
-├── image-name-2/
-│   └── trivy-results.sarif
-└── ...
-```
+- **Quickmode (10x Faster)**: Reuse existing scan data for faster scans
+  ```bash
+  ./scripts/dimpact-image-scanner.sh --quickmode --use-discovered
+  ```
+- **Test Mode**: Scan only first 3 images for testing
+  ```bash
+  ./scripts/dimpact-image-scanner.sh --testmode --use-discovered
+  ```
+- **Custom Configuration**:
+  ```bash
+  SEVERITY_THRESHOLD=HIGH OUTPUT_DIR=./my-results ./scripts/dimpact-image-scanner.sh
+  ```
 
-## 📊 Data Sources
+## 🎯 Use Cases
 
-The dashboard loads vulnerability data from:
+- **Daily Security Monitoring**:
+  ```bash
+  ./scripts/dimpact-image-scanner.sh --quickmode --use-discovered
+  ./scripts/dimpact-image-report.sh
+  ```
+- **Weekly Deep Scan**:
+  ```bash
+  ./scripts/dimpact-image-scanner.sh --use-discovered
+  ./scripts/dimpact-image-report.sh
+  ```
+- **CI/CD Integration**:
+  ```bash
+  ./scripts/dimpact-image-scanner.sh --quickmode --testmode --use-discovered
+  ```
 
-**SARIF Files**: Vulnerability scan results from Trivy/Grype scans
-- `trivy-results.sarif` files in scan result directories
-- Automatic discovery from common scan result locations
-- Full vulnerability details with CVE mappings
+## 📚 Documentation
 
-## 🎨 Color Scheme
-
-- **Critical**: Red (#e74c3c) - Immediate attention required
-- **High**: Orange (#f39c12) - High priority
-- **Medium**: Yellow (#f1c40f) - Medium priority  
-- **Low**: Blue (#3498db) - Low priority
-- **Suppressed**: Purple (#9b59b6) - Suppressed issues
-- **Failed**: Gray (#95a5a6) - Failed scans
-
-## 🔧 Customization
-
-### Adding New Data Sources
-Modify the `discoverSarifFiles()` function in `index.html` to add new scan result locations:
-
-```javascript
-const possibleLocations = [
-    'your-scan-results-directory',
-    'another-directory',
-    // ... existing locations
-];
-```
-
-### Styling
-All styles are contained within the `<style>` tag in `index.html`. The design uses:
-- CSS Grid for responsive layouts
-- Flexbox for component alignment
-- CSS gradients for visual appeal
-- Backdrop filters for glass-morphism effects
-- CSS animations for smooth interactions
-
-
-
-## 🌐 Deployment
-
-1. Host the `docs/` folder on any web server
-2. The dashboard will work with SARIF files in the relative directory structure
-3. No build process or additional configuration required
+- [Commands Reference](COMMANDS_REFERENCE.md) - Quick command guide
+- [GitHub Pages Setup](GITHUB_PAGES_SETUP.md) - Dashboard deployment
+- [Quickmode Guide](QUICKMODE_GUIDE.md) - Fast scanning with caching
+- [Container Configuration](CONTAINER_CONFIG_EXAMPLES.md) - Image discovery setup
 
 ## 📱 Browser Support
 
 - Modern browsers with ES6+ support
-- Chrome 60+
-- Firefox 55+
-- Safari 12+
-- Edge 79+
+- Chrome 60+, Firefox 55+, Safari 12+, Edge 79+
 
-## 🔒 Security
+## 🔒 Security & Performance
 
 - No external dependencies or CDNs
 - All code is self-contained
 - No data transmission to external services
-- SARIF files are loaded locally via fetch API
-
-## 📈 Performance
-
-- Lightweight: ~20KB total size
-- Fast loading with minimal HTTP requests
-- Efficient DOM manipulation
-- Responsive to large datasets (1000+ images)
+- Lightweight, fast, and responsive (1000+ images supported)
 
 ## 🛠️ Development
 
-The dashboard is built with vanilla JavaScript and modern CSS. No build tools or frameworks required.
-
-### File Structure
-```
-docs/
-├── index.html          # Main dashboard (HTML, CSS, JavaScript)
-├── README.md           # This file
-└── ...                 # Other legacy files (optional)
-```
-
-### Key Components
-- `SecurityDashboard` class: Main application logic
-- SARIF file discovery and parsing
-- Responsive UI components
-- Modal system for detailed views
-- Search and filtering functionality
-
-
+- Built with vanilla JavaScript and modern CSS
+- No build tools or frameworks required
+- All styles in `index.html` for easy customization
 
 ## 📝 License
 
-This dashboard is part of the Container Security Scanner project. See the main repository LICENSE file for details.
+This dashboard is part of the Dimpact Container Security Scanner project. See the main repository LICENSE file for details.
