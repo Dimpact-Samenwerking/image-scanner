@@ -101,6 +101,9 @@ done
 # Source utility functions
 source "$(dirname "$0")/dimpact-scanner-utils.sh"
 
+# Load suppressed CVEs from the suppressions file
+load_cve_suppressions
+
 # Function to print colored output
 print_status() {
     echo -e "${BLUE}ℹ️  [INFO]${NC} $1"
