@@ -9,14 +9,13 @@ env:
 
 jobs:
   install-dependencies:
-    runs-on: ubuntu-latest
     uses: ./.github/workflows/install-dependencies.yml
 
   scan:
     needs: [install-dependencies]
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
       security-events: write
     steps:
       - name: Checkout repository
