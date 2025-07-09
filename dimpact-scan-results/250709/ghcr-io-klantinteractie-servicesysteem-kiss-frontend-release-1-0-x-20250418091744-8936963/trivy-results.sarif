@@ -3892,18 +3892,18 @@
           "ghcr.io/klantinteractie-servicesysteem/kiss-frontend:release-1.0.x-20250418091744-8936963"
         ],
         "imageCreatedDate": "2025-04-18T09:18:40.487218973Z",
-        "imageAgeDays": 81,
-        "imageAgeSeconds": 7083046,
-        "imageAgeText": "81 days",
+        "imageAgeDays": 82,
+        "imageAgeSeconds": 7089874,
+        "imageAgeText": "82 days",
         "imageAgeStatus": "recent",
-        "scanTimestamp": "2025-07-09T08:49:27Z",
+        "scanTimestamp": "2025-07-09T10:43:15Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "podiumd"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-09T08:49:27Z",
+        "helmChartsEnhancementDate": "2025-07-09T10:43:15Z",
         "chartsMetadataVersion": "1.0",
         "epssScores": [
           {
@@ -4137,7 +4137,7 @@
         "epssLowRiskCount": 38,
         "epssVeryHighRiskCount": 0,
         "epssEnhanced": true,
-        "epssEnhancementDate": "2025-07-09T08:49:28Z",
+        "epssEnhancementDate": "2025-07-09T10:43:16Z",
         "epssMetadataVersion": "1.0"
       }
     }

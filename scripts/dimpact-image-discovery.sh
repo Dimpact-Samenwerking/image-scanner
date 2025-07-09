@@ -867,6 +867,10 @@ generate_yaml_output() {
                 # Parse image components
                 IFS=':' read -r registry repository tag <<< "$(parse_image_components "$image")"
                 
+                # --- STRIP @ SUFFIX FROM VERSION ---
+                if [[ "$tag" == *"@"* ]]; then
+                    tag="${tag%%@*}"
+                fi
                 # Validate the tag before including in output
                 if ! is_valid_docker_tag "$tag"; then
                     echo "⚠️  Skipping image with invalid tag: $image (tag: '$tag')" >&2
@@ -944,6 +948,10 @@ generate_yaml_output() {
                 echo "$image:$original_image" >> "$translated_map_file"
                 # Parse image components
                 IFS=':' read -r registry repository tag <<< "$(parse_image_components "$image")"
+                # --- STRIP @ SUFFIX FROM VERSION ---
+                if [[ "$tag" == *"@"* ]]; then
+                    tag="${tag%%@*}"
+                fi
                 # Validate the tag before including in output
                 if ! is_valid_docker_tag "$tag"; then
                     echo "⚠️  Skipping image with invalid tag: $image (tag: '$tag')" >&2

@@ -10696,18 +10696,18 @@
           "maykinmedia/open-klant:latest"
         ],
         "imageCreatedDate": "2025-07-08T09:23:56.211277773Z",
-        "imageAgeDays": 0,
-        "imageAgeSeconds": 83985,
-        "imageAgeText": "23 hour(s), 19 minute(s)",
+        "imageAgeDays": 1,
+        "imageAgeSeconds": 91853,
+        "imageAgeText": "1 days",
         "imageAgeStatus": "very_recent",
-        "scanTimestamp": "2025-07-09T08:43:42Z",
+        "scanTimestamp": "2025-07-09T10:54:50Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "openklant"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-09T08:43:43Z",
+        "helmChartsEnhancementDate": "2025-07-09T10:54:50Z",
         "chartsMetadataVersion": "1.0",
         "epssScores": [
           {
@@ -11141,7 +11141,7 @@
         "epssLowRiskCount": 74,
         "epssVeryHighRiskCount": 0,
         "epssEnhanced": true,
-        "epssEnhancementDate": "2025-07-09T08:43:44Z",
+        "epssEnhancementDate": "2025-07-09T10:54:51Z",
         "epssMetadataVersion": "1.0"
       }
     }

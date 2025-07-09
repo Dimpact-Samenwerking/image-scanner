@@ -8320,18 +8320,18 @@
           "bitnami/keycloak:26.0.7-debian-12-r0"
         ],
         "imageCreatedDate": "2024-12-03T08:49:07.02357705Z",
-        "imageAgeDays": 217,
-        "imageAgeSeconds": 18834648,
-        "imageAgeText": "217 days",
+        "imageAgeDays": 218,
+        "imageAgeSeconds": 18842510,
+        "imageAgeText": "218 days",
         "imageAgeStatus": "old",
-        "scanTimestamp": "2025-07-09T08:39:56Z",
+        "scanTimestamp": "2025-07-09T10:50:59Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "keycloak"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-09T08:39:56Z",
+        "helmChartsEnhancementDate": "2025-07-09T10:50:59Z",
         "chartsMetadataVersion": "1.0",
         "epssScores": [
           {
@@ -8775,7 +8775,7 @@
         "epssLowRiskCount": 77,
         "epssVeryHighRiskCount": 0,
         "epssEnhanced": true,
-        "epssEnhancementDate": "2025-07-09T08:39:57Z",
+        "epssEnhancementDate": "2025-07-09T10:51:00Z",
         "epssMetadataVersion": "1.0"
       }
     }

@@ -4477,27 +4477,27 @@
         }
       },
       "properties": {
-        "imageID": "sha256:f1855966bf31e8f5af0d6e9c010e75d1fd4963f8107d6e49d7c50f6492a95e54",
+        "imageID": "sha256:786d2e3c7099f0aafae2d7e6b1ff79139dc010b651233cf6a1fdbecc34dc044b",
         "imageName": "ghcr.io/infonl/zaakafhandelcomponent:latest",
         "repoDigests": [
-          "ghcr.io/infonl/zaakafhandelcomponent@sha256:3ceaffa8dec0d76d0530dc36a877114547b2cd73dc4355915c6979c2b221e4e2"
+          "ghcr.io/infonl/zaakafhandelcomponent@sha256:fd88a5d1a66578eef46a68051e0bd6319bfc12b40c1c7854be5e159b0fd4cd43"
         ],
         "repoTags": [
           "ghcr.io/infonl/zaakafhandelcomponent:latest"
         ],
-        "imageCreatedDate": "2025-07-08T13:29:57.49584495Z",
+        "imageCreatedDate": "2025-07-09T09:09:18.901004979Z",
         "imageAgeDays": 0,
-        "imageAgeSeconds": 69552,
-        "imageAgeText": "19 hour(s), 19 minute(s)",
+        "imageAgeSeconds": 5610,
+        "imageAgeText": "1 hour(s), 33 minute(s)",
         "imageAgeStatus": "very_recent",
-        "scanTimestamp": "2025-07-09T08:49:22Z",
+        "scanTimestamp": "2025-07-09T10:43:10Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "zaakafhandelcomponent"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-09T08:49:22Z",
+        "helmChartsEnhancementDate": "2025-07-09T10:43:10Z",
         "chartsMetadataVersion": "1.0",
         "epssScores": [
           {
@@ -4816,7 +4816,7 @@
         "epssLowRiskCount": 58,
         "epssVeryHighRiskCount": 0,
         "epssEnhanced": true,
-        "epssEnhancementDate": "2025-07-09T08:49:23Z",
+        "epssEnhancementDate": "2025-07-09T10:43:11Z",
         "epssMetadataVersion": "1.0"
       }
     }

@@ -39478,18 +39478,18 @@
           "maykinmedia/open-archiefbeheer:latest"
         ],
         "imageCreatedDate": "2025-07-07T10:34:22.401305648Z",
-        "imageAgeDays": 1,
-        "imageAgeSeconds": 166137,
-        "imageAgeText": "1 days",
+        "imageAgeDays": 2,
+        "imageAgeSeconds": 174002,
+        "imageAgeText": "2 days",
         "imageAgeStatus": "very_recent",
-        "scanTimestamp": "2025-07-09T08:43:20Z",
+        "scanTimestamp": "2025-07-09T10:54:26Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "openarchiefbeheer"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-09T08:43:20Z",
+        "helmChartsEnhancementDate": "2025-07-09T10:54:26Z",
         "chartsMetadataVersion": "1.0",
         "epssScores": [
           {
@@ -41618,7 +41618,7 @@
         "epssLowRiskCount": 397,
         "epssVeryHighRiskCount": 1,
         "epssEnhanced": true,
-        "epssEnhancementDate": "2025-07-09T08:43:25Z",
+        "epssEnhancementDate": "2025-07-09T10:54:32Z",
         "epssMetadataVersion": "1.0"
       }
     }

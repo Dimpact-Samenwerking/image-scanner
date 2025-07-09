@@ -14935,18 +14935,18 @@
           "bitnami/redis:7.0.5-debian-11-r25"
         ],
         "imageCreatedDate": "2022-12-03T09:53:27.015140866Z",
-        "imageAgeDays": 948,
-        "imageAgeSeconds": 81989233,
-        "imageAgeText": "948 days",
+        "imageAgeDays": 949,
+        "imageAgeSeconds": 81997096,
+        "imageAgeText": "949 days",
         "imageAgeStatus": "very_old",
-        "scanTimestamp": "2025-07-09T08:40:43Z",
+        "scanTimestamp": "2025-07-09T10:51:46Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "redis"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-09T08:40:44Z",
+        "helmChartsEnhancementDate": "2025-07-09T10:51:46Z",
         "chartsMetadataVersion": "1.0",
         "epssScores": [
           {
@@ -15920,7 +15920,7 @@
         "epssLowRiskCount": 168,
         "epssVeryHighRiskCount": 5,
         "epssEnhanced": true,
-        "epssEnhancementDate": "2025-07-09T08:40:46Z",
+        "epssEnhancementDate": "2025-07-09T10:51:49Z",
         "epssMetadataVersion": "1.0"
       }
     }
