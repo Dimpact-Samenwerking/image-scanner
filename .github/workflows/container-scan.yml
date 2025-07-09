@@ -27,19 +27,18 @@ jobs:
       # --- Testing Step ---
       - name: Testing Step
         run: |
+          set -v
           echo "🔍 Testing"
+          df -h
           pwd
           ls -la
           touch test.txt
           ls -la
-          exit 100
-
-
-
 
       # --- Discovery Step ---
       - name: Discover container images (generate discovered.yaml)
         run: |
+          set -v
           chmod +x scripts/dimpact-image-discovery.sh
           echo "🔍 Discovering images for scan..."
           ./scripts/dimpact-image-discovery.sh --output-file --check-image-availability
@@ -52,6 +51,7 @@ jobs:
       # --- SCAN Step ---
       - name: Run container image security scan
         run: |
+          set -v
           chmod +x scripts/dimpact-image-scanner.sh
           echo "🚀 Starting container image security scan..."
           # Use date-prefixed output dir
@@ -67,6 +67,7 @@ jobs:
       # --- REPORT Step ---
       - name: Generate consolidated security report
         run: |
+          set -v
           chmod +x scripts/dimpact-image-report.sh
           SCAN_DATE=$(date +%y%m%d)
           OUTPUT_DIR="./${SCAN_DATE}-dimpact-scan-results"
