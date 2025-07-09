@@ -472,8 +472,8 @@ jobs:
             fi
             
             # Check for dashboard data preparation
-            if [ -d "docs/data" ]; then
-              DASHBOARD_FILES=$(find docs/data -name "*.sarif" | wc -l)
+            if [ -d "pages/data" ]; then
+              DASHBOARD_FILES=$(find pages/data -name "*.sarif" | wc -l)
               echo "  📊 Dashboard data prepared: $DASHBOARD_FILES SARIF files"
             else
               echo "  ⚠️ Dashboard data not prepared"
@@ -541,7 +541,7 @@ jobs:
           echo "📊 Generating dashboard data for GitHub Pages..."
           
           # Create dashboard data directory
-          mkdir -p "docs/data"
+          mkdir -p "pages/data"
           
           # Generate JSON data from markdown report for the dashboard
           if [ -f "local-scan-results/SCAN_REPORT.md" ]; then
@@ -633,7 +633,7 @@ jobs:
               
               dashboard_data = parse_scan_report(markdown_content)
               
-              with open("docs/data/security-data.json", "w") as f:
+              with open("pages/data/security-data.json", "w") as f:
                   json.dump(dashboard_data, f, indent=2)
               
               print("✅ Dashboard data generated successfully")
@@ -647,18 +647,18 @@ jobs:
             echo "✅ Dashboard JSON data created successfully"
             
             # Show what was generated
-            if [ -f "docs/data/security-data.json" ]; then
+            if [ -f "pages/data/security-data.json" ]; then
               echo "📊 Generated dashboard data:"
-              echo "  📏 Size: $(du -h docs/data/security-data.json | cut -f1)"
+              echo "  📏 Size: $(du -h pages/data/security-data.json | cut -f1)"
               echo "  📋 Sample content:"
-              head -20 "docs/data/security-data.json" | sed 's/^/    /'
+              head -20 "pages/data/security-data.json" | sed 's/^/    /'
             fi
             
           else
             echo "⚠️ No scan report found - creating placeholder dashboard data..."
             
             # Create placeholder data
-            cat > "docs/data/security-data.json" << EOF
+            cat > "pages/data/security-data.json" << EOF
           {
             "scan_date": "$(date -u +"%Y-%m-%d")",
             "scan_timestamp": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
@@ -1203,7 +1203,7 @@ jobs:
           echo "📊 Dashboard Test Mode: Using existing/sample data..."
           
           # Create dashboard data directory
-          mkdir -p "docs/data"
+          mkdir -p "pages/data"
           mkdir -p "local-scan-results"
           
           # Check if we have a recent security report to use
@@ -1302,7 +1302,7 @@ jobs:
           echo "📊 Generating dashboard data for GitHub Pages (Test Mode)..."
           
           # Create dashboard data directory
-          mkdir -p "docs/data"
+          mkdir -p "pages/data"
           
           # Generate JSON data from markdown report for the dashboard
           if [ -f "local-scan-results/SCAN_REPORT.md" ]; then
@@ -1396,7 +1396,7 @@ jobs:
               
               dashboard_data = parse_scan_report(markdown_content)
               
-              with open("docs/data/security-data.json", "w") as f:
+              with open("pages/data/security-data.json", "w") as f:
                   json.dump(dashboard_data, f, indent=2)
               
               print("✅ Dashboard data generated successfully (Test Mode)")
@@ -1411,12 +1411,12 @@ jobs:
             echo "✅ Dashboard JSON data created successfully (Test Mode)"
             
             # Show what was generated
-            if [ -f "docs/data/security-data.json" ]; then
+            if [ -f "pages/data/security-data.json" ]; then
               echo "📊 Generated dashboard data:"
-              echo "  📏 Size: $(du -h docs/data/security-data.json | cut -f1)"
+              echo "  📏 Size: $(du -h pages/data/security-data.json | cut -f1)"
               echo "  🧪 Mode: Dashboard Test Mode"
               echo "  📋 Sample content:"
-              head -25 "docs/data/security-data.json" | sed 's/^/    /'
+              head -25 "pages/data/security-data.json" | sed 's/^/    /'
             fi
           else
             echo "❌ Could not find scan report for dashboard generation"
@@ -1430,7 +1430,7 @@ jobs:
           git config --local user.name "GitHub Action"
           
           # Add dashboard files
-          git add docs/data/
+          git add pages/data/
           
           # Check if there are changes to commit
           if git diff --staged --quiet; then
@@ -1826,8 +1826,8 @@ jobs:
           
           # Check and add dashboard files if they exist
           echo "📊 Checking dashboard files for commit:"
-          if [ -f "docs/data/security-data.json" ]; then
-            echo "  ✅ Dashboard data found: $(du -h docs/data/security-data.json | cut -f1)"
+          if [ -f "pages/data/security-data.json" ]; then
+            echo "  ✅ Dashboard data found: $(du -h pages/data/security-data.json | cut -f1)"
           else
             echo "  ⚠️ Dashboard data not found"
           fi
@@ -1840,8 +1840,8 @@ jobs:
           
           # Add all security report files and dashboard data
           git add security-reports/
-          git add docs/data/ || echo "No dashboard data to add"
-          git add docs/README.md || echo "No dashboard README to add"
+          git add pages/data/ || echo "No dashboard data to add"
+          git add pages/README.md || echo "No dashboard README to add"
           
           # Check if there are changes to commit
           if git diff --staged --quiet; then

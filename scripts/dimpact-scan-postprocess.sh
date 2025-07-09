@@ -72,8 +72,8 @@ if [[ -d "./local-scan-results" ]]; then
   else
     echo "  ❌ SCAN_REPORT.md not generated"
   fi
-  if [[ -d "docs/data" ]]; then
-    DASHBOARD_FILES=$(find docs/data -name "*.sarif" | wc -l)
+  if [[ -d "pages/data" ]]; then
+DASHBOARD_FILES=$(find pages/data -name "*.sarif" | wc -l)
     echo "  📊 Dashboard data prepared: $DASHBOARD_FILES SARIF files"
   else
     echo "  ⚠️ Dashboard data not prepared"
@@ -130,7 +130,7 @@ set -e
 
 # --- Dashboard data for GitHub Pages ---
 echo "📊 Generating dashboard data for GitHub Pages..."
-mkdir -p "docs/data"
+mkdir -p "pages/data"
 if [[ -f "local-scan-results/SCAN_REPORT.md" ]]; then
   echo "🔄 Converting markdown report to dashboard JSON format..."
   cat > extract_dashboard_data.py << 'EOF'
@@ -204,7 +204,7 @@ if __name__ == "__main__":
     with open("local-scan-results/SCAN_REPORT.md", "r") as f:
         markdown_content = f.read()
     dashboard_data = parse_scan_report(markdown_content)
-    with open("docs/data/security-data.json", "w") as f:
+    with open("pages/data/security-data.json", "w") as f:
         json.dump(dashboard_data, f, indent=2)
     print("✅ Dashboard data generated successfully")
     print(f"📊 Found {dashboard_data['summary']['total_containers']} containers")
@@ -212,15 +212,15 @@ if __name__ == "__main__":
 EOF
   python3 extract_dashboard_data.py
   echo "✅ Dashboard JSON data created successfully"
-  if [[ -f "docs/data/security-data.json" ]]; then
+  if [[ -f "pages/data/security-data.json" ]]; then
     echo "📊 Generated dashboard data:"
-    echo "  📏 Size: $(du -h docs/data/security-data.json | cut -f1)"
+    echo "  📏 Size: $(du -h pages/data/security-data.json | cut -f1)"
     echo "  📋 Sample content:"
-    head -20 "docs/data/security-data.json" | sed 's/^/    /'
+    head -20 "pages/data/security-data.json" | sed 's/^/    /'
   fi
 else
   echo "⚠️ No scan report found - creating placeholder dashboard data..."
-  cat > "docs/data/security-data.json" << EOF
+  cat > "pages/data/security-data.json" << EOF
 {
   "scan_date": "$SCAN_DATE",
   "scan_timestamp": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
