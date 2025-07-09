@@ -1,6 +1,6 @@
 # Container Image Security Scan Report
 
-Generated on: Wed Jul  9 07:38:45 UTC 2025
+Generated on: Wed Jul  9 08:49:46 UTC 2025
 
 *This report is generated from SARIF (Static Analysis Results Interchange Format) data*
 

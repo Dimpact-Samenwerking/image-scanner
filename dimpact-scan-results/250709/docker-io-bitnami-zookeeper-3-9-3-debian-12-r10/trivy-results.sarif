@@ -7295,17 +7295,17 @@
         ],
         "imageCreatedDate": "2025-03-24T00:29:58.221350654Z",
         "imageAgeDays": 107,
-        "imageAgeSeconds": 9269888,
+        "imageAgeSeconds": 9274252,
         "imageAgeText": "107 days",
         "imageAgeStatus": "moderate",
-        "scanTimestamp": "2025-07-09T07:28:08Z",
+        "scanTimestamp": "2025-07-09T08:40:51Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "zookeeper"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-09T07:28:08Z",
+        "helmChartsEnhancementDate": "2025-07-09T08:40:52Z",
         "chartsMetadataVersion": "1.0",
         "epssScores": [
           {
@@ -7754,7 +7754,7 @@
         "epssLowRiskCount": 78,
         "epssVeryHighRiskCount": 0,
         "epssEnhanced": true,
-        "epssEnhancementDate": "2025-07-09T07:28:09Z",
+        "epssEnhancementDate": "2025-07-09T08:40:53Z",
         "epssMetadataVersion": "1.0"
       }
     }
