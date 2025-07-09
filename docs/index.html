@@ -601,17 +601,6 @@
                 <div class="card-label">Low</div>
                 <div class="high-risk-indicator" id="lowHighRisk" style="font-size: 0.7em; color: #ff6b6b; margin-top: 4px;">🎯 - high-risk</div>
             </div>
-            <div class="summary-card suppressed">
-                <div class="card-icon">🛡️</div>
-                <div class="card-number" id="suppressedCount">-</div>
-                <div class="card-label">Suppressed</div>
-            </div>
-            <div class="summary-card failed">
-                <div class="card-icon">❌</div>
-                <div class="card-number" id="failedCount">-</div>
-                <div class="card-label">Failed Scans</div>
-            </div>
-
         </div>
 
         <!-- Images Section -->
@@ -642,9 +631,6 @@
                         </button>
                         <button class="filter-btn" data-severity="clean" id="filterClean">
                             ✅ Clean
-                        </button>
-                        <button class="filter-btn" data-severity="suppressed" id="filterSuppressed">
-                            🛡️ Suppressed
                         </button>
                     </div>
                 </div>
@@ -885,6 +871,11 @@
 
                         if (run.results) {
                             for (const result of run.results) {
+                                // Check for suppressed property
+                                if (result.suppressed === true) {
+                                    vulnerabilities.suppressed++;
+                                    continue; // Do not count suppressed in severity
+                                }
                                 const level = result.level || 'info';
                                 const messageText = result.message?.text || '';
                                 const severity = this.mapSarifLevelToSeverity(level, messageText);
@@ -1107,8 +1098,6 @@
                 document.getElementById('highCount').textContent = summary.high.toLocaleString();
                 document.getElementById('mediumCount').textContent = summary.medium.toLocaleString();
                 document.getElementById('lowCount').textContent = summary.low.toLocaleString();
-                document.getElementById('suppressedCount').textContent = summary.suppressed.toLocaleString();
-                document.getElementById('failedCount').textContent = summary.failed.toLocaleString();
                 
                 // Update high-risk CVE indicators for each severity level
                 const criticalHighRisk = document.getElementById('criticalHighRisk');

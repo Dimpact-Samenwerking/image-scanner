@@ -15105,7 +15105,8 @@
                 "text": "openformulieren/open-forms: libperl5.36@5.36.0-7+deb12u2"
               }
             }
-          ]
+          ],
+          "suppressed": true
         },
         {
           "ruleId": "CVE-2025-40909",
@@ -17157,7 +17158,8 @@
                 "text": "openformulieren/open-forms: perl@5.36.0-7+deb12u2"
               }
             }
-          ]
+          ],
+          "suppressed": true
         },
         {
           "ruleId": "CVE-2025-40909",
@@ -17265,7 +17267,8 @@
                 "text": "openformulieren/open-forms: perl-base@5.36.0-7+deb12u2"
               }
             }
-          ]
+          ],
+          "suppressed": true
         },
         {
           "ruleId": "CVE-2025-40909",
@@ -17373,7 +17376,8 @@
                 "text": "openformulieren/open-forms: perl-modules-5.36@5.36.0-7+deb12u2"
               }
             }
-          ]
+          ],
+          "suppressed": true
         },
         {
           "ruleId": "CVE-2025-40909",
@@ -17913,7 +17917,8 @@
                 "text": "openformulieren/open-forms: zlib1g@1:1.2.13.dfsg-1"
               }
             }
-          ]
+          ],
+          "suppressed": true
         }
       ],
       "columnKind": "utf16CodeUnits",
@@ -17923,27 +17928,27 @@
         }
       },
       "properties": {
-        "imageID": "sha256:f845e01d33c57c60ebf81ca86656fbafc472c71d55dfc3bde2871cfe4a8872f4",
+        "imageID": "sha256:3bd09a0056a1ff65071ac7431e8eda72ed44222db5982cca9a7bc992fbe16772",
         "imageName": "docker.io/openformulieren/open-forms:latest",
         "repoDigests": [
-          "openformulieren/open-forms@sha256:d730f23e4e3bad73739989b04bb23d39c71046c065d9d15f9fc037e56a89a014"
+          "openformulieren/open-forms@sha256:a27d3a2ad80a3db886057bfc67a534f3ea575ec4a08048f5a6c8e263537d6b44"
         ],
         "repoTags": [
           "openformulieren/open-forms:latest"
         ],
-        "imageCreatedDate": "2025-07-07T20:53:34.930078587Z",
-        "imageAgeDays": 1,
-        "imageAgeSeconds": 136900,
-        "imageAgeText": "1 days",
+        "imageCreatedDate": "2025-07-09T11:03:49.799544536Z",
+        "imageAgeDays": 0,
+        "imageAgeSeconds": 2841,
+        "imageAgeText": "47 minute(s)",
         "imageAgeStatus": "very_recent",
-        "scanTimestamp": "2025-07-09T10:55:15Z",
+        "scanTimestamp": "2025-07-09T11:51:11Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "openforms"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-09T10:55:15Z",
+        "helmChartsEnhancementDate": "2025-07-09T11:51:11Z",
         "chartsMetadataVersion": "1.0",
         "epssScores": [
           {
@@ -19147,7 +19152,7 @@
         "epssLowRiskCount": 220,
         "epssVeryHighRiskCount": 0,
         "epssEnhanced": true,
-        "epssEnhancementDate": "2025-07-09T10:55:19Z",
+        "epssEnhancementDate": "2025-07-09T11:51:14Z",
         "epssMetadataVersion": "1.0"
       }
     }

@@ -4818,7 +4818,8 @@
                 "text": "bitnami/zookeeper: libperl5.36@5.36.0-7+deb12u1"
               }
             }
-          ]
+          ],
+          "suppressed": true
         },
         {
           "ruleId": "CVE-2024-56406",
@@ -6330,7 +6331,8 @@
                 "text": "bitnami/zookeeper: perl@5.36.0-7+deb12u1"
               }
             }
-          ]
+          ],
+          "suppressed": true
         },
         {
           "ruleId": "CVE-2024-56406",
@@ -6465,7 +6467,8 @@
                 "text": "bitnami/zookeeper: perl-base@5.36.0-7+deb12u1"
               }
             }
-          ]
+          ],
+          "suppressed": true
         },
         {
           "ruleId": "CVE-2024-56406",
@@ -6600,7 +6603,8 @@
                 "text": "bitnami/zookeeper: perl-modules-5.36@5.36.0-7+deb12u1"
               }
             }
-          ]
+          ],
+          "suppressed": true
         },
         {
           "ruleId": "CVE-2024-56406",
@@ -6924,7 +6928,8 @@
                 "text": "bitnami/zookeeper: zlib1g@1:1.2.13.dfsg-1"
               }
             }
-          ]
+          ],
+          "suppressed": true
         },
         {
           "ruleId": "CVE-2024-12798",
@@ -7295,17 +7300,17 @@
         ],
         "imageCreatedDate": "2025-03-24T00:29:58.221350654Z",
         "imageAgeDays": 107,
-        "imageAgeSeconds": 9282116,
+        "imageAgeSeconds": 9285578,
         "imageAgeText": "107 days",
         "imageAgeStatus": "moderate",
-        "scanTimestamp": "2025-07-09T10:51:55Z",
+        "scanTimestamp": "2025-07-09T11:49:38Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "zookeeper"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-09T10:51:55Z",
+        "helmChartsEnhancementDate": "2025-07-09T11:49:38Z",
         "chartsMetadataVersion": "1.0",
         "epssScores": [
           {
@@ -7754,7 +7759,7 @@
         "epssLowRiskCount": 78,
         "epssVeryHighRiskCount": 0,
         "epssEnhanced": true,
-        "epssEnhancementDate": "2025-07-09T10:51:56Z",
+        "epssEnhancementDate": "2025-07-09T11:49:39Z",
         "epssMetadataVersion": "1.0"
       }
     }

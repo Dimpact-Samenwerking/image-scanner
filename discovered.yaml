@@ -9,11 +9,8 @@
 - url: docker.io/apache/solr-operator
   version: v0.9.1
   charts:
-    - solr-operator
-- url: docker.io/apache/solr-operator
-  version: v0.9.1@sha256:4db34508137f185d3cad03c7cf7c2b5d6533fb590822effcde9125cff5a90aa2
-  charts:
     - zaakafhandelcomponent
+    - solr-operator
 - url: docker.io/bitnami/bitnami-shell
   version: 11-debian-11-r58
   charts:
@@ -99,7 +96,7 @@
   charts:
     - clamav
 - url: docker.io/curlimages/curl
-  version: 8.13.0@sha256:d43bdb28bae0be0998f3be83199bfb2b81e0a30b034b6d7586ce7e05de34c3fd
+  version: 8.13.0
   charts:
     - zaakafhandelcomponent
 - url: docker.io/keycloak-config-cli
@@ -115,11 +112,11 @@
   charts:
     - zookeeper-operator
 - url: docker.io/lachlanevenson/k8s-kubectl
-  version: v1.25.4@sha256:af5cea3f2e40138df90660c0c073d8b1506fb76c8602a9f48aceb5f4fb052ddc
+  version: v1.25.4
   charts:
     - zaakafhandelcomponent
 - url: docker.io/library/solr
-  version: 9.8.1@sha256:16983468366aaf62417bb6a2a4b703b486b199b8461192df131455071c263916
+  version: 9.8.1
   charts:
     - zaakafhandelcomponent
 - url: docker.io/maykinmedia/objects-api
@@ -147,7 +144,7 @@
   charts:
     - podiumd
 - url: docker.io/nginxinc/nginx-unprivileged
-  version: 1.28.0@sha256:3e5f030818c3782a35b6f621458a21f3e526a35267b2b4505d225684d5eac7c4
+  version: 1.28.0
   charts:
     - zaakafhandelcomponent
 - url: docker.io/nginxinc/nginx-unprivileged
@@ -163,7 +160,7 @@
   charts:
     - openforms
 - url: docker.io/openpolicyagent/opa
-  version: 1.3.0-static@sha256:44f0f4b1c09260eaf5e24fc3931fe10f80cffd13054ef3ef62cef775d5cbd272
+  version: 1.3.0-static
   charts:
     - zaakafhandelcomponent
 - url: docker.io/openzaak/open-notificaties
@@ -175,19 +172,16 @@
   charts:
     - openzaak
 - url: docker.io/otel/opentelemetry-collector-contrib
-  version: 0.123.0@sha256:e39311df1f3d941923c00da79ac7ba6269124a870ee87e3c3ad24d60f8aee4d2
+  version: 0.123.0
   charts:
     - zaakafhandelcomponent
 - url: docker.io/pravega/zookeeper-operator
   version: 0.2.15
   charts:
-    - zookeeper-operator
-- url: docker.io/pravega/zookeeper-operator
-  version: 0.2.15@sha256:b2bc4042fdd8fea6613b04f2f602ba4aff1201e79ba35cd0e2df9f3327111b0e
-  charts:
     - zaakafhandelcomponent
+    - zookeeper-operator
 - url: docker.io/pravega/zookeeper
-  version: 0.2.15@sha256:c498ebfb76a66f038075e2fa6148528d74d31ca1664f3257fdf82ee779eec9c8
+  version: 0.2.15
   charts:
     - zaakafhandelcomponent
 - url: ghcr.io/brp-api/personen-mock
@@ -195,7 +189,7 @@
   charts:
     - brp-personen-mock
 - url: ghcr.io/eugenmayer/kontextwork-converter
-  version: 1.8.0@sha256:48da70902307f27ad92a27ddf5875310464fd4d4a2f53ce53e1a6f9b3b4c3355
+  version: 1.8.0
   charts:
     - zaakafhandelcomponent
 - url: ghcr.io/icatt-menselijk-digitaal/podiumd-adapter

@@ -10299,7 +10299,8 @@
                 "text": "bitnami/redis-exporter: perl-base@5.32.1-4+deb11u2"
               }
             }
-          ]
+          ],
+          "suppressed": true
         },
         {
           "ruleId": "CVE-2023-47038",
@@ -10677,7 +10678,8 @@
                 "text": "bitnami/redis-exporter: zlib1g@1:1.2.11.dfsg-2+deb11u2"
               }
             }
-          ]
+          ],
+          "suppressed": true
         },
         {
           "ruleId": "CVE-2024-24786",
@@ -11885,17 +11887,17 @@
         ],
         "imageCreatedDate": "2022-11-30T09:35:22.686489331Z",
         "imageAgeDays": 952,
-        "imageAgeSeconds": 82257368,
+        "imageAgeSeconds": 82260831,
         "imageAgeText": "952 days",
         "imageAgeStatus": "very_old",
-        "scanTimestamp": "2025-07-09T10:51:33Z",
+        "scanTimestamp": "2025-07-09T11:49:16Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "redis"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-09T10:51:33Z",
+        "helmChartsEnhancementDate": "2025-07-09T11:49:16Z",
         "chartsMetadataVersion": "1.0",
         "epssScores": [
           {
@@ -12694,7 +12696,7 @@
         "epssLowRiskCount": 134,
         "epssVeryHighRiskCount": 5,
         "epssEnhanced": true,
-        "epssEnhancementDate": "2025-07-09T10:51:35Z",
+        "epssEnhancementDate": "2025-07-09T11:49:18Z",
         "epssMetadataVersion": "1.0"
       }
     }

@@ -5358,7 +5358,8 @@
                 "text": "brp-api/personen-mock: zlib1g@1:1.2.11.dfsg-2+deb11u2"
               }
             }
-          ]
+          ],
+          "suppressed": true
         },
         {
           "ruleId": "CVE-2025-24070",
@@ -5405,17 +5406,17 @@
         ],
         "imageCreatedDate": "2025-02-26T13:56:50.63243481Z",
         "imageAgeDays": 132,
-        "imageAgeSeconds": 11479312,
+        "imageAgeSeconds": 11483696,
         "imageAgeText": "132 days",
         "imageAgeStatus": "moderate",
-        "scanTimestamp": "2025-07-09T10:38:43Z",
+        "scanTimestamp": "2025-07-09T11:51:48Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "brp-personen-mock"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-09T10:38:43Z",
+        "helmChartsEnhancementDate": "2025-07-09T11:51:48Z",
         "chartsMetadataVersion": "1.0",
         "epssScores": [
           {
@@ -5744,7 +5745,7 @@
         "epssLowRiskCount": 56,
         "epssVeryHighRiskCount": 0,
         "epssEnhanced": true,
-        "epssEnhancementDate": "2025-07-09T10:38:44Z",
+        "epssEnhancementDate": "2025-07-09T11:51:49Z",
         "epssMetadataVersion": "1.0"
       }
     }

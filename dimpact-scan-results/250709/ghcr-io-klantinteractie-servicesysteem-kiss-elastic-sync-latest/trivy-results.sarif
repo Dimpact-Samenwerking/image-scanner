@@ -3171,7 +3171,8 @@
                 "text": "klantinteractie-servicesysteem/kiss-elastic-sync: perl-base@5.36.0-7+deb12u2"
               }
             }
-          ]
+          ],
+          "suppressed": true
         },
         {
           "ruleId": "CVE-2025-40909",
@@ -3414,7 +3415,8 @@
                 "text": "klantinteractie-servicesysteem/kiss-elastic-sync: zlib1g@1:1.2.13.dfsg-1"
               }
             }
-          ]
+          ],
+          "suppressed": true
         }
       ],
       "columnKind": "utf16CodeUnits",
@@ -3434,17 +3436,17 @@
         ],
         "imageCreatedDate": "2025-05-28T08:58:16.882868242Z",
         "imageAgeDays": 42,
-        "imageAgeSeconds": 3635096,
+        "imageAgeSeconds": 3639237,
         "imageAgeText": "42 days",
         "imageAgeStatus": "recent",
-        "scanTimestamp": "2025-07-09T10:43:13Z",
+        "scanTimestamp": "2025-07-09T11:52:15Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "podiumd"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-09T10:43:13Z",
+        "helmChartsEnhancementDate": "2025-07-09T11:52:15Z",
         "chartsMetadataVersion": "1.0",
         "epssScores": [
           {
@@ -3648,7 +3650,7 @@
         "epssLowRiskCount": 32,
         "epssVeryHighRiskCount": 0,
         "epssEnhanced": true,
-        "epssEnhancementDate": "2025-07-09T10:43:13Z",
+        "epssEnhancementDate": "2025-07-09T11:52:15Z",
         "epssMetadataVersion": "1.0"
       }
     }

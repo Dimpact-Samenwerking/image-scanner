@@ -13,6 +13,10 @@ source "$(dirname "$0")/dimpact-scanner-epss.sh"
 # Source image discovery and YAML parsing functions
 source "$(dirname "$0")/dimpact-scanner-discovery.sh"
 
+# Load suppressed CVEs from the suppressions file (default: cve-suppressions.md)
+CVE_SUPPRESSIONS_FILE="${CVE_SUPPRESSIONS_FILE:-cve-suppressions.md}"
+load_cve_suppressions
+
 # Ensure we're using bash
 if [ -z "${BASH_VERSION:-}" ]; then
     echo "Error: This script requires bash" >&2

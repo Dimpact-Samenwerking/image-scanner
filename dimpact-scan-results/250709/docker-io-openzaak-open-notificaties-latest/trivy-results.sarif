@@ -3873,7 +3873,8 @@
                 "text": "openzaak/open-notificaties: libperl5.36@5.36.0-7+deb12u2"
               }
             }
-          ]
+          ],
+          "suppressed": true
         },
         {
           "ruleId": "CVE-2025-40909",
@@ -4899,7 +4900,8 @@
                 "text": "openzaak/open-notificaties: perl@5.36.0-7+deb12u2"
               }
             }
-          ]
+          ],
+          "suppressed": true
         },
         {
           "ruleId": "CVE-2025-40909",
@@ -5007,7 +5009,8 @@
                 "text": "openzaak/open-notificaties: perl-base@5.36.0-7+deb12u2"
               }
             }
-          ]
+          ],
+          "suppressed": true
         },
         {
           "ruleId": "CVE-2025-40909",
@@ -5115,7 +5118,8 @@
                 "text": "openzaak/open-notificaties: perl-modules-5.36@5.36.0-7+deb12u2"
               }
             }
-          ]
+          ],
+          "suppressed": true
         },
         {
           "ruleId": "CVE-2025-40909",
@@ -5385,7 +5389,8 @@
                 "text": "openzaak/open-notificaties: zlib1g@1:1.2.13.dfsg-1"
               }
             }
-          ]
+          ],
+          "suppressed": true
         }
       ],
       "columnKind": "utf16CodeUnits",
@@ -5405,17 +5410,17 @@
         ],
         "imageCreatedDate": "2025-07-08T14:44:19.746610138Z",
         "imageAgeDays": 0,
-        "imageAgeSeconds": 72669,
-        "imageAgeText": "20 hour(s), 11 minute(s)",
+        "imageAgeSeconds": 76019,
+        "imageAgeText": "21 hour(s), 6 minute(s)",
         "imageAgeStatus": "very_recent",
-        "scanTimestamp": "2025-07-09T10:55:29Z",
+        "scanTimestamp": "2025-07-09T11:51:19Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "opennotificaties"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-09T10:55:29Z",
+        "helmChartsEnhancementDate": "2025-07-09T11:51:19Z",
         "chartsMetadataVersion": "1.0",
         "epssScores": [
           {
@@ -5729,7 +5734,7 @@
         "epssLowRiskCount": 51,
         "epssVeryHighRiskCount": 0,
         "epssEnhanced": true,
-        "epssEnhancementDate": "2025-07-09T10:55:30Z",
+        "epssEnhancementDate": "2025-07-09T11:51:20Z",
         "epssMetadataVersion": "1.0"
       }
     }

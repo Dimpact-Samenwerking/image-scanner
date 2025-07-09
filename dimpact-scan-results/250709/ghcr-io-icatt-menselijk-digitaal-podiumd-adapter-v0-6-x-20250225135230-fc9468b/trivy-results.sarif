@@ -3765,7 +3765,8 @@
                 "text": "icatt-menselijk-digitaal/podiumd-adapter: perl-base@5.36.0-7+deb12u1"
               }
             }
-          ]
+          ],
+          "suppressed": true
         },
         {
           "ruleId": "CVE-2024-56406",
@@ -4035,7 +4036,8 @@
                 "text": "icatt-menselijk-digitaal/podiumd-adapter: zlib1g@1:1.2.13.dfsg-1"
               }
             }
-          ]
+          ],
+          "suppressed": true
         },
         {
           "ruleId": "CVE-2025-24070",
@@ -4082,17 +4084,17 @@
         ],
         "imageCreatedDate": "2025-02-25T13:52:49.442906463Z",
         "imageAgeDays": 133,
-        "imageAgeSeconds": 11566156,
+        "imageAgeSeconds": 11570347,
         "imageAgeText": "133 days",
         "imageAgeStatus": "moderate",
-        "scanTimestamp": "2025-07-09T10:42:06Z",
+        "scanTimestamp": "2025-07-09T11:51:57Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "podiumd"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-09T10:42:06Z",
+        "helmChartsEnhancementDate": "2025-07-09T11:51:57Z",
         "chartsMetadataVersion": "1.0",
         "epssScores": [
           {
@@ -4341,7 +4343,7 @@
         "epssLowRiskCount": 41,
         "epssVeryHighRiskCount": 0,
         "epssEnhanced": true,
-        "epssEnhancementDate": "2025-07-09T10:42:07Z",
+        "epssEnhancementDate": "2025-07-09T11:51:58Z",
         "epssMetadataVersion": "1.0"
       }
     }

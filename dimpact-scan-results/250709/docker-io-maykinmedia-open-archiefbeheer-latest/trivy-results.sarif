@@ -39351,7 +39351,8 @@
                 "text": "maykinmedia/open-archiefbeheer: zlib1g@1:1.2.11.dfsg-2+deb11u2"
               }
             }
-          ]
+          ],
+          "suppressed": true
         },
         {
           "ruleId": "CVE-2025-48432",
@@ -39479,17 +39480,17 @@
         ],
         "imageCreatedDate": "2025-07-07T10:34:22.401305648Z",
         "imageAgeDays": 2,
-        "imageAgeSeconds": 174002,
+        "imageAgeSeconds": 177370,
         "imageAgeText": "2 days",
         "imageAgeStatus": "very_recent",
-        "scanTimestamp": "2025-07-09T10:54:26Z",
+        "scanTimestamp": "2025-07-09T11:50:33Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "openarchiefbeheer"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-09T10:54:26Z",
+        "helmChartsEnhancementDate": "2025-07-09T11:50:33Z",
         "chartsMetadataVersion": "1.0",
         "epssScores": [
           {
@@ -41618,7 +41619,7 @@
         "epssLowRiskCount": 397,
         "epssVeryHighRiskCount": 1,
         "epssEnhanced": true,
-        "epssEnhancementDate": "2025-07-09T10:54:32Z",
+        "epssEnhancementDate": "2025-07-09T11:50:39Z",
         "epssMetadataVersion": "1.0"
       }
     }

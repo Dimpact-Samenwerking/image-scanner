@@ -4170,7 +4170,8 @@
                 "text": "lachlanevenson/k8s-kubectl: curl@7.80.0-r0"
               }
             }
-          ]
+          ],
+          "suppressed": true
         },
         {
           "ruleId": "CVE-2023-38546",
@@ -5439,7 +5440,8 @@
                 "text": "lachlanevenson/k8s-kubectl: libcurl@7.80.0-r0"
               }
             }
-          ]
+          ],
+          "suppressed": true
         },
         {
           "ruleId": "CVE-2023-38546",
@@ -7781,17 +7783,17 @@
         ],
         "imageCreatedDate": "2022-01-22T17:08:15.163688384Z",
         "imageAgeDays": 1263,
-        "imageAgeSeconds": 109187032,
+        "imageAgeSeconds": 109190492,
         "imageAgeText": "1263 days",
         "imageAgeStatus": "very_old",
-        "scanTimestamp": "2025-07-09T10:52:09Z",
+        "scanTimestamp": "2025-07-09T11:49:49Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "zookeeper-operator"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-09T10:52:10Z",
+        "helmChartsEnhancementDate": "2025-07-09T11:49:50Z",
         "chartsMetadataVersion": "1.0",
         "epssScores": [
           {
@@ -8395,7 +8397,7 @@
         "epssLowRiskCount": 108,
         "epssVeryHighRiskCount": 5,
         "epssEnhanced": true,
-        "epssEnhancementDate": "2025-07-09T10:52:11Z",
+        "epssEnhancementDate": "2025-07-09T11:49:51Z",
         "epssMetadataVersion": "1.0"
       }
     }
