@@ -478,6 +478,48 @@ enhance_sarif_with_charts() {
     rm -f "${sarif_file}.backup"
 }
 
+# Function to enhance SARIF file with suppressed CVE metadata
+# Adds 'suppressed': true to results whose ruleId is in suppressed_cves
+enhance_sarif_with_suppressions() {
+    local sarif_file="$1"
+    local suppressed_json
+    suppressed_json=$(printf '%s\n' "${suppressed_cves[@]}" | jq -R . | jq -s .)
+
+    if [ ! -f "$sarif_file" ] || [ ! -s "$sarif_file" ]; then
+        print_warning "SARIF file not found or empty: $sarif_file"
+        return 1
+    fi
+    if ! command_exists jq; then
+        print_warning "jq not available - cannot enhance SARIF with suppressions"
+        return 1
+    fi
+    cp "$sarif_file" "${sarif_file}.backup"
+    local temp_sarif="${sarif_file}.temp"
+    jq --argjson suppressed_cves "$suppressed_json" '
+      .runs[0].results |= map(
+        if (.ruleId | IN($suppressed_cves[]))
+        then . + {suppressed: true}
+        else .
+        end
+      )
+    ' "$sarif_file" > "$temp_sarif" 2>/dev/null
+    if [ $? -eq 0 ] && [ -s "$temp_sarif" ]; then
+        if jq empty "$temp_sarif" 2>/dev/null; then
+            cp -a "$temp_sarif" "$sarif_file"
+            print_status "✅ Enhanced SARIF with suppressed CVE metadata"
+        else
+            print_warning "Enhanced SARIF file is invalid JSON - reverting to original"
+            rm -f "$temp_sarif"
+            return 1
+        fi
+    else
+        print_warning "Failed to enhance SARIF with suppressed CVE metadata"
+        rm -f "$temp_sarif"
+        return 1
+    fi
+    rm -f "${sarif_file}.backup"
+}
+
 # Function to scan a single image
 scan_image() {
     local image="$1"
@@ -640,6 +682,10 @@ scan_image() {
         # Enhance SARIF file with Helm charts metadata
         enhance_sarif_with_charts "$image_dir/trivy-results.sarif" "$image" || {
             print_error "[ACTION REQUIRED] Failed to enhance SARIF with Helm charts metadata for $image_dir/trivy-results.sarif.\n  - Check that jq is installed and the SARIF file is valid JSON.\n  - If the SARIF file is missing or empty, check the scan output.\n  - If using bash < 4, charts enhancement is skipped."
+        }
+        # Enhance SARIF file with suppressed CVE metadata
+        enhance_sarif_with_suppressions "$image_dir/trivy-results.sarif" || {
+            print_error "[ACTION REQUIRED] Failed to enhance SARIF with suppressed CVE metadata for $image_dir/trivy-results.sarif.\n  - Check that jq is installed and the SARIF file is valid JSON.\n  - If the SARIF file is missing or empty, check the scan output."
         }
         
         # Fetch and enhance SARIF with EPSS exploitability scores
