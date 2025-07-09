@@ -166,6 +166,14 @@ class SecurityDashboard {
             dataFormat: 'sarif'
         };
 
+        // Initialize EPSS high-risk counts in summary
+        data.summary.highRiskBySeverity = {
+            critical: 0,
+            high: 0,
+            medium: 0,
+            low: 0
+        };
+
         sarifResults.forEach(({ imageName, sarif }) => {
             const imageData = this.parseSarifToImageData(imageName, sarif);
             data.images.push(imageData);
@@ -176,6 +184,14 @@ class SecurityDashboard {
             data.summary.high += imageData.vulnerabilities.high;
             data.summary.medium += imageData.vulnerabilities.medium;
             data.summary.low += imageData.vulnerabilities.low;
+            
+            // Aggregate EPSS high-risk counts if available
+            if (imageData.epss && imageData.epss.highRiskBySeverity) {
+                data.summary.highRiskBySeverity.critical += imageData.epss.highRiskBySeverity.critical || 0;
+                data.summary.highRiskBySeverity.high += imageData.epss.highRiskBySeverity.high || 0;
+                data.summary.highRiskBySeverity.medium += imageData.epss.highRiskBySeverity.medium || 0;
+                data.summary.highRiskBySeverity.low += imageData.epss.highRiskBySeverity.low || 0;
+            }
         });
 
         return data;
@@ -211,17 +227,19 @@ class SecurityDashboard {
                 repoTags: props.repoTags || []
             };
             
-            // Extract EPSS data if available
-            if (props.epss) {
-                epssData = {
-                    totalCves: props.epss.total_cves || 0,
-                    highRiskCount: props.epss.high_risk_count || 0,
-                    veryHighRiskCount: props.epss.very_high_risk_count || 0,
-                    averageScore: props.epss.average_score || 0,
-                    highRiskCves: props.epss.high_risk_cves || [],
-                    veryHighRiskCves: props.epss.very_high_risk_cves || []
-                };
-            }
+                    // Extract EPSS data if available (updated to match actual SARIF structure)
+        if (props.epssEnhanced && props.epssScores) {
+            epssData = {
+                totalCves: props.epssScores.length || 0,
+                highRiskCount: props.epssHighRiskCount || 0,
+                veryHighRiskCount: props.epssVeryHighRiskCount || 0,
+                mediumRiskCount: props.epssMediumRiskCount || 0,
+                lowRiskCount: props.epssLowRiskCount || 0,
+                averageScore: 0, // Will calculate if needed
+                scores: props.epssScores || [],
+                enhanced: true
+            };
+        }
         }
 
         // Process SARIF results - iterate through all runs and their results
@@ -295,6 +313,39 @@ class SecurityDashboard {
                     });
                 }
             });
+        }
+
+        // Calculate EPSS-based high risk counts by severity if EPSS data is available
+        if (epssData && epssData.scores && Array.isArray(epssData.scores)) {
+            epssData.highRiskBySeverity = {
+                critical: 0,
+                high: 0,
+                medium: 0,
+                low: 0
+            };
+
+            // Count high-risk CVEs (>5% EPSS score) by their actual CVE severity
+            epssData.scores.forEach(epssItem => {
+                const epssScore = parseFloat(epssItem.epss || 0);
+                
+                // Only count if EPSS score > 5% (0.05)
+                if (epssScore > 0.05) {
+                    const cveId = epssItem.cve;
+                    
+                    // Find the corresponding vulnerability in detailedVulns to get its severity
+                    const vulnDetail = detailedVulns.find(v => v.id === cveId || v.ruleId === cveId);
+                    
+                    if (vulnDetail) {
+                        const severity = vulnDetail.severity.toLowerCase();
+                        if (epssData.highRiskBySeverity.hasOwnProperty(severity)) {
+                            epssData.highRiskBySeverity[severity]++;
+                        }
+                    }
+                }
+            });
+
+            // Recalculate total high risk count based on severity breakdown
+            epssData.highRiskCount = Object.values(epssData.highRiskBySeverity).reduce((sum, count) => sum + count, 0);
         }
 
         return {

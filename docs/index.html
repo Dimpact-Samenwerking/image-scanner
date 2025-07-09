@@ -874,13 +874,13 @@
                             };
                         }
 
-                        // Extract EPSS metadata from SARIF properties
-                        if (run.properties && run.properties.epss) {
+                        // Extract EPSS metadata from SARIF properties (correct structure)
+                        if (run.properties && run.properties.epssEnhanced) {
                             epssData.enhanced = true;
-                            epssData.totalCves = run.properties.epss.total_cves || 0;
-                            epssData.threshold = run.properties.epss.threshold || "5%";
-                            epssData.analysisDate = run.properties.epss.analysis_date;
-                            epssData.epssScores = run.properties.epss.scores || [];
+                            epssData.totalCves = run.properties.epssScores?.length || 0;
+                            epssData.threshold = "5%";
+                            epssData.analysisDate = new Date().toISOString();
+                            epssData.epssScores = run.properties.epssScores || [];
                         }
 
                         if (run.results) {
@@ -944,10 +944,11 @@
                                 }
                             });
 
-                            // Calculate total high-risk count excluding LOW severity
+                            // Calculate total high-risk count including ALL severities
                             epssData.highRiskCount = epssData.highRiskBySeverity.critical + 
                                                      epssData.highRiskBySeverity.high + 
-                                                     epssData.highRiskBySeverity.medium;
+                                                     epssData.highRiskBySeverity.medium +
+                                                     epssData.highRiskBySeverity.low;
                         }
                     }
                 }
@@ -1070,10 +1071,33 @@
             render() {
                 if (!this.data) return;
 
+                // Calculate and aggregate EPSS high-risk counts by severity
+                this.calculateSummaryHighRiskCounts();
+                
                 this.renderSummary();
                 this.updateResultsCount();
                 this.renderImages();
                 this.updateLastUpdated();
+            }
+            
+            calculateSummaryHighRiskCounts() {
+                // Initialize summary high-risk counts
+                this.data.summary.highRiskBySeverity = {
+                    critical: 0,
+                    high: 0,
+                    medium: 0,
+                    low: 0
+                };
+                
+                // Aggregate high-risk counts from all images
+                this.data.images.forEach(image => {
+                    if (image.epss && image.epss.highRiskBySeverity) {
+                        this.data.summary.highRiskBySeverity.critical += image.epss.highRiskBySeverity.critical || 0;
+                        this.data.summary.highRiskBySeverity.high += image.epss.highRiskBySeverity.high || 0;
+                        this.data.summary.highRiskBySeverity.medium += image.epss.highRiskBySeverity.medium || 0;
+                        this.data.summary.highRiskBySeverity.low += image.epss.highRiskBySeverity.low || 0;
+                    }
+                });
             }
 
             renderSummary() {
