@@ -7,10 +7,10 @@ on:
 env:
   REGISTRY: ghcr.io
 
-# jobs:
-#   install-dependencies:
-#     uses: ./.github/workflows/install-dependencies.yml
 jobs:
+  install-dependencies:
+    uses: ./.github/workflows/install-dependencies.yml
+
   scan:
     needs: [install-dependencies]
     runs-on: ubuntu-latest
