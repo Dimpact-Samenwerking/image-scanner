@@ -323,6 +323,14 @@ enhance_sarif_with_age() {
     
     # Create backup of original SARIF file
     cp "$sarif_file" "${sarif_file}.backup"
+    # Debug info before cp -a temp to target
+    echo "[DEBUG] whoami: $(whoami)" >&2
+    echo "[DEBUG] id: $(id)" >&2
+    echo "[DEBUG] umask: $(umask)" >&2
+    echo "[DEBUG] df -h .: $(df -h . | tail -1)" >&2
+    echo "[DEBUG] ls -ld target dir: $(ls -ld $(dirname "$sarif_file"))" >&2
+    echo "[DEBUG] ls -l target file: $(ls -l "$sarif_file" 2>/dev/null || echo 'not exist')" >&2
+    echo "[DEBUG] ls -l temp file: $(ls -l "$temp_sarif" 2>/dev/null || echo 'not exist')" >&2
     
     # Get current date for scan timestamp
     local scan_timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
@@ -368,6 +376,17 @@ enhance_sarif_with_age() {
         # Validate that the enhanced file is valid JSON
         if jq empty "$temp_sarif" 2>/dev/null; then
             cp -a "$temp_sarif" "$sarif_file"
+            cp_exit=$?
+            if [ $cp_exit -ne 0 ]; then
+                echo "[DEBUG] cp -a failed with exit code $cp_exit" >&2
+                echo "[DEBUG] whoami: $(whoami)" >&2
+                echo "[DEBUG] id: $(id)" >&2
+                echo "[DEBUG] umask: $(umask)" >&2
+                echo "[DEBUG] df -h .: $(df -h . | tail -1)" >&2
+                echo "[DEBUG] ls -ld target dir: $(ls -ld $(dirname "$sarif_file"))" >&2
+                echo "[DEBUG] ls -l target file: $(ls -l "$sarif_file" 2>/dev/null || echo 'not exist')" >&2
+                echo "[DEBUG] ls -l temp file: $(ls -l "$temp_sarif" 2>/dev/null || echo 'not exist')" >&2
+            fi
             print_status "✅ Enhanced SARIF with image age metadata"
             
 
@@ -419,6 +438,14 @@ enhance_sarif_with_charts() {
     
     # Create backup of original SARIF file
     cp "$sarif_file" "${sarif_file}.backup"
+    # Debug info before cp -a temp to target
+    echo "[DEBUG] whoami: $(whoami)" >&2
+    echo "[DEBUG] id: $(id)" >&2
+    echo "[DEBUG] umask: $(umask)" >&2
+    echo "[DEBUG] df -h .: $(df -h . | tail -1)" >&2
+    echo "[DEBUG] ls -ld target dir: $(ls -ld $(dirname "$sarif_file"))" >&2
+    echo "[DEBUG] ls -l target file: $(ls -l "$sarif_file" 2>/dev/null || echo 'not exist')" >&2
+    echo "[DEBUG] ls -l temp file: $(ls -l "$temp_sarif" 2>/dev/null || echo 'not exist')" >&2
     
     # Convert comma-separated charts list to JSON array
     local charts_json_array="[]"
@@ -464,6 +491,17 @@ enhance_sarif_with_charts() {
         # Validate that the enhanced file is valid JSON
         if jq empty "$temp_sarif" 2>/dev/null; then
             cp -a "$temp_sarif" "$sarif_file"
+            cp_exit=$?
+            if [ $cp_exit -ne 0 ]; then
+                echo "[DEBUG] cp -a failed with exit code $cp_exit" >&2
+                echo "[DEBUG] whoami: $(whoami)" >&2
+                echo "[DEBUG] id: $(id)" >&2
+                echo "[DEBUG] umask: $(umask)" >&2
+                echo "[DEBUG] df -h .: $(df -h . | tail -1)" >&2
+                echo "[DEBUG] ls -ld target dir: $(ls -ld $(dirname "$sarif_file"))" >&2
+                echo "[DEBUG] ls -l target file: $(ls -l "$sarif_file" 2>/dev/null || echo 'not exist')" >&2
+                echo "[DEBUG] ls -l temp file: $(ls -l "$temp_sarif" 2>/dev/null || echo 'not exist')" >&2
+            fi
             print_status "✅ Enhanced SARIF with Helm charts metadata"
             
 
@@ -510,6 +548,17 @@ enhance_sarif_with_suppressions() {
     if [ $? -eq 0 ] && [ -s "$temp_sarif" ]; then
         if jq empty "$temp_sarif" 2>/dev/null; then
             cp -a "$temp_sarif" "$sarif_file"
+            cp_exit=$?
+            if [ $cp_exit -ne 0 ]; then
+                echo "[DEBUG] cp -a failed with exit code $cp_exit" >&2
+                echo "[DEBUG] whoami: $(whoami)" >&2
+                echo "[DEBUG] id: $(id)" >&2
+                echo "[DEBUG] umask: $(umask)" >&2
+                echo "[DEBUG] df -h .: $(df -h . | tail -1)" >&2
+                echo "[DEBUG] ls -ld target dir: $(ls -ld $(dirname "$sarif_file"))" >&2
+                echo "[DEBUG] ls -l target file: $(ls -l "$sarif_file" 2>/dev/null || echo 'not exist')" >&2
+                echo "[DEBUG] ls -l temp file: $(ls -l "$temp_sarif" 2>/dev/null || echo 'not exist')" >&2
+            fi
             print_status "✅ Enhanced SARIF with suppressed CVE metadata"
         else
             print_warning "Enhanced SARIF file is invalid JSON - reverting to original"
