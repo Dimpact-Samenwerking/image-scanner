@@ -583,69 +583,43 @@ scan_image() {
     print_status "🔍 Scanning image: $image"
     mkdir -p "$image_dir"
     
-    # Ensure Docker CLI hints are disabled
-    ensure_docker_env
-    
-    # Check disk space before scanning each image (require 3GB minimum)
-    if ! check_disk_space 3; then
-        print_warning "Low disk space detected before scanning $image"
-        print_status "Cleaning up temporary files..."
-        cleanup_temp_dirs
-        
-        # Check again after cleanup
-        if ! check_disk_space 2; then
-            print_error "Insufficient disk space to scan $image, skipping..."
-            echo "SCAN_FAILED: $image - Insufficient disk space" >> "$OUTPUT_DIR/failed_scans.log"
+    # TEMPORARY DEBUG BLOCK: Loop until permission denied error, then debug and exit (for CI)
+    local debug_attempt=1
+    while true; do
+        print_status "[DEBUG] Scan attempt $debug_attempt for $image"
+        ensure_docker_env
+        if ! check_disk_space 3; then
+            print_warning "Low disk space detected before scanning $image"
+            print_status "Cleaning up temporary files..."
+            cleanup_temp_dirs
+            if ! check_disk_space 2; then
+                print_error "Insufficient disk space to scan $image, skipping..."
+                echo "SCAN_FAILED: $image - Insufficient disk space" >> "$OUTPUT_DIR/failed_scans.log"
+                return 1
+            fi
+        fi
+        print_status " Pulling image..."
+        if ! docker pull --platform linux/amd64 "$image"; then
+            print_error "Failed to pull image: $image"
+            echo "SCAN_FAILED: $image - Failed to pull image" >> "$OUTPUT_DIR/failed_scans.log"
             return 1
         fi
-    fi
-    
-    # Pull image with platform specification
-    print_status " Pulling image..."
-    if ! docker pull --platform linux/amd64 "$image"; then
-        print_error "Failed to pull image: $image"
-        echo "SCAN_FAILED: $image - Failed to pull image" >> "$OUTPUT_DIR/failed_scans.log"
-        return 1
-    fi
-    
-    # Get and display image age information
-    print_status "📋 Getting image metadata..."
-    if ! get_image_age "$image"; then
-        print_error "Failed to get image age for $image"
-        echo "SCAN_FAILED: $image - Failed to get image age" >> "$OUTPUT_DIR/failed_scans.log"
-        return 1
-    fi
-    
-    # Run Trivy scan with SARIF output
-    print_status "🛡️ Running Trivy vulnerability scan (SARIF format)..."
-    TRIVY_DB_PATH="$HOME/.cache/trivy/db/"
-    if [ -d "$TRIVY_DB_PATH" ]; then
-        TRIVY_SKIP_DB_UPDATE="--skip-db-update"
-    else
-        TRIVY_SKIP_DB_UPDATE=""
-    fi
-    
-    # Check if Java DB exists, if not warn about potential download
-    local java_db_exists=false
-    if [ -d "$HOME/.cache/trivy" ] && find "$HOME/.cache/trivy" -name "*java*" -type f | grep -q .; then
-        java_db_exists=true
-    fi
-    
-    if [ "$java_db_exists" = false ] && [[ "$image" == *"java"* || "$image" == *"jdk"* || "$image" == *"maven"* || "$image" == *"gradle"* ]]; then
-        print_status "📦 Java-based image detected - downloading Java vulnerability database..."
-        print_status "   This may take a few minutes on first run and requires ~2GB disk space"
-    fi
-    
-    # Create temporary directory for this scan to isolate temp files
-    local trivy_temp_dir="$abs_image_dir/trivy-temp"
-    mkdir -p "$trivy_temp_dir"
-    
-    # Function to run Trivy with clean output
-    run_trivy_scan() {
+        print_status "📋 Getting image metadata..."
+        if ! get_image_age "$image"; then
+            print_error "Failed to get image age for $image"
+            echo "SCAN_FAILED: $image - Failed to get image age" >> "$OUTPUT_DIR/failed_scans.log"
+            return 1
+        fi
+        print_status "🛡️ Running Trivy vulnerability scan (SARIF format)..."
+        TRIVY_DB_PATH="$HOME/.cache/trivy/db/"
+        if [ -d "$TRIVY_DB_PATH" ]; then
+            TRIVY_SKIP_DB_UPDATE="--skip-db-update"
+        else
+            TRIVY_SKIP_DB_UPDATE=""
+        fi
+        local trivy_temp_dir="$abs_image_dir/trivy-temp"
+        mkdir -p "$trivy_temp_dir"
         local temp_output="$trivy_temp_dir/trivy_output.log"
-        local scan_pid
-        
-        # Start Trivy scan in background and capture output
         docker run --rm --memory="$DOCKER_MEMORY_LIMIT" --cpus="$DOCKER_CPU_LIMIT" \
             -v /var/run/docker.sock:/var/run/docker.sock \
             -v "$abs_image_dir:/output" \
@@ -659,68 +633,37 @@ scan_image() {
             --scanners vuln \
             --quiet \
             $TRIVY_SKIP_DB_UPDATE \
-            "$image" > "$temp_output" 2>&1 &
-        
-        scan_pid=$!
-        
-        # Show progress while scan is running
-        local dots=0
-        while kill -0 $scan_pid 2>/dev/null; do
-            # Check if we're downloading Java DB
-            if grep -q "Downloading.*java" "$temp_output" 2>/dev/null; then
-                printf "\r${BLUE}[INFO]${NC} 📦 Downloading Java vulnerability database"
-                for ((i=0; i<(dots % 4); i++)); do printf "."; done
-                printf "   "
-            elif grep -q "Downloading" "$temp_output" 2>/dev/null; then
-                printf "\r${BLUE}[INFO]${NC} 📥 Downloading vulnerability database"
-                for ((i=0; i<(dots % 4); i++)); do printf "."; done
-                printf "   "
-            else
-                printf "\r${BLUE}[INFO]${NC}  Scanning image for vulnerabilities"
-                for ((i=0; i<(dots % 4); i++)); do printf "."; done
-                printf "   "
-            fi
-            
-            sleep 1
-            ((dots++))
-        done
-        
-        # Wait for the process to complete and get exit code
-        wait $scan_pid
-        local exit_code=$?
-        
-        # Clear the progress line
-        printf "\r                                                                    \r"
-        
-        # Show any important messages from the output
-        if [ -f "$temp_output" ]; then
-            # Show download completion messages
-            if grep -q "java" "$temp_output"; then
-                print_status " Java vulnerability database downloaded successfully"
-            fi
-            
-            # Show any errors or warnings that aren't just verbose output
-            if grep -q -E "(ERROR|FATAL|Failed)" "$temp_output"; then
-                grep -E "(ERROR|FATAL|Failed)" "$temp_output" | head -5
-            fi
+            "$image" > "$temp_output" 2>&1
+        local trivy_exit=$?
+        if grep -q "Permission denied" "$temp_output"; then
+            print_error "[DEBUG] Permission denied error detected during scan of $image!"
+            echo "\n===== DEBUGGING INFO (CI) =====" >&2
+            echo "[DEBUG] whoami: $(whoami)" >&2
+            echo "[DEBUG] id: $(id)" >&2
+            echo "[DEBUG] umask: $(umask)" >&2
+            echo "[DEBUG] pwd: $(pwd)" >&2
+            echo "[DEBUG] abs_image_dir: $abs_image_dir" >&2
+            echo "[DEBUG] ls -ld output dir: $(ls -ld $abs_image_dir)" >&2
+            echo "[DEBUG] ls -l output dir: $(ls -l $abs_image_dir)" >&2
+            echo "[DEBUG] ls -l trivy_temp_dir: $(ls -l $trivy_temp_dir)" >&2
+            echo "[DEBUG] docker info: $(docker info 2>&1 | head -20)" >&2
+            echo "[DEBUG] docker version: $(docker version 2>&1 | head -10)" >&2
+            echo "[DEBUG] temp_output log:\n$(cat $temp_output)" >&2
+            echo "[DEBUG] env: $(env | sort)" >&2
+            echo "===== END DEBUGGING INFO (CI) =====\n" >&2
+            print_error "[DEBUG] Exiting due to permission denied (CI debug mode)"
+            exit 99
         fi
-        
-        # Clean up temp output file
-        rm -f "$temp_output"
-        
-        return $exit_code
-    }
-    
-    if [ "$STRICT_MODE" = true ]; then
-        run_trivy_scan
-    else
-        if ! run_trivy_scan; then
-            print_warning "Trivy scan completed with warnings"
+        if [ $trivy_exit -eq 0 ]; then
+            print_status "[DEBUG] Trivy scan completed without permission error."
+            break
         fi
-    fi
-    
-    # Clean up scan-specific temp directory
-    rm -rf "$trivy_temp_dir" >/dev/null 2>&1 || true
+        debug_attempt=$((debug_attempt + 1))
+        if [ $debug_attempt -gt 3 ]; then
+            print_error "[DEBUG] Exceeded 3 attempts, aborting debug loop."
+            break
+        fi
+    done
     
     # Process SARIF results and show vulnerability summary
     if [ -f "$image_dir/trivy-results.sarif" ] && [ -s "$image_dir/trivy-results.sarif" ]; then
