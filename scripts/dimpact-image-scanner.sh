@@ -631,25 +631,12 @@ scan_image() {
             $TRIVY_SKIP_DB_UPDATE \
             "$image" > "$temp_output" 2>&1
         local trivy_exit=$?
-        if grep -q "Permission denied" "$temp_output"; then
-            print_error "[DEBUG] Permission denied error detected during scan of $image!"
-            echo "\n===== DEBUGGING INFO (CI) =====" >&2
-            echo "[DEBUG] whoami: $(whoami)" >&2
-            echo "[DEBUG] id: $(id)" >&2
-            echo "[DEBUG] umask: $(umask)" >&2
-            echo "[DEBUG] pwd: $(pwd)" >&2
-            echo "[DEBUG] abs_image_dir: $abs_image_dir" >&2
-            echo "[DEBUG] ls -ld output dir: $(ls -ld $abs_image_dir)" >&2
-            echo "[DEBUG] ls -l output dir: $(ls -l $abs_image_dir)" >&2
-            echo "[DEBUG] ls -l trivy_temp_dir: $(ls -l $trivy_temp_dir)" >&2
-            echo "[DEBUG] docker info: $(docker info 2>&1 | head -20)" >&2
-            echo "[DEBUG] docker version: $(docker version 2>&1 | head -10)" >&2
-            echo "[DEBUG] temp_output log:\n$(cat $temp_output)" >&2
-            echo "[DEBUG] env: $(env | sort)" >&2
-            echo "===== END DEBUGGING INFO (CI) =====\n" >&2
-            print_error "[DEBUG] Exiting due to permission denied (CI debug mode)"
-            exit 99
+        if [ $trivy_exit -ne 0 ]; then
+            print_warning "Trivy scan failed for $image. See log below:"
+            cat "$temp_output"
         fi
+        # Clean up temp output file
+        rm -f "$temp_output"
         if [ $trivy_exit -eq 0 ]; then
             print_status "[DEBUG] Trivy scan completed without permission error."
             break
