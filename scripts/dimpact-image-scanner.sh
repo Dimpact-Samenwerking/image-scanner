@@ -309,6 +309,7 @@ get_image_age() {
 enhance_sarif_with_age() {
     local sarif_file="$1"
     local image="$2"
+    local temp_sarif="${sarif_file}.temp"  # Ensure this is always defined at the top
     
     if [ ! -f "$sarif_file" ] || [ ! -s "$sarif_file" ]; then
         print_warning "SARIF file not found or empty: $sarif_file"
@@ -350,9 +351,6 @@ enhance_sarif_with_age() {
             age_status="very_recent"
         fi
     fi
-    
-    # Create temporary file for enhanced SARIF
-    local temp_sarif="${sarif_file}.temp"
     
     # Enhance the SARIF file with age metadata in properties section
     jq --arg created_date "${IMAGE_CREATED_DATE:-unknown}" \
@@ -409,6 +407,7 @@ enhance_sarif_with_age() {
 enhance_sarif_with_charts() {
     local sarif_file="$1"
     local image="$2"
+    local temp_sarif="${sarif_file}.temp"  # Ensure this is always defined at the top
     
     if [ ! -f "$sarif_file" ] || [ ! -s "$sarif_file" ]; then
         print_warning "SARIF file not found or empty: $sarif_file"
@@ -472,9 +471,6 @@ enhance_sarif_with_charts() {
     local enhancement_timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
     
     # Create temporary file for enhanced SARIF
-    local temp_sarif="${sarif_file}.temp"
-    
-    # Enhance the SARIF file with charts metadata in properties section
     jq --argjson charts_array "$charts_json_array" \
        --arg charts_count "${#chart_names[@]}" \
        --arg enhancement_timestamp "$enhancement_timestamp" \
@@ -526,6 +522,7 @@ enhance_sarif_with_suppressions() {
     local sarif_file="$1"
     local suppressed_json
     suppressed_json=$(printf '%s\n' "${suppressed_cves[@]}" | jq -R . | jq -s .)
+    local temp_sarif="${sarif_file}.temp"  # Ensure this is always defined at the top
 
     if [ ! -f "$sarif_file" ] || [ ! -s "$sarif_file" ]; then
         print_warning "SARIF file not found or empty: $sarif_file"
@@ -536,7 +533,6 @@ enhance_sarif_with_suppressions() {
         return 1
     fi
     cp "$sarif_file" "${sarif_file}.backup"
-    local temp_sarif="${sarif_file}.temp"
     jq --argjson suppressed_cves "$suppressed_json" '
       .runs[0].results |= map(
         if (.ruleId | IN($suppressed_cves[]))
