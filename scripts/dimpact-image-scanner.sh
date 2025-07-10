@@ -579,74 +579,59 @@ scan_image() {
     print_status "🔍 Scanning image: $image"
     mkdir -p "$image_dir"
     
-    # TEMPORARY DEBUG BLOCK: Loop until permission denied error, then debug and exit (for CI)
-    local debug_attempt=1
-    while true; do
-        print_status "[DEBUG] Scan attempt $debug_attempt for $image"
-        ensure_docker_env
-        if ! check_disk_space 3; then
-            print_warning "Low disk space detected before scanning $image"
-            print_status "Cleaning up temporary files..."
-            cleanup_temp_dirs
-            if ! check_disk_space 2; then
-                print_error "Insufficient disk space to scan $image, skipping..."
-                echo "SCAN_FAILED: $image - Insufficient disk space" >> "$OUTPUT_DIR/failed_scans.log"
-                return 1
-            fi
-        fi
-        print_status " Pulling image..."
-        if ! docker pull --platform linux/amd64 "$image"; then
-            print_error "Failed to pull image: $image"
-            echo "SCAN_FAILED: $image - Failed to pull image" >> "$OUTPUT_DIR/failed_scans.log"
+    ensure_docker_env
+    if ! check_disk_space 3; then
+        print_warning "Low disk space detected before scanning $image"
+        print_status "Cleaning up temporary files..."
+        cleanup_temp_dirs
+        if ! check_disk_space 2; then
+            print_error "Insufficient disk space to scan $image, skipping..."
+            echo "SCAN_FAILED: $image - Insufficient disk space" >> "$OUTPUT_DIR/failed_scans.log"
             return 1
         fi
-        print_status "📋 Getting image metadata..."
-        if ! get_image_age "$image"; then
-            print_error "Failed to get image age for $image"
-            echo "SCAN_FAILED: $image - Failed to get image age" >> "$OUTPUT_DIR/failed_scans.log"
-            return 1
-        fi
-        print_status "🛡️ Running Trivy vulnerability scan (SARIF format)..."
-        TRIVY_DB_PATH="$HOME/.cache/trivy/db/"
-        if [ -d "$TRIVY_DB_PATH" ]; then
-            TRIVY_SKIP_DB_UPDATE="--skip-db-update"
-        else
-            TRIVY_SKIP_DB_UPDATE=""
-        fi
-        local trivy_temp_dir="$abs_image_dir/trivy-temp"
-        mkdir -p "$trivy_temp_dir"
-        local temp_output="$trivy_temp_dir/trivy_output.log"
-        docker run --rm --user $(id -u):$(id -g) --memory="$DOCKER_MEMORY_LIMIT" --cpus="$DOCKER_CPU_LIMIT" \
-            -v /var/run/docker.sock:/var/run/docker.sock \
-            -v "$abs_image_dir:/output" \
-            -v "$HOME/.cache/trivy:/root/.cache/trivy" \
-            -v "$trivy_temp_dir:/tmp" \
-            -e TMPDIR=/tmp \
-            "$TRIVY_VERSION" image \
-            --format sarif \
-            --output /output/trivy-results.sarif \
-            --severity LOW,MEDIUM,HIGH,CRITICAL \
-            --scanners vuln \
-            --quiet \
-            $TRIVY_SKIP_DB_UPDATE \
-            "$image" > "$temp_output" 2>&1
-        local trivy_exit=$?
-        if [ $trivy_exit -ne 0 ]; then
-            print_warning "Trivy scan failed for $image. See log below:"
-            cat "$temp_output"
-        fi
-        # Clean up temp output file
-        rm -f "$temp_output"
-        if [ $trivy_exit -eq 0 ]; then
-            print_status "[DEBUG] Trivy scan completed without permission error."
-            break
-        fi
-        debug_attempt=$((debug_attempt + 1))
-        if [ $debug_attempt -gt 3 ]; then
-            print_error "[DEBUG] Exceeded 3 attempts, aborting debug loop."
-            break
-        fi
-    done
+    fi
+    print_status " Pulling image..."
+    if ! docker pull --platform linux/amd64 "$image"; then
+        print_error "Failed to pull image: $image"
+        echo "SCAN_FAILED: $image - Failed to pull image" >> "$OUTPUT_DIR/failed_scans.log"
+        return 1
+    fi
+    print_status "📋 Getting image metadata..."
+    if ! get_image_age "$image"; then
+        print_error "Failed to get image age for $image"
+        echo "SCAN_FAILED: $image - Failed to get image age" >> "$OUTPUT_DIR/failed_scans.log"
+        return 1
+    fi
+    print_status "🛡️ Running Trivy vulnerability scan (SARIF format)..."
+    TRIVY_DB_PATH="$HOME/.cache/trivy/db/"
+    if [ -d "$TRIVY_DB_PATH" ]; then
+        TRIVY_SKIP_DB_UPDATE="--skip-db-update"
+    else
+        TRIVY_SKIP_DB_UPDATE=""
+    fi
+    local trivy_temp_dir="$abs_image_dir/trivy-temp"
+    mkdir -p "$trivy_temp_dir"
+    local temp_output="$trivy_temp_dir/trivy_output.log"
+    docker run --rm --user $(id -u):$(id -g) --memory="$DOCKER_MEMORY_LIMIT" --cpus="$DOCKER_CPU_LIMIT" \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        -v "$abs_image_dir:/output" \
+        -v "$HOME/.cache/trivy:/root/.cache/trivy" \
+        -v "$trivy_temp_dir:/tmp" \
+        -e TMPDIR=/tmp \
+        "$TRIVY_VERSION" image \
+        --format sarif \
+        --output /output/trivy-results.sarif \
+        --severity LOW,MEDIUM,HIGH,CRITICAL \
+        --scanners vuln \
+        --quiet \
+        $TRIVY_SKIP_DB_UPDATE \
+        "$image" > "$temp_output" 2>&1
+    local trivy_exit=$?
+    if [ $trivy_exit -ne 0 ]; then
+        print_warning "Trivy scan failed for $image. See log below:"
+        cat "$temp_output"
+    fi
+    rm -f "$temp_output"
     
     # Process SARIF results and show vulnerability summary
     if [ -f "$image_dir/trivy-results.sarif" ] && [ -s "$image_dir/trivy-results.sarif" ]; then
@@ -1081,7 +1066,7 @@ update_vulnerability_databases() {
     print_status "Updating Trivy vulnerability database..."
     docker run --rm \
         -v "$HOME/.cache/trivy:/root/.cache/trivy" \
-        "$TRIVY_VERSION" image --download-db-only || {
+        "$TRIVY_VERSION" image --download-db-only --db-repository aquasec/trivy-db|| {
         print_error "Failed to update Trivy database"
         return 1
     }
