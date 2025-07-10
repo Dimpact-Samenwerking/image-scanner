@@ -616,7 +616,7 @@ scan_image() {
         local trivy_temp_dir="$abs_image_dir/trivy-temp"
         mkdir -p "$trivy_temp_dir"
         local temp_output="$trivy_temp_dir/trivy_output.log"
-        docker run --rm --memory="$DOCKER_MEMORY_LIMIT" --cpus="$DOCKER_CPU_LIMIT" \
+        docker run --rm --user $(id -u):$(id -g) --memory="$DOCKER_MEMORY_LIMIT" --cpus="$DOCKER_CPU_LIMIT" \
             -v /var/run/docker.sock:/var/run/docker.sock \
             -v "$abs_image_dir:/output" \
             -v "$HOME/.cache/trivy:/root/.cache/trivy" \
