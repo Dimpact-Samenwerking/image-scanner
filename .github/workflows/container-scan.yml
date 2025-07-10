@@ -58,7 +58,7 @@ jobs:
           SCAN_DATE=$(date +%y%m%d)
           OUTPUT_DIR="./${SCAN_DATE}-dimpact-scan-results"
           # Use max performance for CI
-          bash -x ./scripts/dimpact-image-scanner.sh \
+          ./scripts/dimpact-image-scanner.sh \
             --use-discovered \
             --output-dir "$OUTPUT_DIR" \
             --performance max

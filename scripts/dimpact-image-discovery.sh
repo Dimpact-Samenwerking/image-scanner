@@ -22,6 +22,7 @@ fi
 OUTPUT_FILE=""
 CHECK_IMAGE_AVAILABILITY=false
 FORCED_TRANSLATIONS_FILE="forced_translations.yaml"
+SSC_IMPORT_FORMAT=false
 
 # Global variables for translations (using temp files for bash 3.x compatibility)
 TRANSLATIONS_DIR="${TMPDIR:-${TMP:-/tmp}}/dimpact_translations_$$"
@@ -54,13 +55,18 @@ while [[ $# -gt 0 ]]; do
             FORCED_TRANSLATIONS_FILE="$2"
             shift 2
             ;;
+        --ssc-import-format)
+            SSC_IMPORT_FORMAT=true
+            shift
+            ;;
         -h|--help)
-            echo "Usage: $0 [--output-file] [--check-image-availability] [--translations-file FILE] [--help]"
+            echo "Usage: $0 [--output-file] [--check-image-availability] [--translations-file FILE] [--ssc-import-format] [--help]"
             echo ""
             echo "Options:"
             echo "  --output-file               Save YAML output to discovered.yaml file"
             echo "  --check-image-availability  Check availability of all discovered container images"
             echo "  --translations-file         Specify custom forced translations file (default: forced_translations.yaml)"
+            echo "  --ssc-import-format         Output YAML in SSC import format (flat list, with name/url/version)"
             echo "  --help                      Show this help message"
             echo ""
             echo "Examples:"
@@ -69,6 +75,7 @@ while [[ $# -gt 0 ]]; do
             echo "  $0 --check-image-availability                 # Discover and check image availability"
             echo "  $0 --output-file --check-image-availability   # Save discovery and check image availability"
             echo "  $0 --translations-file translations.yaml      # Use custom translations file"
+            echo "  $0 --ssc-import-format                        # Output in SSC import format"
             exit 0
             ;;
         *)
@@ -836,66 +843,46 @@ check_and_download_dependencies() {
 # Now also outputs a mapping of original:translated images to $TMP_DIR/translated_map.txt
 generate_yaml_output() {
     local images_file="$1"
-    local suppress_file_output="${2:-false}"  # Optional parameter to suppress file output
+    local suppress_file_output="${2:-false}"
+    local ssc_import_format="${3:-false}"
     local yaml_output=""
     local translated_map_file="${TMP_DIR:-/tmp}/translated_map.txt"
-    : > "$translated_map_file"  # Truncate file
-    
-    # Use associative arrays to group images by url:version and collect charts
-    # Check if we have bash 4+ for associative arrays
+    : > "$translated_map_file"
+
     if (( BASH_VERSINFO[0] >= 4 )); then
         declare -A image_to_charts
         declare -A image_to_url
         declare -A image_to_version
-        
-        # First pass: collect all chart-image combinations
+        declare -A image_to_name
         while IFS= read -r line; do
             if [[ $line =~ ^([^:]+):[[:space:]]*(.+)$ ]]; then
                 local chart_name="${BASH_REMATCH[1]}"
                 local image="${BASH_REMATCH[2]}"
                 local original_image="$image"
-                
-                # Apply forced translations if any
                 local translated_image=$(apply_forced_translations "$image")
                 if [[ "$translated_image" != "$image" ]]; then
                     image="$translated_image"
                 fi
-                
-                # Write mapping: translated_image:original_image
                 echo "$image:$original_image" >> "$translated_map_file"
-                
-                # Parse image components
                 IFS=':' read -r registry repository tag <<< "$(parse_image_components "$image")"
-                
-                # --- STRIP @ SUFFIX FROM VERSION ---
                 if [[ "$tag" == *"@"* ]]; then
                     tag="${tag%%@*}"
                 fi
-                # Validate the tag before including in output
                 if ! is_valid_docker_tag "$tag"; then
                     echo "⚠️  Skipping image with invalid tag: $image (tag: '$tag')" >&2
                     continue
                 fi
-                
-                # Construct full URL (maintain docker.io prefix for consistency)
                 local full_url
                 if [[ -n "$registry" ]]; then
                     full_url="$registry/$repository"
                 else
-                    # Fallback if no registry detected
                     full_url="$repository"
                 fi
-                
-                # Create unique key for this image (url:version)
                 local image_key="$full_url:$tag"
-                
-                # Store image details
                 image_to_url["$image_key"]="$full_url"
                 image_to_version["$image_key"]="$tag"
-                
-                # Add chart to the list for this image
+                image_to_name["$image_key"]="$chart_name"
                 if [[ "${image_to_charts[$image_key]+isset}" == "isset" ]]; then
-                    # Check if chart already exists in the list to avoid duplicates
                     if [[ ! "${image_to_charts[$image_key]}" =~ (^|,)$chart_name(,|$) ]]; then
                         image_to_charts["$image_key"]="${image_to_charts[$image_key]},$chart_name"
                     fi
@@ -904,84 +891,95 @@ generate_yaml_output() {
                 fi
             fi
         done < <(grep -E '^[^:]+: .+$' "$images_file")
-        
-        # Second pass: generate YAML output grouped by image
-        for image_key in $(printf '%s\n' "${!image_to_charts[@]}" | sort); do
-            local url="${image_to_url[$image_key]}"
-            local version="${image_to_version[$image_key]}"
-            local charts="${image_to_charts[$image_key]}"
-            
-            # Convert comma-separated charts to YAML array format
-            local charts_yaml=""
-            IFS=',' read -ra chart_array <<< "$charts"
-            for chart in "${chart_array[@]}"; do
-                chart=$(echo "$chart" | xargs)  # Trim whitespace
-                if [[ -z "$charts_yaml" ]]; then
-                    charts_yaml="    - $chart"
-                else
-                    charts_yaml+=$'\n'"    - $chart"
-                fi
+
+        if [[ "$ssc_import_format" == true ]]; then
+            for image_key in $(printf '%s\n' "${!image_to_charts[@]}" | sort); do
+                local url="${image_to_url[$image_key]}"
+                local version="${image_to_version[$image_key]}"
+                local name="${image_to_name[$image_key]}"
+                yaml_output+="- name: $name"$'\n'
+                yaml_output+="  url: $url"$'\n'
+                yaml_output+="  version: \"$version\""$'\n'
             done
-            
-            # Add YAML entry
-            yaml_output+="- url: $url"$'\n'
-            yaml_output+="  version: $version"$'\n'
-            yaml_output+="  charts:"$'\n'
-            yaml_output+="$charts_yaml"$'\n'
-        done
+        else
+            for image_key in $(printf '%s\n' "${!image_to_charts[@]}" | sort); do
+                local url="${image_to_url[$image_key]}"
+                local version="${image_to_version[$image_key]}"
+                local charts="${image_to_charts[$image_key]}"
+                local charts_yaml=""
+                IFS=',' read -ra chart_array <<< "$charts"
+                for chart in "${chart_array[@]}"; do
+                    chart=$(echo "$chart" | xargs)
+                    if [[ -z "$charts_yaml" ]]; then
+                        charts_yaml="    - $chart"
+                    else
+                        charts_yaml+=$'\n'"    - $chart"
+                    fi
+                done
+                yaml_output+="- url: $url"$'\n'
+                yaml_output+="  version: $version"$'\n'
+                yaml_output+="  charts:"$'\n'
+                yaml_output+="$charts_yaml"$'\n'
+            done
+        fi
     else
-        # Fallback for bash < 4: use original logic with warning
-        echo "⚠️  Warning: Using bash < 4.0, chart grouping not available" >&2
-        
-        # Original logic for older bash versions
+        # Fallback for bash < 4.0
         while IFS= read -r line; do
             if [[ $line =~ ^([^:]+):[[:space:]]*(.+)$ ]]; then
                 local chart_name="${BASH_REMATCH[1]}"
                 local image="${BASH_REMATCH[2]}"
                 local original_image="$image"
-                # Apply forced translations if any
                 local translated_image=$(apply_forced_translations "$image")
                 if [[ "$translated_image" != "$image" ]]; then
                     image="$translated_image"
                 fi
-                # Write mapping: translated_image:original_image
                 echo "$image:$original_image" >> "$translated_map_file"
-                # Parse image components
                 IFS=':' read -r registry repository tag <<< "$(parse_image_components "$image")"
-                # --- STRIP @ SUFFIX FROM VERSION ---
                 if [[ "$tag" == *"@"* ]]; then
                     tag="${tag%%@*}"
                 fi
-                # Validate the tag before including in output
                 if ! is_valid_docker_tag "$tag"; then
                     echo "⚠️  Skipping image with invalid tag: $image (tag: '$tag')" >&2
                     continue
                 fi
-                # Construct full URL (maintain docker.io prefix for consistency)
                 local full_url
                 if [[ -n "$registry" ]]; then
                     full_url="$registry/$repository"
                 else
-                    # Fallback if no registry detected
                     full_url="$repository"
                 fi
-                # Add YAML entry (original format for compatibility)
-                yaml_output+="- name: $chart_name"$'\n'
-                yaml_output+="  url: $full_url"$'\n'
-                yaml_output+="  version: $tag"$'\n'
+                if [[ "$ssc_import_format" == true ]]; then
+                    yaml_output+="- name: $chart_name"$'\n'
+                    yaml_output+="  url: $full_url"$'\n'
+                    yaml_output+="  version: \"$tag\""$'\n'
+                else
+                    yaml_output+="- name: $chart_name"$'\n'
+                    yaml_output+="  url: $full_url"$'\n'
+                    yaml_output+="  version: $tag"$'\n'
+                fi
             fi
         done < <(grep -E '^[^:]+: .+$' "$images_file" | sort -u)
     fi
-    
-    # Output the YAML
+
     if [[ "$suppress_file_output" = true ]]; then
-        # Just return the content when suppressing file output
         printf "%s" "$yaml_output"
     elif [[ -n "$OUTPUT_FILE" ]]; then
         printf "%s" "$yaml_output" > "$OUTPUT_FILE"
         echo "YAML output saved to $OUTPUT_FILE" >&2
     else
         printf "%s" "$yaml_output"
+    fi
+}
+
+# Helper function to print only on non-SSC import mode
+ssc_echo() {
+    if [[ "$SSC_IMPORT_FORMAT" != true ]]; then
+        echo "$@"
+    fi
+}
+ssc_echo_err() {
+    if [[ "$SSC_IMPORT_FORMAT" != true ]]; then
+        echo "$@" >&2
     fi
 }
 
@@ -994,15 +992,19 @@ fetch_latest_dimpact_charts() {
     local charts_src="$extracted_dir/charts"
     local charts_dest="dimpact-charts/charts"
 
-    echo "🛳️  Downloading latest Dimpact helm charts..."
+    ssc_echo "🛳️  Downloading latest Dimpact helm charts..."
 
     # Check for curl and unzip dependencies
     local missing=()
     command -v curl >/dev/null 2>&1 || missing+=("curl")
     command -v unzip >/dev/null 2>&1 || missing+=("unzip")
     if [[ ${#missing[@]} -gt 0 ]]; then
-        echo "❌ Missing dependencies: ${missing[*]}" >&2
-        echo "Please install them and try again!" >&2
+        if [[ "$SSC_IMPORT_FORMAT" == true ]]; then
+            echo "Missing dependencies: ${missing[*]}" >&2
+        else
+            echo "❌ Missing dependencies: ${missing[*]}" >&2
+            echo "Please install them and try again!" >&2
+        fi
         exit 1
     fi
 
@@ -1011,17 +1013,17 @@ fetch_latest_dimpact_charts() {
     mkdir -p "$tmp_dir"
 
     # Download the zip
-    echo "📥 Fetching charts zip from GitHub..."
+    ssc_echo "📥 Fetching charts zip from GitHub..."
     if ! curl -s -L -o "$zip_file" "$repo_zip_url"; then
-        echo "❌ Failed to download charts zip!" >&2
+        echo "Failed to download charts zip!" >&2
         rm -rf "$tmp_dir"
         exit 1
     fi
 
     # Unzip
-    echo "📦 Unzipping charts..."
+    ssc_echo "📦 Unzipping charts..."
     if ! unzip -q "$zip_file" -d "$tmp_dir"; then
-        echo "❌ Failed to unzip charts!" >&2
+        echo "Failed to unzip charts!" >&2
         rm -rf "$tmp_dir"
         exit 1
     fi
@@ -1032,24 +1034,22 @@ fetch_latest_dimpact_charts() {
         rm -rf "$charts_dest"
         cp -r "$charts_src" "$charts_dest"
         rm -rf "$charts_src"
-        echo "✅ Charts updated in $charts_dest! 🚀"
+        ssc_echo "✅ Charts updated in $charts_dest! 🚀"
     else
-        echo "❌ Could not find charts/ in the extracted zip!" >&2
+        echo "Could not find charts/ in the extracted zip!" >&2
         rm -rf "$tmp_dir"
         exit 1
     fi
 
     # Clean up
     rm -rf "$tmp_dir"
-    echo "🧹 Cleaned up temp files."
-    echo "🎉 Dimpact charts are ready!"
+    ssc_echo "🧹 Cleaned up temp files."
+    ssc_echo "🎉 Dimpact charts are ready!"
 }
 
 # Main execution block
 main() {
-    # Download and extract latest Dimpact helm charts before discovery
     fetch_latest_dimpact_charts
-    # Check dependencies first
     check_dependencies
     
     # Load forced translations
@@ -1064,8 +1064,12 @@ main() {
             fi
         done
     else
-        echo "ERROR: yq command not found or scan-config/repo_map.yaml is missing." >&2
-        echo "Please ensure yq is installed and the repo map file exists." >&2
+        if [[ "$SSC_IMPORT_FORMAT" == true ]]; then
+            echo "yq command not found or scan-config/repo_map.yaml is missing." >&2
+        else
+            echo "ERROR: yq command not found or scan-config/repo_map.yaml is missing." >&2
+            echo "Please ensure yq is installed and the repo map file exists." >&2
+        fi
         exit 1
     fi
 
@@ -1080,20 +1084,24 @@ main() {
 
          # Check if the podiumd chart exists
      if [[ ! -d "dimpact-charts/charts/podiumd" ]]; then
-         echo "ERROR: podiumd chart not found in the repository" >&2
-         echo "Current working directory: $(pwd)" >&2
-         echo "Looking for: dimpact-charts/charts/podiumd" >&2
-         if [[ -d "dimpact-charts" ]]; then
-             echo "dimpact-charts directory exists" >&2
-             if [[ -d "dimpact-charts/charts" ]]; then
-                 echo "dimpact-charts/charts directory exists" >&2
-                 echo "Available charts:" >&2
-                 ls -1 dimpact-charts/charts/ 2>/dev/null || echo "No charts found" >&2
-             else
-                 echo "dimpact-charts/charts directory does not exist" >&2
-             fi
+         if [[ "$SSC_IMPORT_FORMAT" == true ]]; then
+             echo "podiumd chart not found in the repository" >&2
          else
-             echo "dimpact-charts directory does not exist" >&2
+             echo "ERROR: podiumd chart not found in the repository" >&2
+             echo "Current working directory: $(pwd)" >&2
+             echo "Looking for: dimpact-charts/charts/podiumd" >&2
+             if [[ -d "dimpact-charts" ]]; then
+                 echo "dimpact-charts directory exists" >&2
+                 if [[ -d "dimpact-charts/charts" ]]; then
+                     echo "dimpact-charts/charts directory exists" >&2
+                     echo "Available charts:" >&2
+                     ls -1 dimpact-charts/charts/ 2>/dev/null || echo "No charts found" >&2
+                 else
+                     echo "dimpact-charts/charts directory does not exist" >&2
+                 fi
+             else
+                 echo "dimpact-charts directory does not exist" >&2
+             fi
          fi
          exit 1
      fi
@@ -1107,7 +1115,11 @@ main() {
 
          # Process all charts and extract images
      if ! process_chart "dimpact-charts/charts/podiumd" "podiumd" "$IMAGES_FILE"; then
-         echo "ERROR: Failed to process main podiumd chart" >&2
+         if [[ "$SSC_IMPORT_FORMAT" == true ]]; then
+             echo "Failed to process main podiumd chart" >&2
+         else
+             echo "ERROR: Failed to process main podiumd chart" >&2
+         fi
          exit 1
      fi
 
@@ -1117,35 +1129,42 @@ main() {
         if [[ -d "$chart_dir" ]]; then
             chart_name=$(basename "$chart_dir")
             if ! process_chart "$chart_dir" "$chart_name" "$IMAGES_FILE"; then
-                echo "WARNING: Failed to process dependency chart: $chart_name" >&2
+                if [[ "$SSC_IMPORT_FORMAT" != true ]]; then
+                    echo "WARNING: Failed to process dependency chart: $chart_name" >&2
+                fi
             fi
         fi
     done
 
     # Generate YAML output and capture it if we need to check images
     if [[ "$CHECK_IMAGE_AVAILABILITY" = true ]]; then
-        # Generate YAML and capture it (suppress file output to handle it ourselves)
-        yaml_content=$(generate_yaml_output "$IMAGES_FILE" true)
+        yaml_content=$(generate_yaml_output "$IMAGES_FILE" true "$SSC_IMPORT_FORMAT")
         
         # Output the YAML (to stdout or file as configured)
         if [[ -n "$OUTPUT_FILE" ]]; then
             printf "%s" "$yaml_content" > "$OUTPUT_FILE"
-            echo "YAML output saved to $OUTPUT_FILE" >&2
+            if [[ "$SSC_IMPORT_FORMAT" != true ]]; then
+                echo "YAML output saved to $OUTPUT_FILE" >&2
+            fi
         else
             printf "%s" "$yaml_content"
         fi
         
         # Debug: print contents of translated_map.txt
-        echo "--- DEBUG: Contents of tmp/translated_map.txt ---"
-        cat tmp/translated_map.txt || echo "(not found)"
-        echo "--- END DEBUG ---"
+        if [[ "$SSC_IMPORT_FORMAT" != true ]]; then
+            echo "--- DEBUG: Contents of tmp/translated_map.txt ---"
+            cat tmp/translated_map.txt || echo "(not found)"
+            echo "--- END DEBUG ---"
+        fi
         
         # Check all discovered images
-        echo "" >&2
-        check_discovered_images "$yaml_content" || true
+        if [[ "$SSC_IMPORT_FORMAT" != true ]]; then
+            echo "" >&2
+            check_discovered_images "$yaml_content" || true
+        fi
     else
         # Standard behavior - just generate and output YAML
-        generate_yaml_output "$IMAGES_FILE"
+        generate_yaml_output "$IMAGES_FILE" false "$SSC_IMPORT_FORMAT"
     fi
 
     # Clean up silently
