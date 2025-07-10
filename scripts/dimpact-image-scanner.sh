@@ -604,11 +604,7 @@ scan_image() {
     fi
     print_status "🛡️ Running Trivy vulnerability scan (SARIF format)..."
     TRIVY_DB_PATH="$HOME/.cache/trivy/db/"
-    if [ -d "$TRIVY_DB_PATH" ]; then
-        TRIVY_SKIP_DB_UPDATE="--skip-db-update"
-    else
-        TRIVY_SKIP_DB_UPDATE=""
-    fi
+    # Remove logic for TRIVY_SKIP_DB_UPDATE
     local trivy_temp_dir="$abs_image_dir/trivy-temp"
     mkdir -p "$trivy_temp_dir"
     local temp_output="$trivy_temp_dir/trivy_output.log"
@@ -624,7 +620,6 @@ scan_image() {
         --severity LOW,MEDIUM,HIGH,CRITICAL \
         --scanners vuln \
         --quiet \
-        $TRIVY_SKIP_DB_UPDATE \
         "$image" > "$temp_output" 2>&1
     local trivy_exit=$?
     if [ $trivy_exit -ne 0 ]; then
