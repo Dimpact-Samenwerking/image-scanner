@@ -824,17 +824,17 @@ generate_consolidated_report() {
         fi
     done
 
-    # OPTIMIZED Phase 4: Parallel detailed CVE analysis
-    print_status "🔍 Phase 4/4: Generating detailed CVE analysis (OPTIMIZED)..."
+    # Phase 4: Sequential detailed CVE analysis (parallel temporarily disabled)
+    print_status "🔍 Phase 4/4: Generating detailed CVE analysis (SEQUENTIAL MODE)..."
     echo -e "\n## 🔍 Detailed CVE Analysis" >> "$report_file"
     echo -e "\nThe following section lists all vulnerabilities found in each image, sorted by severity." >> "$report_file"
     echo -e "\n*Data extracted from SARIF (Static Analysis Results Interchange Format) files for standardized vulnerability reporting.*" >> "$report_file"
-    
+
     # Pre-compute suppressed CVEs JSON once (optimization #3)
     local suppressed_json
     suppressed_json=$(printf '%s\n' "${suppressed_cves[@]}" | jq -R . | jq -s .)
     print_status "  🔧 Pre-computed suppressed CVEs list for efficient processing"
-    
+
     # Collect valid images for processing
     declare -a valid_images
     for img_name in "${sorted_images[@]}"; do
@@ -843,71 +843,26 @@ generate_consolidated_report() {
             valid_images+=("$img_name")
         fi
     done
-    
+
     local total_with_sarif="${#valid_images[@]}"
-    
+
     if [[ $total_with_sarif -eq 0 ]]; then
         print_status "  ⚠️ No valid SARIF files found for detailed analysis"
         return 0
     fi
-    
-    # Determine optimal parallel job count
-    local max_parallel_jobs
-    max_parallel_jobs=$(get_optimal_job_count "$total_with_sarif")
-    print_status "  ⚡ Using $max_parallel_jobs parallel jobs for processing $total_with_sarif images"
-    
-    # Create temporary directory for parallel processing
+
+    # Sequential processing block (parallel temporarily disabled)
+    # --- SEQUENTIAL CVE ANALYSIS START ---
     local temp_dir
     temp_dir=$(mktemp -d "${TMPDIR:-/tmp}/cve-analysis.XXXXXX")
-    
-    # Process images in parallel batches
     declare -a temp_files
-    declare -a current_jobs
-    current_jobs=()
-    local processed=0
-    
     for img_name in "${valid_images[@]}"; do
         local img_dir="$INPUT_DIR/$img_name/"
-        
-        # Wait if we've reached max parallel jobs
-        while [[ ${#current_jobs[@]} -ge $max_parallel_jobs ]]; do
-            # Wait for any job to complete
-            for i in "${!current_jobs[@]}"; do
-                if ! kill -0 "${current_jobs[i]}" 2>/dev/null; then
-                    # Job completed, remove from tracking
-                    unset 'current_jobs[i]'
-                    break
-                fi
-            done
-            
-            # Clean up array indices
-            current_jobs=("${current_jobs[@]}")
-            
-            # Brief sleep to avoid busy waiting
-            sleep 0.1
-        done
-        
-        # Start processing this image in background
-        {
-            temp_file=$(process_image_parallel "$img_name" "$img_dir" "$report_file" "$suppressed_json" "$temp_dir")
-            echo "$temp_file" > "$temp_dir/${img_name}.path"
-        } &
-        
-        current_jobs+=($!)
-        ((processed++))
-        
-        # Show progress periodically
-        if [[ $((processed % 5)) -eq 0 ]] || [[ $processed -eq $total_with_sarif ]]; then
-            print_status "  ⚡ Started parallel processing: $processed/$total_with_sarif images (${#current_jobs[@]} active jobs)"
-        fi
+        temp_file=$(process_image_parallel "$img_name" "$img_dir" "$report_file" "$suppressed_json" "$temp_dir")
+        echo "$temp_file" > "$temp_dir/${img_name}.path"
     done
-    
-    # Wait for all remaining jobs to complete
-    print_status "  ⏳ Waiting for all parallel jobs to complete..."
-    for job_pid in "${current_jobs[@]}"; do
-        wait "$job_pid" 2>/dev/null || true
-    done
-    
+    # --- SEQUENTIAL CVE ANALYSIS END ---
+
     # Collect temporary file paths in correct order
     for img_name in "${valid_images[@]}"; do
         local path_file="$temp_dir/${img_name}.path"
@@ -919,15 +874,15 @@ generate_consolidated_report() {
             fi
         fi
     done
-    
+
     # Merge all temporary files into the main report (batch I/O)
     print_status "  📝 Merging $total_with_sarif processed image reports..."
     merge_temp_files "$report_file" "$temp_dir" "${temp_files[@]}"
-    
+
     # Clean up temporary directory
     rm -rf "$temp_dir" 2>/dev/null || true
-    
-    print_status "  ✅ Completed optimized detailed CVE analysis for $total_with_sarif images using $max_parallel_jobs parallel jobs"
+
+    print_status "  ✅ Completed detailed CVE analysis for $total_with_sarif images (sequential mode)"
 
     # Add recommendations based on findings
     echo -e "\n## 🎯 Recommendations" >> "$report_file"
