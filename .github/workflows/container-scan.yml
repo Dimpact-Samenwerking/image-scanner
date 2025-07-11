@@ -95,7 +95,7 @@ jobs:
           set -v
           chmod +x scripts/dimpact-image-report.sh
           SCAN_DATE=$(date +%y%m%d)
-          OUTPUT_DIR="./${SCAN_DATE}-dimpact-scan-results"
+          OUTPUT_DIR="./dimpact-scan-results/${SCAN_DATE}"
           if [ ! -d "$OUTPUT_DIR" ]; then
             echo "❌ Scan output dir $OUTPUT_DIR not found!"
             exit 1
