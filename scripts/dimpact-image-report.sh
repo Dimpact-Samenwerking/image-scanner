@@ -862,7 +862,8 @@ generate_consolidated_report() {
     declare -a temp_files
     for img_name in "${valid_images[@]}"; do
         local img_dir="$INPUT_DIR/$img_name/"
-        temp_file=$(process_image_parallel "$img_name" "$img_dir" "$report_file" "$suppressed_json" "$temp_dir")
+        local temp_output_file="$temp_dir/${img_name}.md"
+        temp_file=$(process_image_parallel "$img_name" "$img_dir" "$temp_output_file" "$suppressed_json" "$temp_dir")
         echo "$temp_file" > "$temp_dir/${img_name}.path"
     done
     # --- SEQUENTIAL CVE ANALYSIS END ---
