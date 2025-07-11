@@ -111,7 +111,7 @@ jobs:
           git config --global user.email "actions@github.com"
           
           SCAN_DATE=$(date +%y%m%d)
-          git add ". --all"
+          git add . --all
           
           COMMIT_MSG="🔒 Add container scan results for ${SCAN_DATE}"
           git commit -m "${COMMIT_MSG}" || echo "No changes to commit"
