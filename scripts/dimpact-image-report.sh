@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
+set -euo pipefail
+trap 'echo "❌ Script failed at line $LINENO"' ERR
 
 # Dimpact Image Scanner - Report Generator
 # This script generates consolidated reports from existing SARIF scan results
 # Can be run standalone to generate reports from previous scans
 # Includes dashboard data preparation for GitHub Pages deployment
-
-set -e
 
 # Ensure we're using bash
 if [ -z "${BASH_VERSION:-}" ]; then
@@ -465,6 +465,7 @@ generate_detailed_cve_report() {
     # Pre-process data into associative arrays for faster access
     declare -A critical_vulns high_vulns medium_vulns low_vulns suppressed_vulns
     declare -a critical_list high_list medium_list low_list suppressed_list
+    suppressed_list=()
     
     # Single pass through data to categorize everything
     while IFS='|' read -r severity rule_id message location help_uri is_suppressed; do
@@ -866,6 +867,7 @@ generate_consolidated_report() {
     # Process images in parallel batches
     declare -a temp_files
     declare -a current_jobs
+    current_jobs=()
     local processed=0
     
     for img_name in "${valid_images[@]}"; do
@@ -877,7 +879,7 @@ generate_consolidated_report() {
             for i in "${!current_jobs[@]}"; do
                 if ! kill -0 "${current_jobs[i]}" 2>/dev/null; then
                     # Job completed, remove from tracking
-                    unset current_jobs[i]
+                    unset 'current_jobs[i]'
                     break
                 fi
             done
