@@ -101,7 +101,7 @@ jobs:
             echo "❌ Scan output dir $OUTPUT_DIR not found!"
             exit 1
           fi
-          bash -x ./scripts/dimpact-image-report.sh --input-dir "$OUTPUT_DIR"
+          ./scripts/dimpact-image-report.sh --input-dir "$OUTPUT_DIR"
 
       # --- Git Commit Step ---
       - name: Commit scan results and reports
