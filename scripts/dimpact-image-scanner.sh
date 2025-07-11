@@ -579,6 +579,10 @@ scan_image() {
     print_status "🔍 Scanning image: $image"
     mkdir -p "$image_dir"
     
+    # Ensure Trivy cache directory exists and is writable
+    local trivy_cache_dir="$(pwd)/.cache/trivy"
+    mkdir -p "$trivy_cache_dir"
+    
     ensure_docker_env
     if ! check_disk_space 3; then
         print_warning "Low disk space detected before scanning $image"
@@ -603,7 +607,7 @@ scan_image() {
         return 1
     fi
     print_status "🛡️ Running Trivy vulnerability scan (SARIF format)..."
-    TRIVY_DB_PATH="$HOME/.cache/trivy/db/"
+    TRIVY_DB_PATH="$trivy_cache_dir/db/"
     # Remove logic for TRIVY_SKIP_DB_UPDATE
     local trivy_temp_dir="$abs_image_dir/trivy-temp"
     mkdir -p "$trivy_temp_dir"
@@ -611,7 +615,7 @@ scan_image() {
     docker run --rm --user $(id -u):$(id -g) --memory="$DOCKER_MEMORY_LIMIT" --cpus="$DOCKER_CPU_LIMIT" \
         -v /var/run/docker.sock:/var/run/docker.sock \
         -v "$abs_image_dir:/output" \
-        -v "$HOME/.cache/trivy:/root/.cache/trivy" \
+        -v "$trivy_cache_dir:/root/.cache/trivy" \
         -v "$trivy_temp_dir:/tmp" \
         -e TMPDIR=/tmp \
         "$TRIVY_VERSION" image \
@@ -1055,12 +1059,13 @@ update_vulnerability_databases() {
     ensure_docker_env
     
     # Create cache directories
-    mkdir -p "$HOME/.cache/trivy"
+    local trivy_cache_dir="$(pwd)/.cache/trivy"
+    mkdir -p "$trivy_cache_dir"
     
     # Update Trivy database
     print_status "Updating Trivy vulnerability database..."
     docker run --rm \
-        -v "$HOME/.cache/trivy:/root/.cache/trivy" \
+        -v "$trivy_cache_dir:/root/.cache/trivy" \
         "$TRIVY_VERSION" image --download-db-only --db-repository aquasec/trivy-db|| {
         print_error "Failed to update Trivy database"
         return 1
@@ -1077,9 +1082,10 @@ clean_all_caches() {
     ensure_docker_env
     
     # Clean Trivy cache
-    if [ -d "$HOME/.cache/trivy" ]; then
+    local trivy_cache_dir="$(pwd)/.cache/trivy"
+    if [ -d "$trivy_cache_dir" ]; then
         print_status "Cleaning Trivy cache..."
-        rm -rf "$HOME/.cache/trivy"
+        rm -rf "$trivy_cache_dir"
     fi
     
     # Clean Docker system

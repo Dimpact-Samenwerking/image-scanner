@@ -35,6 +35,11 @@ jobs:
           touch test.txt
           ls -la
 
+      # --- Prep step ---
+      - name: Prep Step
+        run: |
+          mkdir -p .cache/trivy
+
       # --- Discovery Step ---
       - name: Discover container images (generate discovered.yaml)
         run: |
