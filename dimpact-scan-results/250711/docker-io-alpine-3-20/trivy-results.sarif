@@ -30,10 +30,10 @@
         ],
         "imageCreatedDate": "2025-02-14T03:00:07Z",
         "imageAgeDays": 147,
-        "imageAgeSeconds": 12712079,
+        "imageAgeSeconds": 12719824,
         "imageAgeText": "147 days",
         "imageAgeStatus": "moderate",
-        "scanTimestamp": "2025-07-11T06:08:07Z",
+        "scanTimestamp": "2025-07-11T08:17:14Z",
         "ageMetadataVersion": "1.0",
         "epssScores": [],
         "epssHighRiskCount": 0,
@@ -41,7 +41,7 @@
         "epssLowRiskCount": 0,
         "epssVeryHighRiskCount": 0,
         "epssEnhanced": true,
-        "epssEnhancementDate": "2025-07-11T06:08:07Z",
+        "epssEnhancementDate": "2025-07-11T08:17:14Z",
         "epssMetadataVersion": "1.0"
       }
     }

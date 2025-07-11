@@ -616,7 +616,14 @@ scan_image() {
         -v /var/run/docker.sock:/var/run/docker.sock \
         -v "$abs_image_dir:/output" \
         -v "$trivy_cache_dir:/root/.cache/trivy" \
+        -v "$trivy_cache_dir:/root/.cache" \
+        -v "$trivy_cache_dir:/tmp/.cache/trivy" \
+        -v "$trivy_cache_dir:/.cache" \
+        -v "$trivy_cache_dir:/tmp/.cache" \
         -v "$trivy_temp_dir:/tmp" \
+        -e HOME=/tmp \
+        -e TRIVY_CACHE_DIR=/tmp/.cache/trivy \
+        -e XDG_CACHE_HOME=/tmp/.cache \
         -e TMPDIR=/tmp \
         "$TRIVY_VERSION" image \
         --format sarif \
