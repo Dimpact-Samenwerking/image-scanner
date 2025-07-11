@@ -2,6 +2,22 @@ name: Container Security Scan
 
 on:
   workflow_dispatch:
+    inputs:
+      run_discovery:
+        description: 'Run discovery step (generate discovered.yaml)'
+        required: false
+        default: 'true'
+        type: boolean
+      run_scan:
+        description: 'Run scan step (image security scan)'
+        required: false
+        default: 'true'
+        type: boolean
+      run_report:
+        description: 'Run report step (generate consolidated report)'
+        required: false
+        default: 'true'
+        type: boolean
   # schedule:
   #   - cron: '0 3 * * 2-6  ' # Daily Tuesday-Saturday at 3:00 AM UTC
 env:
@@ -43,6 +59,7 @@ jobs:
 
       # --- Discovery Step ---
       - name: Discover container images (generate discovered.yaml)
+        if: ${{ github.event.inputs.run_discovery != 'false' }}
         run: |
           set -v
           chmod +x scripts/dimpact-image-discovery.sh
@@ -56,6 +73,7 @@ jobs:
 
       # --- SCAN Step ---
       - name: Run container image security scan
+        if: ${{ github.event.inputs.run_scan != 'false' }}
         run: |
           set -v
           chmod +x scripts/dimpact-image-scanner.sh
@@ -72,6 +90,7 @@ jobs:
 
       # --- REPORT Step ---
       - name: Generate consolidated security report
+        if: ${{ github.event.inputs.run_report != 'false' }}
         run: |
           set -v
           chmod +x scripts/dimpact-image-report.sh
