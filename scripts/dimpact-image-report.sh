@@ -465,6 +465,10 @@ generate_detailed_cve_report() {
     # Pre-process data into associative arrays for faster access
     declare -A critical_vulns high_vulns medium_vulns low_vulns suppressed_vulns
     declare -a critical_list high_list medium_list low_list suppressed_list
+    critical_list=()
+    high_list=()
+    medium_list=()
+    low_list=()
     suppressed_list=()
     
     # Single pass through data to categorize everything
