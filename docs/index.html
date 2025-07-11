@@ -1287,7 +1287,6 @@
                                     ${image.age.days > 90 ? '<p style="color: #f39c12;"><strong>⚠️ Recommendation:</strong> Consider updating this image for latest security patches</p>' : ''}
                                 ` : ''}
                                 ${image.epss && image.epss.enhanced ? `
-                                    <p><strong>EPSS Risk Score:</strong> ${this.getEpssRiskEmoji(image.epss.maxScore)} Average: ${(image.epss.averageScore * 100).toFixed(1)}%, Maximum: ${(image.epss.maxScore * 100).toFixed(1)}%</p>
                                     <p><strong>High-Risk CVEs:</strong> ${image.epss.highRiskCount} vulnerabilities with >5% exploitation probability</p>
                                     ${image.epss.maxScore > 0.5 ? '<p style="color: #e74c3c;"><strong>🚨 Critical Alert:</strong> This image contains vulnerabilities with very high exploitation probability (>50%)</p>' : ''}
                                     ${image.epss.highRiskCount > 0 ? '<p style="color: #f39c12;"><strong>⚠️ Security Advisory:</strong> Prioritize patching high-risk vulnerabilities</p>' : ''}
