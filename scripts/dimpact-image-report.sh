@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-trap 'echo "❌ Script failed at line $LINENO"' ERR
+trap 'echo -e "\n❌ Script failed at line $LINENO. Last command: $BASH_COMMAND. Exit code: $?"' ERR
 
 # Dimpact Image Scanner - Report Generator
 # This script generates consolidated reports from existing SARIF scan results
@@ -583,10 +583,18 @@ process_image_parallel() {
     local base_report_file="$3"
     local suppressed_json="$4"
     local temp_dir="$5"
-    
+    # ==== DEBUG BLOCK START ====
+    echo "DEBUG: Entering process_image_parallel for $img_name"
     # Create temporary file for this image's output
     local temp_output_file="$temp_dir/${img_name}.md"
-    
+    echo "DEBUG: About to write to: $temp_output_file"
+    if [[ ! -d "$(dirname "$temp_output_file")" ]]; then
+        echo "DEBUG: Directory does not exist: $(dirname "$temp_output_file")"
+        exit 1
+    fi
+    ls -l "$(dirname "$temp_output_file")"
+    touch "$temp_output_file" || { echo "DEBUG: Cannot create file: $temp_output_file"; exit 1; }
+    # ==== DEBUG BLOCK END ====
     # Generate the detailed report for this image
     generate_detailed_cve_report "$img_name" "$img_dir" "$temp_output_file" "$suppressed_json"
     
