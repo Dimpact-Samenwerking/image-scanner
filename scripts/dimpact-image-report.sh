@@ -857,6 +857,7 @@ generate_consolidated_report() {
 
     # Sequential processing block (parallel temporarily disabled)
     # --- SEQUENTIAL CVE ANALYSIS START ---
+    local max_parallel_jobs=1
     local temp_dir
     temp_dir=$(mktemp -d "${TMPDIR:-/tmp}/cve-analysis.XXXXXX")
     declare -a temp_files
