@@ -92,7 +92,8 @@ jobs:
       - name: Generate consolidated security report
         if: ${{ github.event.inputs.run_report != 'false' }}
         run: |
-          set -v
+          set -vx
+          ls -ltR
           chmod +x scripts/dimpact-image-report.sh
           SCAN_DATE=$(date +%y%m%d)
           OUTPUT_DIR="./dimpact-scan-results/${SCAN_DATE}"
