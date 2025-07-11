@@ -586,7 +586,6 @@ process_image_parallel() {
     # ==== DEBUG BLOCK START ====
     echo "DEBUG: Entering process_image_parallel for $img_name"
     # Create temporary file for this image's output
-    df -h
     local temp_output_file="$temp_dir/${img_name}.md"
     echo "DEBUG: About to write to: $temp_output_file"
     if [[ ! -d "$(dirname "$temp_output_file")" ]]; then
