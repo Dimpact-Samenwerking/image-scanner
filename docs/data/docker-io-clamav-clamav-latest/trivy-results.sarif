@@ -9,7 +9,7 @@
           "informationUri": "https://github.com/aquasecurity/trivy",
           "name": "Trivy",
           "rules": [],
-          "version": "0.64.1"
+          "version": "0.64.0"
         }
       },
       "results": [],
@@ -29,18 +29,18 @@
           "clamav/clamav:latest"
         ],
         "imageCreatedDate": "2025-07-07T01:24:55.284996287Z",
-        "imageAgeDays": 2,
-        "imageAgeSeconds": 198959,
-        "imageAgeText": "2 days",
+        "imageAgeDays": 4,
+        "imageAgeSeconds": 366828,
+        "imageAgeText": "4 days",
         "imageAgeStatus": "very_recent",
-        "scanTimestamp": "2025-07-09T08:40:55Z",
+        "scanTimestamp": "2025-07-11T06:19:29Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "clamav"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-09T08:40:55Z",
+        "helmChartsEnhancementDate": "2025-07-11T06:19:29Z",
         "chartsMetadataVersion": "1.0",
         "epssScores": [],
         "epssHighRiskCount": 0,
@@ -48,7 +48,7 @@
         "epssLowRiskCount": 0,
         "epssVeryHighRiskCount": 0,
         "epssEnhanced": true,
-        "epssEnhancementDate": "2025-07-09T08:40:55Z",
+        "epssEnhancementDate": "2025-07-11T06:19:29Z",
         "epssMetadataVersion": "1.0"
       }
     }
