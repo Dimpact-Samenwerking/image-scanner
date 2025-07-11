@@ -727,45 +727,23 @@ class SecurityDashboard {
     setupEventListeners() {
         // Search functionality
         const searchInput = document.getElementById('searchInput');
-        if (searchInput) {
-            searchInput.addEventListener('input', (e) => {
-                this.filterImages();
-            });
-        }
+        searchInput.addEventListener('input', (e) => {
+            this.filterImages();
+        });
 
         // Severity filter
         const severityFilter = document.getElementById('severityFilter');
-        if (severityFilter) {
-            severityFilter.addEventListener('change', (e) => {
-                this.filterImages();
-            });
-        }
+        severityFilter.addEventListener('change', (e) => {
+            this.filterImages();
+        });
 
         // Refresh button
         const refreshBtn = document.getElementById('refreshBtn');
-        if (refreshBtn) {
-            refreshBtn.addEventListener('click', () => {
-                this.loadSecurityData().then(() => {
-                    this.renderDashboard();
-                });
+        refreshBtn.addEventListener('click', () => {
+            this.loadSecurityData().then(() => {
+                this.renderDashboard();
             });
-        }
-
-        // Add click handlers for summary cards (Critical & High only)
-        const criticalCard = document.querySelector('.summary-card.critical');
-        if (criticalCard) {
-            criticalCard.style.cursor = 'pointer';
-            criticalCard.addEventListener('click', () => {
-                this.showSeverityDetails('critical');
-            });
-        }
-        const highCard = document.querySelector('.summary-card.high');
-        if (highCard) {
-            highCard.style.cursor = 'pointer';
-            highCard.addEventListener('click', () => {
-                this.showSeverityDetails('high');
-            });
-        }
+        });
     }
 
     filterImages() {
@@ -998,92 +976,6 @@ class SecurityDashboard {
             ],
             metadata: null
         };
-    }
-
-    /**
-     * Show a modal with all CVEs of a given severity, sorted with high-risk (EPSS > 5%) first
-     * @param {string} severity - 'critical' or 'high'
-     */
-    showSeverityDetails(severity) {
-        if (!this.securityData || !this.securityData.images) return;
-        const allVulns = [];
-        // Aggregate all vulnerabilities of the given severity
-        this.securityData.images.forEach(image => {
-            if (image.detailedVulnerabilities && Array.isArray(image.detailedVulnerabilities)) {
-                image.detailedVulnerabilities.forEach(vuln => {
-                    if (vuln.severity && vuln.severity.toLowerCase() === severity) {
-                        // Find EPSS score if available
-                        let epssScore = null;
-                        if (image.epss && image.epss.scores) {
-                            const epssObj = image.epss.scores.find(e => e.cve === vuln.id);
-                            if (epssObj) epssScore = parseFloat(epssObj.epss);
-                        }
-                        allVulns.push({
-                            ...vuln,
-                            image: image.name,
-                            epss: epssScore
-                        });
-                    }
-                });
-            }
-        });
-        // Sort: high-risk (EPSS > 0.05) first, then by EPSS descending, then by CVE
-        allVulns.sort((a, b) => {
-            const aHighRisk = a.epss !== null && a.epss > 0.05;
-            const bHighRisk = b.epss !== null && b.epss > 0.05;
-            if (aHighRisk !== bHighRisk) return bHighRisk - aHighRisk;
-            if (a.epss !== b.epss) return (b.epss || 0) - (a.epss || 0);
-            return (a.id || '').localeCompare(b.id || '');
-        });
-        // Modal elements
-        const modal = document.getElementById('vulnerabilityModal');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalBody = document.getElementById('modalBody');
-        // Title
-        modalTitle.textContent = `${this.capitalizeFirst(severity)} Vulnerabilities (${allVulns.length})`;
-        // Build HTML
-        let html = '';
-        if (allVulns.length === 0) {
-            html = `<div style="padding:2rem;text-align:center;">No ${severity} vulnerabilities found.</div>`;
-        } else {
-            html = `<div style="max-height:60vh;overflow-y:auto;">
-                <table style="width:100%;border-collapse:collapse;">
-                    <thead>
-                        <tr style="background:#f3f4f6;">
-                            <th style="padding:8px 4px;text-align:left;">CVE</th>
-                            <th style="padding:8px 4px;text-align:left;">Image</th>
-                            <th style="padding:8px 4px;text-align:left;">Message</th>
-                            <th style="padding:8px 4px;text-align:left;">EPSS</th>
-                            <th style="padding:8px 4px;text-align:left;">Reference</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${allVulns.map(vuln => `
-                            <tr style="border-bottom:1px solid #eee;">
-                                <td style="padding:6px 4px;font-weight:bold;">${vuln.id}</td>
-                                <td style="padding:6px 4px;">${this.escapeHtml(vuln.image)}</td>
-                                <td style="padding:6px 4px;max-width:300px;word-break:break-word;">${this.escapeHtml(vuln.message)}</td>
-                                <td style="padding:6px 4px;">
-                                    ${vuln.epss !== null ? `<span class="epss-badge ${this.getEpssRiskClass(vuln.epss)}">${(vuln.epss * 100).toFixed(1)}%</span>${vuln.epss > 0.05 ? ' 🎯' : ''}` : '<span style="color:#bbb;">N/A</span>'}
-                                </td>
-                                <td style="padding:6px 4px;">
-                                    ${vuln.helpUri && vuln.helpUri !== 'No reference available' ? `<a href="${vuln.helpUri}" target="_blank" rel="noopener" style="color:#2563eb;">🔗</a>` : '<span style="color:#bbb;">-</span>'}
-                                </td>
-                            </tr>
-                        `).join('')}
-                    </tbody>
-                </table>
-            </div>`;
-        }
-        modalBody.innerHTML = html;
-        modal.style.display = 'flex';
-    }
-
-    getEpssRiskClass(epssScore) {
-        if (epssScore === null) return 'unknown';
-        if (epssScore > 0.05) return 'high-risk';
-        if (epssScore > 0.01) return 'medium-risk';
-        return 'low-risk';
     }
 }
 

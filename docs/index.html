@@ -577,13 +577,13 @@
 
         <!-- Summary Cards -->
         <div class="summary-grid" id="summaryGrid">
-            <div class="summary-card critical" title="Click to view all Critical CVEs" style="cursor:pointer;">
+            <div class="summary-card critical">
                 <div class="card-icon">🔥</div>
                 <div class="card-number" id="criticalCount">-</div>
                 <div class="card-label">Critical</div>
                 <div class="high-risk-indicator" id="criticalHighRisk" style="font-size: 0.7em; color: #ff6b6b; margin-top: 4px;">🎯 - high-risk</div>
             </div>
-            <div class="summary-card high" title="Click to view all High CVEs" style="cursor:pointer;">
+            <div class="summary-card high">
                 <div class="card-icon">⚠️</div>
                 <div class="card-number" id="highCount">-</div>
                 <div class="card-label">High</div>
@@ -665,9 +665,755 @@
         </div>
     </div>
 
-    <!-- Restore the original inline dashboard script and remove the external one -->
     <script>
-        // ... (PASTE THE ORIGINAL INLINE SecurityDashboard CLASS AND INITIALIZATION HERE) ...
+        class SecurityDashboard {
+            constructor() {
+                this.data = null;
+                this.filteredData = null;
+                this.currentSearchTerm = '';
+                this.currentSeverityFilter = 'all';
+                this.init();
+            }
+
+            async init() {
+                await this.loadData();
+                this.setupEventListeners();
+                this.render();
+            }
+
+            async loadData() {
+                try {
+                    // Try to load SARIF data from multiple possible locations
+                    const sarifFiles = await this.discoverSarifFiles();
+                    if (sarifFiles.length > 0) {
+                        this.data = await this.loadMultipleSarifFiles(sarifFiles);
+                    } else {
+                        throw new Error('No SARIF files found');
+                    }
+                } catch (error) {
+                    console.error('Error loading SARIF data:', error);
+                    this.showError('Failed to load vulnerability data. Please ensure SARIF scan results are available in the expected directories.');
+                }
+            }
+
+            async discoverSarifFiles() {
+                const dataLocation = 'data';
+                const sarifFiles = [];
+                
+                console.log('🔍 Discovering SARIF files in data directory...');
+                
+                try {
+                    // Try to fetch the data directory listing
+                    const response = await fetch(`${dataLocation}/`);
+                    if (response.ok) {
+                        // Parse directory listing to find subdirectories
+                        const text = await response.text();
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(text, 'text/html');
+                        const links = Array.from(doc.querySelectorAll('a[href]'));
+                        
+                        console.log(`📁 Found ${links.length} links in data directory`);
+                        
+                        for (const link of links) {
+                            const href = link.getAttribute('href');
+                            if (href && href.endsWith('/') && !href.startsWith('../') && href !== './') {
+                                const imageName = href.replace('/', '');
+                                try {
+                                    const sarifPath = `${dataLocation}/${imageName}/trivy-results.sarif`;
+                                    const sarifResponse = await fetch(sarifPath);
+                                    if (sarifResponse.ok) {
+                                        sarifFiles.push({
+                                            path: sarifPath,
+                                            imageName: imageName
+                                        });
+                                        console.log(`✅ Found SARIF for: ${imageName}`);
+                                    }
+                                } catch (e) {
+                                    console.log(`❌ Failed to load SARIF for: ${imageName}`);
+                                }
+                            }
+                        }
+                    } else {
+                        console.log('❌ Could not access data directory listing');
+                        
+                        // Fall back to trying known image names directly
+                        const knownImages = [
+                            'docker-io-bitnami-elasticsearch-8-6-2-debian-11-r0',
+                            'docker-io-maykinmedia-objects-api-latest',
+                            'docker-io-maykinmedia-objecttypes-api-latest',
+                            'docker-io-maykinmedia-open-inwoner-latest',
+                            'docker-io-openzaak-open-zaak-latest',
+                            'docker-io-bitnami-kibana-8-6-1-debian-11-r0',
+                            'docker-io-bitnami-redis-7-0-5-debian-11-r25',
+                            'docker-io-bitnami-rabbitmq-3-11-8-debian-11-r0',
+                            'docker-io-nginx-1-27-4',
+                            'docker-io-alpine-3-20',
+                            'ghcr-io-brp-api-personen-mock-2-6-0-202502261446'
+                        ];
+                        
+                        console.log('🔄 Trying known image names...');
+                        
+                        for (const imageName of knownImages) {
+                            try {
+                                const sarifPath = `${dataLocation}/${imageName}/trivy-results.sarif`;
+                                const response = await fetch(sarifPath);
+                                if (response.ok) {
+                                    sarifFiles.push({
+                                        path: sarifPath,
+                                        imageName: imageName
+                                    });
+                                    console.log(`✅ Found SARIF for: ${imageName}`);
+                                }
+                            } catch (e) {
+                                // Continue to next image
+                            }
+                        }
+                    }
+                } catch (e) {
+                    console.error('❌ Error discovering SARIF files:', e);
+                }
+
+                console.log(`📊 Total SARIF files discovered: ${sarifFiles.length}`);
+                return sarifFiles;
+            }
+
+            async loadMultipleSarifFiles(sarifFiles) {
+                const imageData = [];
+                const summary = {
+                    critical: 0,
+                    high: 0,
+                    medium: 0,
+                    low: 0,
+                    suppressed: 0,
+                    failed: 0,
+                    highRisk: 0,
+                    highRiskBySeverity: {
+                        critical: 0,
+                        high: 0,
+                        medium: 0,
+                        low: 0
+                    },
+                    lastUpdated: new Date().toISOString()
+                };
+
+                for (const file of sarifFiles) {
+                    try {
+                        const response = await fetch(file.path);
+                        const sarif = await response.json();
+                        const parsedData = this.parseSarifToImageData(sarif, file.imageName);
+                        imageData.push(parsedData);
+                        
+                        // Update summary
+                        summary.critical += parsedData.vulnerabilities.critical;
+                        summary.high += parsedData.vulnerabilities.high;
+                        summary.medium += parsedData.vulnerabilities.medium;
+                        summary.low += parsedData.vulnerabilities.low;
+                        summary.suppressed += parsedData.vulnerabilities.suppressed;
+                        summary.highRisk += parsedData.epss ? parsedData.epss.highRiskCount : 0;
+                        
+                        // Add high-risk CVE counts by severity
+                        if (parsedData.epss && parsedData.epss.highRiskBySeverity) {
+                            summary.highRiskBySeverity.critical += parsedData.epss.highRiskBySeverity.critical || 0;
+                            summary.highRiskBySeverity.high += parsedData.epss.highRiskBySeverity.high || 0;
+                            summary.highRiskBySeverity.medium += parsedData.epss.highRiskBySeverity.medium || 0;
+                            summary.highRiskBySeverity.low += parsedData.epss.highRiskBySeverity.low || 0;
+                        }
+                    } catch (error) {
+                        console.error(`Error loading ${file.path}:`, error);
+                        imageData.push({
+                            name: file.imageName,
+                            status: 'failed',
+                            vulnerabilities: { critical: 0, high: 0, medium: 0, low: 0, suppressed: 0 },
+                            details: []
+                        });
+                        summary.failed++;
+                    }
+                }
+
+                // Sort by total vulnerabilities (critical weighted highest)
+                imageData.sort((a, b) => {
+                    const scoreA = (a.vulnerabilities.critical * 1000) + (a.vulnerabilities.high * 100) + 
+                                  (a.vulnerabilities.medium * 10) + a.vulnerabilities.low;
+                    const scoreB = (b.vulnerabilities.critical * 1000) + (b.vulnerabilities.high * 100) + 
+                                  (b.vulnerabilities.medium * 10) + b.vulnerabilities.low;
+                    return scoreB - scoreA;
+                });
+
+                return { summary, images: imageData };
+            }
+
+            parseSarifToImageData(sarif, imageName) {
+                const vulnerabilities = { critical: 0, high: 0, medium: 0, low: 0, suppressed: 0 };
+                const details = { critical: [], high: [], medium: [], low: [] };
+                let ageData = null;
+                let epssData = { enhanced: false, highRiskCount: 0, averageScore: 0, maxScore: 0 };
+
+                if (sarif.runs && sarif.runs.length > 0) {
+                    for (const run of sarif.runs) {
+                        // Extract age metadata from SARIF properties
+                        if (run.properties && run.properties.imageAgeText) {
+                            ageData = {
+                                text: run.properties.imageAgeText,
+                                days: run.properties.imageAgeDays || 0,
+                                status: run.properties.imageAgeStatus || 'unknown',
+                                createdDate: run.properties.imageCreatedDate || 'unknown'
+                            };
+                        }
+
+                        // Extract EPSS metadata from SARIF properties (correct structure)
+                        if (run.properties && run.properties.epssEnhanced) {
+                            epssData.enhanced = true;
+                            epssData.totalCves = run.properties.epssScores?.length || 0;
+                            epssData.threshold = "5%";
+                            epssData.analysisDate = new Date().toISOString();
+                            epssData.epssScores = run.properties.epssScores || [];
+                        }
+
+                        if (run.results) {
+                            for (const result of run.results) {
+                                // Check for suppressed property
+                                if (result.suppressed === true) {
+                                    vulnerabilities.suppressed++;
+                                    continue; // Do not count suppressed in severity
+                                }
+                                const level = result.level || 'info';
+                                const messageText = result.message?.text || '';
+                                const severity = this.mapSarifLevelToSeverity(level, messageText);
+                                
+                                if (severity && vulnerabilities.hasOwnProperty(severity)) {
+                                    vulnerabilities[severity]++;
+                                    
+                                    const cveId = this.extractCveFromRuleId(result.ruleId || '');
+                                    const helpUri = this.getHelpUriFromSarif(run, result.ruleIndex);
+                                    const location = result.locations && result.locations[0] ? 
+                                        result.locations[0].physicalLocation?.artifactLocation?.uri || 'N/A' : 'N/A';
+
+                                    details[severity].push({
+                                        cve: cveId,
+                                        message: result.message?.text || 'No description available',
+                                        location: location,
+                                        helpUri: helpUri || 'No reference available'
+                                    });
+                                }
+                            }
+                        }
+
+                        // Calculate high-risk CVE count (EPSS >5%) by severity level
+                        if (epssData.enhanced && epssData.epssScores.length > 0) {
+                            // Build maps of CVEs by severity for quick lookup
+                            const cvesBySeverity = {
+                                critical: new Set(details.critical.map(vuln => vuln.cve)),
+                                high: new Set(details.high.map(vuln => vuln.cve)),
+                                medium: new Set(details.medium.map(vuln => vuln.cve)),
+                                low: new Set(details.low.map(vuln => vuln.cve))
+                            };
+
+                            // Initialize high-risk counts by severity
+                            epssData.highRiskBySeverity = {
+                                critical: 0,
+                                high: 0,
+                                medium: 0,
+                                low: 0
+                            };
+
+                            // Count high-risk CVEs by severity level
+                            epssData.epssScores.forEach(score => {
+                                const epssValue = parseFloat(score.epss);
+                                const cveId = score.cve;
+                                
+                                if (epssValue > 0.05) {
+                                    // Check which severity this CVE belongs to
+                                    if (cvesBySeverity.critical.has(cveId)) {
+                                        epssData.highRiskBySeverity.critical++;
+                                    } else if (cvesBySeverity.high.has(cveId)) {
+                                        epssData.highRiskBySeverity.high++;
+                                    } else if (cvesBySeverity.medium.has(cveId)) {
+                                        epssData.highRiskBySeverity.medium++;
+                                    } else if (cvesBySeverity.low.has(cveId)) {
+                                        epssData.highRiskBySeverity.low++;
+                                    }
+                                }
+                            });
+
+                            // Calculate total high-risk count including ALL severities
+                            epssData.highRiskCount = epssData.highRiskBySeverity.critical + 
+                                                     epssData.highRiskBySeverity.high + 
+                                                     epssData.highRiskBySeverity.medium +
+                                                     epssData.highRiskBySeverity.low;
+                        }
+                    }
+                }
+
+                const result = {
+                    name: this.cleanImageName(imageName),
+                    status: 'success',
+                    vulnerabilities,
+                    details
+                };
+
+                // Add age data if available
+                if (ageData) {
+                    result.age = ageData;
+                }
+
+                // Add EPSS data
+                result.epss = epssData;
+
+                return result;
+            }
+
+            mapSarifLevelToSeverity(level, messageText) {
+                // For 'error' level, we need to check the message text to distinguish between CRITICAL and HIGH
+                if (level === 'error') {
+                    if (messageText && messageText.includes('Severity: CRITICAL')) {
+                        return 'critical';
+                    } else if (messageText && messageText.includes('Severity: HIGH')) {
+                        return 'high';
+                    }
+                    // Default to critical if we can't determine from message
+                    return 'critical';
+                }
+                
+                // For 'warning' level, these should be MEDIUM severity
+                if (level === 'warning') {
+                    return 'medium';
+                }
+                
+                // For 'note' level, we need to check the message text to distinguish between MEDIUM and LOW
+                if (level === 'note') {
+                    // Check the message text for severity indication
+                    if (messageText && messageText.includes('Severity: LOW')) {
+                        return 'low';
+                    } else if (messageText && messageText.includes('Severity: MEDIUM')) {
+                        return 'medium';
+                    }
+                    // If we can't determine from message text, default to low for note level
+                    return 'low';
+                }
+                
+                // Handle any other cases (shouldn't happen with Trivy SARIF)
+                if (level === 'info') return 'low';
+                
+                return null;
+            }
+
+            extractCveFromRuleId(ruleId) {
+                const match = ruleId.match(/(CVE-\d{4}-\d+)/);
+                return match ? match[1] : ruleId;
+            }
+
+            getHelpUriFromSarif(run, ruleIndex) {
+                if (run.tool && run.tool.driver && run.tool.driver.rules && 
+                    typeof ruleIndex === 'number' && run.tool.driver.rules[ruleIndex]) {
+                    return run.tool.driver.rules[ruleIndex].helpUri;
+                }
+                return null;
+            }
+
+            cleanImageName(name) {
+                return name.replace(/[^a-zA-Z0-9-._]/g, '').substring(0, 100);
+            }
+
+            setupEventListeners() {
+                const searchBox = document.getElementById('searchBox');
+                const closeModal = document.getElementById('closeModal');
+                const modal = document.getElementById('vulnerabilityModal');
+
+                // Search box
+                searchBox.addEventListener('input', (e) => {
+                    this.currentSearchTerm = e.target.value;
+                    this.applyFilters();
+                });
+
+                // Severity filter buttons
+                const filterButtons = document.querySelectorAll('.filter-btn');
+                filterButtons.forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        // Remove active class from all buttons
+                        filterButtons.forEach(btn => btn.classList.remove('active'));
+                        
+                        // Add active class to clicked button
+                        e.target.classList.add('active');
+                        
+                        // Update current filter
+                        this.currentSeverityFilter = e.target.getAttribute('data-severity');
+                        this.applyFilters();
+                    });
+                });
+
+                // Modal events
+                closeModal.addEventListener('click', () => {
+                    modal.style.display = 'none';
+                });
+
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.style.display = 'none';
+                    }
+                });
+
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        modal.style.display = 'none';
+                    }
+                });
+            }
+
+            render() {
+                if (!this.data) return;
+
+                // Calculate and aggregate EPSS high-risk counts by severity
+                this.calculateSummaryHighRiskCounts();
+                
+                this.renderSummary();
+                this.updateResultsCount();
+                this.renderImages();
+                this.updateLastUpdated();
+            }
+            
+            calculateSummaryHighRiskCounts() {
+                // Initialize summary high-risk counts
+                this.data.summary.highRiskBySeverity = {
+                    critical: 0,
+                    high: 0,
+                    medium: 0,
+                    low: 0
+                };
+                
+                // Aggregate high-risk counts from all images
+                this.data.images.forEach(image => {
+                    if (image.epss && image.epss.highRiskBySeverity) {
+                        this.data.summary.highRiskBySeverity.critical += image.epss.highRiskBySeverity.critical || 0;
+                        this.data.summary.highRiskBySeverity.high += image.epss.highRiskBySeverity.high || 0;
+                        this.data.summary.highRiskBySeverity.medium += image.epss.highRiskBySeverity.medium || 0;
+                        this.data.summary.highRiskBySeverity.low += image.epss.highRiskBySeverity.low || 0;
+                    }
+                });
+            }
+
+            renderSummary() {
+                const { summary } = this.data;
+                
+                document.getElementById('criticalCount').textContent = summary.critical.toLocaleString();
+                document.getElementById('highCount').textContent = summary.high.toLocaleString();
+                document.getElementById('mediumCount').textContent = summary.medium.toLocaleString();
+                document.getElementById('lowCount').textContent = summary.low.toLocaleString();
+                
+                // Update high-risk CVE indicators for each severity level
+                const criticalHighRisk = document.getElementById('criticalHighRisk');
+                const highHighRisk = document.getElementById('highHighRisk');
+                const mediumHighRisk = document.getElementById('mediumHighRisk');
+                const lowHighRisk = document.getElementById('lowHighRisk');
+                
+                if (summary.highRiskBySeverity) {
+                    criticalHighRisk.textContent = `🎯 ${summary.highRiskBySeverity.critical} high-risk`;
+                    highHighRisk.textContent = `🎯 ${summary.highRiskBySeverity.high} high-risk`;
+                    mediumHighRisk.textContent = `🎯 ${summary.highRiskBySeverity.medium} high-risk`;
+                    lowHighRisk.textContent = `🎯 ${summary.highRiskBySeverity.low} high-risk`;
+                } else {
+                    // Fallback if no EPSS data available
+                    criticalHighRisk.textContent = '🎯 - high-risk';
+                    highHighRisk.textContent = '🎯 - high-risk';
+                    mediumHighRisk.textContent = '🎯 - high-risk';
+                    lowHighRisk.textContent = '🎯 - high-risk';
+                }
+            }
+
+            renderImages() {
+                const contentArea = document.getElementById('contentArea');
+                const imagesToRender = this.filteredData || this.data.images;
+
+                if (!imagesToRender || imagesToRender.length === 0) {
+                    let emptyMessage = 'No images found';
+                    let emptyDescription = 'Try adjusting your search criteria';
+                    
+                    if (this.currentSeverityFilter !== 'all' && !this.currentSearchTerm.trim()) {
+                        const severityNames = {
+                            'critical': 'critical vulnerabilities',
+                            'high': 'high severity vulnerabilities', 
+                            'medium': 'medium severity vulnerabilities',
+                            'low': 'low severity vulnerabilities',
+                            'clean': 'clean images (no vulnerabilities)',
+                            'suppressed': 'suppressed vulnerabilities'
+                        };
+                        emptyDescription = `No images found with ${severityNames[this.currentSeverityFilter]}`;
+                    }
+                    
+                    contentArea.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">🔍</div>
+                            <h3>${emptyMessage}</h3>
+                            <p>${emptyDescription}</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const imageListHtml = imagesToRender.map(image => `
+                    <div class="image-item" onclick="dashboard.showImageDetails('${image.name}')">
+                        <div class="image-header">
+                            <div class="image-name">${image.name}</div>
+                            <div class="status-badge status-${image.status}">
+                                ${image.status === 'success' ? '✅ Scanned' : '❌ Failed'}
+                            </div>
+                        </div>
+                        ${image.status === 'success' ? `
+                            <div class="vulnerability-counts">
+                                <div class="vuln-badge vuln-critical">🔥 ${image.vulnerabilities.critical} CRITICAL</div>
+                                <div class="vuln-badge vuln-high">⚠️ ${image.vulnerabilities.high} HIGH</div>
+                                <div class="vuln-badge vuln-medium">🔶 ${image.vulnerabilities.medium} MEDIUM</div>
+                                <div class="vuln-badge vuln-low">🔵 ${image.vulnerabilities.low} LOW</div>
+                                <div class="vuln-badge vuln-suppressed">🛡️ ${image.vulnerabilities.suppressed} SUPPRESSED</div>
+                            </div>
+                            ${image.age ? `
+                                <div class="image-age" style="margin-top: 10px; font-size: 0.9em; color: #666;">
+                                    📅 Age: ${this.getAgeStatusEmoji(image.age.status)} ${image.age.text}
+                                </div>
+                            ` : ''}
+                            ${image.epss && image.epss.enhanced ? `
+                                <div class="image-epss" style="margin-top: 8px; font-size: 0.9em; color: #666;">
+                                    🎯 High-Risk CVEs: ${image.epss.highRiskCount} vulnerabilities with >5% exploitation probability
+                                </div>
+                            ` : ''}
+                        ` : '<p style="color: #666; margin-top: 10px;">Scan failed or no data available</p>'}
+                    </div>
+                `).join('');
+
+                contentArea.innerHTML = `<div class="image-list">${imageListHtml}</div>`;
+            }
+
+            applyFilters() {
+                if (!this.data) return;
+
+                let filteredImages = this.data.images;
+
+                // Apply search filter
+                if (this.currentSearchTerm.trim()) {
+                    filteredImages = filteredImages.filter(image =>
+                        image.name.toLowerCase().includes(this.currentSearchTerm.toLowerCase())
+                    );
+                }
+
+                // Apply severity filter
+                if (this.currentSeverityFilter !== 'all') {
+                    filteredImages = filteredImages.filter(image => {
+                        if (image.status !== 'success') return false;
+                        
+                        switch (this.currentSeverityFilter) {
+                            case 'critical':
+                                return image.vulnerabilities.critical > 0;
+                            case 'high':
+                                return image.vulnerabilities.high > 0;
+                            case 'medium':
+                                return image.vulnerabilities.medium > 0;
+                            case 'low':
+                                return image.vulnerabilities.low > 0;
+                            case 'clean':
+                                return image.vulnerabilities.critical === 0 && 
+                                       image.vulnerabilities.high === 0 && 
+                                       image.vulnerabilities.medium === 0 && 
+                                       image.vulnerabilities.low === 0;
+                            case 'suppressed':
+                                return image.vulnerabilities.suppressed > 0;
+                            default:
+                                return true;
+                        }
+                    });
+                }
+
+                this.filteredData = filteredImages;
+                this.updateResultsCount();
+                this.renderImages();
+            }
+
+            updateResultsCount() {
+                const resultsCount = document.getElementById('resultsCount');
+                if (!resultsCount) return;
+
+                const totalImages = this.data ? this.data.images.length : 0;
+                const filteredCount = this.filteredData ? this.filteredData.length : totalImages;
+                
+                let filterText = '';
+                if (this.currentSeverityFilter !== 'all') {
+                    const severityNames = {
+                        'critical': '🔥 Critical',
+                        'high': '⚠️ High', 
+                        'medium': '🔶 Medium',
+                        'low': '🔵 Low',
+                        'clean': '✅ Clean',
+                        'suppressed': '🛡️ Suppressed'
+                    };
+                    filterText = ` matching "${severityNames[this.currentSeverityFilter]}"`;
+                }
+
+                if (this.currentSearchTerm.trim()) {
+                    filterText += ` and search "${this.currentSearchTerm}"`;
+                }
+
+                resultsCount.textContent = `Showing ${filteredCount} of ${totalImages} images${filterText}`;
+            }
+
+            showImageDetails(imageName) {
+                const image = this.data.images.find(img => img.name === imageName);
+                if (!image) return;
+
+                const modal = document.getElementById('vulnerabilityModal');
+                const modalTitle = document.getElementById('modalTitle');
+                const modalBody = document.getElementById('modalBody');
+
+                modalTitle.textContent = `🖼️ ${imageName}`;
+
+                if (image.status === 'failed') {
+                    modalBody.innerHTML = `
+                        <div class="error">
+                            <h3>❌ Scan Failed</h3>
+                            <p>Unable to complete vulnerability scan for this image.</p>
+                        </div>
+                    `;
+                } else {
+                    const severities = ['critical', 'high', 'medium', 'low'];
+                    const severityIcons = { critical: '🔥', high: '⚠️', medium: '🔶', low: '🔵' };
+
+                    let modalContent = `
+                        <div style="margin-bottom: 30px;">
+                            <h3>📦 Image Information</h3>
+                            <div style="margin: 1rem 0;">
+                                <p><strong>Image Name:</strong> ${imageName}</p>
+                                <p><strong>Security Status:</strong> <span class="status-badge status-${image.status}">✅ Scanned</span></p>
+                                <p><strong>Total Vulnerabilities:</strong> ${Object.values(image.vulnerabilities).reduce((a, b) => a + b, 0)}</p>
+                                ${image.age ? `
+                                    <p><strong>Image Age:</strong> ${this.getAgeStatusEmoji(image.age.status)} ${image.age.text}</p>
+                                    <p><strong>Created Date:</strong> ${image.age.createdDate !== 'unknown' ? new Date(image.age.createdDate).toLocaleDateString() : 'Unknown'}</p>
+                                    ${image.age.days > 90 ? '<p style="color: #f39c12;"><strong>⚠️ Recommendation:</strong> Consider updating this image for latest security patches</p>' : ''}
+                                ` : ''}
+                                ${image.epss && image.epss.enhanced ? `
+                                    <p><strong>High-Risk CVEs:</strong> ${image.epss.highRiskCount} vulnerabilities with >5% exploitation probability</p>
+                                    ${image.epss.maxScore > 0.5 ? '<p style="color: #e74c3c;"><strong>🚨 Critical Alert:</strong> This image contains vulnerabilities with very high exploitation probability (>50%)</p>' : ''}
+                                    ${image.epss.highRiskCount > 0 ? '<p style="color: #f39c12;"><strong>⚠️ Security Advisory:</strong> Prioritize patching high-risk vulnerabilities</p>' : ''}
+                                ` : ''}
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 30px;">
+                            <h3>📊 Vulnerability Summary</h3>
+                            <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 15px;">
+                                <div class="vuln-badge vuln-critical">🔥 ${image.vulnerabilities.critical} Critical</div>
+                                <div class="vuln-badge vuln-high">⚠️ ${image.vulnerabilities.high} High</div>
+                                <div class="vuln-badge vuln-medium">🔶 ${image.vulnerabilities.medium} Medium</div>
+                                <div class="vuln-badge vuln-low">🔵 ${image.vulnerabilities.low} Low</div>
+                                <div class="vuln-badge vuln-suppressed">🛡️ ${image.vulnerabilities.suppressed} Suppressed</div>
+                            </div>
+                        </div>
+                    `;
+
+                    for (const severity of severities) {
+                        const vulns = image.details[severity] || [];
+                        if (vulns.length > 0) {
+                            modalContent += `
+                                <div class="vulnerability-section">
+                                    <div class="severity-header ${severity}">
+                                        <span>${severityIcons[severity]}</span>
+                                        <span>${severity.toUpperCase()} Vulnerabilities (${vulns.length})</span>
+                                    </div>
+                                    ${vulns.slice(0, 10).map(vuln => `
+                                        <div class="vulnerability-item ${severity}">
+                                            <div class="vuln-cve">
+                                                ${vuln.cve}
+                                                ${vuln.epss ? `<span class="epss-badge ${this.getEpssRiskClass(vuln.epss.epss)}">${(vuln.epss.epss * 100).toFixed(1)}% EPSS</span>` : ''}
+                                            </div>
+                                            <div class="vuln-message">${vuln.message}</div>
+                                            <div class="vuln-details">
+                                                <span><strong>Location:</strong> ${vuln.location}</span>
+                                                ${vuln.epss ? `<span><strong>Exploit Probability:</strong> ${(vuln.epss.epss * 100).toFixed(1)}% (${vuln.epss.percentile ? (vuln.epss.percentile * 100).toFixed(1) + 'th percentile' : 'N/A'})</span>` : ''}
+                                                ${vuln.helpUri !== 'No reference available' ? 
+                                                    `<span><strong>Reference:</strong> <a href="${vuln.helpUri}" target="_blank">View Details</a></span>` : 
+                                                    '<span><strong>Reference:</strong> Not available</span>'
+                                                }
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                    ${vulns.length > 10 ? `<p style="text-align: center; margin-top: 15px; color: #666;">And ${vulns.length - 10} more ${severity} vulnerabilities...</p>` : ''}
+                                </div>
+                            `;
+                        }
+                    }
+
+                    if (modalContent === `
+                        <div style="margin-bottom: 30px;">
+                            <h3>📊 Summary</h3>
+                            <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 15px;">
+                                <div class="vuln-badge vuln-critical">🔥 ${image.vulnerabilities.critical} Critical</div>
+                                <div class="vuln-badge vuln-high">⚠️ ${image.vulnerabilities.high} High</div>
+                                <div class="vuln-badge vuln-medium">🔶 ${image.vulnerabilities.medium} Medium</div>
+                                <div class="vuln-badge vuln-low">🔵 ${image.vulnerabilities.low} Low</div>
+                                <div class="vuln-badge vuln-suppressed">🛡️ ${image.vulnerabilities.suppressed} Suppressed</div>
+                            </div>
+                        </div>
+                    `) {
+                        modalContent += `
+                            <div class="empty-state">
+                                <div class="empty-state-icon">🎉</div>
+                                <h3>No Vulnerabilities Found</h3>
+                                <p>This image appears to be clean!</p>
+                            </div>
+                        `;
+                    }
+
+                    modalBody.innerHTML = modalContent;
+                }
+
+                modal.style.display = 'block';
+            }
+
+            updateLastUpdated() {
+                const lastUpdated = document.getElementById('lastUpdated');
+                const now = new Date();
+                lastUpdated.textContent = `Last updated: ${now.toLocaleDateString()} at ${now.toLocaleTimeString()}`;
+            }
+
+            getAgeStatusEmoji(ageStatus) {
+                switch (ageStatus) {
+                    case 'very_recent':
+                        return '✅';
+                    case 'recent':
+                        return '🟢';
+                    case 'moderate':
+                        return '🟡';
+                    case 'old':
+                        return '🟠';
+                    case 'very_old':
+                        return '🔴';
+                    default:
+                        return '❓';
+                }
+            }
+
+            getEpssRiskEmoji(score) {
+                if (score > 0.5) return '🔴'; // Very High (>50%)
+                if (score > 0.1) return '🟠'; // High (>10%)
+                if (score > 0.01) return '🟡'; // Medium (>1%)
+                return '🟢'; // Low (≤1%)
+            }
+
+            getEpssRiskClass(score) {
+                if (score > 0.5) return 'epss-very-high';
+                if (score > 0.1) return 'epss-high';
+                if (score > 0.01) return 'epss-medium';
+                return 'epss-low';
+            }
+
+            showError(message) {
+                const contentArea = document.getElementById('contentArea');
+                contentArea.innerHTML = `
+                    <div class="error">
+                        <h3>❌ Error</h3>
+                        <p>${message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Initialize the dashboard
+        const dashboard = new SecurityDashboard();
     </script>
 </body>
 </html> 
