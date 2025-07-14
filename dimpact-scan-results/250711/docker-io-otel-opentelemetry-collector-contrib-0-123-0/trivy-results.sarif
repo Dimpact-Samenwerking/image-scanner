@@ -409,18 +409,18 @@
           "otel/opentelemetry-collector-contrib:0.123.0"
         ],
         "imageCreatedDate": "2025-04-01T14:03:32.917713435Z",
-        "imageAgeDays": 100,
-        "imageAgeSeconds": 8703784,
-        "imageAgeText": "100 days",
+        "imageAgeDays": 101,
+        "imageAgeSeconds": 8736545,
+        "imageAgeText": "101 days",
         "imageAgeStatus": "moderate",
-        "scanTimestamp": "2025-07-11T06:46:38Z",
+        "scanTimestamp": "2025-07-11T16:00:57Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "zaakafhandelcomponent"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-11T06:46:38Z",
+        "helmChartsEnhancementDate": "2025-07-11T16:00:57Z",
         "chartsMetadataVersion": "1.0",
         "epssScores": [
           {
@@ -459,7 +459,7 @@
         "epssLowRiskCount": 6,
         "epssVeryHighRiskCount": 0,
         "epssEnhanced": true,
-        "epssEnhancementDate": "2025-07-11T06:46:39Z",
+        "epssEnhancementDate": "2025-07-11T16:00:58Z",
         "epssMetadataVersion": "1.0"
       }
     }

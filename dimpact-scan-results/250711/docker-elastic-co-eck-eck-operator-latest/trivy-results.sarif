@@ -247,18 +247,18 @@
           "docker.elastic.co/eck/eck-operator:latest"
         ],
         "imageCreatedDate": "2025-04-15T12:54:36.277992311Z",
-        "imageAgeDays": 86,
-        "imageAgeSeconds": 7503725,
-        "imageAgeText": "86 days",
+        "imageAgeDays": 87,
+        "imageAgeSeconds": 7525879,
+        "imageAgeText": "87 days",
         "imageAgeStatus": "recent",
-        "scanTimestamp": "2025-07-11T08:17:10Z",
+        "scanTimestamp": "2025-07-11T14:26:25Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "eck-operator"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-11T08:17:10Z",
+        "helmChartsEnhancementDate": "2025-07-11T14:26:26Z",
         "chartsMetadataVersion": "1.0",
         "epssScores": [
           {
@@ -287,7 +287,7 @@
         "epssLowRiskCount": 4,
         "epssVeryHighRiskCount": 0,
         "epssEnhanced": true,
-        "epssEnhancementDate": "2025-07-11T08:17:10Z",
+        "epssEnhancementDate": "2025-07-11T14:26:26Z",
         "epssMetadataVersion": "1.0"
       }
     }

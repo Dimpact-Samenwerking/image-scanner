@@ -1287,7 +1287,12 @@ main() {
     
     # Explicit cleanup at the end
     cleanup_on_exit
-    
+
+    # Cleanup all trivy-temp folders in OUTPUT_DIR
+    print_status "🧹 Cleaning up trivy-temp folders..."
+    find "${OUTPUT_DIR}" -type d -name "trivy-temp" -exec rm -rf {} + 2>/dev/null || true
+    print_success "🎉 All trivy-temp folders removed!"
+
     print_success "Scan completed successfully! Results are available in $OUTPUT_DIR"
     echo "[COMPLETED]"
 }
