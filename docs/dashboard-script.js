@@ -50,101 +50,46 @@ class SecurityDashboard {
     }
 
     async loadSarifData() {
-        // Try to load SARIF files from common scan result directories
-        const possibleDirs = [
-            '../results/', 
-            '../security-reports/latest/',
-            '../local-scan-results/',
-            './' + new Date().toISOString().slice(2,10).replace(/-/g, '') + '-dimpact-scan-results/'
-        ];
-
+        // Always use index.json in docs/data/ for SARIF file discovery
+        const indexPath = 'data/index.json';
         let allSarifData = [];
         let scanMetadata = null;
-        
-        for (const baseDir of possibleDirs) {
-            try {
-                // Try to get directory listing or known image patterns
-                const commonImages = await this.discoverSarifFiles(baseDir);
-                if (commonImages.length > 0) {
-                    console.log(`Found SARIF files in ${baseDir}`);
-                    allSarifData = await this.loadMultipleSarifFiles(baseDir, commonImages);
-                    break;
-                }
-            } catch (error) {
-                console.debug(`No SARIF data found in ${baseDir}:`, error);
-                continue;
+        try {
+            const response = await fetch(indexPath);
+            if (!response.ok) throw new Error('index.json not found');
+            const sarifFiles = await response.json();
+            if (!Array.isArray(sarifFiles) || sarifFiles.length === 0) {
+                throw new Error('index.json is empty or invalid');
             }
+            allSarifData = await this.loadMultipleSarifFilesFromIndex(sarifFiles);
+        } catch (error) {
+            console.error('Failed to load SARIF index:', error);
+            throw error;
         }
-
         if (allSarifData.length === 0) {
-            throw new Error('No SARIF data found in any scan directories');
+            throw new Error('No SARIF data found in index.json');
         }
-
         return this.aggregateSarifData(allSarifData, scanMetadata);
     }
 
-    async discoverSarifFiles(baseDir) {
-        // Common container image name patterns to look for
-        const commonImagePatterns = [
-            'docker-io-library-nginx-*',
-            'docker-io-library-alpine-*', 
-            'bitnami-*',
-            'ghcr-io-*',
-            'docker-io-*'
-        ];
-
-        const foundFiles = [];
-        
-        // Try known patterns and some common image directories
-        for (const pattern of commonImagePatterns) {
+    // New method: load SARIF files using index.json
+    async loadMultipleSarifFilesFromIndex(sarifFiles) {
+        const sarifPromises = sarifFiles.map(async (relativePath) => {
             try {
-                const response = await fetch(`${baseDir}${pattern}/trivy-results.sarif`);
-                if (response.ok) {
-                    foundFiles.push(pattern.replace('*', ''));
-                }
-            } catch (error) {
-                // Continue checking other patterns
-            }
-        }
-
-        // If no patterns work, try a few specific known directories
-        const knownDirs = [
-            'docker-io-library-nginx-1-27-4',
-            'docker-io-library-alpine-3-20',
-            'ghcr-io-infonl-zaakafhandelcomponent-3-5-0'
-        ];
-
-        for (const dir of knownDirs) {
-            try {
-                const response = await fetch(`${baseDir}${dir}/trivy-results.sarif`);
-                if (response.ok) {
-                    foundFiles.push(dir);
-                }
-            } catch (error) {
-                // Continue checking
-            }
-        }
-
-        return foundFiles;
-    }
-
-    async loadMultipleSarifFiles(baseDir, imageNames) {
-        const sarifPromises = imageNames.map(async (imageName) => {
-            try {
-                const response = await fetch(`${baseDir}${imageName}/trivy-results.sarif`);
+                const response = await fetch('data/' + relativePath);
                 if (!response.ok) return null;
-                
                 const sarifData = await response.json();
+                // Extract image name from path (folder name)
+                const imageName = relativePath.split('/')[0];
                 return {
                     imageName: imageName,
                     sarif: sarifData
                 };
             } catch (error) {
-                console.warn(`Failed to load SARIF for ${imageName}:`, error);
+                console.warn(`Failed to load SARIF for ${relativePath}:`, error);
                 return null;
             }
         });
-
         const results = await Promise.all(sarifPromises);
         return results.filter(result => result !== null);
     }
