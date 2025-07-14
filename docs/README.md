@@ -101,34 +101,7 @@ Dashboard
 
 ---
 
-## 📋 Summary Table
 
-| Step      | Script                              | Output Location           |
-|-----------|-------------------------------------|--------------------------|
-| Discovery | `dimpact-image-discovery.sh`        | scan-config/repo_map.yaml|
-| Scanning  | `dimpact-image-scanner.sh`          | dimpact-scan-results/    |
-| Report    | `dimpact-image-report.sh`           | docs/data/               |
-| Dashboard | (local server or GitHub Pages)      | docs/index.html          |
-
----
-
-## 📚 Documentation & Advanced Topics
-
-- [Commands Reference](COMMANDS_REFERENCE.md)
-- [GitHub Pages Setup](GITHUB_PAGES_SETUP.md)
-- [Quickmode Guide](QUICKMODE_GUIDE.md)
-- [Container Config Examples](CONTAINER_CONFIG_EXAMPLES.md)
-
----
-
-## 🖥️ Browser Support
-- Chrome 60+, Firefox 55+, Safari 12+, Edge 79+
-
-## 🔒 Security & Performance
-- No external dependencies or CDNs
-- All code is self-contained
-- No data sent to external services
-- Fast, supports 1000+ images
 
 ## 📝 License
 See main repository LICENSE file for details.
