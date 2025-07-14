@@ -199,6 +199,114 @@
               }
             },
             {
+              "id": "CVE-2025-32988",
+              "name": "OsPackageVulnerability",
+              "shortDescription": {
+                "text": "gnutls: Vulnerability in GnuTLS otherName SAN export"
+              },
+              "fullDescription": {
+                "text": "A flaw was found in GnuTLS. A double-free vulnerability exists in GnuTLS due to incorrect ownership handling in the export logic of Subject Alternative Name (SAN) entries containing an otherName. If the type-id OID is invalid or malformed, GnuTLS will call asn1_delete_structure() on an ASN.1 node it does not own, leading to a double-free condition when the parent function or caller later attempts to free the same structure.\n\nThis vulnerability can be triggered using only public GnuTLS APIs and may result in denial of service or memory corruption, depending on allocator behavior."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "helpUri": "https://avd.aquasec.com/nvd/cve-2025-32988",
+              "help": {
+                "text": "Vulnerability CVE-2025-32988\nSeverity: MEDIUM\nPackage: libgnutls30\nFixed Version: \nLink: [CVE-2025-32988](https://avd.aquasec.com/nvd/cve-2025-32988)\nA flaw was found in GnuTLS. A double-free vulnerability exists in GnuTLS due to incorrect ownership handling in the export logic of Subject Alternative Name (SAN) entries containing an otherName. If the type-id OID is invalid or malformed, GnuTLS will call asn1_delete_structure() on an ASN.1 node it does not own, leading to a double-free condition when the parent function or caller later attempts to free the same structure.\n\nThis vulnerability can be triggered using only public GnuTLS APIs and may result in denial of service or memory corruption, depending on allocator behavior.",
+                "markdown": "**Vulnerability CVE-2025-32988**\n| Severity | Package | Fixed Version | Link |\n| --- | --- | --- | --- |\n|MEDIUM|libgnutls30||[CVE-2025-32988](https://avd.aquasec.com/nvd/cve-2025-32988)|\n\nA flaw was found in GnuTLS. A double-free vulnerability exists in GnuTLS due to incorrect ownership handling in the export logic of Subject Alternative Name (SAN) entries containing an otherName. If the type-id OID is invalid or malformed, GnuTLS will call asn1_delete_structure() on an ASN.1 node it does not own, leading to a double-free condition when the parent function or caller later attempts to free the same structure.\n\nThis vulnerability can be triggered using only public GnuTLS APIs and may result in denial of service or memory corruption, depending on allocator behavior."
+              },
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "5.5",
+                "tags": [
+                  "vulnerability",
+                  "security",
+                  "MEDIUM"
+                ]
+              }
+            },
+            {
+              "id": "CVE-2025-32989",
+              "name": "OsPackageVulnerability",
+              "shortDescription": {
+                "text": "gnutls: Vulnerability in GnuTLS SCT extension parsing"
+              },
+              "fullDescription": {
+                "text": "A heap-buffer-overread vulnerability was found in GnuTLS in how it handles the Certificate Transparency (CT) Signed Certificate Timestamp (SCT) extension during X.509 certificate parsing. This flaw allows a malicious user to create a certificate containing a malformed SCT extension (OID 1.3.6.1.4.1.11129.2.4.2) that contains sensitive data. This issue leads to the exposure of confidential information when GnuTLS verifies certificates from certain websites when the certificate (SCT) is not checked correctly."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "helpUri": "https://avd.aquasec.com/nvd/cve-2025-32989",
+              "help": {
+                "text": "Vulnerability CVE-2025-32989\nSeverity: MEDIUM\nPackage: libgnutls30\nFixed Version: \nLink: [CVE-2025-32989](https://avd.aquasec.com/nvd/cve-2025-32989)\nA heap-buffer-overread vulnerability was found in GnuTLS in how it handles the Certificate Transparency (CT) Signed Certificate Timestamp (SCT) extension during X.509 certificate parsing. This flaw allows a malicious user to create a certificate containing a malformed SCT extension (OID 1.3.6.1.4.1.11129.2.4.2) that contains sensitive data. This issue leads to the exposure of confidential information when GnuTLS verifies certificates from certain websites when the certificate (SCT) is not checked correctly.",
+                "markdown": "**Vulnerability CVE-2025-32989**\n| Severity | Package | Fixed Version | Link |\n| --- | --- | --- | --- |\n|MEDIUM|libgnutls30||[CVE-2025-32989](https://avd.aquasec.com/nvd/cve-2025-32989)|\n\nA heap-buffer-overread vulnerability was found in GnuTLS in how it handles the Certificate Transparency (CT) Signed Certificate Timestamp (SCT) extension during X.509 certificate parsing. This flaw allows a malicious user to create a certificate containing a malformed SCT extension (OID 1.3.6.1.4.1.11129.2.4.2) that contains sensitive data. This issue leads to the exposure of confidential information when GnuTLS verifies certificates from certain websites when the certificate (SCT) is not checked correctly."
+              },
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "5.5",
+                "tags": [
+                  "vulnerability",
+                  "security",
+                  "MEDIUM"
+                ]
+              }
+            },
+            {
+              "id": "CVE-2025-32990",
+              "name": "OsPackageVulnerability",
+              "shortDescription": {
+                "text": "gnutls: Vulnerability in GnuTLS certtool template parsing"
+              },
+              "fullDescription": {
+                "text": "A heap-buffer-overflow (off-by-one) flaw was found in the GnuTLS software in the template parsing logic within the certtool utility. When it reads certain settings from a template file, it allows an attacker to cause an out-of-bounds (OOB) NULL pointer write, resulting in memory corruption and a denial-of-service (DoS) that could potentially crash the system."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "helpUri": "https://avd.aquasec.com/nvd/cve-2025-32990",
+              "help": {
+                "text": "Vulnerability CVE-2025-32990\nSeverity: MEDIUM\nPackage: libgnutls30\nFixed Version: \nLink: [CVE-2025-32990](https://avd.aquasec.com/nvd/cve-2025-32990)\nA heap-buffer-overflow (off-by-one) flaw was found in the GnuTLS software in the template parsing logic within the certtool utility. When it reads certain settings from a template file, it allows an attacker to cause an out-of-bounds (OOB) NULL pointer write, resulting in memory corruption and a denial-of-service (DoS) that could potentially crash the system.",
+                "markdown": "**Vulnerability CVE-2025-32990**\n| Severity | Package | Fixed Version | Link |\n| --- | --- | --- | --- |\n|MEDIUM|libgnutls30||[CVE-2025-32990](https://avd.aquasec.com/nvd/cve-2025-32990)|\n\nA heap-buffer-overflow (off-by-one) flaw was found in the GnuTLS software in the template parsing logic within the certtool utility. When it reads certain settings from a template file, it allows an attacker to cause an out-of-bounds (OOB) NULL pointer write, resulting in memory corruption and a denial-of-service (DoS) that could potentially crash the system."
+              },
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "5.5",
+                "tags": [
+                  "vulnerability",
+                  "security",
+                  "MEDIUM"
+                ]
+              }
+            },
+            {
+              "id": "CVE-2025-6395",
+              "name": "OsPackageVulnerability",
+              "shortDescription": {
+                "text": "gnutls: NULL pointer dereference in _gnutls_figure_common_ciphersuite()"
+              },
+              "fullDescription": {
+                "text": "A NULL pointer dereference flaw was found in the GnuTLS software in _gnutls_figure_common_ciphersuite(). When it reads certain settings from a template file, it can allow an attacker to cause an out-of-bounds (OOB) NULL pointer write, resulting in memory corruption and a denial of service (DoS) that could crash the system."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "helpUri": "https://avd.aquasec.com/nvd/cve-2025-6395",
+              "help": {
+                "text": "Vulnerability CVE-2025-6395\nSeverity: MEDIUM\nPackage: libgnutls30\nFixed Version: \nLink: [CVE-2025-6395](https://avd.aquasec.com/nvd/cve-2025-6395)\nA NULL pointer dereference flaw was found in the GnuTLS software in _gnutls_figure_common_ciphersuite(). When it reads certain settings from a template file, it can allow an attacker to cause an out-of-bounds (OOB) NULL pointer write, resulting in memory corruption and a denial of service (DoS) that could crash the system.",
+                "markdown": "**Vulnerability CVE-2025-6395**\n| Severity | Package | Fixed Version | Link |\n| --- | --- | --- | --- |\n|MEDIUM|libgnutls30||[CVE-2025-6395](https://avd.aquasec.com/nvd/cve-2025-6395)|\n\nA NULL pointer dereference flaw was found in the GnuTLS software in _gnutls_figure_common_ciphersuite(). When it reads certain settings from a template file, it can allow an attacker to cause an out-of-bounds (OOB) NULL pointer write, resulting in memory corruption and a denial of service (DoS) that could crash the system."
+              },
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "5.5",
+                "tags": [
+                  "vulnerability",
+                  "security",
+                  "MEDIUM"
+                ]
+              }
+            },
+            {
               "id": "CVE-2023-50495",
               "name": "OsPackageVulnerability",
               "shortDescription": {
@@ -685,6 +793,33 @@
               }
             },
             {
+              "id": "CVE-2025-53864",
+              "name": "LanguageSpecificPackageVulnerability",
+              "shortDescription": {
+                "text": "com.nimbusds/nimbus-jose-jwt: Uncontrolled recursion in Connect2id Nimbus JOSE + JWT"
+              },
+              "fullDescription": {
+                "text": "Connect2id Nimbus JOSE + JWT before 10.0.2 allows a remote attacker to cause a denial of service via a deeply nested JSON object supplied in a JWT claim set, because of uncontrolled recursion. NOTE: this is independent of the Gson 2.11.0 issue because the Connect2id product could have checked the JSON object nesting depth, regardless of what limits (if any) were imposed by Gson."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "helpUri": "https://avd.aquasec.com/nvd/cve-2025-53864",
+              "help": {
+                "text": "Vulnerability CVE-2025-53864\nSeverity: MEDIUM\nPackage: com.nimbusds:nimbus-jose-jwt\nFixed Version: 10.0.2\nLink: [CVE-2025-53864](https://avd.aquasec.com/nvd/cve-2025-53864)\nConnect2id Nimbus JOSE + JWT before 10.0.2 allows a remote attacker to cause a denial of service via a deeply nested JSON object supplied in a JWT claim set, because of uncontrolled recursion. NOTE: this is independent of the Gson 2.11.0 issue because the Connect2id product could have checked the JSON object nesting depth, regardless of what limits (if any) were imposed by Gson.",
+                "markdown": "**Vulnerability CVE-2025-53864**\n| Severity | Package | Fixed Version | Link |\n| --- | --- | --- | --- |\n|MEDIUM|com.nimbusds:nimbus-jose-jwt|10.0.2|[CVE-2025-53864](https://avd.aquasec.com/nvd/cve-2025-53864)|\n\nConnect2id Nimbus JOSE + JWT before 10.0.2 allows a remote attacker to cause a denial of service via a deeply nested JSON object supplied in a JWT claim set, because of uncontrolled recursion. NOTE: this is independent of the Gson 2.11.0 issue because the Connect2id product could have checked the JSON object nesting depth, regardless of what limits (if any) were imposed by Gson."
+              },
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "5.8",
+                "tags": [
+                  "vulnerability",
+                  "security",
+                  "MEDIUM"
+                ]
+              }
+            },
+            {
               "id": "CVE-2025-48734",
               "name": "LanguageSpecificPackageVulnerability",
               "shortDescription": {
@@ -970,6 +1105,33 @@
               "help": {
                 "text": "Vulnerability CVE-2024-29133\nSeverity: MEDIUM\nPackage: org.apache.commons:commons-configuration2\nFixed Version: 2.10.1\nLink: [CVE-2024-29133](https://avd.aquasec.com/nvd/cve-2024-29133)\nOut-of-bounds Write vulnerability in Apache Commons Configuration.This issue affects Apache Commons Configuration: from 2.0 before 2.10.1.\n\nUsers are recommended to upgrade to version 2.10.1, which fixes the issue.",
                 "markdown": "**Vulnerability CVE-2024-29133**\n| Severity | Package | Fixed Version | Link |\n| --- | --- | --- | --- |\n|MEDIUM|org.apache.commons:commons-configuration2|2.10.1|[CVE-2024-29133](https://avd.aquasec.com/nvd/cve-2024-29133)|\n\nOut-of-bounds Write vulnerability in Apache Commons Configuration.This issue affects Apache Commons Configuration: from 2.0 before 2.10.1.\n\nUsers are recommended to upgrade to version 2.10.1, which fixes the issue."
+              },
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "6.5",
+                "tags": [
+                  "vulnerability",
+                  "security",
+                  "MEDIUM"
+                ]
+              }
+            },
+            {
+              "id": "CVE-2025-48924",
+              "name": "LanguageSpecificPackageVulnerability",
+              "shortDescription": {
+                "text": "commons-lang/commons-lang: org.apache.commons/commons-lang3: Uncontrolled Recursion vulnerability in Apache Commons Lang"
+              },
+              "fullDescription": {
+                "text": "Uncontrolled Recursion vulnerability in Apache Commons Lang.\n\nThis issue affects Apache Commons Lang: Starting with commons-lang:commons-lang 2.0 to 2.6, and, from org.apache.commons:commons-lang3 3.0 before 3.18.0.\n\nThe methods ClassUtils.getClass(...) can throw StackOverflowError on very long inputs. Because an Error is usually not handled by applications and libraries, a \nStackOverflowError could cause an application to stop.\n\nUsers are recommended to upgrade to version 3.18.0, which fixes the issue."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "helpUri": "https://avd.aquasec.com/nvd/cve-2025-48924",
+              "help": {
+                "text": "Vulnerability CVE-2025-48924\nSeverity: MEDIUM\nPackage: org.apache.commons:commons-lang3\nFixed Version: 3.18.0\nLink: [CVE-2025-48924](https://avd.aquasec.com/nvd/cve-2025-48924)\nUncontrolled Recursion vulnerability in Apache Commons Lang.\n\nThis issue affects Apache Commons Lang: Starting with commons-lang:commons-lang 2.0 to 2.6, and, from org.apache.commons:commons-lang3 3.0 before 3.18.0.\n\nThe methods ClassUtils.getClass(...) can throw StackOverflowError on very long inputs. Because an Error is usually not handled by applications and libraries, a \nStackOverflowError could cause an application to stop.\n\nUsers are recommended to upgrade to version 3.18.0, which fixes the issue.",
+                "markdown": "**Vulnerability CVE-2025-48924**\n| Severity | Package | Fixed Version | Link |\n| --- | --- | --- | --- |\n|MEDIUM|org.apache.commons:commons-lang3|3.18.0|[CVE-2025-48924](https://avd.aquasec.com/nvd/cve-2025-48924)|\n\nUncontrolled Recursion vulnerability in Apache Commons Lang.\n\nThis issue affects Apache Commons Lang: Starting with commons-lang:commons-lang 2.0 to 2.6, and, from org.apache.commons:commons-lang3 3.0 before 3.18.0.\n\nThe methods ClassUtils.getClass(...) can throw StackOverflowError on very long inputs. Because an Error is usually not handled by applications and libraries, a \nStackOverflowError could cause an application to stop.\n\nUsers are recommended to upgrade to version 3.18.0, which fixes the issue."
               },
               "properties": {
                 "precision": "very-high",
@@ -1554,8 +1716,116 @@
           ]
         },
         {
-          "ruleId": "CVE-2023-50495",
+          "ruleId": "CVE-2025-32988",
           "ruleIndex": 7,
+          "level": "warning",
+          "message": {
+            "text": "Package: libgnutls30\nInstalled Version: 3.7.3-4ubuntu1.6\nVulnerability CVE-2025-32988\nSeverity: MEDIUM\nFixed Version: \nLink: [CVE-2025-32988](https://avd.aquasec.com/nvd/cve-2025-32988)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "library/solr",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "library/solr: libgnutls30@3.7.3-4ubuntu1.6"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CVE-2025-32989",
+          "ruleIndex": 8,
+          "level": "warning",
+          "message": {
+            "text": "Package: libgnutls30\nInstalled Version: 3.7.3-4ubuntu1.6\nVulnerability CVE-2025-32989\nSeverity: MEDIUM\nFixed Version: \nLink: [CVE-2025-32989](https://avd.aquasec.com/nvd/cve-2025-32989)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "library/solr",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "library/solr: libgnutls30@3.7.3-4ubuntu1.6"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CVE-2025-32990",
+          "ruleIndex": 9,
+          "level": "warning",
+          "message": {
+            "text": "Package: libgnutls30\nInstalled Version: 3.7.3-4ubuntu1.6\nVulnerability CVE-2025-32990\nSeverity: MEDIUM\nFixed Version: \nLink: [CVE-2025-32990](https://avd.aquasec.com/nvd/cve-2025-32990)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "library/solr",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "library/solr: libgnutls30@3.7.3-4ubuntu1.6"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CVE-2025-6395",
+          "ruleIndex": 10,
+          "level": "warning",
+          "message": {
+            "text": "Package: libgnutls30\nInstalled Version: 3.7.3-4ubuntu1.6\nVulnerability CVE-2025-6395\nSeverity: MEDIUM\nFixed Version: \nLink: [CVE-2025-6395](https://avd.aquasec.com/nvd/cve-2025-6395)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "library/solr",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "library/solr: libgnutls30@3.7.3-4ubuntu1.6"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CVE-2023-50495",
+          "ruleIndex": 11,
           "level": "note",
           "message": {
             "text": "Package: libncurses6\nInstalled Version: 6.3-2ubuntu0.1\nVulnerability CVE-2023-50495\nSeverity: LOW\nFixed Version: \nLink: [CVE-2023-50495](https://avd.aquasec.com/nvd/cve-2023-50495)"
@@ -1582,7 +1852,7 @@
         },
         {
           "ruleId": "CVE-2023-50495",
-          "ruleIndex": 7,
+          "ruleIndex": 11,
           "level": "note",
           "message": {
             "text": "Package: libncursesw6\nInstalled Version: 6.3-2ubuntu0.1\nVulnerability CVE-2023-50495\nSeverity: LOW\nFixed Version: \nLink: [CVE-2023-50495](https://avd.aquasec.com/nvd/cve-2023-50495)"
@@ -1609,7 +1879,7 @@
         },
         {
           "ruleId": "CVE-2024-10041",
-          "ruleIndex": 8,
+          "ruleIndex": 12,
           "level": "warning",
           "message": {
             "text": "Package: libpam-modules\nInstalled Version: 1.4.0-11ubuntu2.6\nVulnerability CVE-2024-10041\nSeverity: MEDIUM\nFixed Version: \nLink: [CVE-2024-10041](https://avd.aquasec.com/nvd/cve-2024-10041)"
@@ -1636,7 +1906,7 @@
         },
         {
           "ruleId": "CVE-2024-10041",
-          "ruleIndex": 8,
+          "ruleIndex": 12,
           "level": "warning",
           "message": {
             "text": "Package: libpam-modules-bin\nInstalled Version: 1.4.0-11ubuntu2.6\nVulnerability CVE-2024-10041\nSeverity: MEDIUM\nFixed Version: \nLink: [CVE-2024-10041](https://avd.aquasec.com/nvd/cve-2024-10041)"
@@ -1663,7 +1933,7 @@
         },
         {
           "ruleId": "CVE-2024-10041",
-          "ruleIndex": 8,
+          "ruleIndex": 12,
           "level": "warning",
           "message": {
             "text": "Package: libpam-runtime\nInstalled Version: 1.4.0-11ubuntu2.6\nVulnerability CVE-2024-10041\nSeverity: MEDIUM\nFixed Version: \nLink: [CVE-2024-10041](https://avd.aquasec.com/nvd/cve-2024-10041)"
@@ -1690,7 +1960,7 @@
         },
         {
           "ruleId": "CVE-2024-10041",
-          "ruleIndex": 8,
+          "ruleIndex": 12,
           "level": "warning",
           "message": {
             "text": "Package: libpam0g\nInstalled Version: 1.4.0-11ubuntu2.6\nVulnerability CVE-2024-10041\nSeverity: MEDIUM\nFixed Version: \nLink: [CVE-2024-10041](https://avd.aquasec.com/nvd/cve-2024-10041)"
@@ -1717,7 +1987,7 @@
         },
         {
           "ruleId": "CVE-2022-41409",
-          "ruleIndex": 9,
+          "ruleIndex": 13,
           "level": "note",
           "message": {
             "text": "Package: libpcre2-8-0\nInstalled Version: 10.39-3ubuntu0.1\nVulnerability CVE-2022-41409\nSeverity: LOW\nFixed Version: \nLink: [CVE-2022-41409](https://avd.aquasec.com/nvd/cve-2022-41409)"
@@ -1744,7 +2014,7 @@
         },
         {
           "ruleId": "CVE-2017-11164",
-          "ruleIndex": 10,
+          "ruleIndex": 14,
           "level": "note",
           "message": {
             "text": "Package: libpcre3\nInstalled Version: 2:8.39-13ubuntu0.22.04.1\nVulnerability CVE-2017-11164\nSeverity: LOW\nFixed Version: \nLink: [CVE-2017-11164](https://avd.aquasec.com/nvd/cve-2017-11164)"
@@ -1771,7 +2041,7 @@
         },
         {
           "ruleId": "CVE-2025-4877",
-          "ruleIndex": 11,
+          "ruleIndex": 15,
           "level": "warning",
           "message": {
             "text": "Package: libssh-4\nInstalled Version: 0.9.6-2ubuntu0.22.04.3\nVulnerability CVE-2025-4877\nSeverity: MEDIUM\nFixed Version: 0.9.6-2ubuntu0.22.04.4\nLink: [CVE-2025-4877](https://avd.aquasec.com/nvd/cve-2025-4877)"
@@ -1798,7 +2068,7 @@
         },
         {
           "ruleId": "CVE-2025-4878",
-          "ruleIndex": 12,
+          "ruleIndex": 16,
           "level": "warning",
           "message": {
             "text": "Package: libssh-4\nInstalled Version: 0.9.6-2ubuntu0.22.04.3\nVulnerability CVE-2025-4878\nSeverity: MEDIUM\nFixed Version: 0.9.6-2ubuntu0.22.04.4\nLink: [CVE-2025-4878](https://avd.aquasec.com/nvd/cve-2025-4878)"
@@ -1825,7 +2095,7 @@
         },
         {
           "ruleId": "CVE-2025-5318",
-          "ruleIndex": 13,
+          "ruleIndex": 17,
           "level": "warning",
           "message": {
             "text": "Package: libssh-4\nInstalled Version: 0.9.6-2ubuntu0.22.04.3\nVulnerability CVE-2025-5318\nSeverity: MEDIUM\nFixed Version: 0.9.6-2ubuntu0.22.04.4\nLink: [CVE-2025-5318](https://avd.aquasec.com/nvd/cve-2025-5318)"
@@ -1852,7 +2122,7 @@
         },
         {
           "ruleId": "CVE-2025-5372",
-          "ruleIndex": 14,
+          "ruleIndex": 18,
           "level": "warning",
           "message": {
             "text": "Package: libssh-4\nInstalled Version: 0.9.6-2ubuntu0.22.04.3\nVulnerability CVE-2025-5372\nSeverity: MEDIUM\nFixed Version: 0.9.6-2ubuntu0.22.04.4\nLink: [CVE-2025-5372](https://avd.aquasec.com/nvd/cve-2025-5372)"
@@ -1879,7 +2149,7 @@
         },
         {
           "ruleId": "CVE-2024-41996",
-          "ruleIndex": 15,
+          "ruleIndex": 19,
           "level": "note",
           "message": {
             "text": "Package: libssl3\nInstalled Version: 3.0.2-0ubuntu1.19\nVulnerability CVE-2024-41996\nSeverity: LOW\nFixed Version: \nLink: [CVE-2024-41996](https://avd.aquasec.com/nvd/cve-2024-41996)"
@@ -1960,7 +2230,7 @@
         },
         {
           "ruleId": "CVE-2023-7008",
-          "ruleIndex": 16,
+          "ruleIndex": 20,
           "level": "note",
           "message": {
             "text": "Package: libsystemd0\nInstalled Version: 249.11-0ubuntu3.16\nVulnerability CVE-2023-7008\nSeverity: LOW\nFixed Version: \nLink: [CVE-2023-7008](https://avd.aquasec.com/nvd/cve-2023-7008)"
@@ -1987,7 +2257,7 @@
         },
         {
           "ruleId": "CVE-2023-50495",
-          "ruleIndex": 7,
+          "ruleIndex": 11,
           "level": "note",
           "message": {
             "text": "Package: libtinfo6\nInstalled Version: 6.3-2ubuntu0.1\nVulnerability CVE-2023-50495\nSeverity: LOW\nFixed Version: \nLink: [CVE-2023-50495](https://avd.aquasec.com/nvd/cve-2023-50495)"
@@ -2014,7 +2284,7 @@
         },
         {
           "ruleId": "CVE-2023-7008",
-          "ruleIndex": 16,
+          "ruleIndex": 20,
           "level": "note",
           "message": {
             "text": "Package: libudev1\nInstalled Version: 249.11-0ubuntu3.16\nVulnerability CVE-2023-7008\nSeverity: LOW\nFixed Version: \nLink: [CVE-2023-7008](https://avd.aquasec.com/nvd/cve-2023-7008)"
@@ -2041,7 +2311,7 @@
         },
         {
           "ruleId": "CVE-2022-4899",
-          "ruleIndex": 17,
+          "ruleIndex": 21,
           "level": "note",
           "message": {
             "text": "Package: libzstd1\nInstalled Version: 1.4.8+dfsg-3build1\nVulnerability CVE-2022-4899\nSeverity: LOW\nFixed Version: \nLink: [CVE-2022-4899](https://avd.aquasec.com/nvd/cve-2022-4899)"
@@ -2095,7 +2365,7 @@
         },
         {
           "ruleId": "CVE-2023-29383",
-          "ruleIndex": 18,
+          "ruleIndex": 22,
           "level": "note",
           "message": {
             "text": "Package: login\nInstalled Version: 1:4.8.1-2ubuntu2.2\nVulnerability CVE-2023-29383\nSeverity: LOW\nFixed Version: \nLink: [CVE-2023-29383](https://avd.aquasec.com/nvd/cve-2023-29383)"
@@ -2122,7 +2392,7 @@
         },
         {
           "ruleId": "CVE-2024-56433",
-          "ruleIndex": 19,
+          "ruleIndex": 23,
           "level": "note",
           "message": {
             "text": "Package: login\nInstalled Version: 1:4.8.1-2ubuntu2.2\nVulnerability CVE-2024-56433\nSeverity: LOW\nFixed Version: \nLink: [CVE-2024-56433](https://avd.aquasec.com/nvd/cve-2024-56433)"
@@ -2149,7 +2419,7 @@
         },
         {
           "ruleId": "CVE-2023-50495",
-          "ruleIndex": 7,
+          "ruleIndex": 11,
           "level": "note",
           "message": {
             "text": "Package: ncurses-base\nInstalled Version: 6.3-2ubuntu0.1\nVulnerability CVE-2023-50495\nSeverity: LOW\nFixed Version: \nLink: [CVE-2023-50495](https://avd.aquasec.com/nvd/cve-2023-50495)"
@@ -2176,7 +2446,7 @@
         },
         {
           "ruleId": "CVE-2023-50495",
-          "ruleIndex": 7,
+          "ruleIndex": 11,
           "level": "note",
           "message": {
             "text": "Package: ncurses-bin\nInstalled Version: 6.3-2ubuntu0.1\nVulnerability CVE-2023-50495\nSeverity: LOW\nFixed Version: \nLink: [CVE-2023-50495](https://avd.aquasec.com/nvd/cve-2023-50495)"
@@ -2203,7 +2473,7 @@
         },
         {
           "ruleId": "CVE-2024-41996",
-          "ruleIndex": 15,
+          "ruleIndex": 19,
           "level": "note",
           "message": {
             "text": "Package: openssl\nInstalled Version: 3.0.2-0ubuntu1.19\nVulnerability CVE-2024-41996\nSeverity: LOW\nFixed Version: \nLink: [CVE-2024-41996](https://avd.aquasec.com/nvd/cve-2024-41996)"
@@ -2230,7 +2500,7 @@
         },
         {
           "ruleId": "CVE-2023-29383",
-          "ruleIndex": 18,
+          "ruleIndex": 22,
           "level": "note",
           "message": {
             "text": "Package: passwd\nInstalled Version: 1:4.8.1-2ubuntu2.2\nVulnerability CVE-2023-29383\nSeverity: LOW\nFixed Version: \nLink: [CVE-2023-29383](https://avd.aquasec.com/nvd/cve-2023-29383)"
@@ -2257,7 +2527,7 @@
         },
         {
           "ruleId": "CVE-2024-56433",
-          "ruleIndex": 19,
+          "ruleIndex": 23,
           "level": "note",
           "message": {
             "text": "Package: passwd\nInstalled Version: 1:4.8.1-2ubuntu2.2\nVulnerability CVE-2024-56433\nSeverity: LOW\nFixed Version: \nLink: [CVE-2024-56433](https://avd.aquasec.com/nvd/cve-2024-56433)"
@@ -2284,7 +2554,7 @@
         },
         {
           "ruleId": "CVE-2021-31879",
-          "ruleIndex": 20,
+          "ruleIndex": 24,
           "level": "warning",
           "message": {
             "text": "Package: wget\nInstalled Version: 1.21.2-2ubuntu1.1\nVulnerability CVE-2021-31879\nSeverity: MEDIUM\nFixed Version: \nLink: [CVE-2021-31879](https://avd.aquasec.com/nvd/cve-2021-31879)"
@@ -2311,7 +2581,7 @@
         },
         {
           "ruleId": "CVE-2025-52999",
-          "ruleIndex": 21,
+          "ruleIndex": 25,
           "level": "error",
           "message": {
             "text": "Package: com.fasterxml.jackson.core:jackson-core\nInstalled Version: 2.12.7\nVulnerability CVE-2025-52999\nSeverity: HIGH\nFixed Version: 2.15.0\nLink: [CVE-2025-52999](https://avd.aquasec.com/nvd/cve-2025-52999)"
@@ -2338,7 +2608,7 @@
         },
         {
           "ruleId": "CVE-2025-49128",
-          "ruleIndex": 22,
+          "ruleIndex": 26,
           "level": "warning",
           "message": {
             "text": "Package: com.fasterxml.jackson.core:jackson-core\nInstalled Version: 2.12.7\nVulnerability CVE-2025-49128\nSeverity: MEDIUM\nFixed Version: 2.13.0\nLink: [CVE-2025-49128](https://avd.aquasec.com/nvd/cve-2025-49128)"
@@ -2365,7 +2635,7 @@
         },
         {
           "ruleId": "CVE-2024-7254",
-          "ruleIndex": 23,
+          "ruleIndex": 27,
           "level": "error",
           "message": {
             "text": "Package: com.google.protobuf:protobuf-java\nInstalled Version: 3.21.12\nVulnerability CVE-2024-7254\nSeverity: HIGH\nFixed Version: 3.25.5, 4.27.5, 4.28.2\nLink: [CVE-2024-7254](https://avd.aquasec.com/nvd/cve-2024-7254)"
@@ -2392,7 +2662,7 @@
         },
         {
           "ruleId": "CVE-2024-7254",
-          "ruleIndex": 23,
+          "ruleIndex": 27,
           "level": "error",
           "message": {
             "text": "Package: com.google.protobuf:protobuf-java\nInstalled Version: 3.25.3\nVulnerability CVE-2024-7254\nSeverity: HIGH\nFixed Version: 3.25.5, 4.27.5, 4.28.2\nLink: [CVE-2024-7254](https://avd.aquasec.com/nvd/cve-2024-7254)"
@@ -2419,7 +2689,7 @@
         },
         {
           "ruleId": "CVE-2024-7254",
-          "ruleIndex": 23,
+          "ruleIndex": 27,
           "level": "error",
           "message": {
             "text": "Package: com.google.protobuf:protobuf-java\nInstalled Version: 3.25.3\nVulnerability CVE-2024-7254\nSeverity: HIGH\nFixed Version: 3.25.5, 4.27.5, 4.28.2\nLink: [CVE-2024-7254](https://avd.aquasec.com/nvd/cve-2024-7254)"
@@ -2446,7 +2716,7 @@
         },
         {
           "ruleId": "CVE-2024-7254",
-          "ruleIndex": 23,
+          "ruleIndex": 27,
           "level": "error",
           "message": {
             "text": "Package: com.google.protobuf:protobuf-java\nInstalled Version: 3.25.3\nVulnerability CVE-2024-7254\nSeverity: HIGH\nFixed Version: 3.25.5, 4.27.5, 4.28.2\nLink: [CVE-2024-7254](https://avd.aquasec.com/nvd/cve-2024-7254)"
@@ -2473,7 +2743,7 @@
         },
         {
           "ruleId": "CVE-2024-7254",
-          "ruleIndex": 23,
+          "ruleIndex": 27,
           "level": "error",
           "message": {
             "text": "Package: com.google.protobuf:protobuf-java\nInstalled Version: 3.25.3\nVulnerability CVE-2024-7254\nSeverity: HIGH\nFixed Version: 3.25.5, 4.27.5, 4.28.2\nLink: [CVE-2024-7254](https://avd.aquasec.com/nvd/cve-2024-7254)"
@@ -2500,7 +2770,7 @@
         },
         {
           "ruleId": "CVE-2024-7254",
-          "ruleIndex": 23,
+          "ruleIndex": 27,
           "level": "error",
           "message": {
             "text": "Package: com.google.protobuf:protobuf-java\nInstalled Version: 3.25.3\nVulnerability CVE-2024-7254\nSeverity: HIGH\nFixed Version: 3.25.5, 4.27.5, 4.28.2\nLink: [CVE-2024-7254](https://avd.aquasec.com/nvd/cve-2024-7254)"
@@ -2527,7 +2797,7 @@
         },
         {
           "ruleId": "CVE-2023-52428",
-          "ruleIndex": 24,
+          "ruleIndex": 28,
           "level": "error",
           "message": {
             "text": "Package: com.nimbusds:nimbus-jose-jwt\nInstalled Version: 9.31\nVulnerability CVE-2023-52428\nSeverity: HIGH\nFixed Version: 9.37.2\nLink: [CVE-2023-52428](https://avd.aquasec.com/nvd/cve-2023-52428)"
@@ -2553,8 +2823,35 @@
           ]
         },
         {
+          "ruleId": "CVE-2025-53864",
+          "ruleIndex": 29,
+          "level": "warning",
+          "message": {
+            "text": "Package: com.nimbusds:nimbus-jose-jwt\nInstalled Version: 9.31\nVulnerability CVE-2025-53864\nSeverity: MEDIUM\nFixed Version: 10.0.2\nLink: [CVE-2025-53864](https://avd.aquasec.com/nvd/cve-2025-53864)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "opt/solr-9.8.1/modules/hdfs/lib/hadoop-client-runtime-3.4.0.jar",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "opt/solr-9.8.1/modules/hdfs/lib/hadoop-client-runtime-3.4.0.jar: com.nimbusds:nimbus-jose-jwt@9.31"
+              }
+            }
+          ]
+        },
+        {
           "ruleId": "CVE-2025-48734",
-          "ruleIndex": 25,
+          "ruleIndex": 30,
           "level": "error",
           "message": {
             "text": "Package: commons-beanutils:commons-beanutils\nInstalled Version: 1.9.4\nVulnerability CVE-2025-48734\nSeverity: HIGH\nFixed Version: 1.11.0\nLink: [CVE-2025-48734](https://avd.aquasec.com/nvd/cve-2025-48734)"
@@ -2581,7 +2878,7 @@
         },
         {
           "ruleId": "CVE-2025-48734",
-          "ruleIndex": 25,
+          "ruleIndex": 30,
           "level": "error",
           "message": {
             "text": "Package: commons-beanutils:commons-beanutils\nInstalled Version: 1.9.4\nVulnerability CVE-2025-48734\nSeverity: HIGH\nFixed Version: 1.11.0\nLink: [CVE-2025-48734](https://avd.aquasec.com/nvd/cve-2025-48734)"
@@ -2608,7 +2905,7 @@
         },
         {
           "ruleId": "CVE-2024-25638",
-          "ruleIndex": 26,
+          "ruleIndex": 31,
           "level": "error",
           "message": {
             "text": "Package: dnsjava:dnsjava\nInstalled Version: 3.4.0\nVulnerability CVE-2024-25638\nSeverity: HIGH\nFixed Version: 3.6.0\nLink: [CVE-2024-25638](https://avd.aquasec.com/nvd/cve-2024-25638)"
@@ -2635,7 +2932,7 @@
         },
         {
           "ruleId": "CVE-2024-47535",
-          "ruleIndex": 27,
+          "ruleIndex": 32,
           "level": "warning",
           "message": {
             "text": "Package: io.netty:netty-common\nInstalled Version: 4.1.114.Final\nVulnerability CVE-2024-47535\nSeverity: MEDIUM\nFixed Version: 4.1.115.Final\nLink: [CVE-2024-47535](https://avd.aquasec.com/nvd/cve-2024-47535)"
@@ -2662,7 +2959,7 @@
         },
         {
           "ruleId": "CVE-2025-25193",
-          "ruleIndex": 28,
+          "ruleIndex": 33,
           "level": "warning",
           "message": {
             "text": "Package: io.netty:netty-common\nInstalled Version: 4.1.114.Final\nVulnerability CVE-2025-25193\nSeverity: MEDIUM\nFixed Version: 4.1.118.Final\nLink: [CVE-2025-25193](https://avd.aquasec.com/nvd/cve-2025-25193)"
@@ -2689,7 +2986,7 @@
         },
         {
           "ruleId": "CVE-2025-24970",
-          "ruleIndex": 29,
+          "ruleIndex": 34,
           "level": "error",
           "message": {
             "text": "Package: io.netty:netty-handler\nInstalled Version: 4.1.114.Final\nVulnerability CVE-2025-24970\nSeverity: HIGH\nFixed Version: 4.1.118.Final\nLink: [CVE-2025-24970](https://avd.aquasec.com/nvd/cve-2025-24970)"
@@ -2716,7 +3013,7 @@
         },
         {
           "ruleId": "CVE-2024-47561",
-          "ruleIndex": 30,
+          "ruleIndex": 35,
           "level": "error",
           "message": {
             "text": "Package: org.apache.avro:avro\nInstalled Version: 1.9.2\nVulnerability CVE-2024-47561\nSeverity: CRITICAL\nFixed Version: 1.11.4\nLink: [CVE-2024-47561](https://avd.aquasec.com/nvd/cve-2024-47561)"
@@ -2743,7 +3040,7 @@
         },
         {
           "ruleId": "CVE-2023-39410",
-          "ruleIndex": 31,
+          "ruleIndex": 36,
           "level": "error",
           "message": {
             "text": "Package: org.apache.avro:avro\nInstalled Version: 1.9.2\nVulnerability CVE-2023-39410\nSeverity: HIGH\nFixed Version: 1.11.3\nLink: [CVE-2023-39410](https://avd.aquasec.com/nvd/cve-2023-39410)"
@@ -2770,7 +3067,7 @@
         },
         {
           "ruleId": "CVE-2024-25710",
-          "ruleIndex": 32,
+          "ruleIndex": 37,
           "level": "warning",
           "message": {
             "text": "Package: org.apache.commons:commons-compress\nInstalled Version: 1.24.0\nVulnerability CVE-2024-25710\nSeverity: MEDIUM\nFixed Version: 1.26.0\nLink: [CVE-2024-25710](https://avd.aquasec.com/nvd/cve-2024-25710)"
@@ -2797,7 +3094,7 @@
         },
         {
           "ruleId": "CVE-2024-26308",
-          "ruleIndex": 33,
+          "ruleIndex": 38,
           "level": "warning",
           "message": {
             "text": "Package: org.apache.commons:commons-compress\nInstalled Version: 1.24.0\nVulnerability CVE-2024-26308\nSeverity: MEDIUM\nFixed Version: 1.26.0\nLink: [CVE-2024-26308](https://avd.aquasec.com/nvd/cve-2024-26308)"
@@ -2824,7 +3121,7 @@
         },
         {
           "ruleId": "CVE-2024-29131",
-          "ruleIndex": 34,
+          "ruleIndex": 39,
           "level": "warning",
           "message": {
             "text": "Package: org.apache.commons:commons-configuration2\nInstalled Version: 2.8.0\nVulnerability CVE-2024-29131\nSeverity: MEDIUM\nFixed Version: 2.10.1\nLink: [CVE-2024-29131](https://avd.aquasec.com/nvd/cve-2024-29131)"
@@ -2851,7 +3148,7 @@
         },
         {
           "ruleId": "CVE-2024-29133",
-          "ruleIndex": 35,
+          "ruleIndex": 40,
           "level": "warning",
           "message": {
             "text": "Package: org.apache.commons:commons-configuration2\nInstalled Version: 2.8.0\nVulnerability CVE-2024-29133\nSeverity: MEDIUM\nFixed Version: 2.10.1\nLink: [CVE-2024-29133](https://avd.aquasec.com/nvd/cve-2024-29133)"
@@ -2877,8 +3174,62 @@
           ]
         },
         {
+          "ruleId": "CVE-2025-48924",
+          "ruleIndex": 41,
+          "level": "warning",
+          "message": {
+            "text": "Package: org.apache.commons:commons-lang3\nInstalled Version: 3.12.0\nVulnerability CVE-2025-48924\nSeverity: MEDIUM\nFixed Version: 3.18.0\nLink: [CVE-2025-48924](https://avd.aquasec.com/nvd/cve-2025-48924)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "opt/solr-9.8.1/modules/hdfs/lib/hadoop-client-runtime-3.4.0.jar",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "opt/solr-9.8.1/modules/hdfs/lib/hadoop-client-runtime-3.4.0.jar: org.apache.commons:commons-lang3@3.12.0"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CVE-2025-48924",
+          "ruleIndex": 41,
+          "level": "warning",
+          "message": {
+            "text": "Package: org.apache.commons:commons-lang3\nInstalled Version: 3.15.0\nVulnerability CVE-2025-48924\nSeverity: MEDIUM\nFixed Version: 3.18.0\nLink: [CVE-2025-48924](https://avd.aquasec.com/nvd/cve-2025-48924)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "opt/solr-9.8.1/server/solr-webapp/webapp/WEB-INF/lib/commons-lang3-3.15.0.jar",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "opt/solr-9.8.1/server/solr-webapp/webapp/WEB-INF/lib/commons-lang3-3.15.0.jar: org.apache.commons:commons-lang3@3.15.0"
+              }
+            }
+          ]
+        },
+        {
           "ruleId": "CVE-2024-21742",
-          "ruleIndex": 36,
+          "ruleIndex": 42,
           "level": "warning",
           "message": {
             "text": "Package: org.apache.james:apache-mime4j-core\nInstalled Version: 0.8.4\nVulnerability CVE-2024-21742\nSeverity: MEDIUM\nFixed Version: 0.8.10\nLink: [CVE-2024-21742](https://avd.aquasec.com/nvd/cve-2024-21742)"
@@ -2905,7 +3256,7 @@
         },
         {
           "ruleId": "CVE-2025-27817",
-          "ruleIndex": 37,
+          "ruleIndex": 43,
           "level": "warning",
           "message": {
             "text": "Package: org.apache.kafka:kafka-clients\nInstalled Version: 3.7.1\nVulnerability CVE-2025-27817\nSeverity: MEDIUM\nFixed Version: 3.9.1\nLink: [CVE-2025-27817](https://avd.aquasec.com/nvd/cve-2025-27817)"
@@ -2932,7 +3283,7 @@
         },
         {
           "ruleId": "CVE-2024-56128",
-          "ruleIndex": 38,
+          "ruleIndex": 44,
           "level": "note",
           "message": {
             "text": "Package: org.apache.kafka:kafka_2.13\nInstalled Version: 3.7.1\nVulnerability CVE-2024-56128\nSeverity: LOW\nFixed Version: 3.7.2, 3.8.1\nLink: [CVE-2024-56128](https://avd.aquasec.com/nvd/cve-2024-56128)"
@@ -2959,7 +3310,7 @@
         },
         {
           "ruleId": "CVE-2025-31672",
-          "ruleIndex": 39,
+          "ruleIndex": 45,
           "level": "warning",
           "message": {
             "text": "Package: org.apache.poi:poi-ooxml\nInstalled Version: 5.2.2\nVulnerability CVE-2025-31672\nSeverity: MEDIUM\nFixed Version: 5.4.0\nLink: [CVE-2025-31672](https://avd.aquasec.com/nvd/cve-2025-31672)"
@@ -2986,7 +3337,7 @@
         },
         {
           "ruleId": "CVE-2024-51504",
-          "ruleIndex": 40,
+          "ruleIndex": 46,
           "level": "error",
           "message": {
             "text": "Package: org.apache.zookeeper:zookeeper\nInstalled Version: 3.9.2\nVulnerability CVE-2024-51504\nSeverity: HIGH\nFixed Version: 3.9.3\nLink: [CVE-2024-51504](https://avd.aquasec.com/nvd/cve-2024-51504)"
@@ -3013,7 +3364,7 @@
         },
         {
           "ruleId": "CVE-2023-33201",
-          "ruleIndex": 41,
+          "ruleIndex": 47,
           "level": "warning",
           "message": {
             "text": "Package: org.bouncycastle:bcprov-jdk15on\nInstalled Version: 1.70\nVulnerability CVE-2023-33201\nSeverity: MEDIUM\nFixed Version: \nLink: [CVE-2023-33201](https://avd.aquasec.com/nvd/cve-2023-33201)"
@@ -3040,7 +3391,7 @@
         },
         {
           "ruleId": "CVE-2024-29857",
-          "ruleIndex": 42,
+          "ruleIndex": 48,
           "level": "warning",
           "message": {
             "text": "Package: org.bouncycastle:bcprov-jdk15on\nInstalled Version: 1.70\nVulnerability CVE-2024-29857\nSeverity: MEDIUM\nFixed Version: 1.78\nLink: [CVE-2024-29857](https://avd.aquasec.com/nvd/cve-2024-29857)"
@@ -3067,7 +3418,7 @@
         },
         {
           "ruleId": "CVE-2024-30171",
-          "ruleIndex": 43,
+          "ruleIndex": 49,
           "level": "warning",
           "message": {
             "text": "Package: org.bouncycastle:bcprov-jdk15on\nInstalled Version: 1.70\nVulnerability CVE-2024-30171\nSeverity: MEDIUM\nFixed Version: 1.78\nLink: [CVE-2024-30171](https://avd.aquasec.com/nvd/cve-2024-30171)"
@@ -3094,7 +3445,7 @@
         },
         {
           "ruleId": "CVE-2024-6763",
-          "ruleIndex": 44,
+          "ruleIndex": 50,
           "level": "warning",
           "message": {
             "text": "Package: org.eclipse.jetty:jetty-http\nInstalled Version: 10.0.22\nVulnerability CVE-2024-6763\nSeverity: MEDIUM\nFixed Version: 12.0.12\nLink: [CVE-2024-6763](https://avd.aquasec.com/nvd/cve-2024-6763)"
@@ -3121,7 +3472,7 @@
         },
         {
           "ruleId": "CVE-2024-6763",
-          "ruleIndex": 44,
+          "ruleIndex": 50,
           "level": "warning",
           "message": {
             "text": "Package: org.eclipse.jetty:jetty-http\nInstalled Version: 9.4.53.v20231009\nVulnerability CVE-2024-6763\nSeverity: MEDIUM\nFixed Version: 12.0.12\nLink: [CVE-2024-6763](https://avd.aquasec.com/nvd/cve-2024-6763)"
@@ -3148,7 +3499,7 @@
         },
         {
           "ruleId": "CVE-2024-8184",
-          "ruleIndex": 45,
+          "ruleIndex": 51,
           "level": "warning",
           "message": {
             "text": "Package: org.eclipse.jetty:jetty-server\nInstalled Version: 10.0.22\nVulnerability CVE-2024-8184\nSeverity: MEDIUM\nFixed Version: 12.0.9, 10.0.24, 11.0.24, 9.4.56\nLink: [CVE-2024-8184](https://avd.aquasec.com/nvd/cve-2024-8184)"
@@ -3190,219 +3541,234 @@
           "solr:9.8.1"
         ],
         "imageCreatedDate": "2025-03-11T21:10:22Z",
-        "imageAgeDays": 121,
-        "imageAgeSeconds": 10517891,
-        "imageAgeText": "121 days",
+        "imageAgeDays": 123,
+        "imageAgeSeconds": 10709970,
+        "imageAgeText": "123 days",
         "imageAgeStatus": "moderate",
-        "scanTimestamp": "2025-07-11T14:49:54Z",
+        "scanTimestamp": "2025-07-13T20:09:54Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "zaakafhandelcomponent"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-11T14:49:54Z",
+        "helmChartsEnhancementDate": "2025-07-13T20:09:54Z",
         "chartsMetadataVersion": "1.0",
         "epssScores": [
           {
             "cve": "CVE-2016-20013",
             "epss": 0.00192,
-            "percentile": 0.41609
+            "percentile": 0.41522
           },
           {
             "cve": "CVE-2016-2781",
-            "epss": 0.00084,
-            "percentile": 0.25463
+            "epss": 0.00065,
+            "percentile": 0.20668
           },
           {
             "cve": "CVE-2017-11164",
             "epss": 0.00364,
-            "percentile": 0.57803
+            "percentile": 0.57747
           },
           {
             "cve": "CVE-2021-31879",
-            "epss": 0.00132,
-            "percentile": 0.33891
+            "epss": 0.00113,
+            "percentile": 0.3086
           },
           {
             "cve": "CVE-2022-27943",
             "epss": 0.00044,
-            "percentile": 0.12917
+            "percentile": 0.12856
           },
           {
             "cve": "CVE-2022-3219",
             "epss": 0.00012,
-            "percentile": 0.01282
+            "percentile": 0.01265
           },
           {
             "cve": "CVE-2022-41409",
-            "epss": 0.00046,
-            "percentile": 0.14114
+            "epss": 0.00061,
+            "percentile": 0.19258
           },
           {
             "cve": "CVE-2022-4899",
             "epss": 0.00205,
-            "percentile": 0.43072
+            "percentile": 0.42987
           },
           {
             "cve": "CVE-2023-29383",
-            "epss": 0.00026,
-            "percentile": 0.05452
+            "epss": 0.00033,
+            "percentile": 0.0766
           },
           {
             "cve": "CVE-2023-33201",
             "epss": 0.00282,
-            "percentile": 0.51275
+            "percentile": 0.51219
           },
           {
             "cve": "CVE-2023-39410",
-            "epss": 0.00045,
-            "percentile": 0.1394
+            "epss": 0.00061,
+            "percentile": 0.19275
           },
           {
             "cve": "CVE-2023-4039",
             "epss": 0.00149,
-            "percentile": 0.36411
+            "percentile": 0.36311
           },
           {
             "cve": "CVE-2023-50495",
             "epss": 0.0005,
-            "percentile": 0.15438
+            "percentile": 0.15399
           },
           {
             "cve": "CVE-2023-52428",
             "epss": 0.00078,
-            "percentile": 0.24111
+            "percentile": 0.2405
           },
           {
             "cve": "CVE-2023-7008",
             "epss": 0.00295,
-            "percentile": 0.52509
+            "percentile": 0.52444
           },
           {
             "cve": "CVE-2024-10041",
             "epss": 0.00029,
-            "percentile": 0.06451
+            "percentile": 0.06409
           },
           {
             "cve": "CVE-2024-21742",
             "epss": 0.00491,
-            "percentile": 0.64654
+            "percentile": 0.64626
           },
           {
             "cve": "CVE-2024-2236",
             "epss": 0.00163,
-            "percentile": 0.38124
+            "percentile": 0.38022
           },
           {
             "cve": "CVE-2024-25638",
             "epss": 0.00048,
-            "percentile": 0.1486
+            "percentile": 0.14809
           },
           {
             "cve": "CVE-2024-25710",
             "epss": 0.00012,
-            "percentile": 0.01099
+            "percentile": 0.01081
           },
           {
             "cve": "CVE-2024-26308",
             "epss": 0.0043,
-            "percentile": 0.61782
+            "percentile": 0.61743
           },
           {
             "cve": "CVE-2024-29131",
             "epss": 0.00149,
-            "percentile": 0.36417
+            "percentile": 0.36317
           },
           {
             "cve": "CVE-2024-29133",
             "epss": 0.00375,
-            "percentile": 0.58398
+            "percentile": 0.58345
           },
           {
             "cve": "CVE-2024-29857",
             "epss": 0.00155,
-            "percentile": 0.37165
+            "percentile": 0.37062
           },
           {
             "cve": "CVE-2024-30171",
             "epss": 0.00045,
-            "percentile": 0.13403
+            "percentile": 0.13347
           },
           {
             "cve": "CVE-2024-41996",
             "epss": 0.00166,
-            "percentile": 0.38462
+            "percentile": 0.38369
           },
           {
             "cve": "CVE-2024-47535",
             "epss": 0.00042,
-            "percentile": 0.12097
+            "percentile": 0.12043
           },
           {
             "cve": "CVE-2024-47561",
-            "epss": 0.01342,
-            "percentile": 0.79137
+            "epss": 0.011,
+            "percentile": 0.77084
           },
           {
             "cve": "CVE-2024-51504",
-            "epss": 0.00228,
-            "percentile": 0.4564
+            "epss": 0.00306,
+            "percentile": 0.53309
           },
           {
             "cve": "CVE-2024-56128",
             "epss": 0.00228,
-            "percentile": 0.45651
+            "percentile": 0.45568
           },
           {
             "cve": "CVE-2024-56433",
             "epss": 0.02872,
-            "percentile": 0.85696
+            "percentile": 0.85689
           },
           {
             "cve": "CVE-2024-6763",
             "epss": 0.00192,
-            "percentile": 0.41628
+            "percentile": 0.41542
           },
           {
             "cve": "CVE-2024-7254",
             "epss": 0.00127,
-            "percentile": 0.3312
+            "percentile": 0.33024
           },
           {
             "cve": "CVE-2024-8184",
             "epss": 0.00304,
-            "percentile": 0.5328
+            "percentile": 0.53215
           },
           {
             "cve": "CVE-2025-0167",
             "epss": 0.00055,
-            "percentile": 0.1718
+            "percentile": 0.17136
           },
           {
             "cve": "CVE-2025-24970",
             "epss": 0.00108,
-            "percentile": 0.30046
+            "percentile": 0.29947
           },
           {
             "cve": "CVE-2025-25193",
             "epss": 0.0009,
-            "percentile": 0.26612
+            "percentile": 0.2654
           },
           {
             "cve": "CVE-2025-27817",
-            "epss": 0.00015,
-            "percentile": 0.01851
+            "epss": 0.00041,
+            "percentile": 0.11576
           },
           {
             "cve": "CVE-2025-31672",
             "epss": 0.00064,
-            "percentile": 0.20358
+            "percentile": 0.20321
+          },
+          {
+            "cve": "CVE-2025-32988",
+            "epss": 0.0004,
+            "percentile": 0.11202
+          },
+          {
+            "cve": "CVE-2025-32989",
+            "epss": 0.00016,
+            "percentile": 0.02239
+          },
+          {
+            "cve": "CVE-2025-32990",
+            "epss": 0.00045,
+            "percentile": 0.13293
           },
           {
             "cve": "CVE-2025-48734",
             "epss": 0.00215,
-            "percentile": 0.44209
+            "percentile": 0.44128
           },
           {
             "cve": "CVE-2025-4877",
@@ -3415,32 +3781,47 @@
             "percentile": 0.00000
           },
           {
+            "cve": "CVE-2025-48924",
+            "epss": 0.00028,
+            "percentile": 0.05895
+          },
+          {
             "cve": "CVE-2025-49128",
             "epss": 0.00005,
-            "percentile": 0.00225
+            "percentile": 0.00224
           },
           {
             "cve": "CVE-2025-52999",
             "epss": 0.00064,
-            "percentile": 0.20187
+            "percentile": 0.20154
           },
           {
             "cve": "CVE-2025-5318",
             "epss": 0.00041,
-            "percentile": 0.11867
+            "percentile": 0.11807
           },
           {
             "cve": "CVE-2025-5372",
             "epss": 0.00041,
-            "percentile": 0.11843
+            "percentile": 0.11782
+          },
+          {
+            "cve": "CVE-2025-53864",
+            "epss": 0.00095,
+            "percentile": 0.27652
+          },
+          {
+            "cve": "CVE-2025-6395",
+            "epss": 0.0004,
+            "percentile": 0.1124
           }
         ],
         "epssHighRiskCount": 0,
         "epssMediumRiskCount": 2,
-        "epssLowRiskCount": 44,
+        "epssLowRiskCount": 50,
         "epssVeryHighRiskCount": 0,
         "epssEnhanced": true,
-        "epssEnhancementDate": "2025-07-11T14:49:58Z",
+        "epssEnhancementDate": "2025-07-13T20:09:59Z",
         "epssMetadataVersion": "1.0"
       }
     }
