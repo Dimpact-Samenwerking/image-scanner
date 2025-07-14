@@ -90,15 +90,14 @@ Dashboard
 
 ## 🤖 GitHub Actions Workflow & GitHub Pages
 
-- **Automated CI/CD:**
-  - The GitHub Actions workflow runs all scripts: discovery → scan → report.
-  - Results are committed to `docs/data/` and published via GitHub Pages.
-- **Setup:**
-  1. Ensure workflow YAML is present in `.github/workflows/` (see repo for example).
-  2. Enable GitHub Pages in repository settings (set source to `docs/` folder).
-  3. On push, the workflow updates dashboard data and publishes the latest results.
-- **Access:**
-  - Visit: `https://<your-username>.github.io/<your-repo>/`
+- The GitHub Actions workflow runs all scripts automatically:
+  - Discovers images
+  - Scans for vulnerabilities
+  - Generates reports
+  - Publishes the dashboard to GitHub Pages
+- Find your dashboard at:
+  - `https://dimpact-samenwerking.github.io/image-scanner/`
+- See `.github/workflows/` for workflow details.
 
 ---
 
