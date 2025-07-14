@@ -230,6 +230,20 @@ update_dashboard_data() {
         print_status "Consider using Git LFS for files >100MB"
     fi
     
+    # Generate data index for GitHub Pages compatibility
+    print_status "📋 Generating data index for GitHub Pages..."
+    if [ -f "scripts/generate-data-index.sh" ]; then
+        if ./scripts/generate-data-index.sh; then
+            print_success "✅ Data index generated successfully"
+        else
+            print_error "❌ Failed to generate data index"
+            return 1
+        fi
+    else
+        print_warning "⚠️  Data index generator not found - GitHub Pages may not work properly"
+        print_status "ℹ️  Run: ./scripts/generate-data-index.sh manually after this script"
+    fi
+    
     # Generate dashboard update summary
     echo ""
     print_success "🎉 Dashboard data updated successfully!"
@@ -242,6 +256,10 @@ update_dashboard_data() {
     echo ""
     print_status "To test locally:"
     echo "  cd docs && python3 -m http.server 8080"
+    echo ""
+    print_status "🔧 GitHub Pages Compatibility:"
+    echo "  ✅ Data index generated: docs/data/index.json"
+    echo "  ✅ Dashboard will discover all $copied_files SARIF files"
     
     return 0
 }

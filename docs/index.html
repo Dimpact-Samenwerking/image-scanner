@@ -705,10 +705,46 @@
                 const dataLocation = 'data';
                 const sarifFiles = [];
                 
-                console.log('🔍 Discovering SARIF files in data directory...');
+                console.log('🔍 Discovering SARIF files using data index...');
                 
                 try {
-                    // Try to fetch the data directory listing
+                    // Method 1: Try to load from data index (GitHub Pages compatible)
+                    console.log('📋 Attempting to load data index...');
+                    const indexResponse = await fetch(`${dataLocation}/index.json`);
+                    if (indexResponse.ok) {
+                        const indexData = await indexResponse.json();
+                        console.log(`📊 Found data index with ${indexData.totalImages} images`);
+                        
+                        // Use the index to load SARIF files
+                        for (const imageEntry of indexData.images) {
+                            try {
+                                const sarifResponse = await fetch(imageEntry.sarifPath);
+                                if (sarifResponse.ok) {
+                                    sarifFiles.push({
+                                        path: imageEntry.sarifPath,
+                                        imageName: imageEntry.name
+                                    });
+                                    console.log(`✅ Found SARIF for: ${imageEntry.name}`);
+                                } else {
+                                    console.log(`❌ SARIF not accessible for: ${imageEntry.name}`);
+                                }
+                            } catch (e) {
+                                console.log(`❌ Failed to load SARIF for: ${imageEntry.name}`);
+                            }
+                        }
+                        
+                        console.log(`📊 Total SARIF files discovered via index: ${sarifFiles.length}`);
+                        return sarifFiles;
+                    } else {
+                        console.log('❌ Could not load data index - falling back to directory discovery');
+                    }
+                } catch (e) {
+                    console.log('❌ Error loading data index - falling back to directory discovery:', e);
+                }
+                
+                // Method 2: Fallback - Try directory listing (local server compatible)
+                console.log('🔄 Trying directory listing fallback...');
+                try {
                     const response = await fetch(`${dataLocation}/`);
                     if (response.ok) {
                         // Parse directory listing to find subdirectories
@@ -741,7 +777,8 @@
                     } else {
                         console.log('❌ Could not access data directory listing');
                         
-                        // Fall back to trying known image names directly
+                        // Method 3: Final fallback - Try known image names
+                        console.log('🔄 Trying known image names fallback...');
                         const knownImages = [
                             'docker-io-bitnami-elasticsearch-8-6-2-debian-11-r0',
                             'docker-io-maykinmedia-objects-api-latest',
@@ -755,8 +792,6 @@
                             'docker-io-alpine-3-20',
                             'ghcr-io-brp-api-personen-mock-2-6-0-202502261446'
                         ];
-                        
-                        console.log('🔄 Trying known image names...');
                         
                         for (const imageName of knownImages) {
                             try {
