@@ -81,7 +81,7 @@ cd docs && python3 -m http.server 8080
   - Generates reports
   - Publishes the dashboard to GitHub Pages
 - Find your dashboard at:
-  - `https://<your-username>.github.io/<your-repo>/`
+  - `https://dimpact-samenwerking.github.io/image-scanner/`
 - See `.github/workflows/` for workflow details.
 
 ---
