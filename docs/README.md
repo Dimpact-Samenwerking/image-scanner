@@ -1,6 +1,6 @@
 # 🛡️ Dimpact Container Security Scanner & Dashboard
 
-A modern, end-to-end solution for discovering, scanning, and reporting vulnerabilities in container images used in Dimpact Helm charts. Results are visualized in a beautiful interactive dashboard, viewable locally or via GitHub Pages.
+A modern, end-to-end solution for discovering, scanning, and reporting vulnerabilities in container images used in Dimpact Helm charts. Results are visualized in an interactive dashboard, viewable locally or via GitHub Pages.
 
 ---
 
