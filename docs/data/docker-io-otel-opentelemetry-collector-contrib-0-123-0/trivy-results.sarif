@@ -409,49 +409,49 @@
           "otel/opentelemetry-collector-contrib:0.123.0"
         ],
         "imageCreatedDate": "2025-04-01T14:03:32.917713435Z",
-        "imageAgeDays": 100,
-        "imageAgeSeconds": 8703784,
-        "imageAgeText": "100 days",
+        "imageAgeDays": 103,
+        "imageAgeSeconds": 8925525,
+        "imageAgeText": "103 days",
         "imageAgeStatus": "moderate",
-        "scanTimestamp": "2025-07-11T06:46:38Z",
+        "scanTimestamp": "2025-07-13T20:22:33Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "zaakafhandelcomponent"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-11T06:46:38Z",
+        "helmChartsEnhancementDate": "2025-07-13T20:22:33Z",
         "chartsMetadataVersion": "1.0",
         "epssScores": [
           {
             "cve": "CVE-2025-0913",
-            "epss": 0.00013,
-            "percentile": 0.01469
+            "epss": 0.00015,
+            "percentile": 0.01957
           },
           {
             "cve": "CVE-2025-22871",
             "epss": 0.00023,
-            "percentile": 0.04459
+            "percentile": 0.04433
           },
           {
             "cve": "CVE-2025-22872",
             "epss": 0.00033,
-            "percentile": 0.07919
+            "percentile": 0.07815
           },
           {
             "cve": "CVE-2025-22874",
-            "epss": 0.00022,
-            "percentile": 0.04104
+            "epss": 0.00024,
+            "percentile": 0.04719
           },
           {
             "cve": "CVE-2025-46327",
             "epss": 0.00013,
-            "percentile": 0.01504
+            "percentile": 0.01488
           },
           {
             "cve": "CVE-2025-4673",
-            "epss": 0.0004,
-            "percentile": 0.11371
+            "epss": 0.00044,
+            "percentile": 0.12743
           }
         ],
         "epssHighRiskCount": 0,
@@ -459,7 +459,7 @@
         "epssLowRiskCount": 6,
         "epssVeryHighRiskCount": 0,
         "epssEnhanced": true,
-        "epssEnhancementDate": "2025-07-11T06:46:39Z",
+        "epssEnhancementDate": "2025-07-13T20:22:34Z",
         "epssMetadataVersion": "1.0"
       }
     }
