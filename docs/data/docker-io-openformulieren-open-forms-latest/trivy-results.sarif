@@ -18180,18 +18180,18 @@
           "openformulieren/open-forms:latest"
         ],
         "imageCreatedDate": "2025-07-10T13:39:53.475865366Z",
-        "imageAgeDays": 0,
-        "imageAgeSeconds": 64874,
-        "imageAgeText": "18 hour(s), 1 minute(s)",
+        "imageAgeDays": 1,
+        "imageAgeSeconds": 95086,
+        "imageAgeText": "1 days",
         "imageAgeStatus": "very_recent",
-        "scanTimestamp": "2025-07-11T06:41:52Z",
+        "scanTimestamp": "2025-07-11T15:09:09Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "openforms"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-11T06:41:52Z",
+        "helmChartsEnhancementDate": "2025-07-11T15:09:09Z",
         "chartsMetadataVersion": "1.0",
         "epssScores": [
           {
@@ -19410,7 +19410,7 @@
         "epssLowRiskCount": 223,
         "epssVeryHighRiskCount": 0,
         "epssEnhanced": true,
-        "epssEnhancementDate": "2025-07-11T06:42:13Z",
+        "epssEnhancementDate": "2025-07-11T15:09:31Z",
         "epssMetadataVersion": "1.0"
       }
     }

@@ -2246,10 +2246,10 @@
         ],
         "imageCreatedDate": "2023-04-04T04:59:42.869624136-07:00",
         "imageAgeDays": 829,
-        "imageAgeSeconds": 71635618,
+        "imageAgeSeconds": 71668877,
         "imageAgeText": "829 days",
         "imageAgeStatus": "very_old",
-        "scanTimestamp": "2025-07-11T06:46:42Z",
+        "scanTimestamp": "2025-07-11T16:01:05Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "zaakafhandelcomponent",
@@ -2257,7 +2257,7 @@
         ],
         "helmChartsCount": 2,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-11T06:46:42Z",
+        "helmChartsEnhancementDate": "2025-07-11T16:01:05Z",
         "chartsMetadataVersion": "1.0",
         "epssScores": [
           {
@@ -2466,7 +2466,7 @@
         "epssLowRiskCount": 37,
         "epssVeryHighRiskCount": 2,
         "epssEnhanced": true,
-        "epssEnhancementDate": "2025-07-11T06:46:46Z",
+        "epssEnhancementDate": "2025-07-11T16:01:09Z",
         "epssMetadataVersion": "1.0"
       }
     }
