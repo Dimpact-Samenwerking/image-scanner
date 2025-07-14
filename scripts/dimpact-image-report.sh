@@ -1001,17 +1001,6 @@ main() {
     update_dashboard_data
     print_status "  ✅ Dashboard data updated"
     
-    # 🎉 Generate index.json for dashboard (GitHub Pages fix)
-    echo "📝 Generating index.json for dashboard..."
-    find ./docs/data/ -type f -name 'trivy-results.sarif' \
-      | sed 's|^./docs/data/||' \
-      | jq -R . | jq -s . > ./docs/data/index.json
-    if [ $? -eq 0 ]; then
-      echo "✅ index.json created at ./docs/data/index.json"
-    else
-      echo "❌ Failed to create index.json"
-    fi
-
     echo ""
     print_success "🎉 SARIF report generation completed successfully!"
     print_status "📊 Using SARIF (Static Analysis Results Interchange Format) data"

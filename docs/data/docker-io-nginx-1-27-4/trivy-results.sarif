@@ -8052,269 +8052,269 @@
           "nginx:1.27.4"
         ],
         "imageCreatedDate": "2025-02-05T21:27:16Z",
-        "imageAgeDays": 157,
-        "imageAgeSeconds": 13647032,
-        "imageAgeText": "157 days",
+        "imageAgeDays": 155,
+        "imageAgeSeconds": 13455294,
+        "imageAgeText": "155 days",
         "imageAgeStatus": "moderate",
-        "scanTimestamp": "2025-07-13T20:17:50Z",
+        "scanTimestamp": "2025-07-11T15:02:24Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "podiumd"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-13T20:17:50Z",
+        "helmChartsEnhancementDate": "2025-07-11T15:02:24Z",
         "chartsMetadataVersion": "1.0",
         "epssScores": [
           {
             "cve": "CVE-2005-2541",
-            "epss": 0.0325,
-            "percentile": 0.86582
+            "epss": 0.02806,
+            "percentile": 0.85511
           },
           {
             "cve": "CVE-2007-5686",
             "epss": 0.00245,
-            "percentile": 0.47756
+            "percentile": 0.47829
           },
           {
             "cve": "CVE-2009-4487",
             "epss": 0.00932,
-            "percentile": 0.75148
+            "percentile": 0.75152
           },
           {
             "cve": "CVE-2010-4756",
             "epss": 0.00373,
-            "percentile": 0.58278
+            "percentile": 0.58331
           },
           {
             "cve": "CVE-2011-3374",
             "epss": 0.01509,
-            "percentile": 0.80357
+            "percentile": 0.80361
           },
           {
             "cve": "CVE-2011-3389",
             "epss": 0.05423,
-            "percentile": 0.89691
+            "percentile": 0.89694
           },
           {
             "cve": "CVE-2011-4116",
-            "epss": 0.00738,
-            "percentile": 0.71921
+            "epss": 0.00815,
+            "percentile": 0.73352
           },
           {
             "cve": "CVE-2013-0337",
             "epss": 0.00547,
-            "percentile": 0.66904
+            "percentile": 0.66929
           },
           {
             "cve": "CVE-2013-4392",
-            "epss": 0.00067,
-            "percentile": 0.21233
+            "epss": 0.00074,
+            "percentile": 0.23251
           },
           {
             "cve": "CVE-2015-3276",
             "epss": 0.01757,
-            "percentile": 0.81773
+            "percentile": 0.81782
           },
           {
             "cve": "CVE-2015-9019",
-            "epss": 0.00984,
-            "percentile": 0.75843
+            "epss": 0.00978,
+            "percentile": 0.75768
           },
           {
             "cve": "CVE-2016-2781",
-            "epss": 0.00065,
-            "percentile": 0.20668
+            "epss": 0.00084,
+            "percentile": 0.25463
           },
           {
             "cve": "CVE-2017-14159",
             "epss": 0.00113,
-            "percentile": 0.30801
+            "percentile": 0.30886
           },
           {
             "cve": "CVE-2017-16232",
             "epss": 0.01738,
-            "percentile": 0.81672
+            "percentile": 0.8168
           },
           {
             "cve": "CVE-2017-17740",
             "epss": 0.02838,
-            "percentile": 0.85603
+            "percentile": 0.85609
           },
           {
             "cve": "CVE-2017-17973",
-            "epss": 0.00442,
-            "percentile": 0.62348
+            "epss": 0.00272,
+            "percentile": 0.50486
           },
           {
             "cve": "CVE-2017-18018",
             "epss": 0.00056,
-            "percentile": 0.17412
+            "percentile": 0.17457
           },
           {
             "cve": "CVE-2017-5563",
             "epss": 0.00457,
-            "percentile": 0.63029
+            "percentile": 0.63072
           },
           {
             "cve": "CVE-2017-9117",
-            "epss": 0.00098,
-            "percentile": 0.28291
+            "epss": 0.00097,
+            "percentile": 0.2801
           },
           {
             "cve": "CVE-2017-9937",
             "epss": 0.00271,
-            "percentile": 0.50299
+            "percentile": 0.50357
           },
           {
             "cve": "CVE-2018-10126",
             "epss": 0.00456,
-            "percentile": 0.62992
+            "percentile": 0.63033
           },
           {
             "cve": "CVE-2018-20796",
             "epss": 0.01996,
-            "percentile": 0.82842
+            "percentile": 0.82844
           },
           {
             "cve": "CVE-2018-5709",
             "epss": 0.00463,
-            "percentile": 0.63306
+            "percentile": 0.63333
           },
           {
             "cve": "CVE-2018-6829",
             "epss": 0.01266,
-            "percentile": 0.78572
+            "percentile": 0.78569
           },
           {
             "cve": "CVE-2019-1010022",
             "epss": 0.00145,
-            "percentile": 0.35724
+            "percentile": 0.35826
           },
           {
             "cve": "CVE-2019-1010023",
             "epss": 0.00703,
-            "percentile": 0.71141
+            "percentile": 0.71163
           },
           {
             "cve": "CVE-2019-1010024",
             "epss": 0.00375,
-            "percentile": 0.58379
+            "percentile": 0.58431
           },
           {
             "cve": "CVE-2019-1010025",
             "epss": 0.00235,
-            "percentile": 0.46383
+            "percentile": 0.46466
           },
           {
             "cve": "CVE-2019-9192",
             "epss": 0.00164,
-            "percentile": 0.38074
+            "percentile": 0.38176
           },
           {
             "cve": "CVE-2020-15719",
             "epss": 0.00371,
-            "percentile": 0.58118
+            "percentile": 0.58171
           },
           {
             "cve": "CVE-2021-4214",
             "epss": 0.00043,
-            "percentile": 0.12383
+            "percentile": 0.12437
           },
           {
             "cve": "CVE-2022-0563",
             "epss": 0.00025,
-            "percentile": 0.05023
+            "percentile": 0.05041
           },
           {
             "cve": "CVE-2022-1210",
             "epss": 0.00035,
-            "percentile": 0.08533
+            "percentile": 0.08634
           },
           {
             "cve": "CVE-2022-27943",
             "epss": 0.00044,
-            "percentile": 0.12856
+            "percentile": 0.12917
           },
           {
             "cve": "CVE-2022-3219",
             "epss": 0.00012,
-            "percentile": 0.01265
+            "percentile": 0.01282
           },
           {
             "cve": "CVE-2022-49043",
             "epss": 0.00031,
-            "percentile": 0.07134
+            "percentile": 0.07253
           },
           {
             "cve": "CVE-2023-1916",
             "epss": 0.00017,
-            "percentile": 0.02376
+            "percentile": 0.02388
           },
           {
             "cve": "CVE-2023-29383",
-            "epss": 0.00033,
-            "percentile": 0.0766
+            "epss": 0.00026,
+            "percentile": 0.05452
           },
           {
             "cve": "CVE-2023-2953",
             "epss": 0.01417,
-            "percentile": 0.79677
+            "percentile": 0.79681
           },
           {
             "cve": "CVE-2023-31437",
             "epss": 0.00128,
-            "percentile": 0.33101
+            "percentile": 0.33197
           },
           {
             "cve": "CVE-2023-31438",
             "epss": 0.001,
-            "percentile": 0.28599
+            "percentile": 0.28679
           },
           {
             "cve": "CVE-2023-31439",
             "epss": 0.00094,
-            "percentile": 0.27412
+            "percentile": 0.27472
           },
           {
             "cve": "CVE-2023-31484",
             "epss": 0.01385,
-            "percentile": 0.79477
+            "percentile": 0.79484
           },
           {
             "cve": "CVE-2023-31486",
             "epss": 0.00785,
-            "percentile": 0.72829
+            "percentile": 0.72846
           },
           {
             "cve": "CVE-2023-3164",
             "epss": 0.0001,
-            "percentile": 0.00801
+            "percentile": 0.00819
           },
           {
             "cve": "CVE-2023-32570",
             "epss": 0.0007,
-            "percentile": 0.22233
+            "percentile": 0.22261
           },
           {
             "cve": "CVE-2023-39615",
             "epss": 0.00093,
-            "percentile": 0.27182
+            "percentile": 0.27247
           },
           {
             "cve": "CVE-2023-39616",
             "epss": 0.0003,
-            "percentile": 0.06865
+            "percentile": 0.06906
           },
           {
             "cve": "CVE-2023-4039",
             "epss": 0.00149,
-            "percentile": 0.36311
+            "percentile": 0.36411
           },
           {
             "cve": "CVE-2023-40403",
             "epss": 0.00305,
-            "percentile": 0.53291
+            "percentile": 0.53353
           },
           {
             "cve": "CVE-2023-44487",
@@ -8324,172 +8324,172 @@
           {
             "cve": "CVE-2023-45322",
             "epss": 0.00076,
-            "percentile": 0.23645
+            "percentile": 0.23699
           },
           {
             "cve": "CVE-2023-45853",
             "epss": 0.00382,
-            "percentile": 0.58818
+            "percentile": 0.58867
           },
           {
             "cve": "CVE-2023-4641",
             "epss": 0.00015,
-            "percentile": 0.02004
+            "percentile": 0.02021
           },
           {
             "cve": "CVE-2023-49463",
             "epss": 0.00164,
-            "percentile": 0.38094
+            "percentile": 0.38196
           },
           {
             "cve": "CVE-2023-50495",
             "epss": 0.0005,
-            "percentile": 0.15399
+            "percentile": 0.15438
           },
           {
             "cve": "CVE-2023-51792",
             "epss": 0.00026,
-            "percentile": 0.05509
+            "percentile": 0.05527
           },
           {
             "cve": "CVE-2023-52355",
             "epss": 0.00119,
-            "percentile": 0.31694
+            "percentile": 0.3179
           },
           {
             "cve": "CVE-2023-52425",
             "epss": 0.00677,
-            "percentile": 0.70592
+            "percentile": 0.7061
           },
           {
             "cve": "CVE-2023-52426",
             "epss": 0.00019,
-            "percentile": 0.03174
+            "percentile": 0.03178
           },
           {
             "cve": "CVE-2023-6228",
             "epss": 0.00014,
-            "percentile": 0.01646
+            "percentile": 0.01656
           },
           {
             "cve": "CVE-2023-6277",
             "epss": 0.00418,
-            "percentile": 0.60965
+            "percentile": 0.61005
           },
           {
             "cve": "CVE-2023-6879",
             "epss": 0.00155,
-            "percentile": 0.37077
+            "percentile": 0.37179
           },
           {
             "cve": "CVE-2024-10041",
             "epss": 0.00029,
-            "percentile": 0.06409
+            "percentile": 0.06451
           },
           {
             "cve": "CVE-2024-13176",
             "epss": 0.00069,
-            "percentile": 0.21714
+            "percentile": 0.21746
           },
           {
             "cve": "CVE-2024-2236",
             "epss": 0.00163,
-            "percentile": 0.38022
+            "percentile": 0.38124
           },
           {
             "cve": "CVE-2024-22365",
             "epss": 0.00079,
-            "percentile": 0.24257
+            "percentile": 0.24316
           },
           {
             "cve": "CVE-2024-2379",
             "epss": 0.00276,
-            "percentile": 0.50684
+            "percentile": 0.50742
           },
           {
             "cve": "CVE-2024-25062",
-            "epss": 0.00111,
-            "percentile": 0.30356
+            "epss": 0.0015,
+            "percentile": 0.3656
           },
           {
             "cve": "CVE-2024-25269",
             "epss": 0.00059,
-            "percentile": 0.18502
+            "percentile": 0.18542
           },
           {
             "cve": "CVE-2024-26458",
             "epss": 0.00152,
-            "percentile": 0.36683
+            "percentile": 0.36788
           },
           {
             "cve": "CVE-2024-26461",
             "epss": 0.00081,
-            "percentile": 0.24838
+            "percentile": 0.24897
           },
           {
             "cve": "CVE-2024-26462",
             "epss": 0.00024,
-            "percentile": 0.04931
+            "percentile": 0.04951
           },
           {
             "cve": "CVE-2024-28757",
             "epss": 0.00474,
-            "percentile": 0.63825
+            "percentile": 0.63847
           },
           {
             "cve": "CVE-2024-34459",
             "epss": 0.00158,
-            "percentile": 0.37396
+            "percentile": 0.37499
           },
           {
             "cve": "CVE-2024-38949",
             "epss": 0.00039,
-            "percentile": 0.10582
+            "percentile": 0.10626
           },
           {
             "cve": "CVE-2024-38950",
             "epss": 0.00145,
-            "percentile": 0.35685
+            "percentile": 0.35786
           },
           {
             "cve": "CVE-2024-50602",
-            "epss": 0.00048,
-            "percentile": 0.14878
+            "epss": 0.00043,
+            "percentile": 0.12485
           },
           {
             "cve": "CVE-2024-56171",
             "epss": 0.00008,
-            "percentile": 0.00418
+            "percentile": 0.00425
           },
           {
             "cve": "CVE-2024-56406",
             "epss": 0.0005,
-            "percentile": 0.154
+            "percentile": 0.15439
           },
           {
             "cve": "CVE-2024-56433",
             "epss": 0.02872,
-            "percentile": 0.85689
+            "percentile": 0.85696
           },
           {
             "cve": "CVE-2024-8176",
             "epss": 0.00358,
-            "percentile": 0.57352
+            "percentile": 0.5741
           },
           {
             "cve": "CVE-2025-0725",
             "epss": 0.00215,
-            "percentile": 0.44167
+            "percentile": 0.44246
           },
           {
             "cve": "CVE-2025-0838",
             "epss": 0.00052,
-            "percentile": 0.16059
+            "percentile": 0.16097
           },
           {
             "cve": "CVE-2025-1390",
             "epss": 0.00027,
-            "percentile": 0.05691
+            "percentile": 0.05721
           },
           {
             "cve": "CVE-2025-24528",
@@ -8499,132 +8499,132 @@
           {
             "cve": "CVE-2025-24928",
             "epss": 0.00009,
-            "percentile": 0.00534
+            "percentile": 0.00544
           },
           {
             "cve": "CVE-2025-27113",
             "epss": 0.00069,
-            "percentile": 0.21566
+            "percentile": 0.21593
           },
           {
             "cve": "CVE-2025-27587",
             "epss": 0.00043,
-            "percentile": 0.12661
+            "percentile": 0.12718
           },
           {
             "cve": "CVE-2025-30258",
             "epss": 0.00012,
-            "percentile": 0.01134
+            "percentile": 0.0115
           },
           {
             "cve": "CVE-2025-32414",
             "epss": 0.00017,
-            "percentile": 0.02626
+            "percentile": 0.0263
           },
           {
             "cve": "CVE-2025-32415",
             "epss": 0.00027,
-            "percentile": 0.05651
+            "percentile": 0.05679
           },
           {
             "cve": "CVE-2025-32988",
             "epss": 0.0004,
-            "percentile": 0.11202
+            "percentile": 0.11259
           },
           {
             "cve": "CVE-2025-32989",
             "epss": 0.00016,
-            "percentile": 0.02239
+            "percentile": 0.0225
           },
           {
             "cve": "CVE-2025-32990",
             "epss": 0.00045,
-            "percentile": 0.13293
+            "percentile": 0.13348
           },
           {
             "cve": "CVE-2025-3576",
             "epss": 0.00022,
-            "percentile": 0.04035
+            "percentile": 0.04064
           },
           {
             "cve": "CVE-2025-40909",
-            "epss": 0.00006,
-            "percentile": 0.00237
+            "epss": 0.00017,
+            "percentile": 0.02422
           },
           {
             "cve": "CVE-2025-4598",
             "epss": 0.00013,
-            "percentile": 0.0136
+            "percentile": 0.01377
           },
           {
             "cve": "CVE-2025-4802",
             "epss": 0.00007,
-            "percentile": 0.00375
+            "percentile": 0.0038
           },
           {
             "cve": "CVE-2025-48174",
             "epss": 0.00046,
-            "percentile": 0.14057
+            "percentile": 0.14109
           },
           {
             "cve": "CVE-2025-48175",
             "epss": 0.0006,
-            "percentile": 0.19186
+            "percentile": 0.19208
           },
           {
             "cve": "CVE-2025-49794",
             "epss": 0.00075,
-            "percentile": 0.23445
+            "percentile": 0.23497
           },
           {
             "cve": "CVE-2025-49796",
             "epss": 0.00058,
-            "percentile": 0.18393
+            "percentile": 0.18435
           },
           {
             "cve": "CVE-2025-5222",
             "epss": 0.00025,
-            "percentile": 0.05059
+            "percentile": 0.05081
           },
           {
             "cve": "CVE-2025-5278",
             "epss": 0.00015,
-            "percentile": 0.01977
+            "percentile": 0.01995
           },
           {
             "cve": "CVE-2025-6020",
             "epss": 0.00023,
-            "percentile": 0.04463
+            "percentile": 0.04487
           },
           {
             "cve": "CVE-2025-6021",
             "epss": 0.00058,
-            "percentile": 0.18393
+            "percentile": 0.18435
           },
           {
             "cve": "CVE-2025-6141",
             "epss": 0.00014,
-            "percentile": 0.01721
+            "percentile": 0.0173
           },
           {
             "cve": "CVE-2025-6170",
             "epss": 0.00014,
-            "percentile": 0.01693
+            "percentile": 0.01703
           },
           {
             "cve": "CVE-2025-6395",
-            "epss": 0.0004,
-            "percentile": 0.1124
+            "epss": 0.00001,
+            "percentile": 0.00000
           },
           {
             "cve": "CVE-2025-7424",
-            "epss": 0.00015,
-            "percentile": 0.01955
+            "epss": 0.00001,
+            "percentile": 0.00000
           },
           {
             "cve": "CVE-2025-7425",
-            "epss": 0.00012,
-            "percentile": 0.01136
+            "epss": 0.00001,
+            "percentile": 0.00000
           }
         ],
         "epssHighRiskCount": 2,
@@ -8632,7 +8632,7 @@
         "epssLowRiskCount": 100,
         "epssVeryHighRiskCount": 1,
         "epssEnhanced": true,
-        "epssEnhancementDate": "2025-07-13T20:18:00Z",
+        "epssEnhancementDate": "2025-07-11T15:02:34Z",
         "epssMetadataVersion": "1.0"
       }
     }

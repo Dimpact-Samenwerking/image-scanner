@@ -247,39 +247,39 @@
           "docker.elastic.co/eck/eck-operator:latest"
         ],
         "imageCreatedDate": "2025-04-15T12:54:36.277992311Z",
-        "imageAgeDays": 89,
-        "imageAgeSeconds": 7718714,
-        "imageAgeText": "89 days",
+        "imageAgeDays": 87,
+        "imageAgeSeconds": 7525879,
+        "imageAgeText": "87 days",
         "imageAgeStatus": "recent",
-        "scanTimestamp": "2025-07-13T20:00:14Z",
+        "scanTimestamp": "2025-07-11T14:26:25Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "eck-operator"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-13T20:00:14Z",
+        "helmChartsEnhancementDate": "2025-07-11T14:26:26Z",
         "chartsMetadataVersion": "1.0",
         "epssScores": [
           {
             "cve": "CVE-2025-0913",
-            "epss": 0.00015,
-            "percentile": 0.01957
+            "epss": 0.00013,
+            "percentile": 0.01469
           },
           {
             "cve": "CVE-2025-22871",
             "epss": 0.00023,
-            "percentile": 0.04433
+            "percentile": 0.04459
           },
           {
             "cve": "CVE-2025-22874",
-            "epss": 0.00024,
-            "percentile": 0.04719
+            "epss": 0.00022,
+            "percentile": 0.04104
           },
           {
             "cve": "CVE-2025-4673",
-            "epss": 0.00044,
-            "percentile": 0.12743
+            "epss": 0.0004,
+            "percentile": 0.11371
           }
         ],
         "epssHighRiskCount": 0,
@@ -287,7 +287,7 @@
         "epssLowRiskCount": 4,
         "epssVeryHighRiskCount": 0,
         "epssEnhanced": true,
-        "epssEnhancementDate": "2025-07-13T20:00:15Z",
+        "epssEnhancementDate": "2025-07-11T14:26:26Z",
         "epssMetadataVersion": "1.0"
       }
     }
