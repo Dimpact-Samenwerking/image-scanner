@@ -1,6 +1,6 @@
 # Container Image Security Scan Report
 
-Generated on: Mon Jul 14 08:12:53 UTC 2025
+Generated on: Fri Jul 11 14:11:02 UTC 2025
 
 *This report is generated from SARIF (Static Analysis Results Interchange Format) data*
 
@@ -9,37 +9,37 @@ Generated on: Mon Jul 14 08:12:53 UTC 2025
 | Image | 🔴 Critical | 🟠 High | 🟡 Medium | 🔵 Low | 🛡️ Suppressed | ❌ Failed |
 |-------|------------|---------|-----------|--------|--------------|-----------|
 | docker-io-pravega-zookeeper-0-2-15 | 16 | 67 | 68 | 72 | 4 | - |
-| docker-io-bitnami-kibana-8-6-1-debian-11-r0 | 13 | 88 | 108 | 86 | 4 | - |
-| docker-io-bitnami-elasticsearch-8-6-2-debian-11-r0 | 10 | 796 | 2366 | 202 | 5 | - |
+| docker-io-bitnami-kibana-8-6-1-debian-11-r0 | 13 | 88 | 104 | 86 | 4 | - |
+| docker-io-bitnami-elasticsearch-8-6-2-debian-11-r0 | 10 | 796 | 2358 | 201 | 5 | - |
 | docker-io-lachlanevenson-k8s-kubectl-v1-23-2 | 9 | 56 | 50 | 4 | 2 | - |
-| docker-io-maykinmedia-open-archiefbeheer-latest | 8 | 24 | 91 | 307 | 1 | - |
-| docker-io-bitnami-redis-sentinel-7-0-5-debian-11-r24 | 8 | 65 | 72 | 56 | 2 | - |
-| docker-io-bitnami-redis-7-0-5-debian-11-r25 | 8 | 65 | 72 | 56 | 2 | - |
-| docker-io-bitnami-rabbitmq-3-11-8-debian-11-r0 | 8 | 65 | 81 | 67 | 4 | - |
-| docker-io-bitnami-redis-exporter-1-45-0-debian-11-r11 | 7 | 41 | 64 | 54 | 2 | - |
+| docker-io-maykinmedia-open-archiefbeheer-latest | 8 | 25 | 89 | 305 | 1 | - |
+| docker-io-bitnami-redis-sentinel-7-0-5-debian-11-r24 | 8 | 65 | 68 | 56 | 2 | - |
+| docker-io-bitnami-redis-7-0-5-debian-11-r25 | 8 | 65 | 68 | 56 | 2 | - |
+| docker-io-bitnami-rabbitmq-3-11-8-debian-11-r0 | 8 | 65 | 77 | 67 | 4 | - |
+| docker-io-bitnami-redis-exporter-1-45-0-debian-11-r11 | 7 | 41 | 60 | 54 | 2 | - |
 | docker-io-lachlanevenson-k8s-kubectl-v1-25-4 | 6 | 40 | 65 | 5 | 2 | - |
-| docker-io-bitnami-elasticsearch-exporter-1-5-0-debian-11-r70 | 6 | 42 | 63 | 54 | 2 | - |
-| docker-io-openzaak-open-zaak-latest | 5 | 187 | 541 | 245 | 6 | - |
+| docker-io-bitnami-elasticsearch-exporter-1-5-0-debian-11-r70 | 6 | 42 | 59 | 54 | 2 | - |
+| docker-io-openzaak-open-zaak-latest | 5 | 187 | 534 | 243 | 6 | - |
 | docker-io-openformulieren-open-forms-latest | 5 | 20 | 76 | 145 | 5 | - |
-| docker-io-nginx-1-27-4 | 5 | 19 | 27 | 65 | 2 | - |
+| docker-io-nginx-1-27-4 | 5 | 18 | 23 | 65 | 2 | - |
 | docker-io-maykinmedia-open-inwoner-latest | 5 | 191 | 541 | 218 | 5 | - |
-| docker-io-maykinmedia-objecttypes-api-latest | 5 | 187 | 542 | 270 | 6 | - |
-| docker-io-maykinmedia-objects-api-latest | 5 | 187 | 541 | 246 | 6 | - |
-| docker-io-nginxinc-nginx-unprivileged-stable | 4 | 11 | 15 | 63 | 2 | - |
-| docker-io-nginxinc-nginx-unprivileged-1-28-0 | 4 | 11 | 15 | 63 | 2 | - |
+| docker-io-maykinmedia-objecttypes-api-latest | 5 | 187 | 535 | 268 | 6 | - |
+| docker-io-maykinmedia-objects-api-latest | 5 | 187 | 534 | 244 | 6 | - |
+| docker-io-nginxinc-nginx-unprivileged-stable | 4 | 10 | 11 | 63 | 2 | - |
+| docker-io-nginxinc-nginx-unprivileged-1-28-0 | 4 | 10 | 11 | 63 | 2 | - |
 | docker-io-pravega-zookeeper-operator-0-2-15 | 3 | 11 | 26 | 0 | 0 | - |
-| docker-io-openzaak-open-notificaties-latest | 3 | 5 | 10 | 50 | 5 | - |
-| docker-io-maykinmedia-open-klant-latest | 3 | 5 | 10 | 74 | 5 | - |
-| docker-io-bitnami-zookeeper-3-9-3-debian-12-r10 | 3 | 19 | 26 | 49 | 5 | - |
-| docker-io-bitnami-postgresql-17-2-0-debian-12-r2 | 3 | 20 | 21 | 49 | 5 | - |
-| docker-io-bitnami-postgres-exporter-0-16-0-debian-12-r1 | 2 | 7 | 23 | 36 | 5 | - |
+| docker-io-openzaak-open-notificaties-latest | 3 | 6 | 6 | 50 | 5 | - |
+| docker-io-maykinmedia-open-klant-latest | 3 | 6 | 6 | 74 | 5 | - |
+| docker-io-bitnami-zookeeper-3-9-3-debian-12-r10 | 3 | 18 | 22 | 49 | 5 | - |
+| docker-io-bitnami-postgresql-17-2-0-debian-12-r2 | 3 | 19 | 17 | 49 | 5 | - |
+| docker-io-bitnami-postgres-exporter-0-16-0-debian-12-r1 | 2 | 7 | 19 | 36 | 5 | - |
 | docker-io-library-solr-9-8-1 | 1 | 8 | 21 | 16 | 0 | - |
-| docker-io-bitnami-solr-9-8-1-debian-12-r5 | 1 | 10 | 25 | 46 | 5 | - |
-| docker-io-bitnami-os-shell-12-debian-12-r42 | 1 | 7 | 19 | 46 | 5 | - |
-| docker-io-bitnami-os-shell-12-debian-12-r40 | 1 | 8 | 20 | 46 | 5 | - |
-| docker-io-bitnami-os-shell-12-debian-12-r33 | 1 | 8 | 28 | 47 | 5 | - |
-| docker-io-bitnami-keycloak-config-cli-6-1-6-debian-12-r6 | 1 | 10 | 19 | 39 | 5 | - |
-| docker-io-bitnami-keycloak-26-0-7-debian-12-r0 | 1 | 12 | 36 | 47 | 5 | - |
+| docker-io-bitnami-solr-9-8-1-debian-12-r5 | 1 | 10 | 21 | 46 | 5 | - |
+| docker-io-bitnami-os-shell-12-debian-12-r42 | 1 | 7 | 15 | 46 | 5 | - |
+| docker-io-bitnami-os-shell-12-debian-12-r40 | 1 | 8 | 16 | 46 | 5 | - |
+| docker-io-bitnami-os-shell-12-debian-12-r33 | 1 | 8 | 24 | 47 | 5 | - |
+| docker-io-bitnami-keycloak-config-cli-6-1-6-debian-12-r6 | 1 | 10 | 15 | 39 | 5 | - |
+| docker-io-bitnami-keycloak-26-0-7-debian-12-r0 | 1 | 12 | 31 | 47 | 5 | - |
 | docker-io-otel-opentelemetry-collector-contrib-0-123-0 | 0 | 1 | 5 | 1 | 0 | - |
 | docker-io-openpolicyagent-opa-1-3-0-static | 0 | 2 | 4 | 0 | 0 | - |
 | docker-io-curlimages-curl-8-13-0 | 0 | 0 | 0 | 0 | 0 | - |
@@ -47,31 +47,18 @@ Generated on: Mon Jul 14 08:12:53 UTC 2025
 | docker-io-apache-solr-operator-v0-9-1 | 0 | 0 | 5 | 0 | 0 | - |
 | docker-io-alpine-3-20 | 0 | 0 | 0 | 0 | 0 | - |
 | docker-elastic-co-eck-eck-operator-latest | 0 | 1 | 3 | 0 | 0 | - |
-| ghcr-io-klantinteractie-servicesysteem-kiss-frontend-release-1-0-x-20250418091744-8936963 | - | - | - | - | - | ❌ |
-| ghcr-io-klantinteractie-servicesysteem-kiss-elastic-sync-latest | - | - | - | - | - | ❌ |
-| ghcr-io-infonl-zaakafhandelcomponent-latest | - | - | - | - | - | ❌ |
-| ghcr-io-infonl-zaakafhandelcomponent-3-5-0 | - | - | - | - | - | ❌ |
-| ghcr-io-icatt-menselijk-digitaal-podiumd-adapter-v0-6-x-20250225135230-fc9468b | - | - | - | - | - | ❌ |
-| ghcr-io-eugenmayer-kontextwork-converter-1-8-0 | - | - | - | - | - | ❌ |
-| ghcr-io-brp-api-personen-mock-2-6-0-202502261446 | - | - | - | - | - | ❌ |
-| docker-io-keycloak-config-cli-latest | - | - | - | - | - | ❌ |
-| docker-io-keycloak-25-0-6 | - | - | - | - | - | ❌ |
-| docker-io-bitnami-bitnami-shell-11-debian-11-r86 | - | - | - | - | - | ❌ |
-| docker-io-bitnami-bitnami-shell-11-debian-11-r78 | - | - | - | - | - | ❌ |
-| docker-io-bitnami-bitnami-shell-11-debian-11-r76 | - | - | - | - | - | ❌ |
-| docker-io-bitnami-bitnami-shell-11-debian-11-r58 | - | - | - | - | - | ❌ |
 |-------|------------|---------|-----------|--------|--------------|-----------|
-| **Total** | **161** | **2296** | **5699** | **2824** | **119** | **13** |
+| **Total** | **161** | **2294** | **5587** | **2815** | **119** | **0** |
 
 ## 🚨 Overall Security Status
 
 ### Total Vulnerabilities Across All Images
 - 🔴 **Critical:** 161
-- 🟠 **High:** 2296
-- 🟡 **Medium:** 5699
-- 🔵 **Low:** 2824
+- 🟠 **High:** 2294
+- 🟡 **Medium:** 5587
+- 🔵 **Low:** 2815
 - 🛡️ **Suppressed:** 119
-- ❌ **Failed Scans:** 13
+- ❌ **Failed Scans:** 0
 
 ## 📝 Image Summary
 
@@ -87,7 +74,7 @@ Generated on: Mon Jul 14 08:12:53 UTC 2025
 - **Status:** ✅ Scan Completed
 - **Critical:** 13
 - **High:** 88
-- **Medium:** 108
+- **Medium:** 104
 - **Low:** 86
 - **Suppressed:** 4
 
@@ -95,8 +82,8 @@ Generated on: Mon Jul 14 08:12:53 UTC 2025
 - **Status:** ✅ Scan Completed
 - **Critical:** 10
 - **High:** 796
-- **Medium:** 2366
-- **Low:** 202
+- **Medium:** 2358
+- **Low:** 201
 - **Suppressed:** 5
 
 ### docker-io-lachlanevenson-k8s-kubectl-v1-23-2
@@ -110,16 +97,16 @@ Generated on: Mon Jul 14 08:12:53 UTC 2025
 ### docker-io-maykinmedia-open-archiefbeheer-latest
 - **Status:** ✅ Scan Completed
 - **Critical:** 8
-- **High:** 24
-- **Medium:** 91
-- **Low:** 307
+- **High:** 25
+- **Medium:** 89
+- **Low:** 305
 - **Suppressed:** 1
 
 ### docker-io-bitnami-redis-sentinel-7-0-5-debian-11-r24
 - **Status:** ✅ Scan Completed
 - **Critical:** 8
 - **High:** 65
-- **Medium:** 72
+- **Medium:** 68
 - **Low:** 56
 - **Suppressed:** 2
 
@@ -127,7 +114,7 @@ Generated on: Mon Jul 14 08:12:53 UTC 2025
 - **Status:** ✅ Scan Completed
 - **Critical:** 8
 - **High:** 65
-- **Medium:** 72
+- **Medium:** 68
 - **Low:** 56
 - **Suppressed:** 2
 
@@ -135,7 +122,7 @@ Generated on: Mon Jul 14 08:12:53 UTC 2025
 - **Status:** ✅ Scan Completed
 - **Critical:** 8
 - **High:** 65
-- **Medium:** 81
+- **Medium:** 77
 - **Low:** 67
 - **Suppressed:** 4
 
@@ -143,7 +130,7 @@ Generated on: Mon Jul 14 08:12:53 UTC 2025
 - **Status:** ✅ Scan Completed
 - **Critical:** 7
 - **High:** 41
-- **Medium:** 64
+- **Medium:** 60
 - **Low:** 54
 - **Suppressed:** 2
 
@@ -159,7 +146,7 @@ Generated on: Mon Jul 14 08:12:53 UTC 2025
 - **Status:** ✅ Scan Completed
 - **Critical:** 6
 - **High:** 42
-- **Medium:** 63
+- **Medium:** 59
 - **Low:** 54
 - **Suppressed:** 2
 
@@ -167,8 +154,8 @@ Generated on: Mon Jul 14 08:12:53 UTC 2025
 - **Status:** ✅ Scan Completed
 - **Critical:** 5
 - **High:** 187
-- **Medium:** 541
-- **Low:** 245
+- **Medium:** 534
+- **Low:** 243
 - **Suppressed:** 6
 
 ### docker-io-openformulieren-open-forms-latest
@@ -182,8 +169,8 @@ Generated on: Mon Jul 14 08:12:53 UTC 2025
 ### docker-io-nginx-1-27-4
 - **Status:** ✅ Scan Completed
 - **Critical:** 5
-- **High:** 19
-- **Medium:** 27
+- **High:** 18
+- **Medium:** 23
 - **Low:** 65
 - **Suppressed:** 2
 
@@ -199,31 +186,31 @@ Generated on: Mon Jul 14 08:12:53 UTC 2025
 - **Status:** ✅ Scan Completed
 - **Critical:** 5
 - **High:** 187
-- **Medium:** 542
-- **Low:** 270
+- **Medium:** 535
+- **Low:** 268
 - **Suppressed:** 6
 
 ### docker-io-maykinmedia-objects-api-latest
 - **Status:** ✅ Scan Completed
 - **Critical:** 5
 - **High:** 187
-- **Medium:** 541
-- **Low:** 246
+- **Medium:** 534
+- **Low:** 244
 - **Suppressed:** 6
 
 ### docker-io-nginxinc-nginx-unprivileged-stable
 - **Status:** ✅ Scan Completed
 - **Critical:** 4
-- **High:** 11
-- **Medium:** 15
+- **High:** 10
+- **Medium:** 11
 - **Low:** 63
 - **Suppressed:** 2
 
 ### docker-io-nginxinc-nginx-unprivileged-1-28-0
 - **Status:** ✅ Scan Completed
 - **Critical:** 4
-- **High:** 11
-- **Medium:** 15
+- **High:** 10
+- **Medium:** 11
 - **Low:** 63
 - **Suppressed:** 2
 
@@ -238,32 +225,32 @@ Generated on: Mon Jul 14 08:12:53 UTC 2025
 ### docker-io-openzaak-open-notificaties-latest
 - **Status:** ✅ Scan Completed
 - **Critical:** 3
-- **High:** 5
-- **Medium:** 10
+- **High:** 6
+- **Medium:** 6
 - **Low:** 50
 - **Suppressed:** 5
 
 ### docker-io-maykinmedia-open-klant-latest
 - **Status:** ✅ Scan Completed
 - **Critical:** 3
-- **High:** 5
-- **Medium:** 10
+- **High:** 6
+- **Medium:** 6
 - **Low:** 74
 - **Suppressed:** 5
 
 ### docker-io-bitnami-zookeeper-3-9-3-debian-12-r10
 - **Status:** ✅ Scan Completed
 - **Critical:** 3
-- **High:** 19
-- **Medium:** 26
+- **High:** 18
+- **Medium:** 22
 - **Low:** 49
 - **Suppressed:** 5
 
 ### docker-io-bitnami-postgresql-17-2-0-debian-12-r2
 - **Status:** ✅ Scan Completed
 - **Critical:** 3
-- **High:** 20
-- **Medium:** 21
+- **High:** 19
+- **Medium:** 17
 - **Low:** 49
 - **Suppressed:** 5
 
@@ -271,7 +258,7 @@ Generated on: Mon Jul 14 08:12:53 UTC 2025
 - **Status:** ✅ Scan Completed
 - **Critical:** 2
 - **High:** 7
-- **Medium:** 23
+- **Medium:** 19
 - **Low:** 36
 - **Suppressed:** 5
 
@@ -287,7 +274,7 @@ Generated on: Mon Jul 14 08:12:53 UTC 2025
 - **Status:** ✅ Scan Completed
 - **Critical:** 1
 - **High:** 10
-- **Medium:** 25
+- **Medium:** 21
 - **Low:** 46
 - **Suppressed:** 5
 
@@ -295,7 +282,7 @@ Generated on: Mon Jul 14 08:12:53 UTC 2025
 - **Status:** ✅ Scan Completed
 - **Critical:** 1
 - **High:** 7
-- **Medium:** 19
+- **Medium:** 15
 - **Low:** 46
 - **Suppressed:** 5
 
@@ -303,7 +290,7 @@ Generated on: Mon Jul 14 08:12:53 UTC 2025
 - **Status:** ✅ Scan Completed
 - **Critical:** 1
 - **High:** 8
-- **Medium:** 20
+- **Medium:** 16
 - **Low:** 46
 - **Suppressed:** 5
 
@@ -311,7 +298,7 @@ Generated on: Mon Jul 14 08:12:53 UTC 2025
 - **Status:** ✅ Scan Completed
 - **Critical:** 1
 - **High:** 8
-- **Medium:** 28
+- **Medium:** 24
 - **Low:** 47
 - **Suppressed:** 5
 
@@ -319,7 +306,7 @@ Generated on: Mon Jul 14 08:12:53 UTC 2025
 - **Status:** ✅ Scan Completed
 - **Critical:** 1
 - **High:** 10
-- **Medium:** 19
+- **Medium:** 15
 - **Low:** 39
 - **Suppressed:** 5
 
@@ -327,7 +314,7 @@ Generated on: Mon Jul 14 08:12:53 UTC 2025
 - **Status:** ✅ Scan Completed
 - **Critical:** 1
 - **High:** 12
-- **Medium:** 36
+- **Medium:** 31
 - **Low:** 47
 - **Suppressed:** 5
 
@@ -386,58 +373,6 @@ Generated on: Mon Jul 14 08:12:53 UTC 2025
 - **Medium:** 3
 - **Low:** 0
 - **Suppressed:** 0
-
-### ghcr-io-klantinteractie-servicesysteem-kiss-frontend-release-1-0-x-20250418091744-8936963
-- **Status:** ❌ Scan Failed
-- **Reason:** Unable to complete vulnerability scan or result file missing
-
-### ghcr-io-klantinteractie-servicesysteem-kiss-elastic-sync-latest
-- **Status:** ❌ Scan Failed
-- **Reason:** Unable to complete vulnerability scan or result file missing
-
-### ghcr-io-infonl-zaakafhandelcomponent-latest
-- **Status:** ❌ Scan Failed
-- **Reason:** Unable to complete vulnerability scan or result file missing
-
-### ghcr-io-infonl-zaakafhandelcomponent-3-5-0
-- **Status:** ❌ Scan Failed
-- **Reason:** Unable to complete vulnerability scan or result file missing
-
-### ghcr-io-icatt-menselijk-digitaal-podiumd-adapter-v0-6-x-20250225135230-fc9468b
-- **Status:** ❌ Scan Failed
-- **Reason:** Unable to complete vulnerability scan or result file missing
-
-### ghcr-io-eugenmayer-kontextwork-converter-1-8-0
-- **Status:** ❌ Scan Failed
-- **Reason:** Unable to complete vulnerability scan or result file missing
-
-### ghcr-io-brp-api-personen-mock-2-6-0-202502261446
-- **Status:** ❌ Scan Failed
-- **Reason:** Unable to complete vulnerability scan or result file missing
-
-### docker-io-keycloak-config-cli-latest
-- **Status:** ❌ Scan Failed
-- **Reason:** Unable to complete vulnerability scan or result file missing
-
-### docker-io-keycloak-25-0-6
-- **Status:** ❌ Scan Failed
-- **Reason:** Unable to complete vulnerability scan or result file missing
-
-### docker-io-bitnami-bitnami-shell-11-debian-11-r86
-- **Status:** ❌ Scan Failed
-- **Reason:** Unable to complete vulnerability scan or result file missing
-
-### docker-io-bitnami-bitnami-shell-11-debian-11-r78
-- **Status:** ❌ Scan Failed
-- **Reason:** Unable to complete vulnerability scan or result file missing
-
-### docker-io-bitnami-bitnami-shell-11-debian-11-r76
-- **Status:** ❌ Scan Failed
-- **Reason:** Unable to complete vulnerability scan or result file missing
-
-### docker-io-bitnami-bitnami-shell-11-debian-11-r58
-- **Status:** ❌ Scan Failed
-- **Reason:** Unable to complete vulnerability scan or result file missing
 
 ## 🔍 Detailed CVE Analysis
 
@@ -2068,7 +2003,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-kibana-8-6-1-debian-11
 **Message:** Package: d3-color
 **Location:** 
-**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (108)**CVE:** CVE-2022-1705
+**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (104)**CVE:** CVE-2022-1705
 **Image:** docker-io-bitnami-kibana-8-6-1-debian-11-r0
 **Helm Chart:** docker-io-bitnami-kibana-8-6-1-debian-11
 **Message:** Package: stdlib
@@ -2558,21 +2493,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-kibana-8-6-1-debian-11
 **Message:** Package: libsqlite3-0
 **Location:** 
-**Reference:** **CVE:** CVE-2025-32988
-**Image:** docker-io-bitnami-kibana-8-6-1-debian-11-r0
-**Helm Chart:** docker-io-bitnami-kibana-8-6-1-debian-11
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32989
-**Image:** docker-io-bitnami-kibana-8-6-1-debian-11-r0
-**Helm Chart:** docker-io-bitnami-kibana-8-6-1-debian-11
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32990
-**Image:** docker-io-bitnami-kibana-8-6-1-debian-11-r0
-**Helm Chart:** docker-io-bitnami-kibana-8-6-1-debian-11
-**Message:** Package: libgnutls30
-**Location:** 
 **Reference:** **CVE:** CVE-2025-3576
 **Image:** docker-io-bitnami-kibana-8-6-1-debian-11-r0
 **Helm Chart:** docker-io-bitnami-kibana-8-6-1-debian-11
@@ -2592,11 +2512,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Image:** docker-io-bitnami-kibana-8-6-1-debian-11-r0
 **Helm Chart:** docker-io-bitnami-kibana-8-6-1-debian-11
 **Message:** Package: stdlib
-**Location:** 
-**Reference:** **CVE:** CVE-2025-6395
-**Image:** docker-io-bitnami-kibana-8-6-1-debian-11-r0
-**Helm Chart:** docker-io-bitnami-kibana-8-6-1-debian-11
-**Message:** Package: libgnutls30
 **Location:** 
 **Reference:** **CVE:** GHSA-9h6g-pr28-7cqp
 **Image:** docker-io-bitnami-kibana-8-6-1-debian-11-r0
@@ -3461,6 +3376,11 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Message:** Package: linux-libc-dev
 **Location:** 
 **Reference:** **CVE:** CVE-2022-49740
+**Image:** docker-io-bitnami-elasticsearch-8-6-2-debian-11-r0
+**Helm Chart:** docker-io-bitnami-elasticsearch-8-6-2-debian-11
+**Message:** Package: linux-libc-dev
+**Location:** 
+**Reference:** **CVE:** CVE-2022-49766
 **Image:** docker-io-bitnami-elasticsearch-8-6-2-debian-11-r0
 **Helm Chart:** docker-io-bitnami-elasticsearch-8-6-2-debian-11
 **Message:** Package: linux-libc-dev
@@ -7040,11 +6960,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-elasticsearch-8-6-2-debian-11
 **Message:** Package: linux-libc-dev
 **Location:** 
-**Reference:** **CVE:** CVE-2025-38328
-**Image:** docker-io-bitnami-elasticsearch-8-6-2-debian-11-r0
-**Helm Chart:** docker-io-bitnami-elasticsearch-8-6-2-debian-11
-**Message:** Package: linux-libc-dev
-**Location:** 
 **Reference:** **CVE:** CVE-2025-39735
 **Image:** docker-io-bitnami-elasticsearch-8-6-2-debian-11-r0
 **Helm Chart:** docker-io-bitnami-elasticsearch-8-6-2-debian-11
@@ -7070,7 +6985,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-elasticsearch-8-6-2-debian-11
 **Message:** Package: io.netty:netty-codec-http2
 **Location:** 
-**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (2366)**CVE:** CVE-2019-15213
+**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (2358)**CVE:** CVE-2019-15213
 **Image:** docker-io-bitnami-elasticsearch-8-6-2-debian-11-r0
 **Helm Chart:** docker-io-bitnami-elasticsearch-8-6-2-debian-11
 **Message:** Package: linux-libc-dev
@@ -18120,21 +18035,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-elasticsearch-8-6-2-debian-11
 **Message:** Package: org.apache.poi:poi-ooxml
 **Location:** 
-**Reference:** **CVE:** CVE-2025-32988
-**Image:** docker-io-bitnami-elasticsearch-8-6-2-debian-11-r0
-**Helm Chart:** docker-io-bitnami-elasticsearch-8-6-2-debian-11
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32989
-**Image:** docker-io-bitnami-elasticsearch-8-6-2-debian-11-r0
-**Helm Chart:** docker-io-bitnami-elasticsearch-8-6-2-debian-11
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32990
-**Image:** docker-io-bitnami-elasticsearch-8-6-2-debian-11-r0
-**Helm Chart:** docker-io-bitnami-elasticsearch-8-6-2-debian-11
-**Message:** Package: libgnutls30
-**Location:** 
 **Reference:** **CVE:** CVE-2025-3576
 **Image:** docker-io-bitnami-elasticsearch-8-6-2-debian-11-r0
 **Helm Chart:** docker-io-bitnami-elasticsearch-8-6-2-debian-11
@@ -18850,26 +18750,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-elasticsearch-8-6-2-debian-11
 **Message:** Package: linux-libc-dev
 **Location:** 
-**Reference:** **CVE:** CVE-2025-38331
-**Image:** docker-io-bitnami-elasticsearch-8-6-2-debian-11-r0
-**Helm Chart:** docker-io-bitnami-elasticsearch-8-6-2-debian-11
-**Message:** Package: linux-libc-dev
-**Location:** 
-**Reference:** **CVE:** CVE-2025-38340
-**Image:** docker-io-bitnami-elasticsearch-8-6-2-debian-11-r0
-**Helm Chart:** docker-io-bitnami-elasticsearch-8-6-2-debian-11
-**Message:** Package: linux-libc-dev
-**Location:** 
-**Reference:** **CVE:** CVE-2025-38343
-**Image:** docker-io-bitnami-elasticsearch-8-6-2-debian-11-r0
-**Helm Chart:** docker-io-bitnami-elasticsearch-8-6-2-debian-11
-**Message:** Package: linux-libc-dev
-**Location:** 
-**Reference:** **CVE:** CVE-2025-38347
-**Image:** docker-io-bitnami-elasticsearch-8-6-2-debian-11-r0
-**Helm Chart:** docker-io-bitnami-elasticsearch-8-6-2-debian-11
-**Message:** Package: linux-libc-dev
-**Location:** 
 **Reference:** **CVE:** CVE-2025-38637
 **Image:** docker-io-bitnami-elasticsearch-8-6-2-debian-11-r0
 **Helm Chart:** docker-io-bitnami-elasticsearch-8-6-2-debian-11
@@ -18895,12 +18775,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-elasticsearch-8-6-2-debian-11
 **Message:** Package: stdlib
 **Location:** 
-**Reference:** **CVE:** CVE-2025-6395
-**Image:** docker-io-bitnami-elasticsearch-8-6-2-debian-11-r0
-**Helm Chart:** docker-io-bitnami-elasticsearch-8-6-2-debian-11
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** ---#### 🔵 LOW Vulnerabilities (202)**CVE:** CVE-2004-0230
+**Reference:** ---#### 🔵 LOW Vulnerabilities (201)**CVE:** CVE-2004-0230
 **Image:** docker-io-bitnami-elasticsearch-8-6-2-debian-11-r0
 **Helm Chart:** docker-io-bitnami-elasticsearch-8-6-2-debian-11
 **Message:** Package: linux-libc-dev
@@ -19436,11 +19311,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Message:** Package: linux-libc-dev
 **Location:** 
 **Reference:** **CVE:** CVE-2022-49761
-**Image:** docker-io-bitnami-elasticsearch-8-6-2-debian-11-r0
-**Helm Chart:** docker-io-bitnami-elasticsearch-8-6-2-debian-11
-**Message:** Package: linux-libc-dev
-**Location:** 
-**Reference:** **CVE:** CVE-2022-49766
 **Image:** docker-io-bitnami-elasticsearch-8-6-2-debian-11-r0
 **Helm Chart:** docker-io-bitnami-elasticsearch-8-6-2-debian-11
 **Message:** Package: linux-libc-dev
@@ -20549,7 +20419,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-maykinmedia-open-archiefbeheer
 **Message:** Package: libxml2
 **Location:** 
-**Reference:** ---#### 🟠 HIGH Vulnerabilities (24)**CVE:** CVE-2018-11205
+**Reference:** ---#### 🟠 HIGH Vulnerabilities (25)**CVE:** CVE-2018-11205
 **Image:** docker-io-maykinmedia-open-archiefbeheer-latest
 **Helm Chart:** docker-io-maykinmedia-open-archiefbeheer
 **Message:** Package: libhdf5-103-1
@@ -20659,6 +20529,11 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-maykinmedia-open-archiefbeheer
 **Message:** Package: libhdf5-103-1
 **Location:** 
+**Reference:** **CVE:** CVE-2025-49795
+**Image:** docker-io-maykinmedia-open-archiefbeheer-latest
+**Helm Chart:** docker-io-maykinmedia-open-archiefbeheer
+**Message:** Package: libxml2
+**Location:** 
 **Reference:** **CVE:** CVE-2025-6020
 **Image:** docker-io-maykinmedia-open-archiefbeheer-latest
 **Helm Chart:** docker-io-maykinmedia-open-archiefbeheer
@@ -20669,7 +20544,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-maykinmedia-open-archiefbeheer
 **Message:** Package: libxml2
 **Location:** 
-**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (91)**CVE:** CVE-2019-20005
+**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (89)**CVE:** CVE-2019-20005
 **Image:** docker-io-maykinmedia-open-archiefbeheer-latest
 **Helm Chart:** docker-io-maykinmedia-open-archiefbeheer
 **Message:** Package: libnetcdf18
@@ -21069,21 +20944,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-maykinmedia-open-archiefbeheer
 **Message:** Package: libgif7
 **Location:** 
-**Reference:** **CVE:** CVE-2025-32988
-**Image:** docker-io-maykinmedia-open-archiefbeheer-latest
-**Helm Chart:** docker-io-maykinmedia-open-archiefbeheer
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32989
-**Image:** docker-io-maykinmedia-open-archiefbeheer-latest
-**Helm Chart:** docker-io-maykinmedia-open-archiefbeheer
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32990
-**Image:** docker-io-maykinmedia-open-archiefbeheer-latest
-**Helm Chart:** docker-io-maykinmedia-open-archiefbeheer
-**Message:** Package: libgnutls30
-**Location:** 
 **Reference:** **CVE:** CVE-2025-40909
 **Image:** docker-io-maykinmedia-open-archiefbeheer-latest
 **Helm Chart:** docker-io-maykinmedia-open-archiefbeheer
@@ -21114,17 +20974,22 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-maykinmedia-open-archiefbeheer
 **Message:** Package: libpython3.9-minimal
 **Location:** 
-**Reference:** **CVE:** CVE-2025-6395
-**Image:** docker-io-maykinmedia-open-archiefbeheer-latest
-**Helm Chart:** docker-io-maykinmedia-open-archiefbeheer
-**Message:** Package: libgnutls30
-**Location:** 
 **Reference:** **CVE:** CVE-2025-7067
 **Image:** docker-io-maykinmedia-open-archiefbeheer-latest
 **Helm Chart:** docker-io-maykinmedia-open-archiefbeheer
 **Message:** Package: libhdf5-103-1
 **Location:** 
-**Reference:** ---#### 🔵 LOW Vulnerabilities (307)**CVE:** CVE-2005-2541
+**Reference:** **CVE:** CVE-2025-7068
+**Image:** docker-io-maykinmedia-open-archiefbeheer-latest
+**Helm Chart:** docker-io-maykinmedia-open-archiefbeheer
+**Message:** Package: libhdf5-103-1
+**Location:** 
+**Reference:** **CVE:** CVE-2025-7069
+**Image:** docker-io-maykinmedia-open-archiefbeheer-latest
+**Helm Chart:** docker-io-maykinmedia-open-archiefbeheer
+**Message:** Package: libhdf5-103-1
+**Location:** 
+**Reference:** ---#### 🔵 LOW Vulnerabilities (305)**CVE:** CVE-2005-2541
 **Image:** docker-io-maykinmedia-open-archiefbeheer-latest
 **Helm Chart:** docker-io-maykinmedia-open-archiefbeheer
 **Message:** Package: tar
@@ -22629,16 +22494,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-maykinmedia-open-archiefbeheer
 **Message:** Package: libhdf5-103-1
 **Location:** 
-**Reference:** **CVE:** CVE-2025-7068
-**Image:** docker-io-maykinmedia-open-archiefbeheer-latest
-**Helm Chart:** docker-io-maykinmedia-open-archiefbeheer
-**Message:** Package: libhdf5-103-1
-**Location:** 
-**Reference:** **CVE:** CVE-2025-7069
-**Image:** docker-io-maykinmedia-open-archiefbeheer-latest
-**Helm Chart:** docker-io-maykinmedia-open-archiefbeheer
-**Message:** Package: libhdf5-103-1
-**Location:** 
 **Reference:** **CVE:** TEMP-0290435-0B57B5
 **Image:** docker-io-maykinmedia-open-archiefbeheer-latest
 **Helm Chart:** docker-io-maykinmedia-open-archiefbeheer
@@ -23026,7 +22881,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-redis-sentinel-7-0-5-debian-11
 **Message:** Package: libpam-modules
 **Location:** 
-**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (72)**CVE:** CVE-2021-43784
+**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (68)**CVE:** CVE-2021-43784
 **Image:** docker-io-bitnami-redis-sentinel-7-0-5-debian-11-r24
 **Helm Chart:** docker-io-bitnami-redis-sentinel-7-0-5-debian-11
 **Message:** Package: github.com/opencontainers/runc
@@ -23346,21 +23201,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-redis-sentinel-7-0-5-debian-11
 **Message:** Package: libgssapi-krb5-2
 **Location:** 
-**Reference:** **CVE:** CVE-2025-32988
-**Image:** docker-io-bitnami-redis-sentinel-7-0-5-debian-11-r24
-**Helm Chart:** docker-io-bitnami-redis-sentinel-7-0-5-debian-11
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32989
-**Image:** docker-io-bitnami-redis-sentinel-7-0-5-debian-11-r24
-**Helm Chart:** docker-io-bitnami-redis-sentinel-7-0-5-debian-11
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32990
-**Image:** docker-io-bitnami-redis-sentinel-7-0-5-debian-11-r24
-**Helm Chart:** docker-io-bitnami-redis-sentinel-7-0-5-debian-11
-**Message:** Package: libgnutls30
-**Location:** 
 **Reference:** **CVE:** CVE-2025-3576
 **Image:** docker-io-bitnami-redis-sentinel-7-0-5-debian-11-r24
 **Helm Chart:** docker-io-bitnami-redis-sentinel-7-0-5-debian-11
@@ -23380,11 +23220,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Image:** docker-io-bitnami-redis-sentinel-7-0-5-debian-11-r24
 **Helm Chart:** docker-io-bitnami-redis-sentinel-7-0-5-debian-11
 **Message:** Package: stdlib
-**Location:** 
-**Reference:** **CVE:** CVE-2025-6395
-**Image:** docker-io-bitnami-redis-sentinel-7-0-5-debian-11-r24
-**Helm Chart:** docker-io-bitnami-redis-sentinel-7-0-5-debian-11
-**Message:** Package: libgnutls30
 **Location:** 
 **Reference:** ---#### 🔵 LOW Vulnerabilities (56)**CVE:** CVE-2005-2541
 **Image:** docker-io-bitnami-redis-sentinel-7-0-5-debian-11-r24
@@ -24033,7 +23868,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-redis-7-0-5-debian-11
 **Message:** Package: libpam-modules
 **Location:** 
-**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (72)**CVE:** CVE-2021-43784
+**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (68)**CVE:** CVE-2021-43784
 **Image:** docker-io-bitnami-redis-7-0-5-debian-11-r25
 **Helm Chart:** docker-io-bitnami-redis-7-0-5-debian-11
 **Message:** Package: github.com/opencontainers/runc
@@ -24353,21 +24188,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-redis-7-0-5-debian-11
 **Message:** Package: libgssapi-krb5-2
 **Location:** 
-**Reference:** **CVE:** CVE-2025-32988
-**Image:** docker-io-bitnami-redis-7-0-5-debian-11-r25
-**Helm Chart:** docker-io-bitnami-redis-7-0-5-debian-11
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32989
-**Image:** docker-io-bitnami-redis-7-0-5-debian-11-r25
-**Helm Chart:** docker-io-bitnami-redis-7-0-5-debian-11
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32990
-**Image:** docker-io-bitnami-redis-7-0-5-debian-11-r25
-**Helm Chart:** docker-io-bitnami-redis-7-0-5-debian-11
-**Message:** Package: libgnutls30
-**Location:** 
 **Reference:** **CVE:** CVE-2025-3576
 **Image:** docker-io-bitnami-redis-7-0-5-debian-11-r25
 **Helm Chart:** docker-io-bitnami-redis-7-0-5-debian-11
@@ -24387,11 +24207,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Image:** docker-io-bitnami-redis-7-0-5-debian-11-r25
 **Helm Chart:** docker-io-bitnami-redis-7-0-5-debian-11
 **Message:** Package: stdlib
-**Location:** 
-**Reference:** **CVE:** CVE-2025-6395
-**Image:** docker-io-bitnami-redis-7-0-5-debian-11-r25
-**Helm Chart:** docker-io-bitnami-redis-7-0-5-debian-11
-**Message:** Package: libgnutls30
 **Location:** 
 **Reference:** ---#### 🔵 LOW Vulnerabilities (56)**CVE:** CVE-2005-2541
 **Image:** docker-io-bitnami-redis-7-0-5-debian-11-r25
@@ -25040,7 +24855,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-rabbitmq-3-11-8-debian-11
 **Message:** Package: libpam-modules
 **Location:** 
-**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (81)**CVE:** CVE-2022-1705
+**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (77)**CVE:** CVE-2022-1705
 **Image:** docker-io-bitnami-rabbitmq-3-11-8-debian-11-r0
 **Helm Chart:** docker-io-bitnami-rabbitmq-3-11-8-debian-11
 **Message:** Package: stdlib
@@ -25405,21 +25220,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-rabbitmq-3-11-8-debian-11
 **Message:** Package: libgssapi-krb5-2
 **Location:** 
-**Reference:** **CVE:** CVE-2025-32988
-**Image:** docker-io-bitnami-rabbitmq-3-11-8-debian-11-r0
-**Helm Chart:** docker-io-bitnami-rabbitmq-3-11-8-debian-11
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32989
-**Image:** docker-io-bitnami-rabbitmq-3-11-8-debian-11-r0
-**Helm Chart:** docker-io-bitnami-rabbitmq-3-11-8-debian-11
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32990
-**Image:** docker-io-bitnami-rabbitmq-3-11-8-debian-11-r0
-**Helm Chart:** docker-io-bitnami-rabbitmq-3-11-8-debian-11
-**Message:** Package: libgnutls30
-**Location:** 
 **Reference:** **CVE:** CVE-2025-3576
 **Image:** docker-io-bitnami-rabbitmq-3-11-8-debian-11-r0
 **Helm Chart:** docker-io-bitnami-rabbitmq-3-11-8-debian-11
@@ -25439,11 +25239,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Image:** docker-io-bitnami-rabbitmq-3-11-8-debian-11-r0
 **Helm Chart:** docker-io-bitnami-rabbitmq-3-11-8-debian-11
 **Message:** Package: stdlib
-**Location:** 
-**Reference:** **CVE:** CVE-2025-6395
-**Image:** docker-io-bitnami-rabbitmq-3-11-8-debian-11-r0
-**Helm Chart:** docker-io-bitnami-rabbitmq-3-11-8-debian-11
-**Message:** Package: libgnutls30
 **Location:** 
 **Reference:** ---#### 🔵 LOW Vulnerabilities (67)**CVE:** CVE-2005-2541
 **Image:** docker-io-bitnami-rabbitmq-3-11-8-debian-11-r0
@@ -26022,7 +25817,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-redis-exporter-1-45-0-debian-11
 **Message:** Package: libpam-modules
 **Location:** 
-**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (64)**CVE:** CVE-2022-2097
+**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (60)**CVE:** CVE-2022-2097
 **Image:** docker-io-bitnami-redis-exporter-1-45-0-debian-11-r11
 **Helm Chart:** docker-io-bitnami-redis-exporter-1-45-0-debian-11
 **Message:** Package: libssl1.1
@@ -26302,21 +26097,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-redis-exporter-1-45-0-debian-11
 **Message:** Package: libgssapi-krb5-2
 **Location:** 
-**Reference:** **CVE:** CVE-2025-32988
-**Image:** docker-io-bitnami-redis-exporter-1-45-0-debian-11-r11
-**Helm Chart:** docker-io-bitnami-redis-exporter-1-45-0-debian-11
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32989
-**Image:** docker-io-bitnami-redis-exporter-1-45-0-debian-11-r11
-**Helm Chart:** docker-io-bitnami-redis-exporter-1-45-0-debian-11
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32990
-**Image:** docker-io-bitnami-redis-exporter-1-45-0-debian-11-r11
-**Helm Chart:** docker-io-bitnami-redis-exporter-1-45-0-debian-11
-**Message:** Package: libgnutls30
-**Location:** 
 **Reference:** **CVE:** CVE-2025-3576
 **Image:** docker-io-bitnami-redis-exporter-1-45-0-debian-11-r11
 **Helm Chart:** docker-io-bitnami-redis-exporter-1-45-0-debian-11
@@ -26336,11 +26116,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Image:** docker-io-bitnami-redis-exporter-1-45-0-debian-11-r11
 **Helm Chart:** docker-io-bitnami-redis-exporter-1-45-0-debian-11
 **Message:** Package: stdlib
-**Location:** 
-**Reference:** **CVE:** CVE-2025-6395
-**Image:** docker-io-bitnami-redis-exporter-1-45-0-debian-11-r11
-**Helm Chart:** docker-io-bitnami-redis-exporter-1-45-0-debian-11
-**Message:** Package: libgnutls30
 **Location:** 
 **Reference:** ---#### 🔵 LOW Vulnerabilities (54)**CVE:** CVE-2005-2541
 **Image:** docker-io-bitnami-redis-exporter-1-45-0-debian-11-r11
@@ -27436,7 +27211,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-elasticsearch-exporter-1-5-0-debian-11
 **Message:** Package: libpam-modules
 **Location:** 
-**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (63)**CVE:** CVE-2022-29526
+**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (59)**CVE:** CVE-2022-29526
 **Image:** docker-io-bitnami-elasticsearch-exporter-1-5-0-debian-11-r70
 **Helm Chart:** docker-io-bitnami-elasticsearch-exporter-1-5-0-debian-11
 **Message:** Package: golang.org/x/sys
@@ -27711,21 +27486,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-elasticsearch-exporter-1-5-0-debian-11
 **Message:** Package: libgssapi-krb5-2
 **Location:** 
-**Reference:** **CVE:** CVE-2025-32988
-**Image:** docker-io-bitnami-elasticsearch-exporter-1-5-0-debian-11-r70
-**Helm Chart:** docker-io-bitnami-elasticsearch-exporter-1-5-0-debian-11
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32989
-**Image:** docker-io-bitnami-elasticsearch-exporter-1-5-0-debian-11-r70
-**Helm Chart:** docker-io-bitnami-elasticsearch-exporter-1-5-0-debian-11
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32990
-**Image:** docker-io-bitnami-elasticsearch-exporter-1-5-0-debian-11-r70
-**Helm Chart:** docker-io-bitnami-elasticsearch-exporter-1-5-0-debian-11
-**Message:** Package: libgnutls30
-**Location:** 
 **Reference:** **CVE:** CVE-2025-3576
 **Image:** docker-io-bitnami-elasticsearch-exporter-1-5-0-debian-11-r70
 **Helm Chart:** docker-io-bitnami-elasticsearch-exporter-1-5-0-debian-11
@@ -27745,11 +27505,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Image:** docker-io-bitnami-elasticsearch-exporter-1-5-0-debian-11-r70
 **Helm Chart:** docker-io-bitnami-elasticsearch-exporter-1-5-0-debian-11
 **Message:** Package: stdlib
-**Location:** 
-**Reference:** **CVE:** CVE-2025-6395
-**Image:** docker-io-bitnami-elasticsearch-exporter-1-5-0-debian-11-r70
-**Helm Chart:** docker-io-bitnami-elasticsearch-exporter-1-5-0-debian-11
-**Message:** Package: libgnutls30
 **Location:** 
 **Reference:** ---#### 🔵 LOW Vulnerabilities (54)**CVE:** CVE-2005-2541
 **Image:** docker-io-bitnami-elasticsearch-exporter-1-5-0-debian-11-r70
@@ -28953,11 +28708,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-openzaak-open-zaak
 **Message:** Package: linux-libc-dev
 **Location:** 
-**Reference:** **CVE:** CVE-2025-38328
-**Image:** docker-io-openzaak-open-zaak-latest
-**Helm Chart:** docker-io-openzaak-open-zaak
-**Message:** Package: linux-libc-dev
-**Location:** 
 **Reference:** **CVE:** CVE-2025-40014
 **Image:** docker-io-openzaak-open-zaak-latest
 **Helm Chart:** docker-io-openzaak-open-zaak
@@ -28973,6 +28723,11 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-openzaak-open-zaak
 **Message:** Package: libc-bin
 **Location:** 
+**Reference:** **CVE:** CVE-2025-49795
+**Image:** docker-io-openzaak-open-zaak-latest
+**Helm Chart:** docker-io-openzaak-open-zaak
+**Message:** Package: libxml2
+**Location:** 
 **Reference:** **CVE:** CVE-2025-6020
 **Image:** docker-io-openzaak-open-zaak-latest
 **Helm Chart:** docker-io-openzaak-open-zaak
@@ -28983,7 +28738,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-openzaak-open-zaak
 **Message:** Package: libxml2
 **Location:** 
-**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (541)**CVE:** CVE-2019-15213
+**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (534)**CVE:** CVE-2019-15213
 **Image:** docker-io-openzaak-open-zaak-latest
 **Helm Chart:** docker-io-openzaak-open-zaak
 **Message:** Package: linux-libc-dev
@@ -31063,21 +30818,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-openzaak-open-zaak
 **Message:** Package: libgif7
 **Location:** 
-**Reference:** **CVE:** CVE-2025-32988
-**Image:** docker-io-openzaak-open-zaak-latest
-**Helm Chart:** docker-io-openzaak-open-zaak
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32989
-**Image:** docker-io-openzaak-open-zaak-latest
-**Helm Chart:** docker-io-openzaak-open-zaak
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32990
-**Image:** docker-io-openzaak-open-zaak-latest
-**Helm Chart:** docker-io-openzaak-open-zaak
-**Message:** Package: libgnutls30
-**Location:** 
 **Reference:** **CVE:** CVE-2025-3576
 **Image:** docker-io-openzaak-open-zaak-latest
 **Helm Chart:** docker-io-openzaak-open-zaak
@@ -31573,11 +31313,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-openzaak-open-zaak
 **Message:** Package: linux-libc-dev
 **Location:** 
-**Reference:** **CVE:** CVE-2025-38239
-**Image:** docker-io-openzaak-open-zaak-latest
-**Helm Chart:** docker-io-openzaak-open-zaak
-**Message:** Package: linux-libc-dev
-**Location:** 
 **Reference:** **CVE:** CVE-2025-38245
 **Image:** docker-io-openzaak-open-zaak-latest
 **Helm Chart:** docker-io-openzaak-open-zaak
@@ -31628,26 +31363,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-openzaak-open-zaak
 **Message:** Package: linux-libc-dev
 **Location:** 
-**Reference:** **CVE:** CVE-2025-38331
-**Image:** docker-io-openzaak-open-zaak-latest
-**Helm Chart:** docker-io-openzaak-open-zaak
-**Message:** Package: linux-libc-dev
-**Location:** 
-**Reference:** **CVE:** CVE-2025-38340
-**Image:** docker-io-openzaak-open-zaak-latest
-**Helm Chart:** docker-io-openzaak-open-zaak
-**Message:** Package: linux-libc-dev
-**Location:** 
-**Reference:** **CVE:** CVE-2025-38343
-**Image:** docker-io-openzaak-open-zaak-latest
-**Helm Chart:** docker-io-openzaak-open-zaak
-**Message:** Package: linux-libc-dev
-**Location:** 
-**Reference:** **CVE:** CVE-2025-38347
-**Image:** docker-io-openzaak-open-zaak-latest
-**Helm Chart:** docker-io-openzaak-open-zaak
-**Message:** Package: linux-libc-dev
-**Location:** 
 **Reference:** **CVE:** CVE-2025-39989
 **Image:** docker-io-openzaak-open-zaak-latest
 **Helm Chart:** docker-io-openzaak-open-zaak
@@ -31678,17 +31393,22 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-openzaak-open-zaak
 **Message:** Package: libpython3.11-minimal
 **Location:** 
-**Reference:** **CVE:** CVE-2025-6395
-**Image:** docker-io-openzaak-open-zaak-latest
-**Helm Chart:** docker-io-openzaak-open-zaak
-**Message:** Package: libgnutls30
-**Location:** 
 **Reference:** **CVE:** CVE-2025-7067
 **Image:** docker-io-openzaak-open-zaak-latest
 **Helm Chart:** docker-io-openzaak-open-zaak
 **Message:** Package: libhdf5-103-1
 **Location:** 
-**Reference:** ---#### 🔵 LOW Vulnerabilities (245)**CVE:** CVE-2004-0230
+**Reference:** **CVE:** CVE-2025-7068
+**Image:** docker-io-openzaak-open-zaak-latest
+**Helm Chart:** docker-io-openzaak-open-zaak
+**Message:** Package: libhdf5-103-1
+**Location:** 
+**Reference:** **CVE:** CVE-2025-7069
+**Image:** docker-io-openzaak-open-zaak-latest
+**Helm Chart:** docker-io-openzaak-open-zaak
+**Message:** Package: libhdf5-103-1
+**Location:** 
+**Reference:** ---#### 🔵 LOW Vulnerabilities (243)**CVE:** CVE-2004-0230
 **Image:** docker-io-openzaak-open-zaak-latest
 **Helm Chart:** docker-io-openzaak-open-zaak
 **Message:** Package: linux-libc-dev
@@ -32874,16 +32594,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Message:** Package: libhdf5-103-1
 **Location:** 
 **Reference:** **CVE:** CVE-2025-6858
-**Image:** docker-io-openzaak-open-zaak-latest
-**Helm Chart:** docker-io-openzaak-open-zaak
-**Message:** Package: libhdf5-103-1
-**Location:** 
-**Reference:** **CVE:** CVE-2025-7068
-**Image:** docker-io-openzaak-open-zaak-latest
-**Helm Chart:** docker-io-openzaak-open-zaak
-**Message:** Package: libhdf5-103-1
-**Location:** 
-**Reference:** **CVE:** CVE-2025-7069
 **Image:** docker-io-openzaak-open-zaak-latest
 **Helm Chart:** docker-io-openzaak-open-zaak
 **Message:** Package: libhdf5-103-1
@@ -34172,7 +33882,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-nginx-1-27
 **Message:** Package: libxml2
 **Location:** 
-**Reference:** ---#### 🟠 HIGH Vulnerabilities (19)**CVE:** CVE-2023-2953
+**Reference:** ---#### 🟠 HIGH Vulnerabilities (18)**CVE:** CVE-2023-2953
 **Image:** docker-io-nginx-1-27-4
 **Helm Chart:** docker-io-nginx-1-27
 **Message:** Package: libldap-2.5-0
@@ -34242,6 +33952,11 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-nginx-1-27
 **Message:** Package: libc-bin
 **Location:** 
+**Reference:** **CVE:** CVE-2025-49795
+**Image:** docker-io-nginx-1-27-4
+**Helm Chart:** docker-io-nginx-1-27
+**Message:** Package: libxml2
+**Location:** 
 **Reference:** **CVE:** CVE-2025-5222
 **Image:** docker-io-nginx-1-27-4
 **Helm Chart:** docker-io-nginx-1-27
@@ -34257,17 +33972,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-nginx-1-27
 **Message:** Package: libxml2
 **Location:** 
-**Reference:** **CVE:** CVE-2025-7424
-**Image:** docker-io-nginx-1-27-4
-**Helm Chart:** docker-io-nginx-1-27
-**Message:** Package: libxslt1.1
-**Location:** 
-**Reference:** **CVE:** CVE-2025-7425
-**Image:** docker-io-nginx-1-27-4
-**Helm Chart:** docker-io-nginx-1-27
-**Message:** Package: libxslt1.1
-**Location:** 
-**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (27)**CVE:** CVE-2022-49043
+**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (23)**CVE:** CVE-2022-49043
 **Image:** docker-io-nginx-1-27-4
 **Helm Chart:** docker-io-nginx-1-27
 **Message:** Package: libxml2
@@ -34362,21 +34067,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-nginx-1-27
 **Message:** Package: libgssapi-krb5-2
 **Location:** 
-**Reference:** **CVE:** CVE-2025-32988
-**Image:** docker-io-nginx-1-27-4
-**Helm Chart:** docker-io-nginx-1-27
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32989
-**Image:** docker-io-nginx-1-27-4
-**Helm Chart:** docker-io-nginx-1-27
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32990
-**Image:** docker-io-nginx-1-27-4
-**Helm Chart:** docker-io-nginx-1-27
-**Message:** Package: libgnutls30
-**Location:** 
 **Reference:** **CVE:** CVE-2025-3576
 **Image:** docker-io-nginx-1-27-4
 **Helm Chart:** docker-io-nginx-1-27
@@ -34396,11 +34086,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Image:** docker-io-nginx-1-27-4
 **Helm Chart:** docker-io-nginx-1-27
 **Message:** Package: libavif15
-**Location:** 
-**Reference:** **CVE:** CVE-2025-6395
-**Image:** docker-io-nginx-1-27-4
-**Helm Chart:** docker-io-nginx-1-27
-**Message:** Package: libgnutls30
 **Location:** 
 **Reference:** ---#### 🔵 LOW Vulnerabilities (65)**CVE:** CVE-2005-2541
 **Image:** docker-io-nginx-1-27-4
@@ -40436,11 +40121,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-maykinmedia-objecttypes-api
 **Message:** Package: linux-libc-dev
 **Location:** 
-**Reference:** **CVE:** CVE-2025-38328
-**Image:** docker-io-maykinmedia-objecttypes-api-latest
-**Helm Chart:** docker-io-maykinmedia-objecttypes-api
-**Message:** Package: linux-libc-dev
-**Location:** 
 **Reference:** **CVE:** CVE-2025-40014
 **Image:** docker-io-maykinmedia-objecttypes-api-latest
 **Helm Chart:** docker-io-maykinmedia-objecttypes-api
@@ -40456,6 +40136,11 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-maykinmedia-objecttypes-api
 **Message:** Package: libc-bin
 **Location:** 
+**Reference:** **CVE:** CVE-2025-49795
+**Image:** docker-io-maykinmedia-objecttypes-api-latest
+**Helm Chart:** docker-io-maykinmedia-objecttypes-api
+**Message:** Package: libxml2
+**Location:** 
 **Reference:** **CVE:** CVE-2025-6020
 **Image:** docker-io-maykinmedia-objecttypes-api-latest
 **Helm Chart:** docker-io-maykinmedia-objecttypes-api
@@ -40466,7 +40151,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-maykinmedia-objecttypes-api
 **Message:** Package: libxml2
 **Location:** 
-**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (542)**CVE:** CVE-2019-15213
+**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (535)**CVE:** CVE-2019-15213
 **Image:** docker-io-maykinmedia-objecttypes-api-latest
 **Helm Chart:** docker-io-maykinmedia-objecttypes-api
 **Message:** Package: linux-libc-dev
@@ -42551,21 +42236,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-maykinmedia-objecttypes-api
 **Message:** Package: libgif7
 **Location:** 
-**Reference:** **CVE:** CVE-2025-32988
-**Image:** docker-io-maykinmedia-objecttypes-api-latest
-**Helm Chart:** docker-io-maykinmedia-objecttypes-api
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32989
-**Image:** docker-io-maykinmedia-objecttypes-api-latest
-**Helm Chart:** docker-io-maykinmedia-objecttypes-api
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32990
-**Image:** docker-io-maykinmedia-objecttypes-api-latest
-**Helm Chart:** docker-io-maykinmedia-objecttypes-api
-**Message:** Package: libgnutls30
-**Location:** 
 **Reference:** **CVE:** CVE-2025-3576
 **Image:** docker-io-maykinmedia-objecttypes-api-latest
 **Helm Chart:** docker-io-maykinmedia-objecttypes-api
@@ -43061,11 +42731,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-maykinmedia-objecttypes-api
 **Message:** Package: linux-libc-dev
 **Location:** 
-**Reference:** **CVE:** CVE-2025-38239
-**Image:** docker-io-maykinmedia-objecttypes-api-latest
-**Helm Chart:** docker-io-maykinmedia-objecttypes-api
-**Message:** Package: linux-libc-dev
-**Location:** 
 **Reference:** **CVE:** CVE-2025-38245
 **Image:** docker-io-maykinmedia-objecttypes-api-latest
 **Helm Chart:** docker-io-maykinmedia-objecttypes-api
@@ -43116,26 +42781,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-maykinmedia-objecttypes-api
 **Message:** Package: linux-libc-dev
 **Location:** 
-**Reference:** **CVE:** CVE-2025-38331
-**Image:** docker-io-maykinmedia-objecttypes-api-latest
-**Helm Chart:** docker-io-maykinmedia-objecttypes-api
-**Message:** Package: linux-libc-dev
-**Location:** 
-**Reference:** **CVE:** CVE-2025-38340
-**Image:** docker-io-maykinmedia-objecttypes-api-latest
-**Helm Chart:** docker-io-maykinmedia-objecttypes-api
-**Message:** Package: linux-libc-dev
-**Location:** 
-**Reference:** **CVE:** CVE-2025-38343
-**Image:** docker-io-maykinmedia-objecttypes-api-latest
-**Helm Chart:** docker-io-maykinmedia-objecttypes-api
-**Message:** Package: linux-libc-dev
-**Location:** 
-**Reference:** **CVE:** CVE-2025-38347
-**Image:** docker-io-maykinmedia-objecttypes-api-latest
-**Helm Chart:** docker-io-maykinmedia-objecttypes-api
-**Message:** Package: linux-libc-dev
-**Location:** 
 **Reference:** **CVE:** CVE-2025-39989
 **Image:** docker-io-maykinmedia-objecttypes-api-latest
 **Helm Chart:** docker-io-maykinmedia-objecttypes-api
@@ -43166,17 +42811,22 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-maykinmedia-objecttypes-api
 **Message:** Package: libpython3.11-minimal
 **Location:** 
-**Reference:** **CVE:** CVE-2025-6395
-**Image:** docker-io-maykinmedia-objecttypes-api-latest
-**Helm Chart:** docker-io-maykinmedia-objecttypes-api
-**Message:** Package: libgnutls30
-**Location:** 
 **Reference:** **CVE:** CVE-2025-7067
 **Image:** docker-io-maykinmedia-objecttypes-api-latest
 **Helm Chart:** docker-io-maykinmedia-objecttypes-api
 **Message:** Package: libhdf5-103-1
 **Location:** 
-**Reference:** ---#### 🔵 LOW Vulnerabilities (270)**CVE:** CVE-2004-0230
+**Reference:** **CVE:** CVE-2025-7068
+**Image:** docker-io-maykinmedia-objecttypes-api-latest
+**Helm Chart:** docker-io-maykinmedia-objecttypes-api
+**Message:** Package: libhdf5-103-1
+**Location:** 
+**Reference:** **CVE:** CVE-2025-7069
+**Image:** docker-io-maykinmedia-objecttypes-api-latest
+**Helm Chart:** docker-io-maykinmedia-objecttypes-api
+**Message:** Package: libhdf5-103-1
+**Location:** 
+**Reference:** ---#### 🔵 LOW Vulnerabilities (268)**CVE:** CVE-2004-0230
 **Image:** docker-io-maykinmedia-objecttypes-api-latest
 **Helm Chart:** docker-io-maykinmedia-objecttypes-api
 **Message:** Package: linux-libc-dev
@@ -44491,16 +44141,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-maykinmedia-objecttypes-api
 **Message:** Package: libhdf5-103-1
 **Location:** 
-**Reference:** **CVE:** CVE-2025-7068
-**Image:** docker-io-maykinmedia-objecttypes-api-latest
-**Helm Chart:** docker-io-maykinmedia-objecttypes-api
-**Message:** Package: libhdf5-103-1
-**Location:** 
-**Reference:** **CVE:** CVE-2025-7069
-**Image:** docker-io-maykinmedia-objecttypes-api-latest
-**Helm Chart:** docker-io-maykinmedia-objecttypes-api
-**Message:** Package: libhdf5-103-1
-**Location:** 
 **Reference:** **CVE:** TEMP-0000000-F7A20F
 **Image:** docker-io-maykinmedia-objecttypes-api-latest
 **Helm Chart:** docker-io-maykinmedia-objecttypes-api
@@ -45458,11 +45098,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-maykinmedia-objects-api
 **Message:** Package: linux-libc-dev
 **Location:** 
-**Reference:** **CVE:** CVE-2025-38328
-**Image:** docker-io-maykinmedia-objects-api-latest
-**Helm Chart:** docker-io-maykinmedia-objects-api
-**Message:** Package: linux-libc-dev
-**Location:** 
 **Reference:** **CVE:** CVE-2025-40014
 **Image:** docker-io-maykinmedia-objects-api-latest
 **Helm Chart:** docker-io-maykinmedia-objects-api
@@ -45478,6 +45113,11 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-maykinmedia-objects-api
 **Message:** Package: libc-bin
 **Location:** 
+**Reference:** **CVE:** CVE-2025-49795
+**Image:** docker-io-maykinmedia-objects-api-latest
+**Helm Chart:** docker-io-maykinmedia-objects-api
+**Message:** Package: libxml2
+**Location:** 
 **Reference:** **CVE:** CVE-2025-6020
 **Image:** docker-io-maykinmedia-objects-api-latest
 **Helm Chart:** docker-io-maykinmedia-objects-api
@@ -45488,7 +45128,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-maykinmedia-objects-api
 **Message:** Package: libxml2
 **Location:** 
-**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (541)**CVE:** CVE-2019-15213
+**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (534)**CVE:** CVE-2019-15213
 **Image:** docker-io-maykinmedia-objects-api-latest
 **Helm Chart:** docker-io-maykinmedia-objects-api
 **Message:** Package: linux-libc-dev
@@ -47568,21 +47208,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-maykinmedia-objects-api
 **Message:** Package: libgif-dev
 **Location:** 
-**Reference:** **CVE:** CVE-2025-32988
-**Image:** docker-io-maykinmedia-objects-api-latest
-**Helm Chart:** docker-io-maykinmedia-objects-api
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32989
-**Image:** docker-io-maykinmedia-objects-api-latest
-**Helm Chart:** docker-io-maykinmedia-objects-api
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32990
-**Image:** docker-io-maykinmedia-objects-api-latest
-**Helm Chart:** docker-io-maykinmedia-objects-api
-**Message:** Package: libgnutls30
-**Location:** 
 **Reference:** **CVE:** CVE-2025-3576
 **Image:** docker-io-maykinmedia-objects-api-latest
 **Helm Chart:** docker-io-maykinmedia-objects-api
@@ -48078,11 +47703,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-maykinmedia-objects-api
 **Message:** Package: linux-libc-dev
 **Location:** 
-**Reference:** **CVE:** CVE-2025-38239
-**Image:** docker-io-maykinmedia-objects-api-latest
-**Helm Chart:** docker-io-maykinmedia-objects-api
-**Message:** Package: linux-libc-dev
-**Location:** 
 **Reference:** **CVE:** CVE-2025-38245
 **Image:** docker-io-maykinmedia-objects-api-latest
 **Helm Chart:** docker-io-maykinmedia-objects-api
@@ -48133,26 +47753,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-maykinmedia-objects-api
 **Message:** Package: linux-libc-dev
 **Location:** 
-**Reference:** **CVE:** CVE-2025-38331
-**Image:** docker-io-maykinmedia-objects-api-latest
-**Helm Chart:** docker-io-maykinmedia-objects-api
-**Message:** Package: linux-libc-dev
-**Location:** 
-**Reference:** **CVE:** CVE-2025-38340
-**Image:** docker-io-maykinmedia-objects-api-latest
-**Helm Chart:** docker-io-maykinmedia-objects-api
-**Message:** Package: linux-libc-dev
-**Location:** 
-**Reference:** **CVE:** CVE-2025-38343
-**Image:** docker-io-maykinmedia-objects-api-latest
-**Helm Chart:** docker-io-maykinmedia-objects-api
-**Message:** Package: linux-libc-dev
-**Location:** 
-**Reference:** **CVE:** CVE-2025-38347
-**Image:** docker-io-maykinmedia-objects-api-latest
-**Helm Chart:** docker-io-maykinmedia-objects-api
-**Message:** Package: linux-libc-dev
-**Location:** 
 **Reference:** **CVE:** CVE-2025-39989
 **Image:** docker-io-maykinmedia-objects-api-latest
 **Helm Chart:** docker-io-maykinmedia-objects-api
@@ -48183,17 +47783,22 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-maykinmedia-objects-api
 **Message:** Package: libpython3.11-minimal
 **Location:** 
-**Reference:** **CVE:** CVE-2025-6395
-**Image:** docker-io-maykinmedia-objects-api-latest
-**Helm Chart:** docker-io-maykinmedia-objects-api
-**Message:** Package: libgnutls30
-**Location:** 
 **Reference:** **CVE:** CVE-2025-7067
 **Image:** docker-io-maykinmedia-objects-api-latest
 **Helm Chart:** docker-io-maykinmedia-objects-api
 **Message:** Package: hdf5-helpers
 **Location:** 
-**Reference:** ---#### 🔵 LOW Vulnerabilities (246)**CVE:** CVE-2004-0230
+**Reference:** **CVE:** CVE-2025-7068
+**Image:** docker-io-maykinmedia-objects-api-latest
+**Helm Chart:** docker-io-maykinmedia-objects-api
+**Message:** Package: hdf5-helpers
+**Location:** 
+**Reference:** **CVE:** CVE-2025-7069
+**Image:** docker-io-maykinmedia-objects-api-latest
+**Helm Chart:** docker-io-maykinmedia-objects-api
+**Message:** Package: hdf5-helpers
+**Location:** 
+**Reference:** ---#### 🔵 LOW Vulnerabilities (244)**CVE:** CVE-2004-0230
 **Image:** docker-io-maykinmedia-objects-api-latest
 **Helm Chart:** docker-io-maykinmedia-objects-api
 **Message:** Package: linux-libc-dev
@@ -49388,16 +48993,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-maykinmedia-objects-api
 **Message:** Package: hdf5-helpers
 **Location:** 
-**Reference:** **CVE:** CVE-2025-7068
-**Image:** docker-io-maykinmedia-objects-api-latest
-**Helm Chart:** docker-io-maykinmedia-objects-api
-**Message:** Package: hdf5-helpers
-**Location:** 
-**Reference:** **CVE:** CVE-2025-7069
-**Image:** docker-io-maykinmedia-objects-api-latest
-**Helm Chart:** docker-io-maykinmedia-objects-api
-**Message:** Package: hdf5-helpers
-**Location:** 
 **Reference:** **CVE:** TEMP-0000000-F7A20F
 **Image:** docker-io-maykinmedia-objects-api-latest
 **Helm Chart:** docker-io-maykinmedia-objects-api
@@ -49445,7 +49040,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-nginxinc-nginx-unprivileged
 **Message:** Package: libxml2
 **Location:** 
-**Reference:** ---#### 🟠 HIGH Vulnerabilities (11)**CVE:** CVE-2023-2953
+**Reference:** ---#### 🟠 HIGH Vulnerabilities (10)**CVE:** CVE-2023-2953
 **Image:** docker-io-nginxinc-nginx-unprivileged-stable
 **Helm Chart:** docker-io-nginxinc-nginx-unprivileged
 **Message:** Package: libldap-2.5-0
@@ -49480,6 +49075,11 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-nginxinc-nginx-unprivileged
 **Message:** Package: libc-bin
 **Location:** 
+**Reference:** **CVE:** CVE-2025-49795
+**Image:** docker-io-nginxinc-nginx-unprivileged-stable
+**Helm Chart:** docker-io-nginxinc-nginx-unprivileged
+**Message:** Package: libxml2
+**Location:** 
 **Reference:** **CVE:** CVE-2025-6020
 **Image:** docker-io-nginxinc-nginx-unprivileged-stable
 **Helm Chart:** docker-io-nginxinc-nginx-unprivileged
@@ -49490,17 +49090,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-nginxinc-nginx-unprivileged
 **Message:** Package: libxml2
 **Location:** 
-**Reference:** **CVE:** CVE-2025-7424
-**Image:** docker-io-nginxinc-nginx-unprivileged-stable
-**Helm Chart:** docker-io-nginxinc-nginx-unprivileged
-**Message:** Package: libxslt1.1
-**Location:** 
-**Reference:** **CVE:** CVE-2025-7425
-**Image:** docker-io-nginxinc-nginx-unprivileged-stable
-**Helm Chart:** docker-io-nginxinc-nginx-unprivileged
-**Message:** Package: libxslt1.1
-**Location:** 
-**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (15)**CVE:** CVE-2023-32570
+**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (11)**CVE:** CVE-2023-32570
 **Image:** docker-io-nginxinc-nginx-unprivileged-stable
 **Helm Chart:** docker-io-nginxinc-nginx-unprivileged
 **Message:** Package: libdav1d6
@@ -49545,21 +49135,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-nginxinc-nginx-unprivileged
 **Message:** Package: libexpat1
 **Location:** 
-**Reference:** **CVE:** CVE-2025-32988
-**Image:** docker-io-nginxinc-nginx-unprivileged-stable
-**Helm Chart:** docker-io-nginxinc-nginx-unprivileged
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32989
-**Image:** docker-io-nginxinc-nginx-unprivileged-stable
-**Helm Chart:** docker-io-nginxinc-nginx-unprivileged
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32990
-**Image:** docker-io-nginxinc-nginx-unprivileged-stable
-**Helm Chart:** docker-io-nginxinc-nginx-unprivileged
-**Message:** Package: libgnutls30
-**Location:** 
 **Reference:** **CVE:** CVE-2025-3576
 **Image:** docker-io-nginxinc-nginx-unprivileged-stable
 **Helm Chart:** docker-io-nginxinc-nginx-unprivileged
@@ -49569,11 +49144,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Image:** docker-io-nginxinc-nginx-unprivileged-stable
 **Helm Chart:** docker-io-nginxinc-nginx-unprivileged
 **Message:** Package: perl-base
-**Location:** 
-**Reference:** **CVE:** CVE-2025-6395
-**Image:** docker-io-nginxinc-nginx-unprivileged-stable
-**Helm Chart:** docker-io-nginxinc-nginx-unprivileged
-**Message:** Package: libgnutls30
 **Location:** 
 **Reference:** ---#### 🔵 LOW Vulnerabilities (63)**CVE:** CVE-2005-2541
 **Image:** docker-io-nginxinc-nginx-unprivileged-stable
@@ -49912,7 +49482,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-nginxinc-nginx-unprivileged-1-28
 **Message:** Package: libxml2
 **Location:** 
-**Reference:** ---#### 🟠 HIGH Vulnerabilities (11)**CVE:** CVE-2023-2953
+**Reference:** ---#### 🟠 HIGH Vulnerabilities (10)**CVE:** CVE-2023-2953
 **Image:** docker-io-nginxinc-nginx-unprivileged-1-28-0
 **Helm Chart:** docker-io-nginxinc-nginx-unprivileged-1-28
 **Message:** Package: libldap-2.5-0
@@ -49947,6 +49517,11 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-nginxinc-nginx-unprivileged-1-28
 **Message:** Package: libc-bin
 **Location:** 
+**Reference:** **CVE:** CVE-2025-49795
+**Image:** docker-io-nginxinc-nginx-unprivileged-1-28-0
+**Helm Chart:** docker-io-nginxinc-nginx-unprivileged-1-28
+**Message:** Package: libxml2
+**Location:** 
 **Reference:** **CVE:** CVE-2025-6020
 **Image:** docker-io-nginxinc-nginx-unprivileged-1-28-0
 **Helm Chart:** docker-io-nginxinc-nginx-unprivileged-1-28
@@ -49957,17 +49532,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-nginxinc-nginx-unprivileged-1-28
 **Message:** Package: libxml2
 **Location:** 
-**Reference:** **CVE:** CVE-2025-7424
-**Image:** docker-io-nginxinc-nginx-unprivileged-1-28-0
-**Helm Chart:** docker-io-nginxinc-nginx-unprivileged-1-28
-**Message:** Package: libxslt1.1
-**Location:** 
-**Reference:** **CVE:** CVE-2025-7425
-**Image:** docker-io-nginxinc-nginx-unprivileged-1-28-0
-**Helm Chart:** docker-io-nginxinc-nginx-unprivileged-1-28
-**Message:** Package: libxslt1.1
-**Location:** 
-**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (15)**CVE:** CVE-2023-32570
+**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (11)**CVE:** CVE-2023-32570
 **Image:** docker-io-nginxinc-nginx-unprivileged-1-28-0
 **Helm Chart:** docker-io-nginxinc-nginx-unprivileged-1-28
 **Message:** Package: libdav1d6
@@ -50012,21 +49577,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-nginxinc-nginx-unprivileged-1-28
 **Message:** Package: libexpat1
 **Location:** 
-**Reference:** **CVE:** CVE-2025-32988
-**Image:** docker-io-nginxinc-nginx-unprivileged-1-28-0
-**Helm Chart:** docker-io-nginxinc-nginx-unprivileged-1-28
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32989
-**Image:** docker-io-nginxinc-nginx-unprivileged-1-28-0
-**Helm Chart:** docker-io-nginxinc-nginx-unprivileged-1-28
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32990
-**Image:** docker-io-nginxinc-nginx-unprivileged-1-28-0
-**Helm Chart:** docker-io-nginxinc-nginx-unprivileged-1-28
-**Message:** Package: libgnutls30
-**Location:** 
 **Reference:** **CVE:** CVE-2025-3576
 **Image:** docker-io-nginxinc-nginx-unprivileged-1-28-0
 **Helm Chart:** docker-io-nginxinc-nginx-unprivileged-1-28
@@ -50036,11 +49586,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Image:** docker-io-nginxinc-nginx-unprivileged-1-28-0
 **Helm Chart:** docker-io-nginxinc-nginx-unprivileged-1-28
 **Message:** Package: perl-base
-**Location:** 
-**Reference:** **CVE:** CVE-2025-6395
-**Image:** docker-io-nginxinc-nginx-unprivileged-1-28-0
-**Helm Chart:** docker-io-nginxinc-nginx-unprivileged-1-28
-**Message:** Package: libgnutls30
 **Location:** 
 **Reference:** ---#### 🔵 LOW Vulnerabilities (63)**CVE:** CVE-2005-2541
 **Image:** docker-io-nginxinc-nginx-unprivileged-1-28-0
@@ -50576,7 +50121,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-openzaak-open-notificaties
 **Message:** Package: libxml2
 **Location:** 
-**Reference:** ---#### 🟠 HIGH Vulnerabilities (5)**CVE:** CVE-2023-2953
+**Reference:** ---#### 🟠 HIGH Vulnerabilities (6)**CVE:** CVE-2023-2953
 **Image:** docker-io-openzaak-open-notificaties-latest
 **Helm Chart:** docker-io-openzaak-open-notificaties
 **Message:** Package: libldap-2.5-0
@@ -50591,6 +50136,11 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-openzaak-open-notificaties
 **Message:** Package: libc-bin
 **Location:** 
+**Reference:** **CVE:** CVE-2025-49795
+**Image:** docker-io-openzaak-open-notificaties-latest
+**Helm Chart:** docker-io-openzaak-open-notificaties
+**Message:** Package: libxml2
+**Location:** 
 **Reference:** **CVE:** CVE-2025-6020
 **Image:** docker-io-openzaak-open-notificaties-latest
 **Helm Chart:** docker-io-openzaak-open-notificaties
@@ -50601,7 +50151,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-openzaak-open-notificaties
 **Message:** Package: libxml2
 **Location:** 
-**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (10)**CVE:** CVE-2023-50495
+**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (6)**CVE:** CVE-2023-50495
 **Image:** docker-io-openzaak-open-notificaties-latest
 **Helm Chart:** docker-io-openzaak-open-notificaties
 **Message:** Package: libncursesw6
@@ -50621,21 +50171,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-openzaak-open-notificaties
 **Message:** Package: libsqlite3-0
 **Location:** 
-**Reference:** **CVE:** CVE-2025-32988
-**Image:** docker-io-openzaak-open-notificaties-latest
-**Helm Chart:** docker-io-openzaak-open-notificaties
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32989
-**Image:** docker-io-openzaak-open-notificaties-latest
-**Helm Chart:** docker-io-openzaak-open-notificaties
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32990
-**Image:** docker-io-openzaak-open-notificaties-latest
-**Helm Chart:** docker-io-openzaak-open-notificaties
-**Message:** Package: libgnutls30
-**Location:** 
 **Reference:** **CVE:** CVE-2025-3576
 **Image:** docker-io-openzaak-open-notificaties-latest
 **Helm Chart:** docker-io-openzaak-open-notificaties
@@ -50645,11 +50180,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Image:** docker-io-openzaak-open-notificaties-latest
 **Helm Chart:** docker-io-openzaak-open-notificaties
 **Message:** Package: libperl5.36
-**Location:** 
-**Reference:** **CVE:** CVE-2025-6395
-**Image:** docker-io-openzaak-open-notificaties-latest
-**Helm Chart:** docker-io-openzaak-open-notificaties
-**Message:** Package: libgnutls30
 **Location:** 
 **Reference:** ---#### 🔵 LOW Vulnerabilities (50)**CVE:** CVE-2005-2541
 **Image:** docker-io-openzaak-open-notificaties-latest
@@ -50918,7 +50448,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-maykinmedia-open-klant
 **Message:** Package: libxml2
 **Location:** 
-**Reference:** ---#### 🟠 HIGH Vulnerabilities (5)**CVE:** CVE-2023-2953
+**Reference:** ---#### 🟠 HIGH Vulnerabilities (6)**CVE:** CVE-2023-2953
 **Image:** docker-io-maykinmedia-open-klant-latest
 **Helm Chart:** docker-io-maykinmedia-open-klant
 **Message:** Package: libldap-2.5-0
@@ -50933,6 +50463,11 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-maykinmedia-open-klant
 **Message:** Package: libc-bin
 **Location:** 
+**Reference:** **CVE:** CVE-2025-49795
+**Image:** docker-io-maykinmedia-open-klant-latest
+**Helm Chart:** docker-io-maykinmedia-open-klant
+**Message:** Package: libxml2
+**Location:** 
 **Reference:** **CVE:** CVE-2025-6020
 **Image:** docker-io-maykinmedia-open-klant-latest
 **Helm Chart:** docker-io-maykinmedia-open-klant
@@ -50943,7 +50478,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-maykinmedia-open-klant
 **Message:** Package: libxml2
 **Location:** 
-**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (10)**CVE:** CVE-2023-50495
+**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (6)**CVE:** CVE-2023-50495
 **Image:** docker-io-maykinmedia-open-klant-latest
 **Helm Chart:** docker-io-maykinmedia-open-klant
 **Message:** Package: libncursesw6
@@ -50963,21 +50498,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-maykinmedia-open-klant
 **Message:** Package: libsqlite3-0
 **Location:** 
-**Reference:** **CVE:** CVE-2025-32988
-**Image:** docker-io-maykinmedia-open-klant-latest
-**Helm Chart:** docker-io-maykinmedia-open-klant
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32989
-**Image:** docker-io-maykinmedia-open-klant-latest
-**Helm Chart:** docker-io-maykinmedia-open-klant
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32990
-**Image:** docker-io-maykinmedia-open-klant-latest
-**Helm Chart:** docker-io-maykinmedia-open-klant
-**Message:** Package: libgnutls30
-**Location:** 
 **Reference:** **CVE:** CVE-2025-3576
 **Image:** docker-io-maykinmedia-open-klant-latest
 **Helm Chart:** docker-io-maykinmedia-open-klant
@@ -50987,11 +50507,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Image:** docker-io-maykinmedia-open-klant-latest
 **Helm Chart:** docker-io-maykinmedia-open-klant
 **Message:** Package: libperl5.36
-**Location:** 
-**Reference:** **CVE:** CVE-2025-6395
-**Image:** docker-io-maykinmedia-open-klant-latest
-**Helm Chart:** docker-io-maykinmedia-open-klant
-**Message:** Package: libgnutls30
 **Location:** 
 **Reference:** ---#### 🔵 LOW Vulnerabilities (74)**CVE:** CVE-2005-2541
 **Image:** docker-io-maykinmedia-open-klant-latest
@@ -51380,7 +50895,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-zookeeper-3-9-3-debian-12
 **Message:** Package: libxml2
 **Location:** 
-**Reference:** ---#### 🟠 HIGH Vulnerabilities (19)**CVE:** CVE-2011-10007
+**Reference:** ---#### 🟠 HIGH Vulnerabilities (18)**CVE:** CVE-2011-10007
 **Image:** docker-io-bitnami-zookeeper-3-9-3-debian-12-r10
 **Helm Chart:** docker-io-bitnami-zookeeper-3-9-3-debian-12
 **Message:** Package: libfile-find-rule-perl
@@ -51450,6 +50965,11 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-zookeeper-3-9-3-debian-12
 **Message:** Package: libc-bin
 **Location:** 
+**Reference:** **CVE:** CVE-2025-49795
+**Image:** docker-io-bitnami-zookeeper-3-9-3-debian-12-r10
+**Helm Chart:** docker-io-bitnami-zookeeper-3-9-3-debian-12
+**Message:** Package: libxml2
+**Location:** 
 **Reference:** **CVE:** CVE-2025-5222
 **Image:** docker-io-bitnami-zookeeper-3-9-3-debian-12-r10
 **Helm Chart:** docker-io-bitnami-zookeeper-3-9-3-debian-12
@@ -51465,17 +50985,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-zookeeper-3-9-3-debian-12
 **Message:** Package: libxml2
 **Location:** 
-**Reference:** **CVE:** CVE-2025-7424
-**Image:** docker-io-bitnami-zookeeper-3-9-3-debian-12-r10
-**Helm Chart:** docker-io-bitnami-zookeeper-3-9-3-debian-12
-**Message:** Package: libxslt1.1
-**Location:** 
-**Reference:** **CVE:** CVE-2025-7425
-**Image:** docker-io-bitnami-zookeeper-3-9-3-debian-12-r10
-**Helm Chart:** docker-io-bitnami-zookeeper-3-9-3-debian-12
-**Message:** Package: libxslt1.1
-**Location:** 
-**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (26)**CVE:** CVE-2022-49043
+**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (22)**CVE:** CVE-2022-49043
 **Image:** docker-io-bitnami-zookeeper-3-9-3-debian-12-r10
 **Helm Chart:** docker-io-bitnami-zookeeper-3-9-3-debian-12
 **Message:** Package: libxml2
@@ -51565,21 +51075,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-zookeeper-3-9-3-debian-12
 **Message:** Package: io.netty:netty-common
 **Location:** 
-**Reference:** **CVE:** CVE-2025-32988
-**Image:** docker-io-bitnami-zookeeper-3-9-3-debian-12-r10
-**Helm Chart:** docker-io-bitnami-zookeeper-3-9-3-debian-12
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32989
-**Image:** docker-io-bitnami-zookeeper-3-9-3-debian-12-r10
-**Helm Chart:** docker-io-bitnami-zookeeper-3-9-3-debian-12
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32990
-**Image:** docker-io-bitnami-zookeeper-3-9-3-debian-12-r10
-**Helm Chart:** docker-io-bitnami-zookeeper-3-9-3-debian-12
-**Message:** Package: libgnutls30
-**Location:** 
 **Reference:** **CVE:** CVE-2025-3576
 **Image:** docker-io-bitnami-zookeeper-3-9-3-debian-12-r10
 **Helm Chart:** docker-io-bitnami-zookeeper-3-9-3-debian-12
@@ -51599,11 +51094,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Image:** docker-io-bitnami-zookeeper-3-9-3-debian-12-r10
 **Helm Chart:** docker-io-bitnami-zookeeper-3-9-3-debian-12
 **Message:** Package: stdlib
-**Location:** 
-**Reference:** **CVE:** CVE-2025-6395
-**Image:** docker-io-bitnami-zookeeper-3-9-3-debian-12-r10
-**Helm Chart:** docker-io-bitnami-zookeeper-3-9-3-debian-12
-**Message:** Package: libgnutls30
 **Location:** 
 **Reference:** ---#### 🔵 LOW Vulnerabilities (49)**CVE:** CVE-2005-2541
 **Image:** docker-io-bitnami-zookeeper-3-9-3-debian-12-r10
@@ -51867,7 +51357,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-postgresql-17-2-0-debian-12
 **Message:** Package: libxml2
 **Location:** 
-**Reference:** ---#### 🟠 HIGH Vulnerabilities (20)**CVE:** CVE-2011-10007
+**Reference:** ---#### 🟠 HIGH Vulnerabilities (19)**CVE:** CVE-2011-10007
 **Image:** docker-io-bitnami-postgresql-17-2-0-debian-12-r2
 **Helm Chart:** docker-io-bitnami-postgresql-17-2-0-debian-12
 **Message:** Package: libfile-find-rule-perl
@@ -51942,6 +51432,11 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-postgresql-17-2-0-debian-12
 **Message:** Package: libc-bin
 **Location:** 
+**Reference:** **CVE:** CVE-2025-49795
+**Image:** docker-io-bitnami-postgresql-17-2-0-debian-12-r2
+**Helm Chart:** docker-io-bitnami-postgresql-17-2-0-debian-12
+**Message:** Package: libxml2
+**Location:** 
 **Reference:** **CVE:** CVE-2025-5222
 **Image:** docker-io-bitnami-postgresql-17-2-0-debian-12-r2
 **Helm Chart:** docker-io-bitnami-postgresql-17-2-0-debian-12
@@ -51957,17 +51452,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-postgresql-17-2-0-debian-12
 **Message:** Package: libxml2
 **Location:** 
-**Reference:** **CVE:** CVE-2025-7424
-**Image:** docker-io-bitnami-postgresql-17-2-0-debian-12-r2
-**Helm Chart:** docker-io-bitnami-postgresql-17-2-0-debian-12
-**Message:** Package: libxslt1.1
-**Location:** 
-**Reference:** **CVE:** CVE-2025-7425
-**Image:** docker-io-bitnami-postgresql-17-2-0-debian-12-r2
-**Helm Chart:** docker-io-bitnami-postgresql-17-2-0-debian-12
-**Message:** Package: libxslt1.1
-**Location:** 
-**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (21)**CVE:** CVE-2022-49043
+**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (17)**CVE:** CVE-2022-49043
 **Image:** docker-io-bitnami-postgresql-17-2-0-debian-12-r2
 **Helm Chart:** docker-io-bitnami-postgresql-17-2-0-debian-12
 **Message:** Package: libxml2
@@ -52037,21 +51522,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-postgresql-17-2-0-debian-12
 **Message:** Package: libsqlite3-0
 **Location:** 
-**Reference:** **CVE:** CVE-2025-32988
-**Image:** docker-io-bitnami-postgresql-17-2-0-debian-12-r2
-**Helm Chart:** docker-io-bitnami-postgresql-17-2-0-debian-12
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32989
-**Image:** docker-io-bitnami-postgresql-17-2-0-debian-12-r2
-**Helm Chart:** docker-io-bitnami-postgresql-17-2-0-debian-12
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32990
-**Image:** docker-io-bitnami-postgresql-17-2-0-debian-12-r2
-**Helm Chart:** docker-io-bitnami-postgresql-17-2-0-debian-12
-**Message:** Package: libgnutls30
-**Location:** 
 **Reference:** **CVE:** CVE-2025-40909
 **Image:** docker-io-bitnami-postgresql-17-2-0-debian-12-r2
 **Helm Chart:** docker-io-bitnami-postgresql-17-2-0-debian-12
@@ -52066,11 +51536,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Image:** docker-io-bitnami-postgresql-17-2-0-debian-12-r2
 **Helm Chart:** docker-io-bitnami-postgresql-17-2-0-debian-12
 **Message:** Package: libsystemd0
-**Location:** 
-**Reference:** **CVE:** CVE-2025-6395
-**Image:** docker-io-bitnami-postgresql-17-2-0-debian-12-r2
-**Helm Chart:** docker-io-bitnami-postgresql-17-2-0-debian-12
-**Message:** Package: libgnutls30
 **Location:** 
 **Reference:** ---#### 🔵 LOW Vulnerabilities (49)**CVE:** CVE-2005-2541
 **Image:** docker-io-bitnami-postgresql-17-2-0-debian-12-r2
@@ -52364,7 +51829,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-postgres-exporter-0-16-0-debian-12
 **Message:** Package: libpam-modules
 **Location:** 
-**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (23)**CVE:** CVE-2023-4641
+**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (19)**CVE:** CVE-2023-4641
 **Image:** docker-io-bitnami-postgres-exporter-0-16-0-debian-12-r1
 **Helm Chart:** docker-io-bitnami-postgres-exporter-0-16-0-debian-12
 **Message:** Package: login
@@ -52444,21 +51909,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-postgres-exporter-0-16-0-debian-12
 **Message:** Package: golang.org/x/net
 **Location:** 
-**Reference:** **CVE:** CVE-2025-32988
-**Image:** docker-io-bitnami-postgres-exporter-0-16-0-debian-12-r1
-**Helm Chart:** docker-io-bitnami-postgres-exporter-0-16-0-debian-12
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32989
-**Image:** docker-io-bitnami-postgres-exporter-0-16-0-debian-12-r1
-**Helm Chart:** docker-io-bitnami-postgres-exporter-0-16-0-debian-12
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32990
-**Image:** docker-io-bitnami-postgres-exporter-0-16-0-debian-12-r1
-**Helm Chart:** docker-io-bitnami-postgres-exporter-0-16-0-debian-12
-**Message:** Package: libgnutls30
-**Location:** 
 **Reference:** **CVE:** CVE-2025-40909
 **Image:** docker-io-bitnami-postgres-exporter-0-16-0-debian-12-r1
 **Helm Chart:** docker-io-bitnami-postgres-exporter-0-16-0-debian-12
@@ -52473,11 +51923,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Image:** docker-io-bitnami-postgres-exporter-0-16-0-debian-12-r1
 **Helm Chart:** docker-io-bitnami-postgres-exporter-0-16-0-debian-12
 **Message:** Package: stdlib
-**Location:** 
-**Reference:** **CVE:** CVE-2025-6395
-**Image:** docker-io-bitnami-postgres-exporter-0-16-0-debian-12-r1
-**Helm Chart:** docker-io-bitnami-postgres-exporter-0-16-0-debian-12
-**Message:** Package: libgnutls30
 **Location:** 
 **Reference:** ---#### 🔵 LOW Vulnerabilities (36)**CVE:** CVE-2005-2541
 **Image:** docker-io-bitnami-postgres-exporter-0-16-0-debian-12-r1
@@ -52948,7 +52393,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-solr-9-8-1-debian-12
 **Message:** Package: libpam-modules
 **Location:** 
-**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (25)**CVE:** CVE-2023-33201
+**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (21)**CVE:** CVE-2023-33201
 **Image:** docker-io-bitnami-solr-9-8-1-debian-12-r5
 **Helm Chart:** docker-io-bitnami-solr-9-8-1-debian-12
 **Message:** Package: org.bouncycastle:bcprov-jdk15on
@@ -53038,21 +52483,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-solr-9-8-1-debian-12
 **Message:** Package: org.apache.poi:poi-ooxml
 **Location:** 
-**Reference:** **CVE:** CVE-2025-32988
-**Image:** docker-io-bitnami-solr-9-8-1-debian-12-r5
-**Helm Chart:** docker-io-bitnami-solr-9-8-1-debian-12
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32989
-**Image:** docker-io-bitnami-solr-9-8-1-debian-12-r5
-**Helm Chart:** docker-io-bitnami-solr-9-8-1-debian-12
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32990
-**Image:** docker-io-bitnami-solr-9-8-1-debian-12-r5
-**Helm Chart:** docker-io-bitnami-solr-9-8-1-debian-12
-**Message:** Package: libgnutls30
-**Location:** 
 **Reference:** **CVE:** CVE-2025-3576
 **Image:** docker-io-bitnami-solr-9-8-1-debian-12-r5
 **Helm Chart:** docker-io-bitnami-solr-9-8-1-debian-12
@@ -53067,11 +52497,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Image:** docker-io-bitnami-solr-9-8-1-debian-12-r5
 **Helm Chart:** docker-io-bitnami-solr-9-8-1-debian-12
 **Message:** Package: libsystemd0
-**Location:** 
-**Reference:** **CVE:** CVE-2025-6395
-**Image:** docker-io-bitnami-solr-9-8-1-debian-12-r5
-**Helm Chart:** docker-io-bitnami-solr-9-8-1-debian-12
-**Message:** Package: libgnutls30
 **Location:** 
 **Reference:** ---#### 🔵 LOW Vulnerabilities (46)**CVE:** CVE-2005-2541
 **Image:** docker-io-bitnami-solr-9-8-1-debian-12-r5
@@ -53345,7 +52770,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-os-shell-12-debian-12
 **Message:** Package: libpam-modules
 **Location:** 
-**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (19)**CVE:** CVE-2023-4641
+**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (15)**CVE:** CVE-2023-4641
 **Image:** docker-io-bitnami-os-shell-12-debian-12-r42
 **Helm Chart:** docker-io-bitnami-os-shell-12-debian-12
 **Message:** Package: login
@@ -53400,21 +52825,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-os-shell-12-debian-12
 **Message:** Package: libgssapi-krb5-2
 **Location:** 
-**Reference:** **CVE:** CVE-2025-32988
-**Image:** docker-io-bitnami-os-shell-12-debian-12-r42
-**Helm Chart:** docker-io-bitnami-os-shell-12-debian-12
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32989
-**Image:** docker-io-bitnami-os-shell-12-debian-12-r42
-**Helm Chart:** docker-io-bitnami-os-shell-12-debian-12
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32990
-**Image:** docker-io-bitnami-os-shell-12-debian-12-r42
-**Helm Chart:** docker-io-bitnami-os-shell-12-debian-12
-**Message:** Package: libgnutls30
-**Location:** 
 **Reference:** **CVE:** CVE-2025-3576
 **Image:** docker-io-bitnami-os-shell-12-debian-12-r42
 **Helm Chart:** docker-io-bitnami-os-shell-12-debian-12
@@ -53434,11 +52844,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Image:** docker-io-bitnami-os-shell-12-debian-12-r42
 **Helm Chart:** docker-io-bitnami-os-shell-12-debian-12
 **Message:** Package: stdlib
-**Location:** 
-**Reference:** **CVE:** CVE-2025-6395
-**Image:** docker-io-bitnami-os-shell-12-debian-12-r42
-**Helm Chart:** docker-io-bitnami-os-shell-12-debian-12
-**Message:** Package: libgnutls30
 **Location:** 
 **Reference:** ---#### 🔵 LOW Vulnerabilities (46)**CVE:** CVE-2005-2541
 **Image:** docker-io-bitnami-os-shell-12-debian-12-r42
@@ -53717,7 +53122,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-os-shell-12-debian-12
 **Message:** Package: libpam-modules
 **Location:** 
-**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (20)**CVE:** CVE-2023-4641
+**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (16)**CVE:** CVE-2023-4641
 **Image:** docker-io-bitnami-os-shell-12-debian-12-r40
 **Helm Chart:** docker-io-bitnami-os-shell-12-debian-12
 **Message:** Package: login
@@ -53777,21 +53182,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-os-shell-12-debian-12
 **Message:** Package: libgssapi-krb5-2
 **Location:** 
-**Reference:** **CVE:** CVE-2025-32988
-**Image:** docker-io-bitnami-os-shell-12-debian-12-r40
-**Helm Chart:** docker-io-bitnami-os-shell-12-debian-12
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32989
-**Image:** docker-io-bitnami-os-shell-12-debian-12-r40
-**Helm Chart:** docker-io-bitnami-os-shell-12-debian-12
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32990
-**Image:** docker-io-bitnami-os-shell-12-debian-12-r40
-**Helm Chart:** docker-io-bitnami-os-shell-12-debian-12
-**Message:** Package: libgnutls30
-**Location:** 
 **Reference:** **CVE:** CVE-2025-3576
 **Image:** docker-io-bitnami-os-shell-12-debian-12-r40
 **Helm Chart:** docker-io-bitnami-os-shell-12-debian-12
@@ -53811,11 +53201,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Image:** docker-io-bitnami-os-shell-12-debian-12-r40
 **Helm Chart:** docker-io-bitnami-os-shell-12-debian-12
 **Message:** Package: stdlib
-**Location:** 
-**Reference:** **CVE:** CVE-2025-6395
-**Image:** docker-io-bitnami-os-shell-12-debian-12-r40
-**Helm Chart:** docker-io-bitnami-os-shell-12-debian-12
-**Message:** Package: libgnutls30
 **Location:** 
 **Reference:** ---#### 🔵 LOW Vulnerabilities (46)**CVE:** CVE-2005-2541
 **Image:** docker-io-bitnami-os-shell-12-debian-12-r40
@@ -54094,7 +53479,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-os-shell-12-debian-12
 **Message:** Package: libpam-modules
 **Location:** 
-**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (28)**CVE:** CVE-2023-4641
+**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (24)**CVE:** CVE-2023-4641
 **Image:** docker-io-bitnami-os-shell-12-debian-12-r33
 **Helm Chart:** docker-io-bitnami-os-shell-12-debian-12
 **Message:** Package: login
@@ -54194,21 +53579,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-os-shell-12-debian-12
 **Message:** Package: libgssapi-krb5-2
 **Location:** 
-**Reference:** **CVE:** CVE-2025-32988
-**Image:** docker-io-bitnami-os-shell-12-debian-12-r33
-**Helm Chart:** docker-io-bitnami-os-shell-12-debian-12
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32989
-**Image:** docker-io-bitnami-os-shell-12-debian-12-r33
-**Helm Chart:** docker-io-bitnami-os-shell-12-debian-12
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32990
-**Image:** docker-io-bitnami-os-shell-12-debian-12-r33
-**Helm Chart:** docker-io-bitnami-os-shell-12-debian-12
-**Message:** Package: libgnutls30
-**Location:** 
 **Reference:** **CVE:** CVE-2025-3576
 **Image:** docker-io-bitnami-os-shell-12-debian-12-r33
 **Helm Chart:** docker-io-bitnami-os-shell-12-debian-12
@@ -54228,11 +53598,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Image:** docker-io-bitnami-os-shell-12-debian-12-r33
 **Helm Chart:** docker-io-bitnami-os-shell-12-debian-12
 **Message:** Package: stdlib
-**Location:** 
-**Reference:** **CVE:** CVE-2025-6395
-**Image:** docker-io-bitnami-os-shell-12-debian-12-r33
-**Helm Chart:** docker-io-bitnami-os-shell-12-debian-12
-**Message:** Package: libgnutls30
 **Location:** 
 **Reference:** ---#### 🔵 LOW Vulnerabilities (47)**CVE:** CVE-2005-2541
 **Image:** docker-io-bitnami-os-shell-12-debian-12-r33
@@ -54526,7 +53891,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-keycloak-config-cli-6-1-6-debian-12
 **Message:** Package: libpam-modules
 **Location:** 
-**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (19)**CVE:** CVE-2023-4641
+**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (15)**CVE:** CVE-2023-4641
 **Image:** docker-io-bitnami-keycloak-config-cli-6-1-6-debian-12-r6
 **Helm Chart:** docker-io-bitnami-keycloak-config-cli-6-1-6-debian-12
 **Message:** Package: login
@@ -54591,21 +53956,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-keycloak-config-cli-6-1-6-debian-12
 **Message:** Package: libcap2
 **Location:** 
-**Reference:** **CVE:** CVE-2025-32988
-**Image:** docker-io-bitnami-keycloak-config-cli-6-1-6-debian-12-r6
-**Helm Chart:** docker-io-bitnami-keycloak-config-cli-6-1-6-debian-12
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32989
-**Image:** docker-io-bitnami-keycloak-config-cli-6-1-6-debian-12-r6
-**Helm Chart:** docker-io-bitnami-keycloak-config-cli-6-1-6-debian-12
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32990
-**Image:** docker-io-bitnami-keycloak-config-cli-6-1-6-debian-12-r6
-**Helm Chart:** docker-io-bitnami-keycloak-config-cli-6-1-6-debian-12
-**Message:** Package: libgnutls30
-**Location:** 
 **Reference:** **CVE:** CVE-2025-40909
 **Image:** docker-io-bitnami-keycloak-config-cli-6-1-6-debian-12-r6
 **Helm Chart:** docker-io-bitnami-keycloak-config-cli-6-1-6-debian-12
@@ -54615,11 +53965,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Image:** docker-io-bitnami-keycloak-config-cli-6-1-6-debian-12-r6
 **Helm Chart:** docker-io-bitnami-keycloak-config-cli-6-1-6-debian-12
 **Message:** Package: libsystemd0
-**Location:** 
-**Reference:** **CVE:** CVE-2025-6395
-**Image:** docker-io-bitnami-keycloak-config-cli-6-1-6-debian-12-r6
-**Helm Chart:** docker-io-bitnami-keycloak-config-cli-6-1-6-debian-12
-**Message:** Package: libgnutls30
 **Location:** 
 **Reference:** ---#### 🔵 LOW Vulnerabilities (39)**CVE:** CVE-2005-2541
 **Image:** docker-io-bitnami-keycloak-config-cli-6-1-6-debian-12-r6
@@ -54883,7 +54228,7 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-keycloak-26-0-7-debian-12
 **Message:** Package: libpam-modules
 **Location:** 
-**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (36)**CVE:** CVE-2023-4641
+**Reference:** ---#### 🟡 MEDIUM Vulnerabilities (31)**CVE:** CVE-2023-4641
 **Image:** docker-io-bitnami-keycloak-26-0-7-debian-12-r0
 **Helm Chart:** docker-io-bitnami-keycloak-26-0-7-debian-12
 **Message:** Package: login
@@ -55008,21 +54353,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Helm Chart:** docker-io-bitnami-keycloak-26-0-7-debian-12
 **Message:** Package: org.keycloak:keycloak-services
 **Location:** 
-**Reference:** **CVE:** CVE-2025-32988
-**Image:** docker-io-bitnami-keycloak-26-0-7-debian-12-r0
-**Helm Chart:** docker-io-bitnami-keycloak-26-0-7-debian-12
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32989
-**Image:** docker-io-bitnami-keycloak-26-0-7-debian-12-r0
-**Helm Chart:** docker-io-bitnami-keycloak-26-0-7-debian-12
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-32990
-**Image:** docker-io-bitnami-keycloak-26-0-7-debian-12-r0
-**Helm Chart:** docker-io-bitnami-keycloak-26-0-7-debian-12
-**Message:** Package: libgnutls30
-**Location:** 
 **Reference:** **CVE:** CVE-2025-3576
 **Image:** docker-io-bitnami-keycloak-26-0-7-debian-12-r0
 **Helm Chart:** docker-io-bitnami-keycloak-26-0-7-debian-12
@@ -55052,16 +54382,6 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Image:** docker-io-bitnami-keycloak-26-0-7-debian-12-r0
 **Helm Chart:** docker-io-bitnami-keycloak-26-0-7-debian-12
 **Message:** Package: io.quarkus:quarkus-vertx
-**Location:** 
-**Reference:** **CVE:** CVE-2025-6395
-**Image:** docker-io-bitnami-keycloak-26-0-7-debian-12-r0
-**Helm Chart:** docker-io-bitnami-keycloak-26-0-7-debian-12
-**Message:** Package: libgnutls30
-**Location:** 
-**Reference:** **CVE:** CVE-2025-7365
-**Image:** docker-io-bitnami-keycloak-26-0-7-debian-12-r0
-**Helm Chart:** docker-io-bitnami-keycloak-26-0-7-debian-12
-**Message:** Package: org.keycloak:keycloak-services
 **Location:** 
 **Reference:** ---#### 🔵 LOW Vulnerabilities (47)**CVE:** CVE-2005-2541
 **Image:** docker-io-bitnami-keycloak-26-0-7-debian-12-r0
@@ -55424,11 +54744,10 @@ The following section lists all vulnerabilities found in each image, sorted by s
 **Location:** 
 **Reference:** ---
 ## 🎯 Recommendations
-❌ **FAILED SCANS**: 13 images could not be scanned. Please check image accessibility and try again.
 ⚠️ **CRITICAL**: Immediate action required! 161 critical vulnerabilities found.
-🔴 **HIGH**: High priority action required! 2296 high vulnerabilities found.
-🟡 **MEDIUM**: Plan to address 5699 medium vulnerabilities.
-🟢 **LOW**: Consider addressing 2824 low vulnerabilities.
+🔴 **HIGH**: High priority action required! 2294 high vulnerabilities found.
+🟡 **MEDIUM**: Plan to address 5587 medium vulnerabilities.
+🟢 **LOW**: Consider addressing 2815 low vulnerabilities.
 ℹ️ **SUPPRESSED**: 119 vulnerabilities have been suppressed based on CVE suppressions list.
 
 ## 📁 Files Generated

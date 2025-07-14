@@ -355,18 +355,18 @@
           "openpolicyagent/opa:1.3.0-static"
         ],
         "imageCreatedDate": "2025-03-27T14:39:17.02439485Z",
-        "imageAgeDays": 106,
-        "imageAgeSeconds": 9160216,
-        "imageAgeText": "106 days",
+        "imageAgeDays": 105,
+        "imageAgeSeconds": 9129782,
+        "imageAgeText": "105 days",
         "imageAgeStatus": "moderate",
-        "scanTimestamp": "2025-07-11T15:09:39Z",
+        "scanTimestamp": "2025-07-11T06:42:21Z",
         "ageMetadataVersion": "1.0",
         "helmCharts": [
           "zaakafhandelcomponent"
         ],
         "helmChartsCount": 1,
         "helmChartsEnhanced": true,
-        "helmChartsEnhancementDate": "2025-07-11T15:09:39Z",
+        "helmChartsEnhancementDate": "2025-07-11T06:42:21Z",
         "chartsMetadataVersion": "1.0",
         "epssScores": [
           {
@@ -405,7 +405,7 @@
         "epssLowRiskCount": 6,
         "epssVeryHighRiskCount": 0,
         "epssEnhanced": true,
-        "epssEnhancementDate": "2025-07-11T15:09:40Z",
+        "epssEnhancementDate": "2025-07-11T06:42:22Z",
         "epssMetadataVersion": "1.0"
       }
     }
