@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  ca-freshness:
+    image: python:3.11-slim
+    container_name: ca-freshness
+    working_dir: /workspace
+    volumes:
+      - ..:/workspace:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - PYTHONUNBUFFERED=1
+    entrypoint: >
+      sh -c "apt-get update && apt-get install -y docker.io && \
+      pip install --no-cache-dir pyyaml docker && \
+      python3 scripts/ca-freshness.py"
+    # 🐳 Mount Docker socket for Docker CLI access
+    # 📂 Mount workspace for script and YAML access
+    # 🔒 Runs read-only except for Docker socket 

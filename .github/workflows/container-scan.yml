@@ -18,8 +18,8 @@ on:
         required: false
         default: 'true'
         type: boolean
-  # schedule:
-  #   - cron: '0 3 * * 2-6  ' # Daily Tuesday-Saturday at 3:00 AM UTC
+  schedule:
+    - cron: '0 3 * * 2-6  ' # Daily Tuesday-Saturday at 3:00 AM UTC
 env:
   REGISTRY: ghcr.io
 
